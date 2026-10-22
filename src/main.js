@@ -7,7 +7,7 @@ const READOUTS=['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM'];
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const wrap=n=>((n%4)+4)%4;
-const mobile=()=>innerWidth<768;
+const mobile=()=>innerWidth<901;
 const availability=Date.now()<Date.parse(`${profile.availableFrom}T00:00:00+08:00`)?profile.availability:'现在即可到岗';
 if(availability==='现在即可到岗')advantages[0].claim='现在即可到岗，用已有经验尽快上手。';
 const param=Number(new URLSearchParams(location.search).get('angle')||1);
@@ -98,14 +98,14 @@ function updateMobileConnection(){
   card.style.setProperty('--notch-x',`${x}px`);connector.setAttribute('d',`M ${x} ${p.y+11} V ${cr.top-sr.top-7}`);
 }
 function layoutCard(data){
-  if(mobile()){card.style.removeProperty('left');card.style.removeProperty('top');card.style.removeProperty('width');updateMobileConnection();return;}
+  if(mobile()){card.style.removeProperty('left');card.style.removeProperty('top');card.style.removeProperty('width');delete card.dataset.nodeDistance;delete card.dataset.overlapsProtected;updateMobileConnection();return;}
   const w=stage.clientWidth,h=stage.clientHeight,p=data?.nodes?.[active]||lastPositions[active]||{x:w*.61,y:h*.51};
   const side=active===3?'left':'right';card.dataset.side=side;
   const frame=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--frame'))||32;
   let cw=w<1120?300:340,x=side==='right'?p.x+28:p.x-cw-28;
   if(x<frame||x+cw>w-frame){cw=300;x=side==='right'?p.x+28:p.x-cw-28;}
   x=clamp(x,frame,w-frame-cw);card.style.width=`${cw}px`;
-  const ch=panels[active].getBoundingClientRect().height+32,tagOffset=27;
+  const ch=panels[active].getBoundingClientRect().height+24,tagOffset=23;
   let y=clamp(p.y-tagOffset,150,h-ch-85);
   const obstacles=[data?.faceBounds,...(Array.isArray(data?.handBounds)?data.handBounds:[data?.handBounds])].map(rect).filter(Boolean);
   const safe=[y,y+12,y-12,y+20,y-20].filter(v=>v>=150&&v+ch<h-70).find(v=>!obstacles.some(r=>overlap({left:x,right:x+cw,top:v,bottom:v+ch},r,8)));
@@ -167,3 +167,4 @@ applyActive(active,{announce:false});positionStaticNodes();document.body.classLi
 fetch('/images-v2/frames.json').then(r=>r.ok?r.json():null).then(d=>{frameMetadata=d;if(staticMode){positionStaticNodes();settled();}}).catch(()=>{});
 bootScene();setTimeout(()=>document.body.classList.add('show-poster'),1500);setTimeout(()=>document.body.classList.add('show-directory'),6500);
 if(import.meta.env.DEV)window.__WHYME__={getScene:()=>scene,select,getActive:()=>active,getLayout:()=>({moving,staticMode,active,lastSettled,lastPositions,nodeDistance:card.dataset.nodeDistance,overlapsProtected:card.dataset.overlapsProtected}),settled};
+

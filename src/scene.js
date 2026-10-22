@@ -166,7 +166,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     }
     animationFrame = requestAnimationFrame(render);
   }
-  function resize() { const rect = canvas.getBoundingClientRect(); width = Math.max(1, rect.width); height = Math.max(1, rect.height); mobile = window.innerWidth < 768; renderer.setSize(width, height, false); for (const material of [frontMaterial, backMaterial, tickMaterial]) material.resolution.set(width, height); settledPending = true; }
+  function resize() { const rect = canvas.getBoundingClientRect(); width = Math.max(1, rect.width); height = Math.max(1, rect.height); mobile = window.innerWidth < 901; renderer.setSize(width, height, false); for (const material of [frontMaterial, backMaterial, tickMaterial]) material.resolution.set(width, height); settledPending = true; }
   function setStation(index, { immediate = false } = {}) {
     const nextStation = Math.round(wrapStation(index)) % 4;
     // Initialization reselects A01 after createScene resolves; preserve its opening wave.
@@ -232,5 +232,6 @@ function makeClothTextures() {
   const texture = (bytes, repeat, color = false) => { const tex = new THREE.DataTexture(bytes, size, size, THREE.RGBAFormat); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(repeat, repeat); tex.minFilter = THREE.LinearMipmapLinearFilter; tex.magFilter = THREE.LinearFilter; tex.generateMipmaps = true; tex.anisotropy = 4; tex.colorSpace = color ? THREE.SRGBColorSpace : THREE.NoColorSpace; tex.needsUpdate = true; return tex; };
   return { color: texture(data, 2, true), normal: texture(normal, 5), twill: texture(twill, 6) };
 }
+
 
 

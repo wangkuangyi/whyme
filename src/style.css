@@ -73,7 +73,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 .strengths[data-side='left']{transform:translateX(4px);--reveal-x:6px}
 .card-open .strengths{opacity:1;transform:translateX(0);transition:opacity .36s var(--ease),transform .36s var(--ease)}
 .is-moving .strengths{pointer-events:none}
-.card-body{padding:16px;background:#ffffffd9}
+.card-body{padding:12px;background:#ffffffd9}
 .strength:not(.is-active){position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;pointer-events:none;white-space:nowrap}
 .card-label{display:flex;align-items:center;gap:10px;color:var(--ink-2);font-size:14px;line-height:22px;margin-bottom:15px}
 .card-number{font-size:11px}
@@ -128,8 +128,8 @@ dialog ul{padding-left:18px}.release-date{font-size:13px}
 .contact-detail>a{font-size:16px}
 
 @media(min-width:1700px){:root{--frame:40px}.identity h1{font-size:64px}}
-@media(min-width:768px) and (max-width:1100px){:root{--frame:24px}.identity h1{font-size:56px}.identity-line{gap:16px;font-size:13px}.contact{gap:20px}.viewfinder{top:115px}.directory{gap:20px}.directory-item{font-size:13px}.proofs{font-size:13px}.strengths{width:300px}}
-@media(max-width:767px){
+@media(min-width:901px) and (max-width:1100px){:root{--frame:24px}.identity h1{font-size:56px}.identity-line{gap:16px;font-size:14px}.contact{gap:20px}.viewfinder{top:115px}.directory{gap:20px}.directory-item{font-size:14px}.proofs{font-size:14px}.strengths{width:300px}}
+@media(max-width:900px){
   :root{--frame:20px}
   body{overflow-y:auto;overflow-x:hidden}
   .portfolio{height:100svh;min-height:680px;overflow:hidden}
@@ -170,7 +170,7 @@ dialog ul{padding-left:18px}.release-date{font-size:13px}
   dialog{padding:24px}dialog h2{font-size:28px}.dialog-header{margin-bottom:28px}
 }
 @media(max-width:380px){:root{--frame:16px}.identity-line{font-size:13px;gap:6px}.identity-line .role-extra{display:none}.contact{gap:12px}.resume{gap:10px}.contact-link{font-size:13px}.mobile-tab{width:25px}.card-actions{gap:10px}.proof-link{font-size:13px}}
-@media(max-height:620px) and (min-width:768px){body{overflow-y:auto}.portfolio{height:680px;min-height:680px}}
+@media(max-height:620px) and (min-width:901px){body{overflow-y:auto}.portfolio{height:680px;min-height:680px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{
   @page{size:A4;margin:16mm}
@@ -183,3 +183,4 @@ dialog ul{padding-left:18px}.release-date{font-size:13px}
   .strength,.strength:not(.is-active){position:static;width:auto;height:auto;clip-path:none;overflow:visible;white-space:normal;margin:20px 0;break-inside:avoid}
   .card-label{font-size:10pt;margin-bottom:6px}.strength h2{font-size:17pt;margin-bottom:8px}.claim{font-size:11pt;margin-bottom:8px}.proofs{font-size:10pt;margin:0}.extra-proof{display:list-item}.card-actions{display:none}.card-reveal{animation:none!important}
 }
+

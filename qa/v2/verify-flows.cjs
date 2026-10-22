@@ -7,7 +7,7 @@ async (page) => {
   await page.goto('http://127.0.0.1:5173/');
   await page.waitForFunction(()=>window.__WHYME__?.getScene()?.getState().ready);
   await page.waitForTimeout(2100);
-  check('开场赤陶且有独立眼球、9个表情',await page.evaluate(()=>{const s=window.__WHYME__.getScene().getState();return s.colors.hoodie.toLowerCase()==='#c2603d'&&s.animation.eyes===2&&Object.keys(s.animation.morphs).length===9;}));
+  check('开场赤陶且原脸无附加眼球或表情',await page.evaluate(()=>{const s=window.__WHYME__.getScene().getState();return s.colors.hoodie.toLowerCase()==='#c2603d'&&s.animation.eyes===0&&Object.keys(s.animation.morphs).length===0;}));
   for(let i=1;i<=4;i++){await page.keyboard.press(String(i));await page.waitForTimeout(1500);check(`键盘${i}定位`,(await state()).active===i-1);}
   await page.keyboard.press('ArrowRight');await page.waitForTimeout(1500);check('箭头循环到01',(await state()).active===0);
   await page.locator('.directory-item').nth(1).click();await page.waitForTimeout(1500);check('目录切换02',(await state()).active===1);
@@ -21,7 +21,7 @@ async (page) => {
   await page.locator('.wordmark').click();await page.locator('#mode-toggle').click();await page.keyboard.press('Escape');
   await page.waitForFunction(()=>window.__WHYME__.getScene()?.getState().ready);check('重启3D',(await state()).scene.ready);
   await page.locator('.contact-link').click();check('联系邮箱与复制入口',await page.locator('#copy-email').isVisible()&&await page.locator('.contact-detail a').first().getAttribute('href')==='mailto:kuangyi001126@outlook.com');await page.keyboard.press('Escape');
-  const pdf=await page.request.get('http://127.0.0.1:5173/resume.pdf');check('简历PDF可读取',pdf.status()===200&&(await pdf.headerValue('content-type'))?.includes('pdf'));
+  const pdf=await page.request.get('http://127.0.0.1:5173/resume.pdf');check('简历PDF可读取',pdf.status()===200&&pdf.headers()['content-type']?.includes('pdf'));
   await page.keyboard.press('1');await page.waitForTimeout(1600);
   await page.mouse.move(700,550);await page.mouse.down();await page.mouse.move(350,550,{steps:18});
   const drag=await state();check('拖动隐藏卡片并实时转动',drag.scene.dragging&&drag.layout.moving);
@@ -37,9 +37,12 @@ async (page) => {
   await page.emulateMedia({reducedMotion:'reduce'});await page.waitForFunction(()=>window.__WHYME__.getScene()?.getState().animation.reducedMotion);
   const a=(await state()).scene.animation;await page.waitForTimeout(1500);const b=(await state()).scene.animation;
   check('减少动态保留稳定身体',JSON.stringify(a.pose)===JSON.stringify(b.pose),{a:a.pose,b:b.pose});
-  check('减少动态只留眨眼视线',Object.entries(b.morphs).filter(([key])=>!key.includes('Blink')).every(([,value])=>value===0));
+  check('减少动态未启用表情变形',Object.entries(b.morphs).filter(([key])=>!key.includes('Blink')).every(([,value])=>value===0));
   await page.emulateMedia({media:'print'});check('打印四个优点与英文名',await page.locator('.print-name').isVisible()&&await page.locator('.strength').count()===4);
   await page.emulateMedia({media:'screen',reducedMotion:'no-preference'});
   check('浏览器没有未处理异常',errors.length===0,errors);
   const pending=page.waitForEvent('download');await page.evaluate(data=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='flows.json';a.click();},results);await (await pending).saveAs('output/playwright/v2/flows.json');
 }
+
+
+
