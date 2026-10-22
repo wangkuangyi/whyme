@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 
-export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'Idle', 'Wave']);
+export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'LookAround', 'Wave']);
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
-const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05 };
+const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05, LookAround: 1 };
 const FADE_SECONDS = .5;
 const cleanName = (name) => name.replace(/^mixamorig[:_]?/i, '');
 const smooth = (value) => value * value * (3 - 2 * value);
@@ -44,7 +44,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     const source = sourceClips.get(name);
     if (!source) continue;
     // Preserve the authored hand/head movement. No additive gestures or face
-    // tracks are generated here. Rejected Greet and Box are never bound.
+    // tracks are generated here. Rejected Greet, Box and CrossArms are never bound.
     const clip = name === 'Idle' ? excerpt(source, name, 1.5, Math.min(3.5, source.duration))
       : name === 'Wave' ? excerpt(source, name, 1.2, Math.min(4.3, source.duration)) : source.clone();
     clip.name = name;
@@ -168,7 +168,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     const visible = !entryEnded && entry ? entry : current;
     return { action: reducedMotion ? 'Rest' : visible?.name || 'Rest', time: visible?.action.time || 0,
       duration: visible?.clip.duration || 0, speed: visible?.rate || 0, walking: !!rootRecord, position: position.toArray(),
-      station, reducedMotion, dragging, end: entryEnded, completedAction, clips: [...clips.keys()], rejected: ['Greet', 'Box'].filter((name) => sourceClips.has(name)),
+      station, reducedMotion, dragging, end: entryEnded, completedAction, clips: [...clips.keys()], rejected: ['Greet', 'Box', 'CrossArms'],
       transition: transition ? { to: transition.to.name, elapsed: transition.elapsed, duration: transition.duration } : null,
       transitions: history.map((item) => ({ ...item, from: [...item.from] })),
       weights: [...records].filter((record) => record.weight > .0001).map((record) => ({ action: record.name, weight: record.weight, time: record.action.time })),

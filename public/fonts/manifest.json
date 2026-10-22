@@ -1,6 +1,6 @@
 {
   "source": "Local Noto Sans SC / Google Fonts Instrument Serif",
-  "subset_characters_requested": 489,
+  "subset_characters_requested": 498,
   "fonts": [
     {
       "file": "instrument-serif-400-italic.woff2",
@@ -14,16 +14,16 @@
       "file": "noto-sans-sc-400.woff2",
       "family": "Noto Sans SC",
       "weight": 400,
-      "bytes": 59312,
-      "sha256": "de7af9658e9077eab058348ee8db080878a5698c27f7f0c6a6897aed8f99d132",
+      "bytes": 60664,
+      "sha256": "bf7eab4f7c4ab41e0cc9f0cdc3351358ac02fbad84b110faa220b281156a7c40",
       "url": "Local installed Noto Sans SC; no page text sent externally"
     },
     {
       "file": "noto-sans-sc-600.woff2",
       "family": "Noto Sans SC",
       "weight": 600,
-      "bytes": 60136,
-      "sha256": "e54f05842560edc773ddea5b886384d7d24b0e6270b4a0f83b64a1ee8e4709e5",
+      "bytes": 61492,
+      "sha256": "4579d4a978da8d2f195c33e59866005f0fa1fe880d72c4f7a08d79583d19302c",
       "url": "Local installed Noto Sans SC; no page text sent externally"
     }
   ]

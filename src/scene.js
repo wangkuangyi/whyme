@@ -8,17 +8,19 @@ import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineSegments2 } from 'three/addons/lines/LineSegments2.js';
 import { LineSegmentsGeometry } from 'three/addons/lines/LineSegmentsGeometry.js';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
-import { clamp, lerp, nearestStation, stationAzimuth, wrapStation, linearToOKLab, oklabToLinear, labToLCH, lchToLab, interpolateLCH } from './scene-math.js';
+import { clamp, lerp, nearestStation, stationAzimuth, wrapStation, linearToOKLab, oklabToLinear, labToLCH, lchToLab, interpolateLCH, interpolateDragLCH } from './scene-math.js';
 
 const HEIGHT = 1.83, RAD = Math.PI / 180;
 // Retain the original static 3D model as an explicit, reproducible fallback.
 const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
 const SHOTS = [
-  { azimuth: 50, fill: .80, camY: .95, lookY: .51, dist: 2.8, fov: 31, haloY: .55 },
-  { azimuth: 28, fill: 2.30, camY: .92, lookY: .78, dist: 2.8, fov: 25, haloY: .83 },
-  { azimuth: 25, fill: 1.35, camY: .90, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
-  { azimuth: -24, fill: 1.52, camY: .90, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
+  { azimuth: 62, fill: .80, camY: .95, lookY: .51, dist: 2.8, fov: 31, haloY: .55 },
+  { azimuth: 8, fill: 2.45, camY: .88, lookY: .80, dist: 2.8, fov: 25, haloY: .83 },
+  { azimuth: -48, fill: 1.70, camY: 1.30, lookY: .72, dist: 2.8, fov: 30, haloY: .77 },
+  { azimuth: 30, fill: 1.52, camY: .83, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
 ];
+const REST_FILLS = [1.88, 2.45, 1.90, 2.10];
+const MOBILE_REST_FILLS = [1.50, 1.85, 1.60, 1.72];
 const STATIONS = [
   { camY: .95, dist: 2.5, lookY: .50, fov: 27, shift: -.04, fill: .84, haloY: .55, width: .64, roll: 9, openness: .24, color: '#C2603D', rib: '#A64F2F', floor: '#FFF4F1' },
   { camY: .22, dist: 2, lookY: .58, fov: 37.8, shift: -.05, fill: .72, haloY: .55, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
@@ -74,12 +76,12 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
 
   let width = 1, height = 1, mobile = false, disposed = false, ready = false, currentProgress = 0, targetProgress = 0, dragging = false, activeStation = 0;
   let previousTime = performance.now(), loadedTime = 0, animationFrame = 0, slowDuration = 0, degradeDuration = 0, qualityLevel = 0, fallbackTriggered = false;
-  let cameraTransition = null, colorTransition = null, settledPending = true, currentLCH = [...COLORS[0]], currentRib = [...RIBS[0]], currentFloor = [...FLOORS[0]], lastCssColor = '';
+  let cameraTransition = null, colorTransition = null, dragColorOrigin = null, settledPending = true, currentLCH = [...COLORS[0]], currentRib = [...RIBS[0]], currentFloor = [...FLOORS[0]], lastCssColor = '';
   const meshes = [], clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
   let model = null, nodePositions = [], lastProfile = STATIONS[0];
   let walkClose = 0, framingPending = false, lastFramingAt = 0;
   // Keep the authored hands visible during gestures; settle on a chest portrait.
-  const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 1, 0];
+  const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 0, 0];
   const timings = { frameMs: 0, poseMs: 0, renderMs: 0, nodesMs: 0 };
   const occlusionCache = Array.from({ length: 4 }, () => ({ at: -Infinity, hidden: false }));
   const lookAt = vector(), projectedTop = vector(), projectedBottom = vector(), cameraRight = vector(), cameraUp = vector(), cameraTowards = vector();
@@ -92,8 +94,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     profile.azimuth = stationAzimuth(progress) / RAD;
     if (USE_ANIMATIONS) {
       const shots = SHOTS.map((shot, i) => {
-        const active = i !== WALK_STATION ? shot : { ...shot, azimuth: lerp(50, 32, walkClose), fill: lerp(.80, 2.05, walkClose), camY: lerp(.95, .90, walkClose), lookY: lerp(.51, .78, walkClose), fov: lerp(31, 28, walkClose), haloY: lerp(.55, .83, walkClose) };
-        return { ...active, fill: lerp(active.fill, Math.max(active.fill, 2.05), restClose[i]), lookY: lerp(active.lookY, .78, restClose[i]), haloY: lerp(active.haloY, .83, restClose[i]) };
+        const active = i !== WALK_STATION ? shot : { ...shot, azimuth: lerp(62, 48, walkClose), fill: lerp(.80, REST_FILLS[i], walkClose), camY: lerp(.95, .90, walkClose), lookY: lerp(.51, .78, walkClose), fov: lerp(31, 28, walkClose), haloY: lerp(.55, .83, walkClose) };
+        return { ...active, fill: lerp(active.fill, REST_FILLS[i], restClose[i]), lookY: lerp(active.lookY, .78, restClose[i]), haloY: lerp(active.haloY, .83, restClose[i]) };
       });
       for (const key of Object.keys(SHOTS[0])) profile[key] = lerp(shots[from][key], shots[to][key], t);
       const shotWidth = (i) => i === WALK_STATION ? lerp(.58, .68, walkClose) : STATIONS[i].width;
@@ -104,8 +106,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       // Width/height matters here: a tall 320px phone needs more horizontal room.
       const gestureScale = Math.min(1, width / 390 * 557 / height);
       const walkWide = Math.min(.67, Math.max(.35, (height - 149) / height));
-      const activeFills = [lerp(walkWide, 1.65 * gestureScale, walkClose), 1.80 * gestureScale, 1.02 * gestureScale, .86 * gestureScale];
-      const fills = USE_ANIMATIONS ? activeFills.map((fill, i) => lerp(fill, Math.max(fill, 1.65 * gestureScale), restClose[i])) : [.68, .66, .68, .70];
+      const activeFills = [lerp(walkWide, MOBILE_REST_FILLS[0] * gestureScale, walkClose), 1.85 * gestureScale, 1.45 * gestureScale, .98 * gestureScale];
+      const fills = USE_ANIMATIONS ? activeFills.map((fill, i) => lerp(fill, MOBILE_REST_FILLS[i] * gestureScale, restClose[i])) : [.68, .66, .68, .70];
       profile.fill = lerp(fills[from], fills[to], t);
       if (!USE_ANIMATIONS && profile.fill < 1) profile.fill = Math.min(profile.fill, Math.max(.35, (height - 149) / height));
       const top = Math.max(135 / height, .25);
@@ -159,7 +161,12 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     const css = `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentLCH))).getHexString()}`; if (css !== lastCssColor) { lastCssColor = css; onColorChange(css); }
   }
   function updateColor(now) {
-    if (dragging) { const local = wrapStation(currentProgress), from = Math.floor(local), to = (from + 1) % 4, t = local - from; currentLCH = interpolateLCH(COLORS[from], COLORS[to], t); currentRib = interpolateLCH(RIBS[from], RIBS[to], t); currentFloor = interpolateLCH(FLOORS[from], FLOORS[to], t); }
+    if (dragging) {
+      const { progress, color, rib, floor } = dragColorOrigin;
+      currentLCH = interpolateDragLCH(currentProgress, progress, color, COLORS);
+      currentRib = interpolateDragLCH(currentProgress, progress, rib, RIBS);
+      currentFloor = interpolateDragLCH(currentProgress, progress, floor, FLOORS);
+    }
     else if (colorTransition) { const t = clamp((now - colorTransition.started) / 600, 0, 1); currentLCH = interpolateLCH(colorTransition.from, COLORS[activeStation], t); currentRib = interpolateLCH(colorTransition.rib, RIBS[activeStation], t); currentFloor = interpolateLCH(colorTransition.floor, FLOORS[activeStation], t); if (t === 1) colorTransition = null; }
     applyColors();
   }
@@ -174,7 +181,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       const motion = characterMotion.getState();
       if (!dragging && motion.station >= 0) {
         const index = cameraTransition ? activeStation : motion.station;
-        const target = reducedMotion || (cameraTransition ? index === 2 : motion.action === 'Idle') ? 1 : 0;
+        const target = reducedMotion || (!cameraTransition && motion.action === 'Idle') ? 1 : 0;
         let next = lerp(restClose[index], target, 1 - Math.exp(-dt * 5));
         if (Math.abs(next - target) < .001) next = target;
         if (next !== restClose[index]) { restClose[index] = next; framingPending = true; }
@@ -240,12 +247,16 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     const nextStation = Math.round(wrapStation(index)) % 4;
     // Initialization reselects A01 after createScene resolves; preserve its opening action.
     if (!dragging && !cameraTransition && nextStation === activeStation && Math.abs(currentProgress - targetProgress) < .00001) { settledPending = true; return; }
-    activeStation = nextStation; targetProgress = nearestStation(activeStation, currentProgress); dragging = false;
+    activeStation = nextStation; targetProgress = nearestStation(activeStation, currentProgress); dragging = false; dragColorOrigin = null;
     const now = performance.now(); settledPending = true;
     colorTransition = { from: [...currentLCH], rib: [...currentRib], floor: [...currentFloor], started: now }; cameraTransition = { from: currentProgress, started: now };
     if (immediate || reducedMotion) { currentProgress = targetProgress; cameraTransition = null; colorTransition = null; currentLCH = [...COLORS[activeStation]]; currentRib = [...RIBS[activeStation]]; currentFloor = [...FLOORS[activeStation]]; applyColors(); if (ready) startPerformance(activeStation); }
   }
-  function setDragProgress(progress) { if (!Number.isFinite(progress)) return; dragging = true; currentProgress = progress; targetProgress = progress; cameraTransition = null; colorTransition = null; activeStation = wrapStation(Math.round(progress)); settledPending = true; slowDuration = 0; }
+  function setDragProgress(progress) {
+    if (!Number.isFinite(progress)) return;
+    if (!dragging) dragColorOrigin = { progress: currentProgress, color: [...currentLCH], rib: [...currentRib], floor: [...currentFloor] };
+    dragging = true; currentProgress = progress; targetProgress = progress; cameraTransition = null; colorTransition = null; activeStation = wrapStation(Math.round(progress)); settledPending = true; slowDuration = 0;
+  }
   function reactAt(x, y) {
     if (!ready || dragging || cameraTransition) return false; raycaster.setFromCamera(new THREE.Vector2(x / width * 2 - 1, 1 - y / height * 2), camera); raycaster.far = 100;
     if (!raycaster.intersectObjects(meshes, false).length) return false;

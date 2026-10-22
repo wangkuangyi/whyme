@@ -65,3 +65,12 @@ export function interpolateLCH(from, to, amount) {
   return [lerp(from[0], to[0], t), lerp(from[1], to[1], t),
     ((from[2] + safeHueDelta(from[2], to[2]) * t) % 360 + 360) % 360];
 }
+
+// 颜色比镜头先到位：拖动接管时保留已显示的颜色，到相邻站点后再接回色板。
+export function interpolateDragLCH(progress, origin, color, palette) {
+  const edge = progress >= origin ? Math.floor(origin) + 1 : Math.ceil(origin) - 1;
+  const t = (progress - origin) / (edge - origin);
+  if (t <= 1) return interpolateLCH(color, palette[wrapStation(edge)], t);
+  const from = Math.floor(progress);
+  return interpolateLCH(palette[wrapStation(from)], palette[wrapStation(from + 1)], progress - from);
+}

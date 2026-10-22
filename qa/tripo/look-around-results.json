@@ -1,0 +1,209 @@
+{
+  "checks": [
+    {
+      "name": "1440px第1站动作正确",
+      "pass": true
+    },
+    {
+      "name": "1440px第1站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "1440px第1站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "1440px第1站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "1440px第2站动作正确",
+      "pass": true
+    },
+    {
+      "name": "1440px第2站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "1440px第2站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "1440px第2站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "1440px第3站动作正确",
+      "pass": true
+    },
+    {
+      "name": "1440px第3站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "1440px第3站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "1440px第3站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "1440px第4站动作正确",
+      "pass": true
+    },
+    {
+      "name": "1440px第4站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "1440px第4站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "1440px第4站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "390px第1站动作正确",
+      "pass": true
+    },
+    {
+      "name": "390px第1站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "390px第1站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "390px第1站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "390px第2站动作正确",
+      "pass": true
+    },
+    {
+      "name": "390px第2站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "390px第2站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "390px第2站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "390px第3站动作正确",
+      "pass": true
+    },
+    {
+      "name": "390px第3站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "390px第3站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "390px第3站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "390px第4站动作正确",
+      "pass": true
+    },
+    {
+      "name": "390px第4站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "390px第4站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "390px第4站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "320px第1站动作正确",
+      "pass": true
+    },
+    {
+      "name": "320px第1站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "320px第1站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "320px第1站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "320px第2站动作正确",
+      "pass": true
+    },
+    {
+      "name": "320px第2站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "320px第2站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "320px第2站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "320px第3站动作正确",
+      "pass": true
+    },
+    {
+      "name": "320px第3站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "320px第3站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "320px第3站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "320px第4站动作正确",
+      "pass": true
+    },
+    {
+      "name": "320px第4站静止手指隐藏",
+      "pass": true
+    },
+    {
+      "name": "320px第4站头顶完整",
+      "pass": true
+    },
+    {
+      "name": "320px第4站不再绑定抱臂和大挥手",
+      "pass": true
+    },
+    {
+      "name": "行走后切换环顾保持世界位置",
+      "pass": true
+    },
+    {
+      "name": "点击人物重新环顾",
+      "pass": true
+    },
+    {
+      "name": "无页面脚本异常",
+      "pass": true,
+      "detail": []
+    }
+  ]
+}

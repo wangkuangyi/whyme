@@ -5,6 +5,10 @@
       "passed": true
     },
     {
+      "name": "look-around-exists-in-supplied-glb",
+      "passed": true
+    },
+    {
       "name": "station-1-uses-reviewed-action",
       "passed": true
     },
@@ -61,6 +65,10 @@
       "passed": true
     },
     {
+      "name": "withdrawn-cross-arms-never-bound-or-played",
+      "passed": true
+    },
+    {
       "name": "large-greet-never-bound-or-played",
       "passed": true
     },
@@ -74,6 +82,18 @@
     },
     {
       "name": "station-switch-preserves-travel",
+      "passed": true
+    },
+    {
+      "name": "entering-look-around-preserves-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "look-around-completion-keeps-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "leaving-look-around-preserves-walk-world-position",
       "passed": true
     },
     {
@@ -125,23 +145,51 @@
       "passed": true
     },
     {
-      "name": "idle-station-does-not-trigger-repeated-settling",
+      "name": "initial-idle-does-not-trigger-repeated-settling",
       "passed": true
     },
     {
-      "name": "idle-station-click-does-not-add-a-reaction",
+      "name": "idle-before-any-station-does-not-add-a-reaction",
       "passed": true
     },
     {
-      "name": "reselecting-idle-does-not-reset-its-phase",
+      "name": "look-around-has-real-head-and-chest-turning",
       "passed": true
     },
     {
-      "name": "reentering-idle-reuses-the-existing-loop",
+      "name": "look-around-does-not-introduce-world-travel",
       "passed": true
     },
     {
-      "name": "idle-remains-stable-after-reentry",
+      "name": "reselecting-look-around-does-not-restart-entry",
+      "passed": true
+    },
+    {
+      "name": "clicking-during-look-around-does-not-interrupt-it",
+      "passed": true
+    },
+    {
+      "name": "look-around-plays-once-and-returns-to-idle",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-after-look-around-keeps-pose-and-position",
+      "passed": true
+    },
+    {
+      "name": "completed-look-around-does-not-replay-spontaneously",
+      "passed": true
+    },
+    {
+      "name": "reselecting-completed-look-around-keeps-idle-phase",
+      "passed": true
+    },
+    {
+      "name": "clicking-after-look-around-replays-the-entry",
+      "passed": true
+    },
+    {
+      "name": "look-around-reaction-also-settles-once",
       "passed": true
     },
     {
@@ -156,10 +204,24 @@
   "stationClips": [
     "Walk",
     "Nod",
-    "Idle",
+    "LookAround",
     "Wave"
   ],
   "walkStation": 0,
+  "lookAround": {
+    "station": 2,
+    "sourceDuration": 15.625,
+    "runtimeDuration": 15.625,
+    "speed": 1,
+    "turnExcursionRadians": {
+      "Head": 0.6832778615373362,
+      "Neck": 0.259376297617933,
+      "Spine": 0.10543879825564666,
+      "Spine1": 0.10047809551698923,
+      "Spine2": 0.09816366356296694
+    },
+    "postIdlePoseError": 4.2146848510894035e-8
+  },
   "walkWorldEnd": [
     0.3870891251373866,
     0,

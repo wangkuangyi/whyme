@@ -1,12 +1,47 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "动作素材/human+character+3d+model.glb",
+  "sources": [
+    {
+      "path": "动作素材/human+character+3d+model.glb",
+      "sha256": "489f55375ca109e670396da16a45f35b94f18a7247a2ff26bb35bbaaa2e6f9e8",
+      "bytes": 4302728,
+      "clips": [
+        "Idle",
+        "Greet",
+        "Box",
+        "Walk",
+        "Nod",
+        "Wave"
+      ],
+      "skeletonComparison": {
+        "jointCount": 65,
+        "maxRestTranslation": 2.086162567138672e-7,
+        "maxRestQuaternion": 0.00001198076643049717,
+        "maxRestScale": 0.000004887580871582031
+      }
+    },
+    {
+      "path": "动作素材/human+character+3d+model+huangu.glb",
+      "sha256": "a5b3fd132e9a46d98d508f5a52e7371503995d424b7ef849c580039024672988",
+      "bytes": 4149852,
+      "clips": [
+        "LookAround"
+      ],
+      "skeletonComparison": {
+        "jointCount": 65,
+        "maxRestTranslation": 2.086162567138672e-7,
+        "maxRestQuaternion": 0.00001198076643049717,
+        "maxRestScale": 0.000004887580871582031
+      }
+    }
+  ],
   "baseline": "public/models/person.glb",
   "output": "public/models/person-animated.glb",
   "sourceSHA256": "489f55375ca109e670396da16a45f35b94f18a7247a2ff26bb35bbaaa2e6f9e8",
   "baselineSHA256": "def0603ec59ac8fac3de5df25e2827b2fbbd11cf0ad7ae5672e9fc3fab4a957f",
-  "outputSHA256": "4600ea8bc2365fca063e916ccf056621f7d9466a1873541243fd31d52522f505",
-  "bytes": 1905448,
+  "outputSHA256": "30c9fe726248feaf64d84b4d54623fc0059dff5d59d0f0c6d13aaf1551491bdd",
+  "bytes": 2135360,
   "preserved": {
     "originalFace": true,
     "originalMeshBytes": true,
@@ -25,6 +60,7 @@
   "clips": [
     {
       "name": "Idle",
+      "source": "动作素材/human+character+3d+model.glb",
       "sourceName": "角色自然站立.001",
       "sourceIndex": 0,
       "duration": 5,
@@ -56,6 +92,7 @@
     },
     {
       "name": "Greet",
+      "source": "动作素材/human+character+3d+model.glb",
       "sourceName": "人物主动向面前的人打招呼，精神饱满，反应利",
       "sourceIndex": 1,
       "duration": 3,
@@ -83,10 +120,11 @@
           -0.021226034550661965
         ]
       },
-      "recommendation": "原地短动作；进入和退出时交叉淡化。"
+      "recommendation": "大幅招手已由用户撤回，不绑定或播放。"
     },
     {
       "name": "Box",
+      "source": "动作素材/human+character+3d+model.glb",
       "sourceName": "box_01.001",
       "sourceIndex": 2,
       "duration": 2.25,
@@ -118,6 +156,7 @@
     },
     {
       "name": "Walk",
+      "source": "动作素材/human+character+3d+model.glb",
       "sourceName": "角色正常走路.001",
       "sourceIndex": 3,
       "duration": 5,
@@ -149,6 +188,7 @@
     },
     {
       "name": "Nod",
+      "source": "动作素材/human+character+3d+model.glb",
       "sourceName": "人物认真听完一句话后，给出明确、自信的肯定",
       "sourceIndex": 4,
       "duration": 3,
@@ -180,6 +220,7 @@
     },
     {
       "name": "Wave",
+      "source": "动作素材/human+character+3d+model.glb",
       "sourceName": "角色小幅挥手，别有气无力的.001",
       "sourceIndex": 5,
       "duration": 5,
@@ -208,6 +249,38 @@
         ]
       },
       "recommendation": "原地短动作；进入和退出时交叉淡化。"
+    },
+    {
+      "name": "LookAround",
+      "source": "动作素材/human+character+3d+model+huangu.glb",
+      "sourceName": "look_around.001",
+      "sourceIndex": 0,
+      "duration": 15.625,
+      "channels": 195,
+      "rootMotion": {
+        "bone": "mixamorig:Hips",
+        "start": [
+          0.0019521939102560282,
+          0.5148422718048096,
+          0.0019521492067724466
+        ],
+        "end": [
+          0.0034806267358362675,
+          0.5148264765739441,
+          0.002804982475936413
+        ],
+        "delta": [
+          0.0015284328255802393,
+          -0.000015795230865478516,
+          0.0008528332691639662
+        ],
+        "worldDelta": [
+          0.002798398479636144,
+          -0.000028919393315618436,
+          0.0015614473098649606
+        ]
+      },
+      "recommendation": "用户新增环顾原片段；保留原采样，播放区间与构图另行验收。"
     }
   ]
 }

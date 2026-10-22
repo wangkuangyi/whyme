@@ -4,7 +4,7 @@ import { setupDialogs } from './dialogs.js';
 
 const COLORS=['#C2603D','#3755A6','#327B60','#A44C76'];
 const restored = new URLSearchParams(location.search).has('still');
-const READOUTS=restored?['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM']:['跟拍 · 出发','特写 · 点头','近景 · 自然站立','近景 · 轻轻挥手'];
+const READOUTS=restored?['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM']:['侧面跟拍 · 出发','正面特写 · 点头','俯视中景 · 环顾','半身近景 · 轻轻挥手'];
 const IMAGE_ROOT=restored?'/images-v2':'/images-tripo';
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
@@ -60,7 +60,7 @@ const connector=document.querySelector('.node-connector path'),readout=document.
 const overlap=(a,b,pad=0)=>a&&b&&a.left<b.right+pad&&a.right>b.left-pad&&a.top<b.bottom+pad&&a.bottom>b.top-pad;
 const rect=r=>r?{left:r.left??r.x,right:r.right??r.x+r.width,top:r.top??r.y,bottom:r.bottom??r.y+r.height}:null;
 function applyActive(index,{announce=true}={}){
-  active=wrap(index);document.documentElement.style.setProperty('--accent',COLORS[active]);document.body.dataset.angle=active+1;
+  active=wrap(index);if(staticMode||!scene)document.documentElement.style.setProperty('--accent',COLORS[active]);document.body.dataset.angle=active+1;
   document.querySelectorAll('[data-index]').forEach(el=>{const selected=Number(el.dataset.index)===active;el.classList.toggle('is-active',selected);el.setAttribute('aria-pressed',String(selected));});
   panels.forEach((p,i)=>{p.classList.toggle('is-active',i===active);p.classList.remove('is-expanded');p.querySelectorAll('a,button').forEach(el=>el.tabIndex=i===active?0:-1);const b=p.querySelector('.expand-proof');if(b){b.setAttribute('aria-expanded','false');b.innerHTML='展开 <span>＋</span>';}});
   document.querySelectorAll('.poster').forEach((p,i)=>p.classList.toggle('is-current',i===active));
@@ -135,14 +135,19 @@ function moveDrag(e){
   const r=stage.getBoundingClientRect();if(e.pointerType==='mouse')scene?.setPointer?.((e.clientX-r.left)/r.width*2-1,1-(e.clientY-r.top)/r.height*2);
   if(!pointer||e.pointerId!==pointer.id)return;const dx=e.clientX-pointer.startX,dy=e.clientY-pointer.startY;
   if(!pointer.started&&Math.abs(dy)>Math.abs(dx)+8){pointer=null;return;}
-  if(!pointer.started&&Math.abs(dx)>6){pointer.started=true;dragged=true;noteInput();beginMotion();document.body.classList.add('is-dragging');e.currentTarget.setPointerCapture?.(e.pointerId);}
+  if(!pointer.started&&Math.abs(dx)>6){
+    // 接管正在移动的镜头时，从这一帧的位置开始，避免跳到目标站。
+    pointer.origin=!staticMode&&!reducedMotion&&scene?scene.getState().currentProgress:active;
+    pointer.originIndex=Math.round(pointer.origin);pointer.anchorX=e.clientX;
+    pointer.started=true;dragged=true;noteInput();beginMotion();document.body.classList.add('is-dragging');e.currentTarget.setPointerCapture?.(e.pointerId);
+  }
   if(!pointer.started)return;const now=performance.now();pointer.velocity=(e.clientX-pointer.lastX)/Math.max(8,now-pointer.lastTime)*1000;pointer.lastX=e.clientX;pointer.lastTime=now;
-  pointer.progress=pointer.origin-dx/(stage.clientWidth*(mobile()?.55:.3));if(!reducedMotion)scene?.setDragProgress(pointer.progress);
+  pointer.progress=pointer.origin-(e.clientX-pointer.anchorX)/(stage.clientWidth*(mobile()?.55:.3));if(!reducedMotion)scene?.setDragProgress(pointer.progress);
   if(staticMode){const n=wrap(Math.round(pointer.progress));if(n!==active){applyActive(n,{announce:false});positionStaticNodes();}}
 }
 function endDrag(e){
   if(!pointer||e.pointerId!==pointer.id)return;
-  if(pointer.started){const fresh=performance.now()-pointer.lastTime<100;select(fresh&&Math.abs(pointer.velocity)>400?pointer.origin+(pointer.velocity<0?1:-1):Math.round(pointer.progress));}
+  if(pointer.started){const fresh=performance.now()-pointer.lastTime<100;select(fresh&&Math.abs(pointer.velocity)>400?pointer.originIndex+(pointer.velocity<0?1:-1):Math.round(pointer.progress));}
   else if(e.currentTarget===stage&&!e.target.closest('button')){const r=stage.getBoundingClientRect();scene?.reactAt?.(e.clientX-r.left,e.clientY-r.top);}
   pointer=null;document.body.classList.remove('is-dragging');setTimeout(()=>dragged=false,0);
 }
@@ -160,7 +165,7 @@ async function bootScene(){
   }catch(error){if(own===generation){console.warn('3D 展示暂不可用，已启用静帧。',error);enableStatic('unavailable');}}
 }
 function syncModeButton(){const b=document.querySelector('#mode-toggle');if(b){b.textContent=staticMode?'启用 3D 展示':'切换到静帧展示';b.setAttribute('aria-pressed',String(staticMode));}}
-function enableStatic(reason='requested'){++generation;controller?.abort();scene?.dispose();scene=null;staticMode=true;document.body.classList.add('static-mode','scene-ready');document.body.classList.remove('scene-loading');document.querySelector('.fallback-status').hidden=!['performance','unavailable'].includes(reason);positionStaticNodes();settled();syncModeButton();}
+function enableStatic(reason='requested'){++generation;controller?.abort();scene?.dispose();scene=null;staticMode=true;document.documentElement.style.setProperty('--accent',COLORS[active]);document.body.classList.add('static-mode','scene-ready');document.body.classList.remove('scene-loading');document.querySelector('.fallback-status').hidden=!['performance','unavailable'].includes(reason);positionStaticNodes();settled();syncModeButton();}
 function retry3D(){staticMode=false;document.body.classList.remove('static-mode','scene-ready');document.body.classList.add('scene-loading');document.querySelector('.fallback-status').hidden=true;bootScene();syncModeButton();}
 document.querySelector('#retry-3d').addEventListener('click',retry3D);
 matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',e=>{reducedMotion=e.matches;controller?.abort();scene?.dispose();scene=null;if(!staticMode)bootScene();});
