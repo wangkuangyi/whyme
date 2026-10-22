@@ -3,7 +3,9 @@ import { profile, advantages } from './content.js';
 import { setupDialogs } from './dialogs.js';
 
 const COLORS=['#C2603D','#3755A6','#327B60','#A44C76'];
-const READOUTS=['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM'];
+const restored = new URLSearchParams(location.search).has('still');
+const READOUTS=restored?['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM']:['近景 · 招手','特写 · 点头','跟拍 · 行走','近景 · 挥手'];
+const IMAGE_ROOT=restored?'/images-v2':'/images-tripo';
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const wrap=n=>((n%4)+4)%4;
@@ -19,7 +21,7 @@ let pointer=null,dragged=false,firstInput=false,moving=false;
 let wheelLast=0,wheelAmount=0,wheelUsed=false;
 let readoutTimer,lineTimer,cardTimer,staticTimer,resizeTimer;
 let frameMetadata=null,lastPositions=[],lastSettled=null;
-const framePath=(i,variant=mobile()?'mobile':'desktop')=>`/images-v2/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png`;
+const framePath=(i,variant=mobile()?'mobile':'desktop')=>`${IMAGE_ROOT}/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png`;
 
 document.title=`${profile.name} ${profile.nameEn} — Why me?`;
 document.querySelector('#app').innerHTML=`
@@ -152,6 +154,7 @@ async function bootScene(){
   try{const {createScene}=await import('./scene.js');if(own!==generation)return;
     const created=await createScene({canvas,reducedMotion,signal:controller.signal,
       onNodePositions:p=>{if(own===generation)positionNodes(p);},onColorChange:c=>{if(own===generation)document.documentElement.style.setProperty('--accent',c);},onSettled:d=>{if(own===generation)settled(d);},
+      onFramingChange:d=>{if(own===generation&&!moving){lastSettled=d;layoutCard(d);}},
       onReady:()=>{if(own===generation){document.body.classList.add('scene-ready');document.body.classList.remove('scene-loading');}},onError:()=>{if(own===generation)enableStatic('unavailable');},onPerformanceFallback:()=>{if(own===generation)enableStatic('performance');}});
     if(own!==generation||staticMode){created?.dispose();return;}scene=created;scene?.setStation(active,{immediate:reducedMotion||firstInput||active!==0});
   }catch(error){if(own===generation){console.warn('3D 展示暂不可用，已启用静帧。',error);enableStatic('unavailable');}}
@@ -164,7 +167,7 @@ matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',e=>{red
 window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(staticMode){positionStaticNodes();settled();}else{layoutCard(lastSettled);scene?.resize();}},120);});
 setupDialogs({profile,availability,getStatic:()=>staticMode,toggleMode:()=>staticMode?retry3D():enableStatic('requested')});
 applyActive(active,{announce:false});positionStaticNodes();document.body.classList.add('scene-loading','card-open');
-fetch('/images-v2/frames.json').then(r=>r.ok?r.json():null).then(d=>{frameMetadata=d;if(staticMode){positionStaticNodes();settled();}}).catch(()=>{});
+fetch(`${IMAGE_ROOT}/frames.json`).then(r=>r.ok?r.json():null).then(d=>{frameMetadata=d;if(staticMode){positionStaticNodes();settled();}}).catch(()=>{});
 bootScene();setTimeout(()=>document.body.classList.add('show-poster'),1500);setTimeout(()=>document.body.classList.add('show-directory'),6500);
 if(import.meta.env.DEV)window.__WHYME__={getScene:()=>scene,select,getActive:()=>active,getLayout:()=>({moving,staticMode,active,lastSettled,lastPositions,nodeDistance:card.dataset.nodeDistance,overlapsProtected:card.dataset.overlapsProtected}),settled};
 

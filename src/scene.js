@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createCharacterMotion } from './motion.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { Line2 } from 'three/addons/lines/Line2.js';
@@ -10,6 +11,14 @@ import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUnifo
 import { clamp, lerp, nearestStation, stationAzimuth, wrapStation, linearToOKLab, oklabToLinear, labToLCH, lchToLab, interpolateLCH } from './scene-math.js';
 
 const HEIGHT = 1.83, RAD = Math.PI / 180;
+// Retain the original static 3D model as an explicit, reproducible fallback.
+const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
+const SHOTS = [
+  { azimuth: -18, fill: 1.50, camY: .90, lookY: .67, dist: 2.8, fov: 28, haloY: .75 },
+  { azimuth: 28, fill: 1.75, camY: .88, lookY: .72, dist: 2.8, fov: 25, haloY: .75 },
+  { azimuth: 50, fill: .80, camY: .95, lookY: .51, dist: 2.8, fov: 31, haloY: .55 },
+  { azimuth: -24, fill: 1.52, camY: .90, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
+];
 const STATIONS = [
   { camY: .95, dist: 2.5, lookY: .50, fov: 27, shift: -.04, fill: .84, haloY: .55, width: .64, roll: 9, openness: .24, color: '#C2603D', rib: '#A64F2F', floor: '#FFF4F1' },
   { camY: .22, dist: 2, lookY: .58, fov: 37.8, shift: -.05, fill: .72, haloY: .55, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
@@ -23,18 +32,20 @@ const vector = () => new THREE.Vector3();
 const ease = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
 
 /** Local WebGL studio. Position callbacks use canvas-local CSS pixels. */
-export async function createScene({ canvas, signal, onNodePositions = () => {}, onSettled = () => {}, onColorChange = () => {}, onReady = () => {}, onError = () => {}, reducedMotion = false, onPerformanceFallback = () => {} }) {
+export async function createScene({ canvas, signal, onNodePositions = () => {}, onSettled = () => {}, onFramingChange = () => {}, onColorChange = () => {}, onReady = () => {}, onError = () => {}, reducedMotion = false, onPerformanceFallback = () => {} }) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' }); }
   catch (error) { onError(error); throw error; }
   renderer.setClearColor(0xffffff, 0); renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1; renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.VSMShadowMap;
   RectAreaLightUniformsLib.init();
+  const cameraAnchor = new THREE.Vector3(), contactShadows = [], studioLights = [];
+  let characterMotion = null;
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(27, 1, .02, 100), modelGroup = new THREE.Group(); scene.add(modelGroup);
   scene.add(new THREE.HemisphereLight(0xffffff, 0xd9d9df, .4)); scene.add(new THREE.AmbientLight(0xffffff, .10));
   const key = new THREE.SpotLight(0xfffcf8, 72, 24, .76, .95, 2); key.position.set(-3.2, 4.3, 4.8); key.target.position.set(0, .4, 0); key.castShadow = true;
-  key.shadow.mapSize.set(1024, 1024); key.shadow.camera.near = .2; key.shadow.camera.far = 18; key.shadow.bias = -.00008; key.shadow.normalBias = .015; key.shadow.radius = 8; key.shadow.blurSamples = 8; scene.add(key, key.target);
-  const addSoftbox = (intensity, w, h, position) => { const light = new THREE.RectAreaLight(0xffffff, intensity, w, h); light.position.set(...position); light.lookAt(0, 1, 0); scene.add(light); };
+  key.shadow.mapSize.set(1024, 1024); key.shadow.camera.near = .2; key.shadow.camera.far = 18; key.shadow.bias = -.00008; key.shadow.normalBias = .015; key.shadow.radius = 8; key.shadow.blurSamples = 8; scene.add(key, key.target); studioLights.push({ light: key, rest: key.position.clone() });
+  const addSoftbox = (intensity, w, h, position) => { const light = new THREE.RectAreaLight(0xffffff, intensity, w, h); light.position.set(...position); light.lookAt(0, 1, 0); scene.add(light); studioLights.push({ light, rest: light.position.clone() }); };
   addSoftbox(2.2, 3.2, 4, [-3, 4.5, 4]); addSoftbox(1.4, 4, 4, [3.8, 2.4, 3]); addSoftbox(2, 3, 1.2, [0, 4, -.2]); addSoftbox(2.5, .8, 3, [-2.6, 2, -3]); addSoftbox(2.2, .8, 3, [2.6, 2, -2.5]);
 
   // A world-space light pool changes shape with the camera and has no hard horizon.
@@ -51,7 +62,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   const contactTexture = makeShadowTexture(), shadowGeometry = new THREE.PlaneGeometry(1, 1);
   for (const [x, z, sx, sz, opacity] of [[0, 0, 1.4, .85, .09], [-.14, .025, .44, .54, .32], [.14, .025, .44, .54, .32]]) {
     const shadow = new THREE.Mesh(shadowGeometry, new THREE.MeshBasicMaterial({ map: contactTexture, color: '#29292e', transparent: true, opacity, depthWrite: false, toneMapped: false }));
-    shadow.rotation.x = -Math.PI / 2; shadow.scale.set(sx, sz, 1); shadow.position.set(x, .002, z); shadow.renderOrder = -1; scene.add(shadow);
+    shadow.rotation.x = -Math.PI / 2; shadow.scale.set(sx, sz, 1); shadow.position.set(x, .002, z); shadow.renderOrder = -1; scene.add(shadow); contactShadows.push(shadow);
   }
   const frontGeometry = new LineGeometry(), backGeometry = new LineGeometry();
   const frontMaterial = new LineMaterial({ color: '#232329', transparent: true, opacity: .7, linewidth: 1.25, worldUnits: false, depthTest: true, depthWrite: false, toneMapped: false });
@@ -64,39 +75,52 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   let width = 1, height = 1, mobile = false, disposed = false, ready = false, currentProgress = 0, targetProgress = 0, dragging = false, activeStation = 0;
   let previousTime = performance.now(), loadedTime = 0, animationFrame = 0, slowDuration = 0, degradeDuration = 0, qualityLevel = 0, fallbackTriggered = false;
   let cameraTransition = null, colorTransition = null, settledPending = true, currentLCH = [...COLORS[0]], currentRib = [...RIBS[0]], currentFloor = [...FLOORS[0]], lastCssColor = '';
-  const meshes = [], clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [], clips = new Map(), actions = new Map();
-  let mixer = null, model = null, actionName = '', currentAction = null, afterAction = null, performanceSince = 0;
-  let lastInteraction = performance.now(), nextIdleAt = lastInteraction + 9000, lastIdle = -1, idleCount = 0, blinkAt = lastInteraction + 1800, blinkStarted = -Infinity, blinkCount = 0;
-  let hoveredNode = null, pointer = { x: 0, y: 0 }, eyeYaw = 0, eyePitch = 0, bodyFollow = 0, dragDirection = 0, laughReactions = 0, reactionCount = 0;
-  let nodePositions = [], lastProfile = STATIONS[0], morphValues = {}, lookBack = false;
+  const meshes = [], clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
+  let model = null, nodePositions = [], lastProfile = STATIONS[0];
+  let walkClose = 0, framingPending = false, lastFramingAt = 0;
   const timings = { frameMs: 0, poseMs: 0, renderMs: 0, nodesMs: 0 };
   const occlusionCache = Array.from({ length: 4 }, () => ({ at: -Infinity, hidden: false }));
-  let microNodStarted = -Infinity;
   const lookAt = vector(), projectedTop = vector(), projectedBottom = vector(), cameraRight = vector(), cameraUp = vector(), cameraTowards = vector();
-  const ringU = vector(), ringV = vector(), ringNormal = vector(), ringCenter = vector(), point = vector(), rayDirection = vector(), projected = vector(), gazeTarget = vector();
+  const ringU = vector(), ringV = vector(), ringNormal = vector(), ringCenter = vector(), point = vector(), rayDirection = vector(), projected = vector();
   const raycaster = new THREE.Raycaster(), nodes = Array.from({ length: 4 }, vector), frontPoints = new Float32Array(65 * 3), backPoints = new Float32Array(65 * 3), tickPoints = new Float32Array(4 * 6);
-  const axisY = new THREE.Vector3(0, 1, 0), axisX = new THREE.Vector3(1, 0, 0), overlay = new THREE.Quaternion();
 
   function sampleProfile(progress) {
     const local = wrapStation(progress), from = Math.floor(local), to = (from + 1) % 4, t = local - from, profile = {};
     for (const key of Object.keys(STATIONS[0])) if (typeof STATIONS[0][key] === 'number') profile[key] = lerp(STATIONS[from][key], STATIONS[to][key], t);
-    if (mobile) { profile.fill = Math.min(lerp([.68, .66, .68, .70][from], [.68, .66, .68, .70][to], t), Math.max(.35, (height - 149) / height)); profile.shift = 0; profile.width = .84; }
+    profile.azimuth = stationAzimuth(progress) / RAD;
+    if (USE_ANIMATIONS) {
+      const shots = SHOTS.map((shot, i) => i !== 2 ? shot : { ...shot, azimuth: lerp(50, 32, walkClose), fill: lerp(.80, 1.30, walkClose), camY: lerp(.95, .90, walkClose), lookY: lerp(.51, .69, walkClose), fov: lerp(31, 28, walkClose), haloY: lerp(.55, .75, walkClose) });
+      for (const key of Object.keys(SHOTS[0])) profile[key] = lerp(shots[from][key], shots[to][key], t);
+      profile.width = lerp(STATIONS[from].width + (from === 2 ? .10 * walkClose : 0), STATIONS[to].width + (to === 2 ? .10 * walkClose : 0), t);
+    }
+    if (mobile) {
+      // Budget for the widest part of a gesture, including the incoming blend.
+      // Width/height matters here: a tall 320px phone needs more horizontal room.
+      const gestureScale = Math.min(1, width / 390 * 557 / height);
+      const walkWide = Math.min(.67, Math.max(.35, (height - 149) / height));
+      const fills = USE_ANIMATIONS ? [.90 * gestureScale, 1.05 * gestureScale, lerp(walkWide, 1.12 * gestureScale, walkClose), .86 * gestureScale] : [.68, .66, .68, .70];
+      profile.fill = lerp(fills[from], fills[to], t);
+      if (!USE_ANIMATIONS && profile.fill < 1) profile.fill = Math.min(profile.fill, Math.max(.35, (height - 149) / height));
+      profile.shift = 0; profile.width = .84;
+    }
     return profile;
   }
   function updateCamera(profile) {
-    const azimuth = stationAzimuth(currentProgress); camera.clearViewOffset(); camera.fov = profile.fov; camera.aspect = width / height; camera.updateProjectionMatrix(); lookAt.set(0, HEIGHT * profile.lookY, 0);
+    const azimuth = profile.azimuth * RAD; camera.clearViewOffset(); camera.fov = profile.fov; camera.aspect = width / height; camera.updateProjectionMatrix(); lookAt.copy(cameraAnchor).add(new THREE.Vector3(0, HEIGHT * profile.lookY, 0));
     const elevation = (profile.camY - profile.lookY) / profile.dist; let distance = HEIGHT / (2 * Math.tan(profile.fov * RAD / 2) * profile.fill);
     for (let iteration = 0; iteration < 4; iteration += 1) {
-      camera.position.set(Math.sin(azimuth) * distance, lookAt.y + elevation * distance, Math.cos(azimuth) * distance); camera.lookAt(lookAt); camera.updateMatrixWorld(); projectedTop.set(0, HEIGHT, 0).project(camera); projectedBottom.set(0, 0, 0).project(camera); distance *= Math.abs(projectedTop.y - projectedBottom.y) / (profile.fill * 2);
+      camera.position.copy(cameraAnchor).add(new THREE.Vector3(Math.sin(azimuth) * distance, HEIGHT * profile.lookY + elevation * distance, Math.cos(azimuth) * distance)); camera.lookAt(lookAt); camera.updateMatrixWorld(); projectedTop.copy(cameraAnchor).add(new THREE.Vector3(0, HEIGHT, 0)).project(camera); projectedBottom.copy(cameraAnchor).project(camera); distance *= Math.abs(projectedTop.y - projectedBottom.y) / (profile.fill * 2);
     }
     const currentCenter = (projectedTop.y + projectedBottom.y) * .5;
     const mobileTop = Math.max(135, height * .25);
-    const desiredCenter = mobile ? 1 - 2 * (mobileTop / height + profile.fill * .5) : profile.fill <= 1 ? .04 : 1 - 2 * (.08 + profile.fill * .5);
-    camera.setViewOffset(width, height, -profile.shift * width, (desiredCenter - currentCenter) * height / 2, width, height); camera.updateMatrixWorld(); cameraRight.setFromMatrixColumn(camera.matrixWorld, 0).normalize(); cameraUp.setFromMatrixColumn(camera.matrixWorld, 1).normalize(); cameraTowards.setFromMatrixColumn(camera.matrixWorld, 2).normalize(); return azimuth;
+    const desiredCenter = mobile ? 1 - 2 * (mobileTop / height + profile.fill * .5) : USE_ANIMATIONS || profile.fill > 1 ? 1 - 2 * (.08 + profile.fill * .5) : .04;
+    camera.setViewOffset(width, height, -profile.shift * width, (desiredCenter - currentCenter) * height / 2, width, height); camera.updateMatrixWorld(); cameraRight.setFromMatrixColumn(camera.matrixWorld, 0).normalize(); cameraUp.setFromMatrixColumn(camera.matrixWorld, 1).normalize(); cameraTowards.setFromMatrixColumn(camera.matrixWorld, 2).normalize();
+    // Navigation remains one continuous orbit while each chapter gets its own shot.
+    return stationAzimuth(currentProgress);
   }
   function ringPoint(angle, radius, out) { return out.copy(ringCenter).addScaledVector(ringU, Math.sin(angle) * radius).addScaledVector(ringV, Math.cos(angle) * radius); }
   function updateHalo(profile, azimuth) {
-    ringCenter.set(0, profile.haloY * HEIGHT, 0); const roll = profile.roll * RAD;
+    ringCenter.copy(cameraAnchor).add(new THREE.Vector3(0, profile.haloY * HEIGHT, 0)); const roll = profile.roll * RAD;
     ringU.copy(cameraRight).multiplyScalar(Math.cos(roll)).addScaledVector(cameraUp, Math.sin(roll)); ringV.copy(cameraRight).multiplyScalar(profile.openness * Math.sin(roll)).addScaledVector(cameraUp, -profile.openness * Math.cos(roll)).addScaledVector(cameraTowards, Math.sqrt(1 - profile.openness ** 2)); ringNormal.crossVectors(ringU, ringV).normalize();
     const centerDistance = camera.position.distanceTo(ringCenter); let radius = centerDistance * Math.tan(camera.fov * RAD / 2) * camera.aspect * profile.width;
     for (let pass = 0; pass < 3; pass += 1) { let minX = Infinity, maxX = -Infinity; for (let i = 0; i < 32; i += 1) { ringPoint(i / 32 * Math.PI * 2, radius, point).project(camera); minX = Math.min(minX, point.x); maxX = Math.max(maxX, point.x); } radius *= 2 * profile.width / (maxX - minX); }
@@ -124,38 +148,60 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     else if (colorTransition) { const t = clamp((now - colorTransition.started) / 600, 0, 1); currentLCH = interpolateLCH(colorTransition.from, COLORS[activeStation], t); currentRib = interpolateLCH(colorTransition.rib, RIBS[activeStation], t); currentFloor = interpolateLCH(colorTransition.floor, FLOORS[activeStation], t); if (t === 1) colorTransition = null; }
     applyColors();
   }
-  function play(name, { loop = false, next = null, fade = .7 } = {}) {
-    if (!mixer || reducedMotion || !clips.has(name)) return false;
-    let action = actions.get(name); if (!action) { action = mixer.clipAction(clips.get(name)); actions.set(name, action); }
-    if (action === currentAction && action.isRunning() && loop) return true;
-    // A clamped one-shot is paused, yet still has weight; fade it out as well.
-    for (const previous of actions.values()) if (previous !== action && previous.enabled) previous.fadeOut(fade);
-    action.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).setLoop(loop ? THREE.LoopRepeat : THREE.LoopOnce, loop ? Infinity : 1); action.clampWhenFinished = !loop; action.fadeIn(fade).play(); currentAction = action; actionName = name; afterAction = next; return true;
-  }
-  function startPerformance(index, intro = false) { performanceSince = performance.now(); nextIdleAt = performanceSince + 8500 + Math.random() * 1200; const prefix = `A0${index + 1}`; if (intro && play('IntroWave', { next: `${prefix}_Enter`, fade: .3 })) return; play(`${prefix}_Enter`, { next: `${prefix}_Loop` }); }
-  function updatePose() {
-    // User override: restore the original static standing pose and scanned face.
-    for (const entry of bones.values()) entry.bone.quaternion.copy(entry.rest);
+  function startPerformance(index) { if (characterMotion?.setStation(index)) walkClose = 0; }
+  function updatePose(dt) {
+    if (characterMotion) {
+      characterMotion.update(dt, { dragging });
+      modelGroup.position.copy(characterMotion.position);
+      cameraAnchor.lerp(characterMotion.position, 1 - Math.exp(-dt * 14));
+      // The supplied walk has no authored stopping pose. Push in before its
+      // legs blend to Idle, and retain the close shot after the person arrives.
+      const motion = characterMotion.getState();
+      if (!dragging && motion.station === 2 && motion.action === 'Walk') {
+        const next = ease((motion.time - 3.55) / .85);
+        if (next !== walkClose) { walkClose = next; framingPending = true; }
+      }
+    } else {
+      for (const entry of bones.values()) entry.bone.quaternion.copy(entry.rest);
+    }
+    // Facial geometry, textures and expressions remain exactly the supplied scan.
     for (const mesh of morphMeshes) mesh.morphTargetInfluences.fill(0);
-    morphValues = {}; bodyFollow = 0; eyeYaw = 0; eyePitch = 0; lookBack = false;
     modelGroup.updateMatrixWorld(true);
-    return;
+    for (const { light, rest } of studioLights) light.position.copy(rest).add(cameraAnchor);
+    key.target.position.copy(cameraAnchor).add(new THREE.Vector3(0, .4, 0));
+    floor.position.x = cameraAnchor.x; floor.position.z = cameraAnchor.z;
+    shadowReceiver.position.x = cameraAnchor.x; shadowReceiver.position.z = cameraAnchor.z;
+    if (contactShadows[0]) { contactShadows[0].position.x = modelGroup.position.x; contactShadows[0].position.z = modelGroup.position.z; }
+    for (const [i, name] of ['LeftFoot', 'RightFoot'].entries()) {
+      const foot = bones.get(name)?.bone, shadow = contactShadows[i + 1];
+      if (foot && shadow) { foot.getWorldPosition(point); shadow.position.x = point.x; shadow.position.z = point.z; shadow.material.opacity = .32 * (1 - clamp((point.y - .10) * 5, 0, .90)); }
+    }
   }
   function projectBounds(center, radius) {
     const corners = []; for (const x of [-1, 1]) for (const y of [-1, 1]) for (const z of [-1, 1]) { projected.copy(center).add(new THREE.Vector3(x * radius.x, y * radius.y, z * radius.z)).project(camera); corners.push({ x: (projected.x + 1) * width / 2, y: (1 - projected.y) * height / 2 }); }
     const left = Math.min(...corners.map((p) => p.x)), right = Math.max(...corners.map((p) => p.x)), top = Math.min(...corners.map((p) => p.y)), bottom = Math.max(...corners.map((p) => p.y)); return { x: left, y: top, left, right, top, bottom, width: right - left, height: bottom - top };
   }
   function boneBounds(name, radius) { const bone = bones.get(name)?.bone; return bone ? projectBounds(bone.getWorldPosition(vector()), new THREE.Vector3(...radius)) : null; }
+  function handBounds(name) {
+    const box = new THREE.Box3();
+    for (const [key, { bone }] of bones) if (key.startsWith(name)) box.expandByPoint(bone.getWorldPosition(point));
+    if (box.isEmpty()) return null;
+    // Include finger tips and palm thickness, rather than treating the wrist
+    // as a 20 cm cube that falsely intersects cards in close shots.
+    box.expandByScalar(.025); return projectBounds(box.getCenter(vector()), box.getSize(vector()).multiplyScalar(.5));
+  }
+  function protectedBounds() { return { faceBounds: boneBounds('Head', [.13, .17, .13]), handBounds: ['LeftHand', 'RightHand'].map(handBounds).filter(Boolean) }; }
   function notifySettled() {
     if (!ready || dragging || cameraTransition || !settledPending) return; settledPending = false;
     const box = new THREE.Box3().setFromObject(modelGroup), center = box.getCenter(vector()), half = box.getSize(vector()).multiplyScalar(.5);
-    onSettled({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), modelBounds: projectBounds(center, half), faceBounds: boneBounds('Head', [.13, .17, .13]), handBounds: ['LeftHand', 'RightHand'].map((name) => boneBounds(name, [.10, .12, .10])).filter(Boolean) });
+    onSettled({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), modelBounds: projectBounds(center, half), ...protectedBounds() });
   }
   function render(now) {
     if (disposed || document.hidden) return; const rawDelta = Math.max(0, (now - previousTime) / 1000), dt = Math.min(rawDelta, .05); previousTime = now;
     if (cameraTransition && !dragging) { const t = clamp((now - cameraTransition.started) / 1000, 0, 1); currentProgress = lerp(cameraTransition.from, targetProgress, ease(t)); if (t === 1) { cameraTransition = null; currentProgress = targetProgress; startPerformance(activeStation); } }
-    updateColor(now); lastProfile = sampleProfile(currentProgress); const azimuth = updateCamera(lastProfile); updateHalo(lastProfile, azimuth);
-    const poseStart = performance.now(); updatePose(dt, now); const renderStart = performance.now(); renderer.render(scene, camera); const nodesStart = performance.now(); updateNodes(); notifySettled();
+    updateColor(now); const poseStart = performance.now(); updatePose(dt, now); lastProfile = sampleProfile(currentProgress); const azimuth = updateCamera(lastProfile); updateHalo(lastProfile, azimuth);
+    const renderStart = performance.now(); renderer.render(scene, camera); const nodesStart = performance.now(); updateNodes(); notifySettled();
+    if (framingPending && ready && !dragging && !cameraTransition && now - lastFramingAt > 80) { onFramingChange({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), ...protectedBounds() }); lastFramingAt = now; framingPending = false; }
     timings.frameMs = lerp(timings.frameMs, rawDelta * 1000, .1); timings.poseMs = lerp(timings.poseMs, renderStart - poseStart, .1); timings.renderMs = lerp(timings.renderMs, nodesStart - renderStart, .1); timings.nodesMs = lerp(timings.nodesMs, performance.now() - nodesStart, .1);
     if (ready && now - loadedTime > 3500) {
       // Degrade resolution and shadow cost first; a single healthy frame resets the fallback clock.
@@ -171,25 +217,23 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     const nextStation = Math.round(wrapStation(index)) % 4;
     // Initialization reselects A01 after createScene resolves; preserve its opening wave.
     if (!dragging && !cameraTransition && nextStation === activeStation && Math.abs(currentProgress - targetProgress) < .00001) { settledPending = true; return; }
-    activeStation = nextStation; targetProgress = nearestStation(activeStation, currentProgress); dragging = false; hoveredNode = null;
-    const now = performance.now(); lastInteraction = now; nextIdleAt = now + 9000; settledPending = true;
+    activeStation = nextStation; targetProgress = nearestStation(activeStation, currentProgress); dragging = false;
+    const now = performance.now(); settledPending = true;
     colorTransition = { from: [...currentLCH], rib: [...currentRib], floor: [...currentFloor], started: now }; cameraTransition = { from: currentProgress, started: now };
     if (immediate || reducedMotion) { currentProgress = targetProgress; cameraTransition = null; colorTransition = null; currentLCH = [...COLORS[activeStation]]; currentRib = [...RIBS[activeStation]]; currentFloor = [...FLOORS[activeStation]]; applyColors(); if (ready) startPerformance(activeStation); }
   }
-  function setDragProgress(progress) { if (!Number.isFinite(progress)) return; dragDirection = clamp((progress - currentProgress) * 36, -1, 1); dragging = true; currentProgress = progress; targetProgress = progress; cameraTransition = null; colorTransition = null; activeStation = wrapStation(Math.round(progress)); lastInteraction = performance.now(); nextIdleAt = lastInteraction + 9000; settledPending = true; slowDuration = 0; }
-  function hoverNode(index) { hoveredNode = Number.isInteger(index) && index >= 0 && index < 4 ? index : null; lastInteraction = performance.now(); nextIdleAt = lastInteraction + 8500 + Math.random() * 2500; }
-  function setPointer(x, y) { pointer = { x: clamp(x, -1, 1), y: clamp(y, -1, 1) }; lastInteraction = performance.now(); nextIdleAt = lastInteraction + 8500 + Math.random() * 2500; }
+  function setDragProgress(progress) { if (!Number.isFinite(progress)) return; dragging = true; currentProgress = progress; targetProgress = progress; cameraTransition = null; colorTransition = null; activeStation = wrapStation(Math.round(progress)); settledPending = true; slowDuration = 0; }
   function reactAt(x, y) {
-    if (!ready || dragging) return false; raycaster.setFromCamera(new THREE.Vector2(x / width * 2 - 1, 1 - y / height * 2), camera); raycaster.far = 100;
-    if (!raycaster.intersectObjects(meshes, false).length) return false; lastInteraction = performance.now(); nextIdleAt = lastInteraction + 9000;
-    if (!reducedMotion && (activeStation !== 3 || laughReactions < 2)) { if (play(`React0${activeStation + 1}`, { next: `A0${activeStation + 1}_Loop`, fade: .3 })) { reactionCount += 1; if (activeStation === 3) laughReactions += 1; } } return true;
+    if (!ready || dragging || cameraTransition) return false; raycaster.setFromCamera(new THREE.Vector2(x / width * 2 - 1, 1 - y / height * 2), camera); raycaster.far = 100;
+    if (!raycaster.intersectObjects(meshes, false).length) return false;
+    if (!reducedMotion) characterMotion?.react(); return true;
   }
   function onVisibilityChange() { cancelAnimationFrame(animationFrame); slowDuration = 0; degradeDuration = 0; if (!document.hidden && !disposed) { previousTime = performance.now(); animationFrame = requestAnimationFrame(render); } }
   function onContextLost(event) { event.preventDefault(); onPerformanceFallback({ reason: 'webgl-context-lost' }); }
   document.addEventListener('visibilitychange', onVisibilityChange); canvas.addEventListener('webglcontextlost', onContextLost); const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(canvas); resize();
   signal?.addEventListener('abort', dispose, { once: true }); if (signal?.aborted) { dispose(); return; } animationFrame = requestAnimationFrame(render);
   try {
-    const url = new URL('models/person.glb', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href); if (disposed) return;
+    const url = new URL(USE_ANIMATIONS ? 'models/person-animated.glb' : 'models/person.glb', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href); if (disposed) return;
     model = gltf.scene; model.updateMatrixWorld(true); const box = new THREE.Box3().setFromObject(model), dimensions = box.getSize(vector()); model.scale.multiplyScalar(HEIGHT / Math.max(dimensions.y, .001)); model.updateMatrixWorld(true); box.setFromObject(model); const center = box.getCenter(vector()); model.position.x -= center.x; model.position.y -= box.min.y; model.position.z -= center.z; modelGroup.add(model);
     const clothNoise = makeClothTextures();
     model.traverse((object) => {
@@ -208,19 +252,19 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
         if (/iris/i.test(material.name)) material.roughness = .3; return material;
       }); object.material = Array.isArray(object.material) ? materials : materials[0];
     });
-    if (gltf.animations.length) { mixer = new THREE.AnimationMixer(model); for (const clip of gltf.animations) clips.set(clip.name, clip); mixer.addEventListener('finished', ({ action }) => { if (action !== currentAction || !afterAction) return; const next = afterAction; afterAction = null; play(next, { loop: next.endsWith('_Loop'), next: next.endsWith('_Enter') ? next.replace('_Enter', '_Loop') : null, fade: .65 }); }); }
-    ready = true; loadedTime = performance.now(); blinkAt = loadedTime + 650; settledPending = true; applyColors(); startPerformance(activeStation, true);
-    onReady({ modelHeight: HEIGHT, materials: clothMaterials.length, animations: [...clips.keys()], morphTargets: [...new Set(morphMeshes.flatMap((mesh) => Object.keys(mesh.morphTargetDictionary)))], eyes: eyes.length });
+    if (USE_ANIMATIONS && gltf.animations.length) characterMotion = createCharacterMotion({ model, animations: gltf.animations, bones, reducedMotion });
+    ready = true; loadedTime = performance.now(); settledPending = true; applyColors(); startPerformance(activeStation);
+    onReady({ modelHeight: HEIGHT, materials: clothMaterials.length, animations: characterMotion?.getState().clips || [], morphTargets: [...new Set(morphMeshes.flatMap((mesh) => Object.keys(mesh.morphTargetDictionary)))], eyes: eyes.length });
   } catch (error) { onError(error); cancelAnimationFrame(animationFrame); dispose(); throw error; }
   function dispose() {
-    if (disposed) return; disposed = true; cancelAnimationFrame(animationFrame); resizeObserver.disconnect(); document.removeEventListener('visibilitychange', onVisibilityChange); canvas.removeEventListener('webglcontextlost', onContextLost); signal?.removeEventListener('abort', dispose); mixer?.stopAllAction();
+    if (disposed) return; disposed = true; cancelAnimationFrame(animationFrame); resizeObserver.disconnect(); document.removeEventListener('visibilitychange', onVisibilityChange); canvas.removeEventListener('webglcontextlost', onContextLost); signal?.removeEventListener('abort', dispose); characterMotion?.dispose();
     const geometries = new Set(), materials = new Set(), textures = new Set(); scene.traverse((object) => { if (object.geometry) geometries.add(object.geometry); for (const material of Array.isArray(object.material) ? object.material : object.material ? [object.material] : []) { materials.add(material); for (const value of Object.values(material)) if (value?.isTexture) textures.add(value); } }); for (const item of [...geometries, ...materials, ...textures]) item.dispose(); renderer.dispose();
   }
-  return { setStation, setDragProgress, hoverNode, setPointer, reactAt, resize, dispose,
+  return { setStation, setDragProgress, reactAt, resize, dispose,
     capture: () => { renderer.render(scene, camera); return canvas.toDataURL('image/png'); },
     getState: () => ({ currentProgress, targetProgress, activeStation, ready, dragging, moving: !!cameraTransition || dragging, mobile, width, height, dpr: renderer.getPixelRatio(), triangles: renderer.info.render.triangles,
-      colors: { hoodie: lastCssColor, rib: `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentRib))).getHexString()}`, lch: [...currentLCH], durationMs: 600, throughBlack: false }, ring: { openness: lastProfile.openness, linewidth: 1.25, frontInk: .7, backDash: [3, 4], ticks: 4 }, camera: { azimuth: stationAzimuth(currentProgress) / RAD, shift: lastProfile.shift }, nodes: nodePositions,
-      animation: { action: actionName, available: [...clips.keys()], afterAction, reducedMotion, blinkCount, idleCount, idle: lastIdle, lookBack, reactionCount, laughReactions, bodyFollowDegrees: bodyFollow / RAD, eyeYawDegrees: eyeYaw / RAD, eyePitchDegrees: eyePitch / RAD, hoveredNode, morphs: { ...morphValues }, morphMeshes: morphMeshes.length, eyes: eyes.length, pose: Object.fromEntries(['Hips','Head','LeftHand','RightHand','LeftFoot','RightFoot'].map((name) => [name, bones.get(name)?.bone.getWorldPosition(vector()).toArray()])) },
+      colors: { hoodie: lastCssColor, rib: `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentRib))).getHexString()}`, lch: [...currentLCH], durationMs: 600, throughBlack: false }, ring: { openness: lastProfile.openness, linewidth: 1.25, frontInk: .7, backDash: [3, 4], ticks: 4 }, camera: { azimuth: lastProfile.azimuth, shift: lastProfile.shift, fill: lastProfile.fill, walkClose, position: camera.position.toArray(), target: lookAt.toArray(), anchor: cameraAnchor.toArray(), tracking: characterMotion?.getState().walking || false }, nodes: nodePositions,
+      animation: { ...(characterMotion?.getState() || { action: 'OriginalRest', clips: [], walking: false, position: [0, 0, 0] }), reducedMotion, eyes: 0, morphs: {}, pose: Object.fromEntries(['Hips','Head','LeftHand','RightHand','LeftFoot','RightFoot'].map((name) => [name, bones.get(name)?.bone.getWorldPosition(vector()).toArray()])) }, protectedBounds: protectedBounds(),
       studio: { ambient: .5, shadowOpacity: .16, shadowWorldPosition: key.position.toArray(), shadowEnabled: key.castShadow, mapSize: key.shadow.mapSize.x, floorRadiusH: 1.2 }, quality: { level: qualityLevel, slowDuration, fallbackTriggered, staticThresholdSeconds: 5, staticThresholdFps: 20, timings: { ...timings } }, cloth: clothMaterials.map((material) => ({ name: material.name, rib: !!material.userData.rib, normalMap: !!material.normalMap, aoMap: !!material.aoMap, sheen: `#${material.sheenColor.getHexString()}` })) }),
   };
 }

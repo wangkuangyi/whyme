@@ -13,7 +13,7 @@ export const profile = {
   // display rollover boundary, not a claim of an exact joining date.
   availableFrom: '2026-12-01',
   resume: '/resume.pdf',
-  version: 'v2.0',
+  version: 'v2.1',
   updatedAt: '2026-10-23',
 };
 
