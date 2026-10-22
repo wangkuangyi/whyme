@@ -47,10 +47,9 @@ ascii_text = ''.join(chr(i) for i in range(32, 127))
 subset_text = ''.join(sorted(set(ascii_text + ''.join(c for c in text if ord(c) >= 160))))
 
 families = [
-    ('Instrument Serif', 'instrument-serif', [400], True),
     ('Noto Sans SC', 'noto-sans-sc', [400, 600], False),
 ]
-manifest = {'source': 'Local Noto Sans SC / Google Fonts Instrument Serif', 'subset_characters_requested': len(subset_text), 'fonts': []}
+manifest = {'source': 'Local Noto Sans SC', 'subset_characters_requested': len(subset_text), 'fonts': []}
 css = []
 for family, slug, weights, italic in families:
     for weight in weights:

@@ -1,6 +1,6 @@
 # Why me? — 本地网页
 
-独立项目目录：`whyme-web`。本轮开发版本为 v2.3，使用用户提供的 Tripo 动作，保留原人物的脸、几何与贴图。四站改为“走路、点头、环顾、小幅挥手”，并调整四站的摄影角度和距离，使镜头明显区分。原始 `../person.blend` 和 `public/models/person.glb` 保持不变。本轮验收与此前交付版本分开记录。
+独立项目目录：`whyme-web`。当前版本为 v2.3.1，使用用户提供的 Tripo 动作，保留原人物的脸、几何与贴图。四站改为“走路、点头、环顾、小幅挥手”，并调整四站的摄影角度和距离，使镜头明显区分。原始 `../person.blend` 和 `public/models/person.glb` 保持不变。本轮验收与此前交付版本分开记录。
 
 ## 运行
 
@@ -21,7 +21,7 @@ npm run dev
 ## 当前版本
 
 - 中文身份信息、联系与简历、节点卡片、左下目录。
-- 自托管 Noto Sans SC 400/600；Why me? 使用 Instrument Serif Italic。
+- 自托管 Noto Sans SC 400/600；Why me? 与中文统一使用无衬线字体。镜头参数不在页面显示，左下目录使用通透的玻璃背景、柔和模糊与淡边缘高光。
 - 赤陶、群青、松绿、莓果四种卫衣颜色，直接 OKLCH 过渡。
 - 四站动作映射为 `Walk / Nod / LookAround / Wave`：随时出发使用走路，好看也好用使用带抬手的点头，上线只是开始使用新环顾，好队友保留小幅挥手。
 - 第三站使用新素材 `look_around.001`，原片段长 15.625 秒，以头部环顾为主。单次播放后回到自然待机，点击人物可重播；本轮已检查动作、待机和重播，环顾在 1.5、4、7.5、11、14 秒的截图取样中未见严重穿模。
@@ -71,11 +71,15 @@ node scripts/tripo-test-motion.mjs
 - `qa/v2-requirements.md`：此前恢复原人物版本的历史验收，不等同于本版动画验收。
 - `动作素材/`：用户导出的同人物动画；未经筛选的原始素材默认不入库。
 
-Git 在本项目独立初始化。v2.3 使用 `feature/look-around` 分支开发与验收，版本标签为 `v2-look-around`。此前 v2.2 见 `v2-refined-actions`，最初 Tripo 版本见 `v2-tripo-motion`，原人物静止版本见 `v2-restored`。后续按可回退的小改动提交。依赖、构建结果、测试截图、Blender 实验、缓存和未经筛选的原始动作素材不提交。未配置远程仓库，也未推送。
+Git 在本项目独立初始化。v2.3.1 的界面改进使用 `feature/clearer-interface` 分支，版本标签为 `v2.3.1`。v2.3 使用 `feature/look-around` 分支开发与验收，版本标签为 `v2-look-around`。此前 v2.2 见 `v2-refined-actions`，最初 Tripo 版本见 `v2-tripo-motion`，原人物静止版本见 `v2-restored`。后续按可回退的小改动提交。依赖、构建结果、测试截图、Blender 实验、缓存和未经筛选的原始动作素材不提交。未配置远程仓库，也未推送。
 
 文案改变后运行 `python scripts/fetch_fonts.py --local-only` 更新字体子集。
 
 ## 验证状态
+
+v2.3.1 已通过语法检查、构建及现有页面交互回归 29/29；已查看 1440、1000、390、320 px 的实际截图，确认标题字体、目录玻璃底和移除镜头参数后的画面。截图与回归输出分别位于 `output/playwright/interface/`、`output/playwright/tripo/flows.json`。
+
+以下为 v2.3 动作与镜头版本的验收记录；v2.3.1 没有改动人物和镜头代码。
 
 本轮已通过两份素材的骨架一致性、原资产保留和 `tripo-prepare.mjs --check` 多源可复现检查。与 Git 中旧派生 GLB 比较，原有六个动画定义、accessor、bufferView 和压缩二进制前缀完全一致；当前输出只新增 LookAround，不含 CrossArms。原人物 SHA-256 仍为 `def0603ec59ac8fac3de5df25e2827b2fbbd11cf0ad7ae5672e9fc3fab4a957f`。
 

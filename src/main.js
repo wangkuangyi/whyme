@@ -4,7 +4,6 @@ import { setupDialogs } from './dialogs.js';
 
 const COLORS=['#C2603D','#3755A6','#327B60','#A44C76'];
 const restored = new URLSearchParams(location.search).has('still');
-const READOUTS=restored?['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM']:['侧面跟拍 · 出发','正面特写 · 点头','俯视中景 · 环顾','半身近景 · 轻轻挥手'];
 const IMAGE_ROOT=restored?'/images-v2':'/images-tripo';
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
@@ -19,7 +18,7 @@ let staticMode=new URLSearchParams(location.search).has('static');
 let reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let pointer=null,dragged=false,firstInput=false,moving=false;
 let wheelLast=0,wheelAmount=0,wheelUsed=false;
-let readoutTimer,lineTimer,cardTimer,staticTimer,resizeTimer;
+let lineTimer,cardTimer,staticTimer,resizeTimer;
 let frameMetadata=null,lastPositions=[],lastSettled=null;
 const framePath=(i,variant=mobile()?'mobile':'desktop')=>`${IMAGE_ROOT}/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png`;
 
@@ -34,7 +33,6 @@ document.querySelector('#app').innerHTML=`
     <div class="nodes" aria-label="选择光环节点">${advantages.map((a,i)=>`<button class="node ${i===active?'is-active':''}" data-index="${i}" aria-label="角度 ${i+1}：${esc(a.category)}" aria-pressed="${i===active}"><span class="node-dot"></span><span class="node-index">0${i+1}</span><span class="node-tooltip">${esc(a.category)}</span></button>`).join('')}</div>
     <span id="drag-label" class="drag-label" aria-hidden="true"></span>
     <svg class="node-connector" aria-hidden="true"><path pathLength="1"/></svg>
-    <p class="viewfinder" aria-hidden="true" id="readout">ANGLE 0${active+1}/04 · ${READOUTS[active]}</p>
   </div>
   <header class="identity"><a class="wordmark" href="#behind-the-scenes" aria-label="Why me? 网站幕后" title="了解这个网站">Why me?</a><h1>${esc(profile.name)}</h1><span class="print-name">${esc(profile.nameEn)}</span><p class="identity-line"><span>AI 系统 · Agent<span class="role-extra"> · 平台开发</span></span><span class="availability">${esc(availability)}</span></p></header>
   <nav class="contact" aria-label="简历与联系"><a href="#contact" class="contact-link">联系</a><a class="resume" href="${esc(profile.resume)}" target="_blank" rel="noopener noreferrer">简历 <span>↗</span></a></nav>
@@ -56,7 +54,7 @@ document.querySelector('#app').innerHTML=`
 const stage=document.querySelector('#stage'),canvas=document.querySelector('#scene');
 const card=document.querySelector('.strengths'),panels=[...document.querySelectorAll('.strength')];
 const nodes=[...document.querySelectorAll('.node')],dialog=document.querySelector('#detail-dialog');
-const connector=document.querySelector('.node-connector path'),readout=document.querySelector('#readout');
+const connector=document.querySelector('.node-connector path');
 const overlap=(a,b,pad=0)=>a&&b&&a.left<b.right+pad&&a.right>b.left-pad&&a.top<b.bottom+pad&&a.bottom>b.top-pad;
 const rect=r=>r?{left:r.left??r.x,right:r.right??r.x+r.width,top:r.top??r.y,bottom:r.bottom??r.y+r.height}:null;
 function applyActive(index,{announce=true}={}){
@@ -64,19 +62,17 @@ function applyActive(index,{announce=true}={}){
   document.querySelectorAll('[data-index]').forEach(el=>{const selected=Number(el.dataset.index)===active;el.classList.toggle('is-active',selected);el.setAttribute('aria-pressed',String(selected));});
   panels.forEach((p,i)=>{p.classList.toggle('is-active',i===active);p.classList.remove('is-expanded');p.querySelectorAll('a,button').forEach(el=>el.tabIndex=i===active?0:-1);const b=p.querySelector('.expand-proof');if(b){b.setAttribute('aria-expanded','false');b.innerHTML='展开 <span>＋</span>';}});
   document.querySelectorAll('.poster').forEach((p,i)=>p.classList.toggle('is-current',i===active));
-  readout.textContent=`ANGLE 0${active+1}/04 · ${READOUTS[active]}`;
   if(announce)document.querySelector('#announcement').textContent=`角度 ${active+1}，${advantages[active].title}。${advantages[active].claim}`;
   const url=new URL(location.href);url.searchParams.set('angle',active+1);history.replaceState(null,'',url);
 }
 function noteInput(){firstInput=true;document.body.classList.add('has-interacted');}
-function beginMotion(){moving=true;clearTimeout(readoutTimer);clearTimeout(lineTimer);clearTimeout(cardTimer);clearTimeout(staticTimer);document.body.classList.add('is-moving','readout-visible');document.body.classList.remove('card-open','line-open');}
+function beginMotion(){moving=true;clearTimeout(lineTimer);clearTimeout(cardTimer);clearTimeout(staticTimer);document.body.classList.add('is-moving');document.body.classList.remove('card-open','line-open');}
 function settled(data){
   if(data?.index!==undefined&&wrap(data.index)!==active)return;if(pointer?.started)return;
   moving=false;lastSettled=data||lastSettled;if(data?.nodes)positionNodes(data.nodes);document.body.classList.remove('is-moving');layoutCard(lastSettled);
   nodes[active].classList.remove('node-arrive');void nodes[active].offsetWidth;nodes[active].classList.add('node-arrive');
   clearTimeout(lineTimer);lineTimer=setTimeout(()=>document.body.classList.add('line-open'),reducedMotion?0:240);
   clearTimeout(cardTimer);cardTimer=setTimeout(()=>document.body.classList.add('card-open'),reducedMotion?0:360);
-  clearTimeout(readoutTimer);readoutTimer=setTimeout(()=>document.body.classList.remove('readout-visible'),1000);
 }
 function select(index,{immediate=false}={}){
   noteInput();const next=wrap(Math.round(index));if(next===active&&!dragged)return;beginMotion();applyActive(next);

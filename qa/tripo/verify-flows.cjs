@@ -28,7 +28,7 @@ async (page) => {
   check('拖动显示跟随标签',await page.locator('#drag-label').evaluate(e=>getComputedStyle(e).opacity==='1'&&e.textContent.length>2));
   await page.screenshot({path:'output/playwright/tripo/drag.png'});await page.mouse.up();await page.waitForTimeout(1600);
   check('松手后卡片恢复',await page.locator('body').evaluate(e=>e.classList.contains('card-open')));
-  await page.waitForFunction(()=>parseFloat(getComputedStyle(document.querySelector('#readout')).opacity)<.01,{timeout:4000});check('停稳后读数消失',true);
+  check('页面不显示镜头参数',await page.locator('#readout,.viewfinder').count()===0);
   const wheelFrom=(await state()).active;await page.mouse.move(700,400);await page.mouse.wheel(0,90);await page.waitForTimeout(1500);check('滚轮切换',(await state()).active===(wheelFrom+1)%4);
   await page.setViewportSize({width:390,height:844});await page.waitForTimeout(500);
   check('手机默认第二证据折叠',!await page.locator('.strength.is-active .extra-proof').isVisible());
