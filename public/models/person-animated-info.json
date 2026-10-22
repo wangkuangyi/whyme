@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "source": "动作素材/human+character+3d+model.glb",
+  "baseline": "public/models/person.glb",
+  "output": "public/models/person-animated.glb",
+  "sourceSHA256": "489f55375ca109e670396da16a45f35b94f18a7247a2ff26bb35bbaaa2e6f9e8",
+  "baselineSHA256": "def0603ec59ac8fac3de5df25e2827b2fbbd11cf0ad7ae5672e9fc3fab4a957f",
+  "outputSHA256": "4600ea8bc2365fca063e916ccf056621f7d9466a1873541243fd31d52522f505",
+  "bytes": 1905448,
+  "preserved": {
+    "originalFace": true,
+    "originalMeshBytes": true,
+    "originalMaterials": true,
+    "originalTextures": true,
+    "originalSkeleton": true,
+    "newMorphTargets": false
+  },
+  "skeletonComparison": {
+    "jointCount": 65,
+    "maxRestTranslation": 2.086162567138672e-7,
+    "maxRestQuaternion": 0.00001198076643049717,
+    "maxRestScale": 0.000004887580871582031
+  },
+  "validation": "Original mesh/texture bytes and all scene object definitions match the baseline exactly; all animation channels and floating-point samples match the supplied Tripo clips exactly after reopening the compressed GLB.",
+  "clips": [
+    {
+      "name": "Idle",
+      "sourceName": "角色自然站立.001",
+      "sourceIndex": 0,
+      "duration": 5,
+      "channels": 195,
+      "rootMotion": {
+        "bone": "mixamorig:Hips",
+        "start": [
+          -0.023393996059894562,
+          0.5031110048294067,
+          -0.0029480336233973503
+        ],
+        "end": [
+          -0.09690073877573013,
+          0.513052225112915,
+          -0.03039626032114029
+        ],
+        "delta": [
+          -0.07350674271583557,
+          0.0099412202835083,
+          -0.02744822669774294
+        ],
+        "worldDelta": [
+          -0.1345830537111823,
+          0.01820132050391976,
+          -0.05025479338976657
+        ]
+      },
+      "recommendation": "站立包含侧向漂移，避免直接硬循环。"
+    },
+    {
+      "name": "Greet",
+      "sourceName": "人物主动向面前的人打招呼，精神饱满，反应利",
+      "sourceIndex": 1,
+      "duration": 3,
+      "channels": 195,
+      "rootMotion": {
+        "bone": "mixamorig:Hips",
+        "start": [
+          -0.0010328709613531828,
+          0.5095043182373047,
+          0.012506156228482723
+        ],
+        "end": [
+          0.0010117387864738703,
+          0.5106656551361084,
+          0.0009128937963396311
+        ],
+        "delta": [
+          0.002044609747827053,
+          0.001161336898803711,
+          -0.011593262432143092
+        ],
+        "worldDelta": [
+          0.003743463706098016,
+          0.0021262847523075834,
+          -0.021226034550661965
+        ]
+      },
+      "recommendation": "原地短动作；进入和退出时交叉淡化。"
+    },
+    {
+      "name": "Box",
+      "sourceName": "box_01.001",
+      "sourceIndex": 2,
+      "duration": 2.25,
+      "channels": 195,
+      "rootMotion": {
+        "bone": "mixamorig:Hips",
+        "start": [
+          0.0019521946087479591,
+          0.46263936161994934,
+          0.0019521674839779735
+        ],
+        "end": [
+          0.0019522053189575672,
+          0.4626394808292389,
+          0.0019521781941875815
+        ],
+        "delta": [
+          1.0710209608078003e-8,
+          1.1920928955078125e-7,
+          1.0710209608078003e-8
+        ],
+        "worldDelta": [
+          1.960925843924599e-8,
+          2.1825957219334668e-7,
+          1.960925843924599e-8
+        ]
+      },
+      "recommendation": "拳击动作；默认不启用。"
+    },
+    {
+      "name": "Walk",
+      "sourceName": "角色正常走路.001",
+      "sourceIndex": 3,
+      "duration": 5,
+      "channels": 195,
+      "rootMotion": {
+        "bone": "mixamorig:Hips",
+        "start": [
+          0.004768076352775097,
+          0.49222585558891296,
+          -0.035331640392541885
+        ],
+        "end": [
+          0.21301192045211792,
+          0.502666711807251,
+          4.109251976013184
+        ],
+        "delta": [
+          0.20824384409934282,
+          0.010440856218338013,
+          4.1445836164057255
+        ],
+        "worldDelta": [
+          0.38127240331936596,
+          0.019116100935875124,
+          7.588293248328808
+        ]
+      },
+      "recommendation": "真实根运动；镜头与场景锚点跟随。不要直接首尾跳回循环。"
+    },
+    {
+      "name": "Nod",
+      "sourceName": "人物认真听完一句话后，给出明确、自信的肯定",
+      "sourceIndex": 4,
+      "duration": 3,
+      "channels": 195,
+      "rootMotion": {
+        "bone": "mixamorig:Hips",
+        "start": [
+          0.004266038537025452,
+          0.5129846930503845,
+          0.0034599194768816233
+        ],
+        "end": [
+          0.005477864760905504,
+          0.5127350091934204,
+          0.000049892951210495085
+        ],
+        "delta": [
+          0.0012118262238800526,
+          -0.00024968385696411133,
+          -0.003410026525671128
+        ],
+        "worldDelta": [
+          0.0022187253543195506,
+          -0.00045714467395896463,
+          -0.006243397083109847
+        ]
+      },
+      "recommendation": "原地短动作；进入和退出时交叉淡化。"
+    },
+    {
+      "name": "Wave",
+      "sourceName": "角色小幅挥手，别有气无力的.001",
+      "sourceIndex": 5,
+      "duration": 5,
+      "channels": 195,
+      "rootMotion": {
+        "bone": "mixamorig:Hips",
+        "start": [
+          0.003570541273802519,
+          0.5108271241188049,
+          0.0013170852325856686
+        ],
+        "end": [
+          0.005987538956105709,
+          0.5109548568725586,
+          0.005480467341840267
+        ],
+        "delta": [
+          0.0024169976823031902,
+          0.0001277327537536621,
+          0.004163382109254599
+        ],
+        "worldDelta": [
+          0.0044252665385366985,
+          0.00023386513160517097,
+          0.0076227112959703636
+        ]
+      },
+      "recommendation": "原地短动作；进入和退出时交叉淡化。"
+    }
+  ]
+}

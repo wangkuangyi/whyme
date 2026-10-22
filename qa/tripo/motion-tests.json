@@ -1,0 +1,277 @@
+{
+  "checks": [
+    {
+      "name": "station-1-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-1-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-2-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-2-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-3-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-3-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-4-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-4-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "source-animation-arrays-preserved",
+      "passed": true
+    },
+    {
+      "name": "boxing-never-bound",
+      "passed": true
+    },
+    {
+      "name": "walk-travels-in-world-metres",
+      "passed": true
+    },
+    {
+      "name": "walk-holds-position-after-finish",
+      "passed": true
+    },
+    {
+      "name": "station-switch-preserves-travel",
+      "passed": true
+    },
+    {
+      "name": "interrupted-walk-keeps-current-position",
+      "passed": true
+    },
+    {
+      "name": "dragging-freezes-action-and-root-motion",
+      "passed": true
+    },
+    {
+      "name": "root-motion-includes-parent-scale-and-rotation",
+      "passed": true
+    },
+    {
+      "name": "reduced-motion-keeps-original-rest-pose",
+      "passed": true
+    },
+    {
+      "name": "rapid-switches-retire-fading-actions",
+      "passed": true
+    },
+    {
+      "name": "walk-station-click-uses-nod-not-more-travel",
+      "passed": true
+    },
+    {
+      "name": "reaction-keeps-travel",
+      "passed": true
+    },
+    {
+      "name": "walk-ending-fades-to-zero-speed",
+      "passed": true
+    },
+    {
+      "name": "walk-ending-has-no-bone-position-pop",
+      "passed": true
+    },
+    {
+      "name": "crossfade-weights-stay-normalized",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-has-no-root-drift",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-returns-to-the-same-pose",
+      "passed": true
+    },
+    {
+      "name": "switching-during-walk-settle-preserves-position",
+      "passed": true
+    },
+    {
+      "name": "walk-settles-at-20-through-120-fps",
+      "passed": true
+    }
+  ],
+  "walkWorldEnd": [
+    0.3870891251373866,
+    0,
+    7.196013876381541
+  ],
+  "interruptedWorldEnd": [
+    0.2213475458614861,
+    0,
+    2.7276818289538474
+  ],
+  "endingSamples": [
+    {
+      "time": 4.45,
+      "speed": 1.3987190242000966,
+      "position": [
+        0.41740792189328735,
+        0,
+        6.773061443769974
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 1,
+          "time": 4.450000000000069
+        }
+      ]
+    },
+    {
+      "time": 4.7,
+      "speed": 0.9418971203819044,
+      "position": [
+        0.3919560550073549,
+        0,
+        7.103976016924637
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.567993989481408,
+          "time": 4.700000000000054
+        },
+        {
+          "action": "Idle",
+          "weight": 0.432006010518592,
+          "time": 0.25000000000006833
+        }
+      ]
+    },
+    {
+      "time": 4.9,
+      "speed": 0.11613082701806657,
+      "position": [
+        0.3869018530633395,
+        0,
+        7.191917021456333
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.08715251690447334,
+          "time": 4.900000000000043
+        },
+        {
+          "action": "Idle",
+          "weight": 0.9128474830955267,
+          "time": 0.4500000000000676
+        }
+      ]
+    },
+    {
+      "time": 4.991666666666666,
+      "speed": 0.0016133623636787424,
+      "position": [
+        0.3870873480753766,
+        0,
+        7.196012690107857
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.0006817486156219799,
+          "time": 4.991666666666704
+        },
+        {
+          "action": "Idle",
+          "weight": 0.999318251384378,
+          "time": 0.541666666666734
+        }
+      ]
+    },
+    {
+      "time": 5.020833333333333,
+      "speed": 0,
+      "position": [
+        0.38708747781746833,
+        0,
+        7.196015806694073
+      ],
+      "weights": [
+        {
+          "action": "Idle",
+          "weight": 1,
+          "time": 0.5708333333334006
+        }
+      ]
+    },
+    {
+      "time": 5.2,
+      "speed": 0,
+      "position": [
+        0.38708747781746833,
+        0,
+        7.196015806694073
+      ],
+      "weights": [
+        {
+          "action": "Idle",
+          "weight": 1,
+          "time": 0.7500000000000666
+        }
+      ]
+    }
+  ],
+  "maxEndingBoneStep": 0.016551307066793915,
+  "maxWeightError": 0,
+  "idlePoseError": 4.2146848510894035e-8,
+  "frameRates": [
+    {
+      "fps": 20,
+      "position": [
+        0.38720908626124806,
+        0,
+        7.195850316628944
+      ],
+      "action": "Idle"
+    },
+    {
+      "fps": 30,
+      "position": [
+        0.38716479170425255,
+        0,
+        7.196000800430376
+      ],
+      "action": "Idle"
+    },
+    {
+      "fps": 60,
+      "position": [
+        0.38710331820064475,
+        0,
+        7.195996888162306
+      ],
+      "action": "Idle"
+    },
+    {
+      "fps": 120,
+      "position": [
+        0.3870891251373866,
+        0,
+        7.196013876381541
+      ],
+      "action": "Idle"
+    }
+  ],
+  "notes": "Actual GLB animation arrays used. No browser rendering asserted by this test."
+}

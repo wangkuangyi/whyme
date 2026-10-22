@@ -1,0 +1,2 @@
+# Keep deterministic asset metadata identical after a Windows checkout.
+public/models/person-animated-info.json text eol=lf
