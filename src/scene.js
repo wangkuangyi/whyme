@@ -132,11 +132,16 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   }
   function updateNodes() {
     const now = performance.now();
+    const face = USE_ANIMATIONS && ready ? boneBounds('Head', [.13, .17, .13]) : null;
     nodePositions = nodes.map((node, index) => { projected.copy(node).project(camera); rayDirection.copy(node).sub(camera.position); const distance = rayDirection.length(), cache = occlusionCache[index];
       // Exact skinned-triangle occlusion is expensive; positions remain 60 fps while
       // the small DOM hit targets refresh their occlusion at 14 Hz (idle: 6 Hz).
       if (ready && (now - cache.at > (dragging || cameraTransition ? 70 : 170) || (settledPending && !dragging && !cameraTransition))) { raycaster.set(camera.position, rayDirection.divideScalar(distance)); raycaster.far = Math.max(0, distance - .018); cache.hidden = raycaster.intersectObjects(meshes, false).length > 0; cache.at = now; }
-      return { x: (projected.x + 1) * width / 2, y: (1 - projected.y) * height / 2, visible: !cache.hidden && Math.abs(projected.x) < 1.1 && Math.abs(projected.y) < 1.1 && projected.z < 1, depth: distance }; }); onNodePositions(nodePositions);
+      const x = (projected.x + 1) * width / 2, y = (1 - projected.y) * height / 2;
+      // DOM labels cannot be depth-tested with the skinned face. Suppress an
+      // inactive node while its dot or number would cover the face in a close shot.
+      const coversFace = face && index !== activeStation && x > face.left - 18 && x < face.right + 18 && y > face.top - 12 && y < face.bottom + 28;
+      return { x, y, visible: !cache.hidden && !coversFace && Math.abs(projected.x) < 1.1 && Math.abs(projected.y) < 1.1 && projected.z < 1, depth: distance }; }); onNodePositions(nodePositions);
   }
   function applyColors() {
     for (const material of clothMaterials) { material.color.fromArray(oklabToLinear(lchToLab(material.userData.rib ? currentRib : currentLCH))); material.sheenColor.copy(material.color).lerp(new THREE.Color('#ffffff'), .18); }

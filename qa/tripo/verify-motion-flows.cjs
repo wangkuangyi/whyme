@@ -1,0 +1,34 @@
+async (page) => {
+  const checks=[],errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const check=(name,pass,detail)=>checks.push({name,pass:!!pass,detail});
+  const state=()=>page.evaluate(()=>window.__WHYME__.getScene().getState());
+  const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
+  await page.setViewportSize({width:1440,height:1000});
+  await page.goto('http://127.0.0.1:5173/?angle=3');
+  await page.waitForFunction(()=>window.__WHYME__?.getScene()?.getState().ready);
+  const start=await state();await page.waitForTimeout(1900);const walk=await state();
+  check('默认第三站播放用户Walk动作',walk.animation.action==='Walk'&&walk.animation.walking);
+  check('人物真实前进且相机目标跟随',distance(walk.animation.position,start.animation.position)>2&&distance(walk.camera.anchor,walk.animation.position)<.25,{start:start.animation.position,walk:walk.animation.position,camera:walk.camera.anchor});
+  check('保留原脸且不绑定拳击',walk.animation.eyes===0&&Object.keys(walk.animation.morphs).length===0&&!walk.animation.clips.includes('Box'));
+  await page.mouse.move(670,410);await page.mouse.down();await page.mouse.move(700,410,{steps:8});
+  const frozen=await state();await page.waitForTimeout(500);const frozenAfter=await state();
+  check('拖动冻结动作和前进位移',frozen.dragging&&frozenAfter.animation.time===frozen.animation.time&&distance(frozen.animation.position,frozenAfter.animation.position)<1e-8);
+  await page.mouse.up();await page.waitForTimeout(3400);const close=await state();
+  check('收腿前完成推近',close.camera.walkClose>.99&&close.camera.fill>1.2,{time:close.animation.time,camera:close.camera});
+  await page.waitForTimeout(2300);const stopped=await state();await page.waitForTimeout(500);const idle=await state();
+  check('动作收尾待机且保持前进终点',idle.animation.action==='Idle'&&distance(stopped.animation.position,idle.animation.position)<1e-8);
+  check('待机保持收尾近景',idle.camera.walkClose===1&&idle.camera.fill>1.2);
+  const hit=await page.evaluate(()=>{const s=window.__WHYME__.getScene(),b=s.getState().protectedBounds.faceBounds;return s.reactAt((b.left+b.right)/2,(b.top+b.bottom)/2+120);});
+  await page.waitForTimeout(700);const react=await state();
+  check('点击人物以点头回应且不再次行走',hit&&react.animation.action==='Nod'&&distance(react.animation.position,idle.animation.position)<1e-8);
+  await page.keyboard.press('1');await page.waitForTimeout(150);await page.keyboard.press('4');await page.waitForTimeout(150);await page.keyboard.press('2');await page.waitForTimeout(1800);const switched=await state();
+  check('连续快速切换停在目标站',switched.activeStation===1&&!switched.moving&&switched.animation.action==='Nod');
+  check('切站不会跳回原点',distance(switched.animation.position,idle.animation.position)<1e-8);
+  await page.goto('http://127.0.0.1:5173/?still=1&angle=1');await page.waitForFunction(()=>window.__WHYME__?.getScene()?.getState().ready);const still=await state();
+  check('原始静止3D入口保留',still.animation.action==='OriginalRest'&&still.animation.clips.length===0);
+  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('http://127.0.0.1:5173/?angle=3');await page.waitForFunction(()=>window.__WHYME__?.getScene()?.getState().ready);const reduced=await state();await page.waitForTimeout(1600);const reducedAfter=await state();
+  check('减少动态保留原站姿与固定位置',reduced.animation.action==='Rest'&&JSON.stringify(reduced.animation.pose)===JSON.stringify(reducedAfter.animation.pose)&&distance(reduced.animation.position,reducedAfter.animation.position)<1e-8);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  check('动画导航无未处理脚本异常',errors.length===0,errors);
+  const pending=page.waitForEvent('download');await page.evaluate(data=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='motion-flows.json';a.click();},checks);await(await pending).saveAs('output/playwright/tripo/motion-flows.json');
+}

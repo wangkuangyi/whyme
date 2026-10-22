@@ -1,0 +1,629 @@
+{
+  "date": "2026-10-23",
+  "sourceCommit": "2ffc09e plus face-label correction",
+  "flows": [
+    {
+      "name": "开场赤陶且原脸无附加眼球或表情",
+      "pass": true
+    },
+    {
+      "name": "键盘1定位",
+      "pass": true
+    },
+    {
+      "name": "键盘2定位",
+      "pass": true
+    },
+    {
+      "name": "键盘3定位",
+      "pass": true
+    },
+    {
+      "name": "键盘4定位",
+      "pass": true
+    },
+    {
+      "name": "箭头循环到01",
+      "pass": true
+    },
+    {
+      "name": "目录切换02",
+      "pass": true
+    },
+    {
+      "name": "幕后打开",
+      "pass": true
+    },
+    {
+      "name": "对话框内键盘不转镜头",
+      "pass": true
+    },
+    {
+      "name": "幕后移除退黑旧说法",
+      "pass": true
+    },
+    {
+      "name": "手动静帧开关",
+      "pass": true
+    },
+    {
+      "name": "关闭后焦点归还",
+      "pass": true
+    },
+    {
+      "name": "静帧也能键盘切换",
+      "pass": true
+    },
+    {
+      "name": "静帧图片实际加载",
+      "pass": true
+    },
+    {
+      "name": "重启3D",
+      "pass": true
+    },
+    {
+      "name": "联系邮箱与复制入口",
+      "pass": true
+    },
+    {
+      "name": "简历PDF可读取",
+      "pass": true
+    },
+    {
+      "name": "拖动隐藏卡片并实时转动",
+      "pass": true
+    },
+    {
+      "name": "拖动显示跟随标签",
+      "pass": true
+    },
+    {
+      "name": "松手后卡片恢复",
+      "pass": true
+    },
+    {
+      "name": "停稳后读数消失",
+      "pass": true
+    },
+    {
+      "name": "滚轮切换",
+      "pass": true
+    },
+    {
+      "name": "手机默认第二证据折叠",
+      "pass": true
+    },
+    {
+      "name": "手机展开第二证据",
+      "pass": true
+    },
+    {
+      "name": "手机切换重置展开",
+      "pass": true
+    },
+    {
+      "name": "减少动态保留稳定身体",
+      "pass": true,
+      "detail": {
+        "a": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9481048247307591,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.0035406552681998497,
+            1.5428251105487891,
+            -0.0037257668648783965
+          ],
+          "LeftHand": [
+            0.2658337731022659,
+            0.8705941386854601,
+            -0.004357552978623162
+          ],
+          "RightHand": [
+            -0.2639293952220195,
+            0.8782945939380482,
+            0.0014672048685572467
+          ],
+          "LeftFoot": [
+            0.14684644123565163,
+            0.11692973357798403,
+            -0.04671753431442548
+          ],
+          "RightFoot": [
+            -0.13976546538918674,
+            0.11692971329347013,
+            -0.046717452740155055
+          ]
+        },
+        "b": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9481048247307591,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.0035406552681998497,
+            1.5428251105487891,
+            -0.0037257668648783965
+          ],
+          "LeftHand": [
+            0.2658337731022659,
+            0.8705941386854601,
+            -0.004357552978623162
+          ],
+          "RightHand": [
+            -0.2639293952220195,
+            0.8782945939380482,
+            0.0014672048685572467
+          ],
+          "LeftFoot": [
+            0.14684644123565163,
+            0.11692973357798403,
+            -0.04671753431442548
+          ],
+          "RightFoot": [
+            -0.13976546538918674,
+            0.11692971329347013,
+            -0.046717452740155055
+          ]
+        }
+      }
+    },
+    {
+      "name": "减少动态未启用表情变形",
+      "pass": true
+    },
+    {
+      "name": "打印四个优点与英文名",
+      "pass": true
+    },
+    {
+      "name": "浏览器没有未处理异常",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "motionFlows": [
+    {
+      "name": "默认第三站播放用户Walk动作",
+      "pass": true
+    },
+    {
+      "name": "人物真实前进且相机目标跟随",
+      "pass": true,
+      "detail": {
+        "start": [
+          0,
+          0,
+          0
+        ],
+        "walk": [
+          0.21018484964289483,
+          0,
+          2.665702235883559
+        ],
+        "camera": [
+          0.1885097324908651,
+          0,
+          2.544890814444211
+        ]
+      }
+    },
+    {
+      "name": "保留原脸且不绑定拳击",
+      "pass": true
+    },
+    {
+      "name": "拖动冻结动作和前进位移",
+      "pass": true
+    },
+    {
+      "name": "收腿前完成推近",
+      "pass": true,
+      "detail": {
+        "time": 0.9371999999999968,
+        "camera": {
+          "azimuth": 32,
+          "shift": -0.03,
+          "fill": 1.3,
+          "walkClose": 1,
+          "position": [
+            1.8599950964010048,
+            1.4694573545101117,
+            9.27919490653237
+          ],
+          "target": [
+            0.3991323607103074,
+            1.2627,
+            6.941325828417177
+          ],
+          "anchor": [
+            0.3991323607103074,
+            0,
+            6.941325828417177
+          ],
+          "tracking": false
+        }
+      }
+    },
+    {
+      "name": "动作收尾待机且保持前进终点",
+      "pass": true
+    },
+    {
+      "name": "待机保持收尾近景",
+      "pass": true
+    },
+    {
+      "name": "点击人物以点头回应且不再次行走",
+      "pass": true
+    },
+    {
+      "name": "连续快速切换停在目标站",
+      "pass": true
+    },
+    {
+      "name": "切站不会跳回原点",
+      "pass": true
+    },
+    {
+      "name": "原始静止3D入口保留",
+      "pass": true
+    },
+    {
+      "name": "减少动态保留原站姿与固定位置",
+      "pass": true
+    },
+    {
+      "name": "动画导航无未处理脚本异常",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "production": {
+    "base": "http://127.0.0.1:4173",
+    "checks": [
+      {
+        "name": "默认打开加载3D动画版本",
+        "pass": true
+      },
+      {
+        "name": "生产没有开发调试接口",
+        "pass": true
+      },
+      {
+        "name": "默认人物画面随时间变化",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度2",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度3",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度4",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度1",
+        "pass": true
+      },
+      {
+        "name": "390px真实触摸横滑切换角度1到2",
+        "pass": true
+      },
+      {
+        "name": "static参数启用静帧模式",
+        "pass": true
+      },
+      {
+        "name": "静帧角度1图片加载",
+        "pass": true
+      },
+      {
+        "name": "静帧角度2图片加载",
+        "pass": true
+      },
+      {
+        "name": "静帧角度3图片加载",
+        "pass": true
+      },
+      {
+        "name": "静帧角度4图片加载",
+        "pass": true
+      },
+      {
+        "name": "幕后按钮从静帧启用3D",
+        "pass": true
+      },
+      {
+        "name": "幕后按钮从3D切换静帧",
+        "pass": true
+      },
+      {
+        "name": "再次切回3D可恢复",
+        "pass": true
+      },
+      {
+        "name": "Escape关闭幕后说明",
+        "pass": true
+      },
+      {
+        "name": "全程无404或其他失败HTTP资源",
+        "pass": true,
+        "details": []
+      },
+      {
+        "name": "全程无页面脚本错误",
+        "pass": true,
+        "details": []
+      },
+      {
+        "name": "移动版无横向滚动溢出",
+        "pass": true
+      },
+      {
+        "name": "持续低帧率15秒内自动降级静帧",
+        "pass": true,
+        "elapsedMs": 8779
+      },
+      {
+        "name": "低帧率降级后的静帧图片加载",
+        "pass": true
+      },
+      {
+        "name": "低帧率降级提示可见",
+        "pass": true
+      },
+      {
+        "name": "低帧率模拟无页面错误或失败资源",
+        "pass": true
+      }
+    ],
+    "errors": [],
+    "failed": [],
+    "passed": 24,
+    "total": 24,
+    "animationModelRequested": true,
+    "visualReview": {
+      "status": "passed",
+      "scope": "390/320 Nod到Wave早期手势、手机Walk推近连续性及全部新手机静帧",
+      "checks": [
+        {
+          "name": "390px Nod到Wave进入阶段手部完整",
+          "pass": true
+        },
+        {
+          "name": "320px Nod到Wave进入阶段手部完整",
+          "pass": true
+        },
+        {
+          "name": "390px步行推近连续且头部完整",
+          "pass": true
+        },
+        {
+          "name": "320px步行推近连续且头部完整",
+          "pass": true
+        },
+        {
+          "name": "两尺寸四个新静帧图像加载及构图正常",
+          "pass": true
+        },
+        {
+          "name": "指定最新生产场景构建已加载",
+          "pass": true
+        },
+        {
+          "name": "复查无脚本错误或失败HTTP资源",
+          "pass": true
+        }
+      ],
+      "passed": 7,
+      "total": 7,
+      "observations": [
+        {
+          "severity": "minor",
+          "message": "Walk推近末段约4.5秒，非当前光环编号01短暂与下颌附近重叠；本次手部越界、镜头连续性及静帧检查通过。",
+          "evidence": "output/playwright/tripo/production-final-320-walk-4_5.png",
+          "resolved": true,
+          "resolution": "Inactive DOM node labels are hidden within the projected face bounds; final 320/390 production screenshots confirm the face is clear and the active node remains visible."
+        }
+      ],
+      "reviewedImages": 28,
+      "build": "scene-DPiQEkGW.js",
+      "details": "output/playwright/tripo/production-final-visual.json",
+      "evidence": [
+        "output/playwright/tripo/production-final-contact-390-nod-wave.jpg",
+        "output/playwright/tripo/production-final-contact-320-nod-wave.jpg",
+        "output/playwright/tripo/production-final-contact-390-walk.jpg",
+        "output/playwright/tripo/production-final-contact-320-walk.jpg",
+        "output/playwright/tripo/production-final-contact-390-static.jpg",
+        "output/playwright/tripo/production-final-contact-320-static.jpg"
+      ],
+      "supersedes": "Earlier production-mobile.png documents the previous framing issue; use production-final-* for current framing.",
+      "finalBuild": "scene-CGbJMLPg.js"
+    },
+    "faceLabelCheck": {
+      "results": [
+        {
+          "width": 320,
+          "inactiveNodeHidden": true,
+          "activeNodeVisible": true
+        },
+        {
+          "width": 390,
+          "inactiveNodeHidden": true,
+          "activeNodeVisible": true
+        }
+      ],
+      "errors": []
+    }
+  },
+  "layout": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "angle": 1,
+      "samples": 55,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "angle": 2,
+      "samples": 56,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "angle": 4,
+      "samples": 54,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "angle": 1,
+      "samples": 55,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "angle": 2,
+      "samples": 55,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "angle": 4,
+      "samples": 55,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "angle": 1,
+      "samples": 55,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "angle": 2,
+      "samples": 56,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "angle": 4,
+      "samples": 51,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "angle": 3,
+      "samples": 56,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "angle": 3,
+      "samples": 56,
+      "protectedOverlaps": 0
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "angle": 3,
+      "samples": 56,
+      "protectedOverlaps": 0
+    }
+  ],
+  "mobileGestures": [
+    {
+      "width": 390,
+      "angle": 1,
+      "samples": 53,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 390,
+      "angle": 2,
+      "samples": 53,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 390,
+      "angle": 4,
+      "samples": 54,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 390,
+      "angle": 1,
+      "samples": 53,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 390,
+      "angle": 3,
+      "samples": 54,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 390,
+      "angle": 4,
+      "samples": 53,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 320,
+      "angle": 1,
+      "samples": 53,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 320,
+      "angle": 2,
+      "samples": 53,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 320,
+      "angle": 4,
+      "samples": 54,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 320,
+      "angle": 1,
+      "samples": 53,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 320,
+      "angle": 3,
+      "samples": 54,
+      "visibleHandOutOfFrame": 0
+    },
+    {
+      "width": 320,
+      "angle": 4,
+      "samples": 54,
+      "visibleHandOutOfFrame": 0
+    }
+  ],
+  "notes": "Browser evidence uses local Chromium. Screenshots and raw samples are in ignored output/playwright/tripo. Full source animation naturalness and every physical device are not asserted."
+}
