@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createCharacterMotion } from './motion.js';
+import { createCharacterMotion, WALK_STATION } from './motion.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { Line2 } from 'three/addons/lines/Line2.js';
@@ -14,9 +14,9 @@ const HEIGHT = 1.83, RAD = Math.PI / 180;
 // Retain the original static 3D model as an explicit, reproducible fallback.
 const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
 const SHOTS = [
-  { azimuth: -18, fill: 1.50, camY: .90, lookY: .67, dist: 2.8, fov: 28, haloY: .75 },
-  { azimuth: 28, fill: 1.75, camY: .88, lookY: .72, dist: 2.8, fov: 25, haloY: .75 },
   { azimuth: 50, fill: .80, camY: .95, lookY: .51, dist: 2.8, fov: 31, haloY: .55 },
+  { azimuth: 28, fill: 2.30, camY: .92, lookY: .78, dist: 2.8, fov: 25, haloY: .83 },
+  { azimuth: 25, fill: 1.35, camY: .90, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
   { azimuth: -24, fill: 1.52, camY: .90, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
 ];
 const STATIONS = [
@@ -78,6 +78,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   const meshes = [], clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
   let model = null, nodePositions = [], lastProfile = STATIONS[0];
   let walkClose = 0, framingPending = false, lastFramingAt = 0;
+  // Keep the authored hands visible during gestures; settle on a chest portrait.
+  const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 1, 0];
   const timings = { frameMs: 0, poseMs: 0, renderMs: 0, nodesMs: 0 };
   const occlusionCache = Array.from({ length: 4 }, () => ({ at: -Infinity, hidden: false }));
   const lookAt = vector(), projectedTop = vector(), projectedBottom = vector(), cameraRight = vector(), cameraUp = vector(), cameraTowards = vector();
@@ -89,19 +91,27 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     for (const key of Object.keys(STATIONS[0])) if (typeof STATIONS[0][key] === 'number') profile[key] = lerp(STATIONS[from][key], STATIONS[to][key], t);
     profile.azimuth = stationAzimuth(progress) / RAD;
     if (USE_ANIMATIONS) {
-      const shots = SHOTS.map((shot, i) => i !== 2 ? shot : { ...shot, azimuth: lerp(50, 32, walkClose), fill: lerp(.80, 1.30, walkClose), camY: lerp(.95, .90, walkClose), lookY: lerp(.51, .69, walkClose), fov: lerp(31, 28, walkClose), haloY: lerp(.55, .75, walkClose) });
+      const shots = SHOTS.map((shot, i) => {
+        const active = i !== WALK_STATION ? shot : { ...shot, azimuth: lerp(50, 32, walkClose), fill: lerp(.80, 2.05, walkClose), camY: lerp(.95, .90, walkClose), lookY: lerp(.51, .78, walkClose), fov: lerp(31, 28, walkClose), haloY: lerp(.55, .83, walkClose) };
+        return { ...active, fill: lerp(active.fill, Math.max(active.fill, 2.05), restClose[i]), lookY: lerp(active.lookY, .78, restClose[i]), haloY: lerp(active.haloY, .83, restClose[i]) };
+      });
       for (const key of Object.keys(SHOTS[0])) profile[key] = lerp(shots[from][key], shots[to][key], t);
-      profile.width = lerp(STATIONS[from].width + (from === 2 ? .10 * walkClose : 0), STATIONS[to].width + (to === 2 ? .10 * walkClose : 0), t);
+      const shotWidth = (i) => i === WALK_STATION ? lerp(.58, .68, walkClose) : STATIONS[i].width;
+      profile.width = lerp(shotWidth(from), shotWidth(to), t);
     }
     if (mobile) {
       // Budget for the widest part of a gesture, including the incoming blend.
       // Width/height matters here: a tall 320px phone needs more horizontal room.
       const gestureScale = Math.min(1, width / 390 * 557 / height);
       const walkWide = Math.min(.67, Math.max(.35, (height - 149) / height));
-      const fills = USE_ANIMATIONS ? [.90 * gestureScale, 1.05 * gestureScale, lerp(walkWide, 1.12 * gestureScale, walkClose), .86 * gestureScale] : [.68, .66, .68, .70];
+      const activeFills = [lerp(walkWide, 1.65 * gestureScale, walkClose), 1.80 * gestureScale, 1.02 * gestureScale, .86 * gestureScale];
+      const fills = USE_ANIMATIONS ? activeFills.map((fill, i) => lerp(fill, Math.max(fill, 1.65 * gestureScale), restClose[i])) : [.68, .66, .68, .70];
       profile.fill = lerp(fills[from], fills[to], t);
       if (!USE_ANIMATIONS && profile.fill < 1) profile.fill = Math.min(profile.fill, Math.max(.35, (height - 149) / height));
-      profile.shift = 0; profile.width = .84;
+      const top = Math.max(135 / height, .25);
+      const shotTop = (i) => USE_ANIMATIONS ? lerp(top, Math.max(top, 1 - fills[i] * (1 - 1.08 / HEIGHT)), i === 1 ? 1 : Math.max(restClose[i], i === WALK_STATION ? walkClose : 0)) : top;
+      profile.top = lerp(shotTop(from), shotTop(to), t);
+      profile.shift = USE_ANIMATIONS ? lerp(from === 1 ? .08 : 0, to === 1 ? .08 : 0, t) : 0; profile.width = .84;
     }
     return profile;
   }
@@ -112,7 +122,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       camera.position.copy(cameraAnchor).add(new THREE.Vector3(Math.sin(azimuth) * distance, HEIGHT * profile.lookY + elevation * distance, Math.cos(azimuth) * distance)); camera.lookAt(lookAt); camera.updateMatrixWorld(); projectedTop.copy(cameraAnchor).add(new THREE.Vector3(0, HEIGHT, 0)).project(camera); projectedBottom.copy(cameraAnchor).project(camera); distance *= Math.abs(projectedTop.y - projectedBottom.y) / (profile.fill * 2);
     }
     const currentCenter = (projectedTop.y + projectedBottom.y) * .5;
-    const mobileTop = Math.max(135, height * .25);
+    const mobileTop = profile.top * height;
     const desiredCenter = mobile ? 1 - 2 * (mobileTop / height + profile.fill * .5) : USE_ANIMATIONS || profile.fill > 1 ? 1 - 2 * (.08 + profile.fill * .5) : .04;
     camera.setViewOffset(width, height, -profile.shift * width, (desiredCenter - currentCenter) * height / 2, width, height); camera.updateMatrixWorld(); cameraRight.setFromMatrixColumn(camera.matrixWorld, 0).normalize(); cameraUp.setFromMatrixColumn(camera.matrixWorld, 1).normalize(); cameraTowards.setFromMatrixColumn(camera.matrixWorld, 2).normalize();
     // Navigation remains one continuous orbit while each chapter gets its own shot.
@@ -162,7 +172,15 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       // The supplied walk has no authored stopping pose. Push in before its
       // legs blend to Idle, and retain the close shot after the person arrives.
       const motion = characterMotion.getState();
-      if (!dragging && motion.station === 2 && motion.action === 'Walk') {
+      if (!dragging && motion.station >= 0) {
+        const index = cameraTransition ? activeStation : motion.station;
+        const target = reducedMotion || (cameraTransition ? index === 2 : motion.action === 'Idle') ? 1 : 0;
+        let next = lerp(restClose[index], target, 1 - Math.exp(-dt * 5));
+        if (Math.abs(next - target) < .001) next = target;
+        if (next !== restClose[index]) { restClose[index] = next; framingPending = true; }
+        if (cameraTransition && index === WALK_STATION && motion.station !== WALK_STATION) walkClose *= Math.exp(-dt * 8);
+      }
+      if (!dragging && motion.station === WALK_STATION && motion.action === 'Walk') {
         const next = ease((motion.time - 3.55) / .85);
         if (next !== walkClose) { walkClose = next; framingPending = true; }
       }
@@ -220,7 +238,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   function resize() { const rect = canvas.getBoundingClientRect(); width = Math.max(1, rect.width); height = Math.max(1, rect.height); mobile = window.innerWidth < 901; renderer.setSize(width, height, false); for (const material of [frontMaterial, backMaterial, tickMaterial]) material.resolution.set(width, height); settledPending = true; }
   function setStation(index, { immediate = false } = {}) {
     const nextStation = Math.round(wrapStation(index)) % 4;
-    // Initialization reselects A01 after createScene resolves; preserve its opening wave.
+    // Initialization reselects A01 after createScene resolves; preserve its opening action.
     if (!dragging && !cameraTransition && nextStation === activeStation && Math.abs(currentProgress - targetProgress) < .00001) { settledPending = true; return; }
     activeStation = nextStation; targetProgress = nearestStation(activeStation, currentProgress); dragging = false;
     const now = performance.now(); settledPending = true;
@@ -268,7 +286,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   return { setStation, setDragProgress, reactAt, resize, dispose,
     capture: () => { renderer.render(scene, camera); return canvas.toDataURL('image/png'); },
     getState: () => ({ currentProgress, targetProgress, activeStation, ready, dragging, moving: !!cameraTransition || dragging, mobile, width, height, dpr: renderer.getPixelRatio(), triangles: renderer.info.render.triangles,
-      colors: { hoodie: lastCssColor, rib: `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentRib))).getHexString()}`, lch: [...currentLCH], durationMs: 600, throughBlack: false }, ring: { openness: lastProfile.openness, linewidth: 1.25, frontInk: .7, backDash: [3, 4], ticks: 4 }, camera: { azimuth: lastProfile.azimuth, shift: lastProfile.shift, fill: lastProfile.fill, walkClose, position: camera.position.toArray(), target: lookAt.toArray(), anchor: cameraAnchor.toArray(), tracking: characterMotion?.getState().walking || false }, nodes: nodePositions,
+      colors: { hoodie: lastCssColor, rib: `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentRib))).getHexString()}`, lch: [...currentLCH], durationMs: 600, throughBlack: false }, ring: { openness: lastProfile.openness, linewidth: 1.25, frontInk: .7, backDash: [3, 4], ticks: 4 }, camera: { azimuth: lastProfile.azimuth, shift: lastProfile.shift, fill: lastProfile.fill, walkClose, restClose: [...restClose], position: camera.position.toArray(), target: lookAt.toArray(), anchor: cameraAnchor.toArray(), tracking: characterMotion?.getState().walking || false }, nodes: nodePositions,
       animation: { ...(characterMotion?.getState() || { action: 'OriginalRest', clips: [], walking: false, position: [0, 0, 0] }), reducedMotion, eyes: 0, morphs: {}, pose: Object.fromEntries(['Hips','Head','LeftHand','RightHand','LeftFoot','RightFoot'].map((name) => [name, bones.get(name)?.bone.getWorldPosition(vector()).toArray()])) }, protectedBounds: protectedBounds(),
       studio: { ambient: .5, shadowOpacity: .16, shadowWorldPosition: key.position.toArray(), shadowEnabled: key.castShadow, mapSize: key.shadow.mapSize.x, floorRadiusH: 1.2 }, quality: { level: qualityLevel, slowDuration, fallbackTriggered, staticThresholdSeconds: 5, staticThresholdFps: 20, timings: { ...timings } }, cloth: clothMaterials.map((material) => ({ name: material.name, rib: !!material.userData.rib, normalMap: !!material.normalMap, aoMap: !!material.aoMap, sheen: `#${material.sheenColor.getHexString()}` })) }),
   };

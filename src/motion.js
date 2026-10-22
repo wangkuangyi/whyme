@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 
-const STATION_CLIPS = ['Greet', 'Nod', 'Walk', 'Wave'];
-const SPEEDS = { Idle: 1, Greet: 1.1, Nod: 1.1, Walk: 1, Wave: 1.05 };
+export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'Idle', 'Wave']);
+export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
+const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05 };
 const FADE_SECONDS = .5;
 const cleanName = (name) => name.replace(/^mixamorig[:_]?/i, '');
 const smooth = (value) => value * value * (3 - 2 * value);
@@ -39,11 +40,11 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
   let walkInterpolant = null, current = null, entry = null, rootRecord = null, transition = null;
   let station = -1, elapsed = 0, serial = 0, disposed = false, entryEnded = true, completedAction = null, dragging = false;
 
-  for (const name of ['Idle', ...STATION_CLIPS]) {
+  for (const name of new Set(['Idle', ...STATION_CLIPS])) {
     const source = sourceClips.get(name);
     if (!source) continue;
     // Preserve the authored hand/head movement. No additive gestures or face
-    // tracks are generated here, and the rejected boxing clip is never bound.
+    // tracks are generated here. Rejected Greet and Box are never bound.
     const clip = name === 'Idle' ? excerpt(source, name, 1.5, Math.min(3.5, source.duration))
       : name === 'Wave' ? excerpt(source, name, 1.2, Math.min(4.3, source.duration)) : source.clone();
     clip.name = name;
@@ -85,6 +86,12 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
   }
   function enter(name, immediate, reason) {
     rootRecord = null; entryEnded = false; completedAction = null;
+    if (name === 'Idle') {
+      // Idle is a continuous station, not a one-shot entry. Reuse an existing
+      // idle action so revisiting this station never restarts its loop phase.
+      entry = null; entryEnded = true;
+      return current?.name === 'Idle' || !!start('Idle', immediate ? 0 : FADE_SECONDS, reason);
+    }
     entry = start(name, immediate ? 0 : FADE_SECONDS, reason);
     if (!entry) { entryEnded = true; return false; }
     if (name === 'Walk') rootRecord = entry;
@@ -152,16 +159,16 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     model.updateMatrixWorld(true);
   }
   function react() {
-    if (disposed || reducedMotion || dragging || !entryEnded || rootRecord) return false;
+    if (disposed || reducedMotion || dragging || !entryEnded || rootRecord || station < 0 || STATION_CLIPS[station] === 'Idle') return false;
     // Walk is navigational, so clicking the person uses the supplied nod
     // instead of unexpectedly restarting several metres of forward travel.
-    return enter(station === 2 ? 'Nod' : STATION_CLIPS[Math.max(0, station)], false, 'reaction');
+    return enter(station === WALK_STATION ? 'Nod' : STATION_CLIPS[station], false, 'reaction');
   }
   function getState() {
     const visible = !entryEnded && entry ? entry : current;
     return { action: reducedMotion ? 'Rest' : visible?.name || 'Rest', time: visible?.action.time || 0,
       duration: visible?.clip.duration || 0, speed: visible?.rate || 0, walking: !!rootRecord, position: position.toArray(),
-      station, reducedMotion, dragging, end: entryEnded, completedAction, clips: [...clips.keys()], rejected: sourceClips.has('Box') ? ['Box'] : [],
+      station, reducedMotion, dragging, end: entryEnded, completedAction, clips: [...clips.keys()], rejected: ['Greet', 'Box'].filter((name) => sourceClips.has(name)),
       transition: transition ? { to: transition.to.name, elapsed: transition.elapsed, duration: transition.duration } : null,
       transitions: history.map((item) => ({ ...item, from: [...item.from] })),
       weights: [...records].filter((record) => record.weight > .0001).map((record) => ({ action: record.name, weight: record.weight, time: record.action.time })),

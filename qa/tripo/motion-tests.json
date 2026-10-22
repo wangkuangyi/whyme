@@ -1,11 +1,23 @@
 {
   "checks": [
     {
+      "name": "reviewed-station-map",
+      "passed": true
+    },
+    {
+      "name": "station-1-uses-reviewed-action",
+      "passed": true
+    },
+    {
       "name": "station-1-settles-to-idle",
       "passed": true
     },
     {
       "name": "station-1-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-2-uses-reviewed-action",
       "passed": true
     },
     {
@@ -17,11 +29,19 @@
       "passed": true
     },
     {
+      "name": "station-3-uses-reviewed-action",
+      "passed": true
+    },
+    {
       "name": "station-3-settles-to-idle",
       "passed": true
     },
     {
       "name": "station-3-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-4-uses-reviewed-action",
       "passed": true
     },
     {
@@ -38,6 +58,10 @@
     },
     {
       "name": "boxing-never-bound",
+      "passed": true
+    },
+    {
+      "name": "large-greet-never-bound-or-played",
       "passed": true
     },
     {
@@ -101,6 +125,26 @@
       "passed": true
     },
     {
+      "name": "idle-station-does-not-trigger-repeated-settling",
+      "passed": true
+    },
+    {
+      "name": "idle-station-click-does-not-add-a-reaction",
+      "passed": true
+    },
+    {
+      "name": "reselecting-idle-does-not-reset-its-phase",
+      "passed": true
+    },
+    {
+      "name": "reentering-idle-reuses-the-existing-loop",
+      "passed": true
+    },
+    {
+      "name": "idle-remains-stable-after-reentry",
+      "passed": true
+    },
+    {
       "name": "switching-during-walk-settle-preserves-position",
       "passed": true
     },
@@ -109,6 +153,13 @@
       "passed": true
     }
   ],
+  "stationClips": [
+    "Walk",
+    "Nod",
+    "Idle",
+    "Wave"
+  ],
+  "walkStation": 0,
   "walkWorldEnd": [
     0.3870891251373866,
     0,

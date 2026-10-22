@@ -1,0 +1,92 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "checks": [
+    {
+      "name": "默认打开加载3D动画版本",
+      "pass": true
+    },
+    {
+      "name": "生产没有开发调试接口",
+      "pass": true
+    },
+    {
+      "name": "默认人物画面随时间变化",
+      "pass": true
+    },
+    {
+      "name": "键盘切换到角度2",
+      "pass": true
+    },
+    {
+      "name": "键盘切换到角度3",
+      "pass": true
+    },
+    {
+      "name": "键盘切换到角度4",
+      "pass": true
+    },
+    {
+      "name": "键盘切换到角度1",
+      "pass": true
+    },
+    {
+      "name": "390px真实触摸横滑切换角度1到2",
+      "pass": true
+    },
+    {
+      "name": "static参数启用静帧模式",
+      "pass": true
+    },
+    {
+      "name": "静帧角度1图片加载",
+      "pass": true
+    },
+    {
+      "name": "静帧角度2图片加载",
+      "pass": true
+    },
+    {
+      "name": "静帧角度3图片加载",
+      "pass": true
+    },
+    {
+      "name": "静帧角度4图片加载",
+      "pass": true
+    },
+    {
+      "name": "幕后按钮从静帧启用3D",
+      "pass": true
+    },
+    {
+      "name": "幕后按钮从3D切换静帧",
+      "pass": true
+    },
+    {
+      "name": "再次切回3D可恢复",
+      "pass": true
+    },
+    {
+      "name": "Escape关闭幕后说明",
+      "pass": true
+    },
+    {
+      "name": "全程无404或其他失败HTTP资源",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "全程无页面脚本错误",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "移动版无横向滚动溢出",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "passed": 20,
+  "total": 20,
+  "animationModelRequested": true
+}

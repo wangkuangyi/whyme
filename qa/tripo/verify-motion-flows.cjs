@@ -4,10 +4,10 @@ async (page) => {
   const state=()=>page.evaluate(()=>window.__WHYME__.getScene().getState());
   const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
   await page.setViewportSize({width:1440,height:1000});
-  await page.goto('http://127.0.0.1:5173/?angle=3');
+  await page.goto('http://127.0.0.1:5173/?angle=1');
   await page.waitForFunction(()=>window.__WHYME__?.getScene()?.getState().ready);
   const start=await state();await page.waitForTimeout(1900);const walk=await state();
-  check('默认第三站播放用户Walk动作',walk.animation.action==='Walk'&&walk.animation.walking);
+  check('默认第一站播放用户Walk动作',walk.animation.action==='Walk'&&walk.animation.walking);
   check('人物真实前进且相机目标跟随',distance(walk.animation.position,start.animation.position)>2&&distance(walk.camera.anchor,walk.animation.position)<.25,{start:start.animation.position,walk:walk.animation.position,camera:walk.camera.anchor});
   check('保留原脸且不绑定拳击',walk.animation.eyes===0&&Object.keys(walk.animation.morphs).length===0&&!walk.animation.clips.includes('Box'));
   await page.mouse.move(670,410);await page.mouse.down();await page.mouse.move(700,410,{steps:8});

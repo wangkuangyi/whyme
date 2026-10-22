@@ -5,7 +5,8 @@ async (page) => {
     for(let i=0;i<4;i++){
       await page.goto(`http://127.0.0.1:5173/?motion=1&angle=${i+1}`);
       await page.waitForFunction(()=>window.__WHYME__?.getScene()?.getState().ready);
-      await page.waitForFunction(time=>window.__WHYME__.getScene().getState().animation.time>=time,[1.35,1.4,1.7,1.3][i]);
+      await page.waitForFunction(()=>{const s=window.__WHYME__.getScene().getState();return s.animation.action==='Idle' && s.camera.restClose[s.activeStation]===1;});
+      await page.waitForTimeout(200);
       const pending=page.waitForEvent('download');
       metadata[variant].push(await page.evaluate(()=>{
         const scene=window.__WHYME__.getScene(),s=scene.getState(),r=document.querySelector('#scene').getBoundingClientRect();

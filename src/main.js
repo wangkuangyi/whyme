@@ -4,7 +4,7 @@ import { setupDialogs } from './dialogs.js';
 
 const COLORS=['#C2603D','#3755A6','#327B60','#A44C76'];
 const restored = new URLSearchParams(location.search).has('still');
-const READOUTS=restored?['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM']:['近景 · 招手','特写 · 点头','跟拍 · 行走','近景 · 挥手'];
+const READOUTS=restored?['EYE LEVEL · 50MM','LOW · 35MM','HIGH · 70MM','MID · 85MM']:['跟拍 · 出发','特写 · 点头','近景 · 自然站立','近景 · 轻轻挥手'];
 const IMAGE_ROOT=restored?'/images-v2':'/images-tripo';
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
