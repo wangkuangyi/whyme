@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.vite/
+*.log
+.playwright-cli/
+.cache/
+output/
+versions/
+__pycache__/
+*.blend1
+动作素材/*
+!动作素材/.gitkeep
+qa/*.png
+qa/*.json
+qa/*.jpg
+qa/*.glb
+review/*.png
