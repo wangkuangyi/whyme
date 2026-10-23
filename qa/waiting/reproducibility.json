@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-10-23T17:59:34.577Z",
+  "visualVariant": "L-full-local-fingers",
+  "script": "scripts/blender_edit_motion.py",
+  "scriptSHA256": "08c345019cc8cbbc5a539851df9254cef4d84fa4afd0d55e07dc42d603ab10f9",
+  "method": "Executed exact final authoring script with only ROOT and two output paths redirected to output/waiting/repro; deep-compared every exported bone TRS value for all five Actions. Did not save or replace either official asset.",
+  "assetSHA256": "dbcc30a95bcc6a96e94708822bf4a960fa93ecbe594aac22b2ef2c0e906ed922",
+  "editableBlendSHA256": "0eb310c2f2ad93ca7e164315bea1a30fd2504f05a59d2b07b4cc0295b9d63aed",
+  "officialAssetsUnchanged": true,
+  "actions": [
+    {
+      "name": "Idle",
+      "frames": 289,
+      "duration": 4.8,
+      "allExportedTRSValuesExactlyIdentical": true
+    },
+    {
+      "name": "Walk",
+      "frames": 265,
+      "duration": 4.4,
+      "allExportedTRSValuesExactlyIdentical": true
+    },
+    {
+      "name": "Nod",
+      "frames": 250,
+      "duration": 4.15,
+      "allExportedTRSValuesExactlyIdentical": true
+    },
+    {
+      "name": "Wave",
+      "frames": 313,
+      "duration": 5.2,
+      "allExportedTRSValuesExactlyIdentical": true
+    },
+    {
+      "name": "Wait",
+      "frames": 481,
+      "duration": 8,
+      "allExportedTRSValuesExactlyIdentical": true
+    }
+  ],
+  "passed": 5,
+  "total": 5
+}

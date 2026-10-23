@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 
-export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'LookAround', 'Wave']);
+export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'Wait', 'Wave']);
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
 const FADE_SECONDS = .35;
+const WAIT_FADE_SECONDS = .45;
 const AUTHORED_RETURN_SECONDS = .8;
 const cleanName = name => name.replace(/^mixamorig[:_]?/i, '');
 const smooth = value => value * value * (3 - 2 * value);
@@ -70,7 +71,10 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
   }
   function enter(name, immediate, reason) {
     rootRecord = null; entryEnded = false; completedAction = null;
-    entry = start(name, immediate ? 0 : FADE_SECONDS, reason);
+    // A raised waving arm needs more time to/from the hands-on-hips pose.
+    // Walk keeps its shorter blend so its forward arm swing clears the waist.
+    const involvesWait = name === 'Wait' || [...records].some(record => record.name === 'Wait' && record.weight > .001);
+    entry = start(name, immediate ? 0 : involvesWait && name !== 'Walk' ? WAIT_FADE_SECONDS : FADE_SECONDS, reason);
     if (name === 'Walk') rootRecord = entry;
     return true;
   }
@@ -156,7 +160,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       settleProgress: smoother(returnProgress),
       playbackTiming: { sourceRange: [0, visible?.clip.duration || idleDuration], authoredReturn: true, settleSeconds: visible?.name === 'Idle' ? 0 : returnSeconds },
       walkPlayback: { sourceDuration: sourceClips.get('Walk').duration, duration: clips.get('Walk').duration, speed: 1 },
-      waveRange: [0, clips.get('Wave').duration], lookAroundRange: [0, clips.get('LookAround').duration], faceAnimation: false,
+      waveRange: [0, clips.get('Wave').duration], waitRange: [0, clips.get('Wait').duration], faceAnimation: false,
     };
   }
   function dispose() {

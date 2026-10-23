@@ -1,0 +1,968 @@
+{
+  "createdAt": "2026-10-23T18:05:06.272Z",
+  "method": "Actual GLTFLoader, independent keyframe interpolation, 65-bone world positions and world quaternion finite differences at 240Hz; original binary and mesh/UV/texture metadata comparisons.",
+  "scope": "Natural coordinated Blender Actions and animated Idle. No old exact-Rest upright-angle standard is applied.",
+  "limitations": [
+    "Numeric bone continuity does not substitute for visible gesture review.",
+    "Wrist-to-torso-axis distance is diagnostic and is not mesh collision proof.",
+    "Baked linear 60Hz animation is piecewise differentiable; 240Hz velocity checks bound the two sides of each clip splice rather than claiming mathematical C1 for every key."
+  ],
+  "limits": {
+    "endpointMetres": 0.00001,
+    "endpointRadians": 0.00001,
+    "velocityMismatchMetresPerSecond": 0.02,
+    "angularVelocityMismatchDegreesPerSecond": 2,
+    "boneStepMetresAt240Hz": 0.02,
+    "playbackError": 0.00001
+  },
+  "hashes": {
+    "original": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+    "originalBlend": "51363cd344cf3538e1b82a26b1e6921d52e3bbd734b5b78375844c679bd0f16d",
+    "authored": "dbcc30a95bcc6a96e94708822bf4a960fa93ecbe594aac22b2ef2c0e906ed922",
+    "modules": {
+      "src/motion.js": "b9082c2cda7d8feb5bd7a2a78ae7ebed024ff9544150de68256e5efcc65f4e27",
+      "scripts/blender_edit_motion.py": "08c345019cc8cbbc5a539851df9254cef4d84fa4afd0d55e07dc42d603ab10f9",
+      "qa/waiting/test-motion.mjs": "8e8abcbb0ab024bcdf9055e011250a47ab36fd0e3fc3190ee57679ff01810d99"
+    },
+    "previousPublishedAsset": "28ddcb8629174322495add57936bc27e8851dd7a5bb682602a46b728902bfda0",
+    "previousPublishedAnimationSHA256": {
+      "Idle": "d842585b9163f4f2c43461579dc3407e5a5dd9e2d778867b2df23018607ea8c3",
+      "Walk": "dad3381483068436f1fe7a9173459be6533d9d3ece1d274daee0a6e26cd37466",
+      "Nod": "25f4f31be903a20bb75096bcad3bd3888d44a7188162d89ef1b270185f187d2d",
+      "Wave": "b6055635f1d1feae2a5e3d14408fba9d69e1b718bc88143b0ace6f092da22042"
+    },
+    "currentAnimationSHA256": {
+      "Idle": "d842585b9163f4f2c43461579dc3407e5a5dd9e2d778867b2df23018607ea8c3",
+      "Walk": "dad3381483068436f1fe7a9173459be6533d9d3ece1d274daee0a6e26cd37466",
+      "Nod": "25f4f31be903a20bb75096bcad3bd3888d44a7188162d89ef1b270185f187d2d",
+      "Wave": "b6055635f1d1feae2a5e3d14408fba9d69e1b718bc88143b0ace6f092da22042"
+    }
+  },
+  "images": [
+    {
+      "sha256": "c931d3555581a035ff2445b148f2676d70c5b22a60ec3b99b191c7341ed8c1ec",
+      "width": 4096,
+      "height": 4096,
+      "bytes": 3106959
+    }
+  ],
+  "idlePeriod": 4.800000190734863,
+  "idleSeam": {
+    "position": 0.0017379105001862568,
+    "angular": 0.3183474957085259,
+    "positionBone": "LeftHandIndex4",
+    "angularBone": "LeftForeArm"
+  },
+  "endpointResults": [
+    {
+      "clip": "Walk",
+      "duration": 4.400000095367432,
+      "idlePhase": 4.400000095367432,
+      "entryError": {
+        "world": 8.703239205327796e-8,
+        "localPosition": 0,
+        "rotation": 3.4755181639464544e-7,
+        "scale": 0,
+        "worstWorldBone": "LeftHandRing4"
+      },
+      "exitError": {
+        "world": 9.929120733107583e-8,
+        "localPosition": 0,
+        "rotation": 5.599348016993998e-7,
+        "scale": 0,
+        "worstWorldBone": "LeftHandIndex4"
+      },
+      "entryVelocity": {
+        "position": 0.003927150175211421,
+        "angular": 0.7140024458614213,
+        "positionBone": "RightLeg",
+        "angularBone": "RightLeg"
+      },
+      "exitVelocity": {
+        "position": 0.011750995750171762,
+        "angular": 1.878029822217064,
+        "positionBone": "HeadTop_End",
+        "angularBone": "Head"
+      },
+      "idleAtExitVelocity": {
+        "position": 0.01123383009377097,
+        "angular": 1.8368760105455828,
+        "positionBone": "LeftHandMiddle4",
+        "angularBone": "Head"
+      },
+      "entryMatchedIdleVelocityError": {
+        "position": 0.003927150175211421,
+        "angular": 0.7140024458614213,
+        "positionBone": "RightLeg",
+        "angularBone": "RightLeg"
+      },
+      "exitMatchedIdleVelocityError": {
+        "position": 0.0007169009139457347,
+        "angular": 0.15044907253158443,
+        "positionBone": "LeftLeg",
+        "angularBone": "LeftToe_End"
+      }
+    },
+    {
+      "clip": "Nod",
+      "duration": 4.150000095367432,
+      "idlePhase": 4.150000095367432,
+      "entryError": {
+        "world": 0,
+        "localPosition": 0,
+        "rotation": 5.960464477539063e-8,
+        "scale": 0,
+        "worstWorldBone": null
+      },
+      "exitError": {
+        "world": 0,
+        "localPosition": 0,
+        "rotation": 5.960464477539063e-8,
+        "scale": 0,
+        "worstWorldBone": null
+      },
+      "entryVelocity": {
+        "position": 0.0017753655956575603,
+        "angular": 0.3213039227071235,
+        "positionBone": "LeftHandIndex4",
+        "angularBone": "LeftForeArm"
+      },
+      "exitVelocity": {
+        "position": 0.010242315120787472,
+        "angular": 4.652403865202359,
+        "positionBone": "LeftHandPinky1",
+        "angularBone": "LeftArm"
+      },
+      "idleAtExitVelocity": {
+        "position": 0.010211347609682666,
+        "angular": 4.646241951573524,
+        "positionBone": "LeftHandPinky1",
+        "angularBone": "LeftArm"
+      },
+      "entryMatchedIdleVelocityError": {
+        "position": 0.0006527068282181494,
+        "angular": 0.09971276877173169,
+        "positionBone": "RightHandIndex4",
+        "angularBone": "RightHandRing4"
+      },
+      "exitMatchedIdleVelocityError": {
+        "position": 0.0004294516552214958,
+        "angular": 0.09835253096220127,
+        "positionBone": "RightHandIndex4",
+        "angularBone": "RightHandMiddle4"
+      }
+    },
+    {
+      "clip": "Wave",
+      "duration": 5.199999809265137,
+      "idlePhase": 0.39999961853027344,
+      "entryError": {
+        "world": 0,
+        "localPosition": 0,
+        "rotation": 5.960464477539063e-8,
+        "scale": 0,
+        "worstWorldBone": null
+      },
+      "exitError": {
+        "world": 3.029399167558448e-8,
+        "localPosition": 0,
+        "rotation": 5.960464477539063e-8,
+        "scale": 0,
+        "worstWorldBone": "RightHandIndex4"
+      },
+      "entryVelocity": {
+        "position": 0.0018212780179115739,
+        "angular": 0.372483727876356,
+        "positionBone": "LeftHandIndex4",
+        "angularBone": "LeftForeArm"
+      },
+      "exitVelocity": {
+        "position": 0.011277480703666222,
+        "angular": 1.8467601352000553,
+        "positionBone": "HeadTop_End",
+        "angularBone": "Head"
+      },
+      "idleAtExitVelocity": {
+        "position": 0.011229694786413101,
+        "angular": 1.835850558926458,
+        "positionBone": "LeftHandMiddle4",
+        "angularBone": "Head"
+      },
+      "entryMatchedIdleVelocityError": {
+        "position": 0.00031316015586292694,
+        "angular": 0.08536474906654017,
+        "positionBone": "LeftHandIndex4",
+        "angularBone": "LeftHandMiddle4"
+      },
+      "exitMatchedIdleVelocityError": {
+        "position": 0.00014178544186717687,
+        "angular": 0.02028668143424545,
+        "positionBone": "LeftHandMiddle4",
+        "angularBone": "LeftHandRing4"
+      }
+    },
+    {
+      "clip": "Wait",
+      "duration": 8,
+      "idlePhase": 3.1999998092651367,
+      "entryError": {
+        "world": 7.4951408991708e-9,
+        "localPosition": 0,
+        "rotation": 1.1920928955078128e-7,
+        "scale": 0,
+        "worstWorldBone": "LeftHandMiddle4"
+      },
+      "exitError": {
+        "world": 7.595516369968937e-9,
+        "localPosition": 0,
+        "rotation": 1.6049041769309358e-7,
+        "scale": 0,
+        "worstWorldBone": "LeftHandMiddle3"
+      },
+      "entryVelocity": {
+        "position": 0.0018799110156660817,
+        "angular": 0.4248456586379434,
+        "positionBone": "RightHandThumb4",
+        "angularBone": "LeftHandRing2"
+      },
+      "exitVelocity": {
+        "position": 0.03792092109324985,
+        "angular": 5.254365808831164,
+        "positionBone": "LeftHandPinky2",
+        "angularBone": "LeftHandRing2"
+      },
+      "idleAtExitVelocity": {
+        "position": 0.037397940996771524,
+        "angular": 5.001216567734862,
+        "positionBone": "LeftHandPinky2",
+        "angularBone": "RightForeArm"
+      },
+      "entryMatchedIdleVelocityError": {
+        "position": 0.0007062313600987117,
+        "angular": 0.36503597040350466,
+        "positionBone": "LeftHandIndex4",
+        "angularBone": "LeftHandIndex2"
+      },
+      "exitMatchedIdleVelocityError": {
+        "position": 0.0007072811062516153,
+        "angular": 0.35480396696144784,
+        "positionBone": "RightHandThumb4",
+        "angularBone": "LeftHandIndex2"
+      }
+    }
+  ],
+  "idleMotion": {
+    "rotations": {
+      "Hips": 0.0000034150945850063755,
+      "LeftUpLeg": 0,
+      "LeftLeg": 0,
+      "LeftFoot": 0,
+      "LeftToeBase": 0,
+      "LeftToe_End": 0,
+      "RightUpLeg": 0,
+      "RightLeg": 0,
+      "RightFoot": 0,
+      "RightToeBase": 0.0000017075472925031877,
+      "RightToe_End": 0,
+      "Spine": 0.9878389491507092,
+      "Spine1": 0.400670801090527,
+      "Spine2": 0.5977865863534089,
+      "LeftShoulder": 1.2163871447673003,
+      "LeftArm": 4.398119720071937,
+      "LeftForeArm": 0.802006130324157,
+      "LeftHand": 2.132889780796037,
+      "LeftHandIndex1": 0.000011326587362040635,
+      "LeftHandIndex2": 0.000013872179782028061,
+      "LeftHandIndex3": 0.000008706816964856284,
+      "LeftHandIndex4": 0.000006830189170012753,
+      "LeftHandMiddle1": 0.000006830189170012753,
+      "LeftHandMiddle2": 0.000012194326777763644,
+      "LeftHandMiddle3": 0.000009659346157805868,
+      "LeftHandMiddle4": 0.000006613302226726412,
+      "LeftHandPinky1": 0.000012313298636799906,
+      "LeftHandPinky2": 0.000012194326777763644,
+      "LeftHandPinky3": 0.000004829673078902933,
+      "LeftHandPinky4": 0.000006389056940260397,
+      "LeftHandRing1": 0.0000072445096183544,
+      "LeftHandRing2": 0.000016199215970291508,
+      "LeftHandRing3": 0.000012547858734911242,
+      "LeftHandRing4": 0.000007636383641665691,
+      "LeftHandThumb1": 0.000010526028440638417,
+      "LeftHandThumb2": 0.000011581149199548747,
+      "LeftHandThumb3": 0.000011066171232981565,
+      "LeftHandThumb4": 0.000005915117333884393,
+      "Neck": 1.4894643566320258,
+      "Head": 1.0779420861036686,
+      "HeadTop_End": 0.000004182619578303746,
+      "RightShoulder": 1.890575006853577,
+      "RightArm": 2.946057649533466,
+      "RightForeArm": 1.946763323623744,
+      "RightHand": 2.413506202578063,
+      "RightHandIndex1": 0.000007443026089337883,
+      "RightHandIndex2": 0.000012194326777763644,
+      "RightHandIndex3": 0.000012074182697257337,
+      "RightHandIndex4": 0.000008365239156607494,
+      "RightHandMiddle1": 0.000011952831047522321,
+      "RightHandMiddle2": 0.000006613302226726412,
+      "RightHandMiddle3": 0.00000615664931839995,
+      "RightHandMiddle4": 0.000009035490975690204,
+      "RightHandPinky1": 0.00000887267600082659,
+      "RightHandPinky2": 0.000015649929441225527,
+      "RightHandPinky3": 0.00000615664931839995,
+      "RightHandPinky4": 0.000005399738656763832,
+      "RightHandRing1": 0.000009507220963046143,
+      "RightHandRing2": 0.00001024528375501913,
+      "RightHandRing3": 0.000006613302226726412,
+      "RightHandRing4": 0.00000782496472061276,
+      "RightHandThumb1": 0.000011066171232981565,
+      "RightHandThumb2": 0.00000782496472061276,
+      "RightHandThumb3": 0.0000070403978477281,
+      "RightHandThumb4": 0.000006613302226726412
+    },
+    "maximumPositionDelta": 0,
+    "maximumFootWorldDelta": 0,
+    "handExcursion": 0.027975244301383023,
+    "frames": 1153
+  },
+  "runtimeResults": [
+    {
+      "clip": "Walk",
+      "frames": 1537,
+      "maximumStep": 0.014203391207031828,
+      "maximumPlaybackError": 1.2900351318900708e-7,
+      "boundaryMaximumStep": 0.0003152039001657812,
+      "worstStep": {
+        "time": 2.066666666666667,
+        "bone": "LeftToe_End",
+        "state": "Walk"
+      },
+      "rightWristToTorsoMinimum": null
+    },
+    {
+      "clip": "Nod",
+      "frames": 1477,
+      "maximumStep": 0.013529916586754712,
+      "maximumPlaybackError": 1.2530606469895707e-7,
+      "boundaryMaximumStep": 0.0003057973813843224,
+      "worstStep": {
+        "time": 3.05,
+        "bone": "RightHandMiddle4",
+        "state": "Nod"
+      },
+      "rightWristToTorsoMinimum": null
+    },
+    {
+      "clip": "Wait",
+      "frames": 2400,
+      "maximumStep": 0.0025728917119898723,
+      "maximumPlaybackError": 1.3035202696147807e-7,
+      "boundaryMaximumStep": 0.0002583149990781039,
+      "worstStep": {
+        "time": 7.4375,
+        "bone": "RightHandIndex3",
+        "state": "Wait"
+      },
+      "rightWristToTorsoMinimum": null
+    },
+    {
+      "clip": "Wave",
+      "frames": 1728,
+      "maximumStep": 0.008740021659359597,
+      "maximumPlaybackError": 1.2089983113411168e-7,
+      "boundaryMaximumStep": 0.00031205787350379845,
+      "worstStep": {
+        "time": 1.3333333333333333,
+        "bone": "LeftHandIndex4",
+        "state": "Wave"
+      },
+      "rightWristToTorsoMinimum": 0.26663255349225023
+    }
+  ],
+  "rapidResult": {
+    "frames": 1728,
+    "maximumStep": 0.003426892865483116,
+    "worstStep": {
+      "frame": 801,
+      "bone": "RightToe_End"
+    }
+  },
+  "waitInterruptions": [
+    {
+      "from": "Walk",
+      "to": "Wait",
+      "fraction": 0.25,
+      "maximumStep": 0.010595959907280475,
+      "worst": {
+        "frame": 44,
+        "bone": "RightToe_End"
+      }
+    },
+    {
+      "from": "Walk",
+      "to": "Wait",
+      "fraction": 0.6,
+      "maximumStep": 0.013562200115846822,
+      "worst": {
+        "frame": 7,
+        "bone": "RightToe_End"
+      }
+    },
+    {
+      "from": "Walk",
+      "to": "Wait",
+      "fraction": 0.9,
+      "maximumStep": 0.0063897561283425995,
+      "worst": {
+        "frame": 18,
+        "bone": "RightToe_End"
+      }
+    },
+    {
+      "from": "Nod",
+      "to": "Wait",
+      "fraction": 0.25,
+      "maximumStep": 0.012253742369300567,
+      "worst": {
+        "frame": 50,
+        "bone": "RightHandMiddle4"
+      }
+    },
+    {
+      "from": "Nod",
+      "to": "Wait",
+      "fraction": 0.6,
+      "maximumStep": 0.01156960980623641,
+      "worst": {
+        "frame": 55,
+        "bone": "RightHandMiddle4"
+      }
+    },
+    {
+      "from": "Nod",
+      "to": "Wait",
+      "fraction": 0.9,
+      "maximumStep": 0.002548593441833727,
+      "worst": {
+        "frame": 97,
+        "bone": "RightHandThumb4"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Walk",
+      "fraction": 0.25,
+      "maximumStep": 0.01392895632106227,
+      "worst": {
+        "frame": 88,
+        "bone": "RightToe_End"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Walk",
+      "fraction": 0.6,
+      "maximumStep": 0.01392895632106227,
+      "worst": {
+        "frame": 88,
+        "bone": "RightToe_End"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Walk",
+      "fraction": 0.9,
+      "maximumStep": 0.01392895632106227,
+      "worst": {
+        "frame": 88,
+        "bone": "RightToe_End"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Nod",
+      "fraction": 0.25,
+      "maximumStep": 0.013045156581409072,
+      "worst": {
+        "frame": 181,
+        "bone": "RightHandMiddle4"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Nod",
+      "fraction": 0.6,
+      "maximumStep": 0.013045156581409072,
+      "worst": {
+        "frame": 181,
+        "bone": "RightHandMiddle4"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Nod",
+      "fraction": 0.9,
+      "maximumStep": 0.013045156581409072,
+      "worst": {
+        "frame": 181,
+        "bone": "RightHandMiddle4"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Wave",
+      "fraction": 0.25,
+      "maximumStep": 0.004468177979193907,
+      "worst": {
+        "frame": 45,
+        "bone": "RightHandIndex3"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Wave",
+      "fraction": 0.6,
+      "maximumStep": 0.0044333936716072775,
+      "worst": {
+        "frame": 44,
+        "bone": "RightHandIndex3"
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Wave",
+      "fraction": 0.9,
+      "maximumStep": 0.004631357573645317,
+      "worst": {
+        "frame": 29,
+        "bone": "RightHandIndex3"
+      }
+    },
+    {
+      "from": "Wave",
+      "to": "Wait",
+      "fraction": 0.25,
+      "maximumStep": 0.009892876768883297,
+      "worst": {
+        "frame": 69,
+        "bone": "LeftHandThumb4"
+      }
+    },
+    {
+      "from": "Wave",
+      "to": "Wait",
+      "fraction": 0.6,
+      "maximumStep": 0.017344413951437782,
+      "worst": {
+        "frame": 36,
+        "bone": "LeftHandMiddle4"
+      }
+    },
+    {
+      "from": "Wave",
+      "to": "Wait",
+      "fraction": 0.9,
+      "maximumStep": 0.002501391041576586,
+      "worst": {
+        "frame": 97,
+        "bone": "RightHandThumb4"
+      }
+    }
+  ],
+  "frameRates": [
+    {
+      "rate": 30,
+      "firstIdle": {
+        "elapsed": 8.033333333333315,
+        "phase": 3.2333331425984513,
+        "expectedPhase": 3.233333142598452,
+        "difference": {
+          "world": 9.103302129078852e-9,
+          "localPosition": 0,
+          "rotation": 5.960464477539063e-8,
+          "scale": 0,
+          "worstWorldBone": "HeadTop_End"
+        }
+      }
+    },
+    {
+      "rate": 60,
+      "firstIdle": {
+        "elapsed": 8.016666666666644,
+        "phase": 3.2166664759317802,
+        "expectedPhase": 3.216666475931781,
+        "difference": {
+          "world": 2.549724099104379e-8,
+          "localPosition": 0,
+          "rotation": 5.960464477539063e-8,
+          "scale": 0,
+          "worstWorldBone": "LeftHandMiddle4"
+        }
+      }
+    },
+    {
+      "rate": 120,
+      "firstIdle": {
+        "elapsed": 8.000000000000187,
+        "phase": 3.1999998092653237,
+        "expectedPhase": 3.1999998092653232,
+        "difference": {
+          "world": 7.459392270145638e-8,
+          "localPosition": 0,
+          "rotation": 5.960464477539063e-8,
+          "scale": 0,
+          "worstWorldBone": "LeftHandMiddle4"
+        }
+      }
+    },
+    {
+      "rate": "jitter",
+      "firstIdle": {
+        "elapsed": 8.002000000000013,
+        "phase": 3.2019998092651494,
+        "expectedPhase": 3.20199980926515,
+        "difference": {
+          "world": 5.362778551164936e-8,
+          "localPosition": 0,
+          "rotation": 5.960464477539063e-8,
+          "scale": 0,
+          "worstWorldBone": "RightHandMiddle4"
+        }
+      }
+    }
+  ],
+  "longError": {
+    "world": 3.400834479439184e-8,
+    "localPosition": 0,
+    "rotation": 5.960464477539063e-8,
+    "scale": 0,
+    "worstWorldBone": "RightHandRing4"
+  },
+  "checks": [
+    {
+      "name": "Idle-animation-targets-and-key-bytes-match-the-previous-published-version",
+      "passed": true
+    },
+    {
+      "name": "Walk-animation-targets-and-key-bytes-match-the-previous-published-version",
+      "passed": true
+    },
+    {
+      "name": "Nod-animation-targets-and-key-bytes-match-the-previous-published-version",
+      "passed": true
+    },
+    {
+      "name": "Wave-animation-targets-and-key-bytes-match-the-previous-published-version",
+      "passed": true
+    },
+    {
+      "name": "original-animated-GLB-has-reviewed-immutable-SHA256",
+      "passed": true
+    },
+    {
+      "name": "original-person-blend-remains-unmodified",
+      "passed": true
+    },
+    {
+      "name": "original-binary-prefix-is-byte-identical-in-authored-asset",
+      "passed": true
+    },
+    {
+      "name": "original-nodes-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-meshes-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-skins-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-materials-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-textures-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-images-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-samplers-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-scenes-JSON-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-accessors-prefix-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-bufferViews-prefix-is-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-JPEGs-still-4096-square-and-embedded-at-original-offsets",
+      "passed": true
+    },
+    {
+      "name": "actual-GLTFLoader-preserves-65-bones-and-original-topology",
+      "passed": true
+    },
+    {
+      "name": "exactly-five-approved-actions-without-facial-tracks",
+      "passed": true
+    },
+    {
+      "name": "Idle-loop-endpoint-matches-start-on-all-65-bones",
+      "passed": true
+    },
+    {
+      "name": "Idle-loop-velocity-has-no-visible-splice",
+      "passed": true
+    },
+    {
+      "name": "Walk-first-frame-matches-real-Idle-zero",
+      "passed": true
+    },
+    {
+      "name": "Walk-last-frame-matches-its-corresponding-Idle-phase",
+      "passed": true
+    },
+    {
+      "name": "Walk-entry-and-return-velocity-matches-same-phase-Idle-at-240Hz",
+      "passed": true
+    },
+    {
+      "name": "Nod-first-frame-matches-real-Idle-zero",
+      "passed": true
+    },
+    {
+      "name": "Nod-last-frame-matches-its-corresponding-Idle-phase",
+      "passed": true
+    },
+    {
+      "name": "Nod-entry-and-return-velocity-matches-same-phase-Idle-at-240Hz",
+      "passed": true
+    },
+    {
+      "name": "Wave-first-frame-matches-real-Idle-zero",
+      "passed": true
+    },
+    {
+      "name": "Wave-last-frame-matches-its-corresponding-Idle-phase",
+      "passed": true
+    },
+    {
+      "name": "Wave-entry-and-return-velocity-matches-same-phase-Idle-at-240Hz",
+      "passed": true
+    },
+    {
+      "name": "Wait-first-frame-matches-real-Idle-zero",
+      "passed": true
+    },
+    {
+      "name": "Wait-last-frame-matches-its-corresponding-Idle-phase",
+      "passed": true
+    },
+    {
+      "name": "Wait-entry-and-return-velocity-matches-same-phase-Idle-at-240Hz",
+      "passed": true
+    },
+    {
+      "name": "Idle-is-real-rotation-motion-in-spine-neck-arms",
+      "passed": true
+    },
+    {
+      "name": "Idle-does-not-fake-breathing-by-translating-bones",
+      "passed": true
+    },
+    {
+      "name": "Idle-hips-feet-and-toes-stay-planted",
+      "passed": true
+    },
+    {
+      "name": "Walk-runtime-returns-to-Idle-without-a-second-fade",
+      "passed": true
+    },
+    {
+      "name": "Walk-full-runtime-no-20mm-per-240Hz-bone-pop",
+      "passed": true
+    },
+    {
+      "name": "Walk-runtime-plays-authored-tracks-without-a-posture-solver",
+      "passed": true
+    },
+    {
+      "name": "Walk-runtime-does-not-modify-loaded-animation-arrays",
+      "passed": true
+    },
+    {
+      "name": "Nod-runtime-returns-to-Idle-without-a-second-fade",
+      "passed": true
+    },
+    {
+      "name": "Nod-full-runtime-no-20mm-per-240Hz-bone-pop",
+      "passed": true
+    },
+    {
+      "name": "Nod-runtime-plays-authored-tracks-without-a-posture-solver",
+      "passed": true
+    },
+    {
+      "name": "Nod-runtime-does-not-modify-loaded-animation-arrays",
+      "passed": true
+    },
+    {
+      "name": "Wait-runtime-returns-to-Idle-without-a-second-fade",
+      "passed": true
+    },
+    {
+      "name": "Wait-full-runtime-no-20mm-per-240Hz-bone-pop",
+      "passed": true
+    },
+    {
+      "name": "Wait-runtime-plays-authored-tracks-without-a-posture-solver",
+      "passed": true
+    },
+    {
+      "name": "Wait-runtime-does-not-modify-loaded-animation-arrays",
+      "passed": true
+    },
+    {
+      "name": "Wave-runtime-returns-to-Idle-without-a-second-fade",
+      "passed": true
+    },
+    {
+      "name": "Wave-full-runtime-no-20mm-per-240Hz-bone-pop",
+      "passed": true
+    },
+    {
+      "name": "Wave-runtime-plays-authored-tracks-without-a-posture-solver",
+      "passed": true
+    },
+    {
+      "name": "Wave-runtime-does-not-modify-loaded-animation-arrays",
+      "passed": true
+    },
+    {
+      "name": "48-rapid-interruptions-retain-the-existing-20mm-per-240Hz-bound",
+      "passed": true
+    },
+    {
+      "name": "rapid-interruptions-eventually-retire-all-stale-actions",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Walk-to-Wait-at-0.25-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Walk-to-Wait-at-0.6-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Walk-to-Wait-at-0.9-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Nod-to-Wait-at-0.25-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Nod-to-Wait-at-0.6-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Nod-to-Wait-at-0.9-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Walk-at-0.25-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Walk-at-0.6-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Walk-at-0.9-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Nod-at-0.25-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Nod-at-0.6-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Nod-at-0.9-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Wave-at-0.25-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Wave-at-0.6-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wait-to-Wave-at-0.9-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wave-to-Wait-at-0.25-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wave-to-Wait-at-0.6-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "Wait-interruption-Wave-to-Wait-at-0.9-is-continuous-and-cleans-up",
+      "passed": true
+    },
+    {
+      "name": "30-fps-return-splits-exactly-at-action-boundary",
+      "passed": true
+    },
+    {
+      "name": "60-fps-return-splits-exactly-at-action-boundary",
+      "passed": true
+    },
+    {
+      "name": "120-fps-return-splits-exactly-at-action-boundary",
+      "passed": true
+    },
+    {
+      "name": "jitter-fps-return-splits-exactly-at-action-boundary",
+      "passed": true
+    },
+    {
+      "name": "paused-or-dragging-freezes-action-and-all-bones",
+      "passed": true
+    },
+    {
+      "name": "reduced-motion-holds-authored-Idle-zero-not-bind-pose",
+      "passed": true
+    },
+    {
+      "name": "five-minute-real-Idle-loop-has-no-transform-drift",
+      "passed": true
+    },
+    {
+      "name": "authored-asset-remains-unchanged-through-the-entire-test",
+      "passed": true
+    }
+  ],
+  "passed": 81,
+  "total": 81
+}

@@ -8,8 +8,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "check": "node --check src/main.js && node --check src/dialogs.js && node --check src/scene.js && node --check src/motion.js && node --check src/posture.js && node --check src/breathing.js && node --check src/hoodie-skinning.js && node --check src/scene-math.js",
-    "test:motion": "node scripts/test-authored-motion.mjs",
-    "test:hoodie": "node scripts/test-authored-clothing.mjs",
+    "test:motion": "node qa/waiting/test-motion.mjs",
+    "test:hoodie": "node qa/waiting/test-clothing.mjs",
     "motion:pack": "node scripts/blender_pack_motion.mjs"
   },
   "dependencies": {

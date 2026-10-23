@@ -10,19 +10,45 @@ from mathutils import Matrix, Quaternion, Vector
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from blender_motion_helpers import solve_arm_to_target
-OUT = ROOT / 'output/blender-motion'
+from blender_motion_helpers import solve_arm_to_target, world_rotate_pose_bone
+OUT = ROOT / 'output/waiting'
 OUT.mkdir(parents=True, exist_ok=True)
 SOURCE = ROOT / 'public/models/person-original-animated.glb'
+WAIT_SOURCE = ROOT / '动作素材/human+character+3d+model+dengdai.glb'
 FPS, IDLE_SECONDS = 60, 4.8
-DURATIONS = {'Idle': 4.8, 'Walk': 4.4, 'Nod': 4.15, 'Wave': 5.2, 'LookAround': 6.8}
+DURATIONS = {'Idle': 4.8, 'Walk': 4.4, 'Nod': 4.15, 'Wave': 5.2, 'Wait': 8.0}
+
+def glb_json(path):
+    data = path.read_bytes()
+    return json.loads(data[20:20 + struct.unpack_from('<I', data, 12)[0]])
+
+original_rig, wait_rig = glb_json(SOURCE), glb_json(WAIT_SOURCE)
+assert original_rig['nodes'][:65] == wait_rig['nodes'][:65], 'Wait rest skeleton differs; explicit retargeting is required'
+assert original_rig['skins'] == wait_rig['skins'], 'Wait skin/bind relationship differs'
+assert [a['name'] for a in wait_rig['animations']] == ['wait.001'], 'Unexpected Wait source clip'
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=str(SOURCE), import_pack_images=True)
 scene = bpy.context.scene
 arm = next(o for o in scene.objects if o.type == 'ARMATURE')
 mesh = next(o for o in scene.objects if o.type == 'MESH')
-source_actions = {name: bpy.data.actions[name] for name in DURATIONS}
+source_actions = {name: bpy.data.actions[name] for name in DURATIONS if name != 'Wait'}
+# The supplied Wait uses exactly the same 65 rest bones and skin. Import its
+# Action into the original armature; discard its duplicate mesh and skeleton.
+objects_before = set(bpy.data.objects)
+actions_before = set(bpy.data.actions)
+bpy.ops.import_scene.gltf(filepath=str(WAIT_SOURCE), import_pack_images=True)
+wait_action = next(a for a in bpy.data.actions if a not in actions_before)
+wait_action.name = 'Source_Wait'
+wait_action.use_fake_user = True
+source_actions['Wait'] = wait_action
+for obj in list(bpy.data.objects):
+    if obj not in objects_before:
+        bpy.data.objects.remove(obj, do_unlink=True)
+for datablocks in [bpy.data.meshes, bpy.data.armatures, bpy.data.materials, bpy.data.images]:
+    for block in list(datablocks):
+        if block.users == 0:
+            datablocks.remove(block)
 for track in arm.animation_data.nla_tracks:
     track.mute = True
 bones = {b.name.replace('mixamorig:', ''): b for b in arm.pose.bones}
@@ -70,7 +96,7 @@ def smooth(t):
 # genuinely animated last 1.75 s is reused for the independent idle Action.
 neutral_ranges = {'Idle': [(3.25, 5)], 'Walk': [(0, 2.375)],
                   'Nod': [(0, 1 / 24)], 'Wave': [(.25, .8)],
-                  'LookAround': [(0, .125), (15.375, 15.625)]}
+                  'Wait': [(0, 6.041666666666667)]}
 neutral = {}
 for name, ranges in neutral_ranges.items():
     samples = []
@@ -119,7 +145,7 @@ def idle_at(t):
     return mix(idle_poses[a], idle_poses[min(a + 1, len(idle_poses) - 1)], index - a)
 
 poses_by_action = {'Idle': idle_poses}
-for name in ['Walk', 'Nod', 'Wave', 'LookAround']:
+for name in ['Walk', 'Nod', 'Wave', 'Wait']:
     duration = DURATIONS[name]
     poses = []
     for i in range(round(duration * FPS) + 1):
@@ -128,8 +154,8 @@ for name in ['Walk', 'Nod', 'Wave', 'LookAround']:
             source_t = max(0, t - .2) % 2.375
         elif name == 'Wave':
             source_t = .25 + min(4.5, max(0, t - .3))
-        elif name == 'LookAround':
-            source_t = 1.2 + min(6.2, max(0, t - .2))
+        elif name == 'Wait':
+            source_t = min(6.041666666666667, max(0, t - 1.0))
         else:
             active_t = max(0, t - .25)
             u = min(1, active_t / .75)
@@ -139,22 +165,28 @@ for name in ['Walk', 'Nod', 'Wave', 'LookAround']:
         raw = source_pose(name, source_t)
         pose = motion_delta(name, raw)
         idle = idle_at(t)
+        if name == 'Wait':
+            # Preserve the whole relaxed source stance. Separating its pelvis
+            # from the torso changed the waist/hand contact, while pushing both
+            # wrists forward produced floating hands despite positive QA gaps.
+            pose = raw
         # Body motion remains animated, with its fixed source slouch removed.
-        for n in ['Spine', 'Spine1', 'Spine2']:
+        for n in ([] if name == 'Wait' else ['Spine', 'Spine1', 'Spine2']):
             p, q, s = pose[n]
             pose[n] = (p, common[n][1].slerp(q, .65), s)
         if name == 'Walk':
             for n in lower | {'Hips'}:
                 pose[n] = raw[n]
-        else:
+        elif name != 'Wait':
             for n in lower | {'Hips'}:
                 pose[n] = idle[n]
-        inactive = ['Right'] if name == 'Wave' else ['Left'] if name == 'Nod' else ['Left', 'Right'] if name == 'LookAround' else []
+        inactive = ['Right'] if name == 'Wave' else ['Left'] if name == 'Nod' else []
         for n in names:
             if any(n.startswith(side) and any(key in n for key in ['Shoulder', 'Arm', 'Hand']) for side in inactive):
                 pose[n] = idle[n]
-        entry = smooth(t / .5)
-        exit_weight = 1 - smooth((t - (duration - .85)) / .85)
+        entry_seconds, exit_seconds = (1.0, 1.0) if name == 'Wait' else (.5, .85)
+        entry = smooth(t / entry_seconds)
+        exit_weight = 1 - smooth((t - (duration - exit_seconds)) / exit_seconds)
         poses.append(mix(idle, pose, entry * exit_weight))
     poses_by_action[name] = poses
 
@@ -197,22 +229,36 @@ for name, poses in poses_by_action.items():
         frame = i + 1
         scene.frame_set(frame)
         apply(pose)
-        if name in ['Walk', 'LookAround']:
+        if name == 'Wait':
+            t = i / FPS
+            envelope = smooth(t) * (1 - smooth(t - (DURATIONS[name] - 1)))
+            # Visual candidate L: the palm, wrist, thumb and three distal
+            # finger curls stay in the supplied contact pose. Only the visible
+            # left index/middle MCP direction is adjusted along the cloth,
+            # removing their abruptly buried tips without moving the hand.
+            for digit in ['Index', 'Middle']:
+                base, tip = bones['LeftHand' + digit + '1'], bones['LeftHand' + digit + '4']
+                start = (arm.matrix_world @ base.matrix).translation
+                end = (arm.matrix_world @ tip.matrix).translation
+                desired = end - start + Vector((.018, -.014, -.004))
+                turn = (end - start).rotation_difference(desired)
+                world_rotate_pose_bone(arm, base, IDENTITY.slerp(turn, envelope))
+            update()
+        if name == 'Walk':
             t = i / FPS
             envelope = smooth(t / .5) * (1 - smooth((t - (DURATIONS[name] - .85)) / .85))
             # Preserve the arm's swing and hand orientation while giving the
             # non-gesturing hand clearance from the waist, measured in QA.
             wrist = arm.matrix_world @ bones['RightHand'].matrix
             source_units_per_metre = .9995117486 / 1.83
-            offset = (.04 if name == 'Walk' else .015) * source_units_per_metre * envelope
+            offset = .04 * source_units_per_metre * envelope
             target = wrist.translation.copy() + Vector((-offset, 0, 0))
             solve_arm_to_target(arm, 'Right', target)
             update()
-            if name == 'Walk':
-                left_wrist = arm.matrix_world @ bones['LeftHand'].matrix
-                left_target = left_wrist.translation.copy() + Vector((.01 * source_units_per_metre * envelope, 0, 0))
-                solve_arm_to_target(arm, 'Left', left_target)
-                update()
+            left_wrist = arm.matrix_world @ bones['LeftHand'].matrix
+            left_target = left_wrist.translation.copy() + Vector((.01 * source_units_per_metre * envelope, 0, 0))
+            solve_arm_to_target(arm, 'Left', left_target)
+            update()
         # The inactive hand in Wave now follows the same comfortable stance as
         # Idle rather than the source's tucked-in, body-intersecting right arm.
         for n, b in bones.items():
@@ -253,6 +299,6 @@ scene.frame_set(1)
 EDITABLE = ROOT / 'animation/character-actions.blend'
 EDITABLE.parent.mkdir(parents=True, exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(EDITABLE))
-(OUT / 'authored-animations.json').write_text(json.dumps({'sourceSHA256': hashlib.sha256(raw).hexdigest(), 'blender': bpy.app.version_string, 'actions': exports}), encoding='utf8')
-(OUT / 'editing-summary.json').write_text(json.dumps({'blender': bpy.app.version_string, 'actions': summaries, 'sourceSHA256': hashlib.sha256(raw).hexdigest(), 'originalMeshUnchanged': True, 'neutralRanges': neutral_ranges}, indent=2), encoding='utf8')
+(OUT / 'authored-animations.json').write_text(json.dumps({'sourceSHA256': hashlib.sha256(raw).hexdigest(), 'waitSourceSHA256': hashlib.sha256(WAIT_SOURCE.read_bytes()).hexdigest(), 'blender': bpy.app.version_string, 'actions': exports}), encoding='utf8')
+(OUT / 'editing-summary.json').write_text(json.dumps({'blender': bpy.app.version_string, 'actions': summaries, 'sourceSHA256': hashlib.sha256(raw).hexdigest(), 'waitSourceSHA256': hashlib.sha256(WAIT_SOURCE.read_bytes()).hexdigest(), 'originalMeshUnchanged': True, 'neutralRanges': neutral_ranges, 'waitAdaptation': {'visualVariant': 'L-full-local-fingers', 'sourceSeconds': 6.041666666666667, 'editedSeconds': 8, 'sourceSpeed': 1, 'entrySeconds': 1, 'exitSeconds': 1, 'armGesture': 'original source shoulder, elbow, wrist, palm contact and thumb retained; no whole-hand offset', 'visibleFingerAdjustment': {'bones': ['LeftHandIndex1', 'LeftHandMiddle1'], 'method': 'world direction to current tip plus small cloth-tangent vector, quintic envelope', 'tipDirectionOffsetBlenderSourceUnits': [.018, -.014, -.004]}, 'torso': 'complete original source torso and pelvis relationship retained', 'legs': 'original relaxed source stance; entry and exit blend into shared Idle', 'endPose': 'same phase of independent Idle', 'limits': 'Hidden original right-side hand contact is retained for the requested left-front camera; no claim of all-angle collision-free hands'}}, indent=2), encoding='utf8')
 print('SAVED', EDITABLE, flush=True)

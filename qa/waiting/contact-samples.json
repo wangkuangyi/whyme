@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "requestedTime": 0.7,
+      "sampledTime": 0.7042000000000009,
+      "file": "output/playwright/waiting/contact-0.7.png"
+    },
+    {
+      "requestedTime": 1.42,
+      "sampledTime": 1.4218000000014928,
+      "file": "output/playwright/waiting/contact-1.42.png"
+    },
+    {
+      "requestedTime": 2.17,
+      "sampledTime": 2.1737000000000046,
+      "file": "output/playwright/waiting/contact-2.17.png"
+    },
+    {
+      "requestedTime": 7.25,
+      "sampledTime": 7.2517999999999345,
+      "file": "output/playwright/waiting/contact-7.25.png"
+    }
+  ]
+}

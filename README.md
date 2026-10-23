@@ -1,6 +1,6 @@
 # Why me? — 个人展示
 
-独立项目目录：`whyme-web`。页面版本标识为 v2.4.1，当前保留 Tripo 原始表面与 4K 贴图，以及在 Blender 中编辑的五个独立动画：自然待机、走路、点头、小幅挥手和环顾。使用统一放松站姿，已修正非挥手右臂内缩与动作间的姿态跳变。抽绳修正继续保留。白色加载页完成后再淡入网站。本次仅调整镜头和站点顺序，模型与五段动画不变：顺序为“迅速到岗、审美与产品意识、长期意识、团队精神”，对应 Walk2 原地步态、点头、环顾和小幅挥手，默认展示迅速到岗。
+独立项目目录：`whyme-web`。页面版本标识为 v2.4.1，当前保留 Tripo 原始表面与 4K 贴图，以及在 Blender 中编辑的五个独立动画：自然待机、走路、点头、小幅挥手和等待。各动作首尾与同一放松待机相接，已修正非挥手右臂内缩与动作间的姿态跳变，抽绳修正继续保留。白色加载页完成后再淡入网站。本次将 03 环顾替换为适配现有站姿与衔接的等待动作，从人物自身左前方轻仰拍；01 改为朝画面右下的斜俯视步态。顺序仍为“迅速到岗、审美与产品意识、长期意识、团队精神”，默认展示迅速到岗。
 
 静态使用 `public/models/person-original.glb`，动态使用 `person-authored-animated.glb`；`person-original-animated.glb` 保留为原动画备份。新动态文件只追加 Blender 编辑的动画，完整保留原 binary 前缀及 nodes、meshes、skins、materials、textures、images 等模型数据。它们保留 Tripo 的 11,922 个 GLB 顶点、10,892 个三角形、原法线、UV、蒙皮与原始 4096×4096 JPEG 字节，不做细分、减面、几何量化、缩图或贴图重编码。旧 `person.glb` / `person-animated.glb` 曾做细分、材质重建与 2K 处理，是历史网站基线，不是未经处理的 Tripo 原模型；它们与用户的 `../person.blend` 均保留。下文旧版本记录中的“原模型”指当时的网站基线，不能作为当前原始保真程度的证明。
 
@@ -41,16 +41,16 @@ npm run preview -- --port 4174 --base /whyme/
 
 ## 当前版本
 
-站点顺序、配色和动作如下；重排时配色与动作随内容身份移动。当前原始资产检查见 `qa/tripo/original-assets.json`，独立待机、动作和衣服的资产检查见 `qa/blender-motion/`，当前镜头与重排检查见 `qa/reframe/`。`qa/blender-motion/` 的旧镜头截图只作历史对照。加载与揭幕检查见 `qa/original/loading-results.json`；此前 `qa/tripo/walk-entry-*`、`walk-idle-*` 和 `walk2-*` 是历史证据，不替代本轮资产、渲染与加载检查。
+站点顺序、配色和动作如下；重排时配色与动作随内容身份移动。当前等待替换、原资产保留、动作与衣服、镜头方向及桌面/手机构图检查见 `qa/waiting/`。`qa/blender-motion/` 保留此前五动作版本的检查，`qa/reframe/` 保留上一轮镜头与重排的检查；两者的旧截图不能代替本轮 Wait 验收。原始资产来源见 `qa/tripo/original-assets.json`，加载与揭幕检查见 `qa/original/loading-results.json`；此前 `qa/tripo/walk-entry-*`、`walk-idle-*` 和 `walk2-*` 是历史证据，不替代本轮资产与渲染检查。
 
 | 站点 | 主题 | 动作 | 卫衣颜色 |
 | --- | --- | --- | --- |
 | 01（默认） | 迅速到岗 · 随时出发 | 原地步态 `Walk`，来源为 Walk2 | 暖灰褐 `#82756E` |
 | 02 | 审美与产品意识 · 好看，也好用 | 点头 `Nod` | 群青 `#3755A6` |
-| 03 | 长期意识 · 上线只是开始 | 环顾 `LookAround` | 松绿 `#327B60` |
+| 03 | 长期意识 · 上线只是开始 | 扶髋等待 `Wait`，来源为 dengdai | 松绿 `#327B60` |
 | 04 | 团队精神 · 好队友 | 小幅挥手 `Wave` | 莓果 `#A44C76` |
 
-- 桌面 01“随时出发”在白色加载页淡出后即可阅读介绍，与步态同时呈现，不必等待动作结束；动作期间持续更新卡片位置与连接线。01 的动作与待机都保持斜俯视小全身，不再末段推近。
+- 桌面 01“随时出发”在白色加载页淡出后即可阅读介绍，与步态同时呈现，不必等待动作结束；动作期间持续更新卡片位置与连接线。01 的动作与待机都保持斜俯视小全身，人物前方朝屏幕右下，不再末段推近。素材仍是原地步态，没有额外的人为路径平移。
 - 手机优点栏从首屏起持续可读，切站立即更新；人物走路、转镜头或静帧切换时不隐藏正文，也不再重复播放文字入场动画。动作期间可以切换优点、展开证明和打开作品详情。
 - 光环节点的遮挡同时检查圆点和右上数字；被人物遮住时立即隐藏，非当前节点稳定露出后再显示（通常 250 ms，稳定步态播放期间 650 ms），避免数字反复浮到胸前或从身体边缘闪出。
 - 根据用户确认的经历更新审美、长期投入和团队协作三站。主卡保持短句，作品、Text2SQL 时间线、Benchmark Atlas 更新日志与协作项目集中在对应详情窗口；NUS 使用用户确认的个人站介绍页。到岗信息当前为“11月底可到岗”，事实来源见 `CONTENT_SOURCES.md`。
@@ -61,20 +61,20 @@ npm run preview -- --port 4174 --base /whyme/
 - 中文身份信息、联系与简历、节点卡片、左下目录。
 - 自托管 Noto Sans SC 400/600；WHY ME? 使用全大写自绘几何字标，统一顶线、底线和直切笔画，与姓名等宽。姓名下显示“11月底可到岗”小字；页面不显示镜头参数。左下目录与内容展示框共用直角半透明底色。
 - 暖灰褐、群青、松绿、莓果四种卫衣颜色，直接 OKLCH 过渡。01 使用低饱和暖灰褐 `#82756E`，袖口为 `#6B5E58`、地面为 `#F8F5F3`；首帧和降级静帧需与新顺序及配色同步。
-- 四站动作映射为 `Walk / Nod / LookAround / Wave`。站点判断通过动作名称定位，避免顺序改变后把 Walk 的行为套到其他站。
-- 五段 Blender 动画时长：Idle 4.8 秒、Walk 4.4 秒、Nod 4.15 秒、Wave 5.2 秒、LookAround 6.8 秒。点头只对起手最初 0.4 源秒减速到 0.75 秒，主体手势保留。
-- Idle 是独立循环的骨骼动画，取原 Idle 3.25–5 秒的稳定上身微动，脚保持落地，肩背、头部和手臂有细微变化。所有动作围绕同一放松站姿编辑，首帧匹配 Idle0、末帧匹配对应 Idle 相位，结束后直接续播 Idle；不再程序性上下浮动或强行回 bind/rest。
-- 四站保持不同摄影角度和距离：01 动作与 Idle 均为斜俯视小全身；02 是较正面的中景，动作与待机都露出手，不再收成脸部特写；03 环顾采用稍远的低机位仰拍中景；04 保留挥手侧面半身与待机侧面近景。当前参数以 `src/scene.js` 为准。改动镜头后需在 `qa/reframe/` 重新检查桌面、手机的动作与待机构图；旧镜头截图不能代替复核。
+- 四站动作映射为 `Walk / Nod / Wait / Wave`。站点判断通过动作名称定位，避免顺序改变后把 Walk 的行为套到其他站。
+- 五段 Blender 动画时长：Idle 4.8 秒、Walk 4.4 秒、Nod 4.15 秒、Wave 5.2 秒、Wait 8 秒。等待源片段约 6.04 秒，保留主体原速并在总计 8 秒的片段首尾各设置 1 秒衔接。点头只对起手最初 0.4 源秒减速到 0.75 秒，主体手势保留。
+- Idle 是独立循环的骨骼动画，取原 Idle 3.25–5 秒的稳定上身微动，脚保持落地，肩背、头部和手臂有细微变化。所有动作首尾与这段放松待机衔接，首帧匹配 Idle0、末帧匹配对应 Idle 相位，结束后直接续播 Idle；不再程序性上下浮动或强行回 bind/rest。
+- 四站保持不同摄影角度和距离：01 动作与 Idle 均为斜俯视小全身，前向投影朝右下；02 是较正面的中景，动作与待机都露出手，不再收成脸部特写；03 等待采用人物自身左前方、稍远的轻仰拍中景，展示清楚的左手；04 保留挥手侧面半身与待机侧面近景。当前参数以 `src/scene.js` 为准，03 相机 azimuth +35、camY .40、lookY .64。原骨骼自身左侧是世界 +X、前方是 +Z；`qa/waiting/verify-direction.mjs` 用实际骨骼的胸廓和骨盆方向核验，不能只凭角度符号判断。改动镜头后需在 `qa/waiting/` 重新检查桌面、手机的动作与待机构图；旧镜头截图不能代替复核。
 - 光环、柔光与阴影；键盘、拖动、节点和目录导航。
 - 手机版说明区、打印版、幕后详情和静帧降级。
-- 人物使用 `public/models/person-authored-animated.glb`，精确文件体积和 SHA-256 见 `qa/blender-motion/asset-preservation.json`。使用三份同骨架素材，Walk 来自 Walk2，没有新增眼球或面部动画。衣服通过额外的 4K 灰度遮罩限定换色区域，同时保留原纹理；不使用程序生成布纹或合成法线替代原纹理。当前不因帧率自动降低画质，仅在失败或主动选择时切换高质量静帧。
+- 人物使用 `public/models/person-authored-animated.glb`，精确文件体积和 SHA-256 见 `qa/waiting/asset-preservation.json`。原基线使用三份同骨架素材，本轮增加 dengdai 源片段替换当前环顾；Walk 来自 Walk2，没有新增眼球或面部动画。Idle/Walk/Nod/Wave 的采样数据与替换前逐字节一致。衣服通过额外的 4K 灰度遮罩限定换色区域，同时保留原纹理；不使用程序生成布纹或合成法线替代原纹理。当前不因帧率自动降低画质，仅在失败或主动选择时切换高质量静帧。
 - 原始贴图已包含鼻唇等部位的烘焙明暗。运行时人物采用 `MeshBasicMaterial`、`toneMapped:false`，直接呈现原 4K 纹理，避免棚灯再次塑形导致嘴唇明暗被放大；地面的投影仍保留。GLB 文件保留原 PBR 参数（roughness 约 0.9）用于数据互换，但网站人物不再受棚灯二次照明。镜头具体参数以 `src/scene.js` 为准。
 
 大幅招手 `Greet` 和不合适的 `Box` 均不绑定或播放。它们仍存在于原始动作资产中，不属于当前可用动作。此前撤回的表情和动作实验只保留在被 Git 忽略的 `output/v2/`，不参与运行。
 
-用户已因明显穿模撤回抱臂 `CrossArms`。当前派生 GLB 不包含抱臂片段，管线也不读取 `human+character+3d+model+shuangbi.glb`；抱臂实验的通过记录不能作为本轮环顾验收。
+用户已因明显穿模撤回抱臂 `CrossArms`。当前派生 GLB 不包含抱臂或环顾片段，管线也不读取 `human+character+3d+model+shuangbi.glb`；抱臂、环顾实验的通过记录不能作为本轮等待验收。
 
-动画编辑源为 `animation/character-actions.blend`，包含五个 `Edited_*` Actions。Wave 的右臂改为自然下垂；Walk 双手及 LookAround 右手在 Blender 里通过 IK 留出腰侧间距。网页只播放烘焙后的动画，已取消运行时肩背校正和胸部上下平移。抽绳仍使用原先 180 个顶点的蒙皮权重修正。验收与限制见 `qa/blender-motion/acceptance.md`。
+动画编辑源为 `animation/character-actions.blend`，包含五个 `Edited_*` Actions。Wave 的右臂改为自然下垂，Walk 双手在 Blender 里通过 IK 留出腰侧间距。Wait 采用经视觉审阅的 L 方案：保留原放松站姿中的完整髋、腿和躯干关系，手掌、手腕及拇指保持贴腰姿势，只调整左食指/中指掌指关节的方向，沿衣物表面微调可见指尖；首尾各 1 秒衔接独立 Idle。曾尝试的整手前推、拇指朝镜头外展会形成悬空抓握轮廓，已撤回。原右侧手部接触保留，使用用户指定的左前方机位，不宣称任意视角绝无自交。网页只播放烘焙后的动画，已取消运行时肩背校正和胸部上下平移。涉及 Wait 的起手或中途切站使用 0.45 秒交叉过渡，Wait→Walk 为 0.35 秒，其余非 Wait 过渡也为 0.35 秒；片段自然结束后仍直接续播匹配相位的 Idle。抽绳保留原先 180 个顶点的蒙皮权重修正。本轮结果与取样范围见 `qa/waiting/`。
 
 ## 编辑当前 Blender 动作
 
@@ -85,15 +85,17 @@ npm run test:motion
 npm run test:hoodie
 ```
 
-上述命令从原始 GLB 重新生成并覆盖 `animation/character-actions.blend`；修改过该副本时请先另存。五段 Actions 均可在 Blender 中编辑。打包器读取 `output/blender-motion/authored-animations.json`，不会直接读取手工改过的 `.blend`，手工编辑后需要重新采样。采样中间数据被 Git 忽略。打包器不重新导出网格，只追加骨骼动画数据。修改后需重新截图、生成 24 张静帧并运行正式构建。
+上述命令从原始动画备份与 `动作素材/human+character+3d+model+dengdai.glb` 重新生成并覆盖 `animation/character-actions.blend`；修改过该副本时请先另存。五段 Actions 均可在 Blender 中编辑。打包器读取 `output/waiting/authored-animations.json`，不会直接读取手工改过的 `.blend`，手工编辑后需要重新采样。采样中间数据被 Git 忽略。打包器不重新导出网格，只追加骨骼动画数据，并核对 Idle/Walk/Nod/Wave 的采样字节未变。当前动作与衣服测试分别写入 `qa/waiting/motion-results.json`、`qa/waiting/clothing-results.json`；方向检查运行 `node qa/waiting/verify-direction.mjs`。修改后需重新截图、生成 24 张静帧并运行正式构建。
 
 ## 重新生成原始动作基线
 
-将三份用户原始导出文件放在 `动作素材/`：
+重新生成原始基线需将以下三份用户原始导出文件放在 `动作素材/`；这是历史原始备份管线，当前等待在上节的 Blender 编辑流程另行接入：
 
 - `human+character+3d+model.glb`：原有六个动作片段，其中旧 Walk 不再采用。
 - `human+character+3d+model+huangu.glb`：单个 `look_around.001` 环顾片段。
 - `human+character+3d+model+walk2.glb`：单个 `walk.001` 原地步态片段，替换派生资产中的 Walk。
+
+当前 Blender 编辑还需 `human+character+3d+model+dengdai.glb`，其中单个 `wait.001` 是新等待来源；它不改写上述原始基线。
 
 另外保留最早的 `../human character 3d model.glb`，用于核对原始 4K JPEG 与材质参数。其静态骨架绑定数据不完整，运行资产使用同人物动画导出的有效骨架，细节见生成的来源报告。然后运行：
 
@@ -102,7 +104,7 @@ node scripts/original-prepare.mjs
 node scripts/original-prepare.mjs --check
 ```
 
-准备脚本核对骨架、原网格属性、4K JPEG 字节和各动作采样，生成 `person-original.glb`、`person-original-animated.glb`、`hoodie-mask.png` 及 `person-original-info.json`；元数据记录源路径、SHA-256 和片段来源。`--check` 只核验可复现性，不写文件。资产报告写入 `qa/tripo/original-assets.json`；它只更新原始基线，之后需按上节在 Blender 编辑、打包并运行 `npm run test:motion`，当前动作报告写入 `qa/blender-motion/motion-results.json`。数值报告不能替代浏览器中的材质、动作和构图检查。每次改动导出或遮罩后重新生成报告，并核对动作报告的资产 SHA-256。原始素材默认不入库，新检出项目只有重新生成资产时才需补齐源文件。旧 `prepare_person.py` 与 `tripo-prepare.mjs` 仅用于历史管线，不用于当前原始保真资产。
+准备脚本核对骨架、原网格属性、4K JPEG 字节和各动作采样，生成 `person-original.glb`、`person-original-animated.glb`、`hoodie-mask.png` 及 `person-original-info.json`；元数据记录源路径、SHA-256 和片段来源。`--check` 只核验可复现性，不写文件。资产报告写入 `qa/tripo/original-assets.json`；它只更新原始基线，之后需按上节在 Blender 编辑、打包并运行 `npm run test:motion`，当前动作报告写入 `qa/waiting/motion-results.json`。数值报告不能替代浏览器中的材质、动作和构图检查。每次改动导出或遮罩后重新生成报告，并核对动作报告的资产 SHA-256。原始素材默认不入库，新检出项目只有重新生成资产时才需补齐源文件。旧 `prepare_person.py` 与 `tripo-prepare.mjs` 仅用于历史管线，不用于当前原始保真资产。
 
 ## 文件与版本管理
 
@@ -115,11 +117,12 @@ v2.4.1 的文案与作品入口使用 `feature/content-evidence` 分支，标签
 - `src/dialogs.js`：联系、幕后、更新记录。
 - `public/models/`：当前 `person-original*`、衣服换色遮罩、来源报告，以及保留的历史模型。
 - `public/images-intro/`：透明人物与相机配准元数据，用于截图验收和资料保留，普通 3D 首屏不下载这些图片。仅开发模式的 `?holdIntro=1` 暂停模型用于捕获，白色遮罩保持显示；通过 scene.capture() 导出人物，浏览器截图若需隐藏遮罩只在测试中处理。
-- `public/images-tripo/`：四张桌面、四张手机待机静帧及位置元数据；`public/images-v2/` 为静止 3D 的静帧。改变资产、镜头或灯光后须重生成这两组及 intro 共 24 张，并同步元数据。当前静帧缓存版本为 `framing-2`。
+- `public/images-tripo/`：四张桌面、四张手机待机静帧及位置元数据；`public/images-v2/` 为静止 3D 的静帧。改变资产、镜头或灯光后须重生成这两组及 intro 共 24 张，并同步元数据。当前静帧缓存版本为 `waiting-1`。
 - `CONTENT_SOURCES.md`：个人经历的来源边界。
 - `qa/tripo/original-assets.json`：原始资产保留检查；`qa/tripo/original-motion.json` 为此前待机行为的历史检查。
-- `qa/blender-motion/acceptance.md`：当前 Blender 独立待机、四动作、衔接与衣服的资产检查；其中旧镜头截图只作历史对照。`qa/breathing/` 和 `qa/posture/` 保留被替代方案的历史结果。
-- `qa/reframe/`：当前 02 露手中景、03 低机位仰拍、03/04 重排及静帧对应关系的复核。
+- `qa/waiting/`：当前等待替换、五段动画衔接、左右手与抽绳、原数据保留、摄影方向、构图与静帧的复核。`direction-results.json` 记录与受测 GLB/镜头源码对应的 SHA-256。
+- `qa/blender-motion/acceptance.md`：此前 Blender 独立待机、四动作、衔接与衣服的资产检查；其中旧镜头截图只作历史对照。`qa/breathing/` 和 `qa/posture/` 保留被替代方案的历史结果。
+- `qa/reframe/`：此前 02 露手中景、03 环顾低机位仰拍、03/04 重排及静帧对应关系的复核。
 - `qa/original/loading.md`、`qa/original/loading-results.json`：白色加载页、错误恢复、静帧解码、字体等待与揭幕时序检查。
 - `qa/tripo/walk2-assets.json`：历史 Walk2 替换检查，不替代当前原始保真资产检查。
 - `qa/tripo/walk-idle-motion.json`、`qa/tripo/walk-idle-visual.json`：此前新顺序、稳站与旧资产的检查。
@@ -137,7 +140,7 @@ Git 在本项目独立初始化。v2.4.0 使用 `feature/v2.4-polish` 分支落�
 
 ## 验证状态
 
-当前镜头和站点重排的检查以 `qa/reframe/` 为准；保真资产和五段动画未改，其检查依据仍为 `qa/blender-motion/` 中的资产、动作与衣服报告。`qa/blender-motion/` 的旧镜头截图不证明本轮构图通过。发布前需复核桌面与手机上的 02 手部完整性、03 仰拍构图、03/04 内容和动作配色对应关系，以及 24 张静帧与元数据的一致性。
+当前等待替换及两机位调整的检查以 `qa/waiting/` 为准。保留原模型数据及另外四段动画的字节证据在 `asset-preservation.json`；方向检查采样实际骨骼，构图检查需配合浏览器截图。`qa/blender-motion/` 与 `qa/reframe/` 的旧截图不证明本轮通过。发布前需复核桌面与手机上的 01 右下步态、02 手部完整性、03 左前轻仰拍与等待衔接、四站配色映射，以及 24 张静帧与元数据的一致性。穿模检查是所列顶点和时刻的抽样，不能表述为任意视角逐帧绝无自交。
 
 此前原始材质与镜头检查见 `qa/original/rendering.md`：当时桌面/手机四站 33/33、取消加载资源释放 3/3、生产构建 9/9，24 张 2× 静帧及元数据已更新；这些是历史交付记录，不能替代当前构图复核。画面已实际查看，但不将参考截图的接近程度表述为逐像素一致。
 

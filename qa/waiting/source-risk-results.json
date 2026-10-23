@@ -1,0 +1,1010 @@
+{
+  "generatedAt": "2026-10-23T17:13:20.933Z",
+  "source": "动作素材/human+character+3d+model+dengdai.glb",
+  "sha256": "abf0aa454793056dd78d3a5799482c102ee22f86632039e81ebc0d4a9774a4d0",
+  "clip": "wait.001",
+  "duration": 6.041666507720947,
+  "bones": 65,
+  "vertices": 11922,
+  "triangles": 10892,
+  "frames": 364,
+  "left": {
+    "minimumGapMM": -61.64228502787625,
+    "penetratingSamples": 95776,
+    "samples": 303940,
+    "missing": 0,
+    "worst": {
+      "time": 0.36666666666666664,
+      "vertex": 6660
+    },
+    "byJoint": {
+      "LeftHandIndex3": {
+        "minimumGapMM": -30.01265650340867,
+        "negativeSamples": 17635,
+        "worst": {
+          "time": 4.833333333333333,
+          "vertex": 6596
+        },
+        "worst3D": {
+          "time": 4.833333333333333,
+          "vertex": 6596,
+          "position": [
+            0.07437721198306671,
+            0.5163997289986669,
+            0.04829280728534904
+          ],
+          "nearest": {
+            "triangle": [
+              7385,
+              7362,
+              7360
+            ],
+            "distanceMM": 19.961403957370173,
+            "signedDistanceMM": -19.961403957370173
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandThumb3": {
+        "minimumGapMM": -61.64228502787625,
+        "negativeSamples": 26572,
+        "worst": {
+          "time": 0.36666666666666664,
+          "vertex": 6660
+        },
+        "worst3D": {
+          "time": 0.36666666666666664,
+          "vertex": 6660,
+          "position": [
+            0.0590624646428321,
+            0.5203322505526344,
+            -0.014863182848486423
+          ],
+          "nearest": {
+            "triangle": [
+              10439,
+              7445,
+              7420
+            ],
+            "distanceMM": 58.430166120134004,
+            "signedDistanceMM": -53.01309032549697
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandThumb2": {
+        "minimumGapMM": -35.33274472841402,
+        "negativeSamples": 15154,
+        "worst": {
+          "time": 0.36666666666666664,
+          "vertex": 6780
+        },
+        "worst3D": {
+          "time": 0.36666666666666664,
+          "vertex": 6780,
+          "position": [
+            0.07817706598101144,
+            0.5115774232929798,
+            -0.012759780899493768
+          ],
+          "nearest": {
+            "triangle": [
+              10439,
+              7445,
+              7420
+            ],
+            "distanceMM": 30.96668212657519,
+            "signedDistanceMM": -30.96668212657519
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandMiddle3": {
+        "minimumGapMM": -41.26150787615656,
+        "negativeSamples": 16744,
+        "worst": {
+          "time": 4.816666666666666,
+          "vertex": 6702
+        },
+        "worst3D": {
+          "time": 4.816666666666666,
+          "vertex": 6702,
+          "position": [
+            0.07250397999804137,
+            0.49603786668544825,
+            0.05056837047821028
+          ],
+          "nearest": {
+            "triangle": [
+              6579,
+              6797,
+              6806
+            ],
+            "distanceMM": 22.841896135126596,
+            "signedDistanceMM": -21.75694560192765
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandRing3": {
+        "minimumGapMM": -18.434501293214023,
+        "negativeSamples": 10563,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 6743
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 6743,
+          "position": [
+            0.08051249011768413,
+            0.48260048946009004,
+            0.04505710557040524
+          ],
+          "nearest": {
+            "triangle": [
+              6810,
+              6803,
+              6793
+            ],
+            "distanceMM": 14.730694072709875,
+            "signedDistanceMM": -14.730694072709875
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandThumb1": {
+        "minimumGapMM": -10.993731504206512,
+        "negativeSamples": 617,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 7104
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 7104,
+          "position": [
+            0.09398878784184099,
+            0.5050980967997962,
+            0.007701050414985735
+          ],
+          "nearest": {
+            "triangle": [
+              7420,
+              7408,
+              7404
+            ],
+            "distanceMM": 10.098704679677263,
+            "signedDistanceMM": -10.098704679677262
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHand": {
+        "minimumGapMM": 10.485147932630342,
+        "negativeSamples": 0,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 7183
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 7183,
+          "position": [
+            0.10135814753142178,
+            0.503110462140947,
+            0.02576259255500605
+          ],
+          "nearest": {
+            "triangle": [
+              7420,
+              7404,
+              7414
+            ],
+            "distanceMM": 9.569872786708796,
+            "signedDistanceMM": 9.569872786708798
+          },
+          "positiveXRayIntersections": 0,
+          "insideByOddParity": false
+        }
+      },
+      "LeftHandIndex2": {
+        "minimumGapMM": -2.3920401111206577,
+        "negativeSamples": 166,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 6897
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 6897,
+          "position": [
+            0.08519232212283066,
+            0.5243142506552427,
+            0.04182190652295116
+          ],
+          "nearest": {
+            "triangle": [
+              7369,
+              7402,
+              7396
+            ],
+            "distanceMM": 2.077042762195239,
+            "signedDistanceMM": -2.077042762195239
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandIndex1": {
+        "minimumGapMM": -9.578081377517844,
+        "negativeSamples": 543,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 7097
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 7097,
+          "position": [
+            0.08844275568075546,
+            0.5132752210675945,
+            0.0184326794616473
+          ],
+          "nearest": {
+            "triangle": [
+              7403,
+              7408,
+              7420
+            ],
+            "distanceMM": 7.636075852622152,
+            "signedDistanceMM": -7.636075852622154
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandMiddle2": {
+        "minimumGapMM": -21.079173023694118,
+        "negativeSamples": 5956,
+        "worst": {
+          "time": 4.833333333333333,
+          "vertex": 6970
+        },
+        "worst3D": {
+          "time": 4.833333333333333,
+          "vertex": 6970,
+          "position": [
+            0.08106898061034297,
+            0.5090262389286354,
+            0.050558521662386995
+          ],
+          "nearest": {
+            "triangle": [
+              7386,
+              7361,
+              7359
+            ],
+            "distanceMM": 17.17128546191406,
+            "signedDistanceMM": -17.171285461914056
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandRing2": {
+        "minimumGapMM": -8.631641905832858,
+        "negativeSamples": 958,
+        "worst": {
+          "time": 4.366666666666666,
+          "vertex": 7017
+        },
+        "worst3D": {
+          "time": 4.366666666666666,
+          "vertex": 7017,
+          "position": [
+            0.0899127832596528,
+            0.49563985697923807,
+            0.05118440642986043
+          ],
+          "nearest": {
+            "triangle": [
+              6578,
+              6801,
+              7382
+            ],
+            "distanceMM": 6.144664112940297,
+            "signedDistanceMM": -6.144664112940297
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandMiddle1": {
+        "minimumGapMM": 0.3692303299467552,
+        "negativeSamples": 0,
+        "worst": {
+          "time": 4.833333333333333,
+          "vertex": 7072
+        },
+        "worst3D": {
+          "time": 4.833333333333333,
+          "vertex": 7072,
+          "position": [
+            0.09240673924671784,
+            0.513484220376386,
+            0.04527899094528334
+          ],
+          "nearest": {
+            "triangle": [
+              7406,
+              7384,
+              7381
+            ],
+            "distanceMM": 0.3480835169072098,
+            "signedDistanceMM": 0.3480835169072098
+          },
+          "positiveXRayIntersections": 0,
+          "insideByOddParity": false
+        }
+      },
+      "LeftHandRing1": {
+        "minimumGapMM": 9.839127146736748,
+        "negativeSamples": 0,
+        "worst": {
+          "time": 4.833333333333333,
+          "vertex": 7147
+        },
+        "worst3D": {
+          "time": 4.833333333333333,
+          "vertex": 7147,
+          "position": [
+            0.10038174730882898,
+            0.5002308107677387,
+            0.04691292068595377
+          ],
+          "nearest": {
+            "triangle": [
+              6799,
+              7404,
+              7381
+            ],
+            "distanceMM": 9.616525987618372,
+            "signedDistanceMM": 9.616525987618372
+          },
+          "positiveXRayIntersections": 0,
+          "insideByOddParity": false
+        }
+      },
+      "LeftHandPinky3": {
+        "minimumGapMM": -6.055121830164199,
+        "negativeSamples": 868,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 10113
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 10113,
+          "position": [
+            0.09286705516345273,
+            0.4701206518965193,
+            0.04735238222257454
+          ],
+          "nearest": {
+            "triangle": [
+              6810,
+              6793,
+              6823
+            ],
+            "distanceMM": 4.70154373682576,
+            "signedDistanceMM": -4.70154373682576
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "LeftHandPinky2": {
+        "minimumGapMM": 16.26538429778561,
+        "negativeSamples": 0,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 10164
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 10164,
+          "position": [
+            0.10290841343719496,
+            0.476385934580099,
+            0.04480251059432148
+          ],
+          "nearest": {
+            "triangle": [
+              6810,
+              6793,
+              6823
+            ],
+            "distanceMM": 12.639631953706068,
+            "signedDistanceMM": 12.639631953706067
+          },
+          "positiveXRayIntersections": 0,
+          "insideByOddParity": false
+        }
+      },
+      "LeftHandPinky1": {
+        "minimumGapMM": 24.87196736728182,
+        "negativeSamples": 0,
+        "worst": {
+          "time": 0.4166666666666667,
+          "vertex": 10194
+        },
+        "worst3D": {
+          "time": 0.4166666666666667,
+          "vertex": 10194,
+          "position": [
+            0.10882288966699483,
+            0.47907277066683995,
+            0.03995134762386281
+          ],
+          "nearest": {
+            "triangle": [
+              6810,
+              6793,
+              6823
+            ],
+            "distanceMM": 19.460272078807716,
+            "signedDistanceMM": 19.31202140568794
+          },
+          "positiveXRayIntersections": 0,
+          "insideByOddParity": false
+        }
+      }
+    },
+    "worst3D": {
+      "time": 0.36666666666666664,
+      "vertex": 6660,
+      "position": [
+        0.0590624646428321,
+        0.5203322505526344,
+        -0.014863182848486423
+      ],
+      "nearest": {
+        "triangle": [
+          10439,
+          7445,
+          7420
+        ],
+        "distanceMM": 58.430166120134004,
+        "signedDistanceMM": -53.01309032549697
+      },
+      "positiveXRayIntersections": 1,
+      "insideByOddParity": true
+    }
+  },
+  "right": {
+    "minimumGapMM": -146.52698368030934,
+    "penetratingSamples": 276556,
+    "samples": 309764,
+    "missing": 0,
+    "worst": {
+      "time": 1.1666666666666667,
+      "vertex": 998
+    },
+    "byJoint": {
+      "RightHandMiddle1": {
+        "minimumGapMM": -75.8369956317971,
+        "negativeSamples": 25844,
+        "worst": {
+          "time": 1.25,
+          "vertex": 692
+        },
+        "worst3D": {
+          "time": 1.25,
+          "vertex": 692,
+          "position": [
+            -0.0496381395466252,
+            0.5223031802995011,
+            0.05195685217035126
+          ],
+          "nearest": {
+            "triangle": [
+              1530,
+              1377,
+              1376
+            ],
+            "distanceMM": 47.64856057736794,
+            "signedDistanceMM": -47.64856057736794
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandRing1": {
+        "minimumGapMM": -53.36418235123105,
+        "negativeSamples": 25116,
+        "worst": {
+          "time": 1.1666666666666667,
+          "vertex": 598
+        },
+        "worst3D": {
+          "time": 1.1666666666666667,
+          "vertex": 598,
+          "position": [
+            -0.05963935600418317,
+            0.5104022044060847,
+            0.05291459601293185
+          ],
+          "nearest": {
+            "triangle": [
+              1529,
+              1376,
+              1375
+            ],
+            "distanceMM": 35.7562327970554,
+            "signedDistanceMM": -35.75529445632997
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandIndex2": {
+        "minimumGapMM": -108.93133938929451,
+        "negativeSamples": 10556,
+        "worst": {
+          "time": 1.05,
+          "vertex": 483
+        },
+        "worst3D": {
+          "time": 1.05,
+          "vertex": 483,
+          "position": [
+            -0.03332673205975858,
+            0.5257667323786692,
+            0.04789538716655648
+          ],
+          "nearest": {
+            "triangle": [
+              1532,
+              1377,
+              1530
+            ],
+            "distanceMM": 70.14864515908897,
+            "signedDistanceMM": -70.14864515908896
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandIndex3": {
+        "minimumGapMM": -112.57619809331605,
+        "negativeSamples": 16380,
+        "worst": {
+          "time": 1.2166666666666666,
+          "vertex": 943
+        },
+        "worst3D": {
+          "time": 1.2166666666666666,
+          "vertex": 943,
+          "position": [
+            -0.028937960514288343,
+            0.5184462773575995,
+            0.05135348598341343
+          ],
+          "nearest": {
+            "triangle": [
+              1537,
+              1532,
+              1530
+            ],
+            "distanceMM": 67.50070754131941,
+            "signedDistanceMM": -67.39623846677716
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandIndex1": {
+        "minimumGapMM": -97.62525055228242,
+        "negativeSamples": 29120,
+        "worst": {
+          "time": 1.05,
+          "vertex": 556
+        },
+        "worst3D": {
+          "time": 1.05,
+          "vertex": 556,
+          "position": [
+            -0.044145737117656444,
+            0.5221721630856457,
+            0.013754824892495554
+          ],
+          "nearest": {
+            "triangle": [
+              1450,
+              1465,
+              1473
+            ],
+            "distanceMM": 90.3170878036874,
+            "signedDistanceMM": -90.3170878036874
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandThumb3": {
+        "minimumGapMM": -146.52698368030934,
+        "negativeSamples": 28756,
+        "worst": {
+          "time": 1.1666666666666667,
+          "vertex": 998
+        },
+        "worst3D": {
+          "time": 1.1666666666666667,
+          "vertex": 998,
+          "position": [
+            -0.018132327255734604,
+            0.5313607469005084,
+            -0.0037050867889378697
+          ],
+          "nearest": {
+            "triangle": [
+              4509,
+              4493,
+              4469
+            ],
+            "distanceMM": 135.3957160930087,
+            "signedDistanceMM": -117.07626708781802
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandThumb2": {
+        "minimumGapMM": -117.81989728628584,
+        "negativeSamples": 18564,
+        "worst": {
+          "time": 1.1666666666666667,
+          "vertex": 1120
+        },
+        "worst3D": {
+          "time": 1.1666666666666667,
+          "vertex": 1120,
+          "position": [
+            -0.03600351130147414,
+            0.5207398405627833,
+            -0.007637122607436894
+          ],
+          "nearest": {
+            "triangle": [
+              4448,
+              4455,
+              4465
+            ],
+            "distanceMM": 98.66470930157072,
+            "signedDistanceMM": -79.91219273198391
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandMiddle2": {
+        "minimumGapMM": -87.52594871550605,
+        "negativeSamples": 10920,
+        "worst": {
+          "time": 1.1666666666666667,
+          "vertex": 637
+        },
+        "worst3D": {
+          "time": 1.1666666666666667,
+          "vertex": 637,
+          "position": [
+            -0.040576596081816525,
+            0.5098496507331163,
+            0.05469321943265718
+          ],
+          "nearest": {
+            "triangle": [
+              940,
+              1219,
+              1233
+            ],
+            "distanceMM": 49.807096818071976,
+            "signedDistanceMM": -46.15315731135504
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandRing2": {
+        "minimumGapMM": -67.32976128190292,
+        "negativeSamples": 12012,
+        "worst": {
+          "time": 1.1666666666666667,
+          "vertex": 646
+        },
+        "worst3D": {
+          "time": 1.1666666666666667,
+          "vertex": 646,
+          "position": [
+            -0.05025145483316744,
+            0.5015117580349931,
+            0.05779152369076063
+          ],
+          "nearest": {
+            "triangle": [
+              940,
+              1219,
+              1233
+            ],
+            "distanceMM": 29.140809855966495,
+            "signedDistanceMM": -27.485760156862867
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandMiddle3": {
+        "minimumGapMM": -93.82487085438272,
+        "negativeSamples": 16016,
+        "worst": {
+          "time": 1.25,
+          "vertex": 1046
+        },
+        "worst3D": {
+          "time": 1.25,
+          "vertex": 1046,
+          "position": [
+            -0.03608527162196582,
+            0.5002674842555821,
+            0.05481712923590903
+          ],
+          "nearest": {
+            "triangle": [
+              940,
+              1219,
+              1233
+            ],
+            "distanceMM": 40.155758262403346,
+            "signedDistanceMM": -30.374057170905992
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandRing3": {
+        "minimumGapMM": -71.12523308016385,
+        "negativeSamples": 16744,
+        "worst": {
+          "time": 1.25,
+          "vertex": 668
+        },
+        "worst3D": {
+          "time": 1.25,
+          "vertex": 668,
+          "position": [
+            -0.04694500836448293,
+            0.49307594224119766,
+            0.05201644876520103
+          ],
+          "nearest": {
+            "triangle": [
+              940,
+              1219,
+              1233
+            ],
+            "distanceMM": 29.491534676253412,
+            "signedDistanceMM": -15.390192478438257
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHand": {
+        "minimumGapMM": -65.08864773147224,
+        "negativeSamples": 11002,
+        "worst": {
+          "time": 1.1333333333333333,
+          "vertex": 861
+        },
+        "worst3D": {
+          "time": 1.1333333333333333,
+          "vertex": 861,
+          "position": [
+            -0.06435783527988626,
+            0.5045756287546175,
+            0.006159803632493532
+          ],
+          "nearest": {
+            "triangle": [
+              4448,
+              1197,
+              4455
+            ],
+            "distanceMM": 50.81566890638057,
+            "signedDistanceMM": -42.546994261179215
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandThumb1": {
+        "minimumGapMM": -82.47885481371554,
+        "negativeSamples": 16016,
+        "worst": {
+          "time": 1.25,
+          "vertex": 862
+        },
+        "worst3D": {
+          "time": 1.25,
+          "vertex": 862,
+          "position": [
+            -0.055834551773946584,
+            0.5088370392748104,
+            -0.006201017766854338
+          ],
+          "nearest": {
+            "triangle": [
+              4448,
+              1197,
+              4455
+            ],
+            "distanceMM": 60.83904995124624,
+            "signedDistanceMM": -50.86862648412061
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandPinky1": {
+        "minimumGapMM": -31.301909132431785,
+        "negativeSamples": 15228,
+        "worst": {
+          "time": 1.25,
+          "vertex": 4161
+        },
+        "worst3D": {
+          "time": 1.25,
+          "vertex": 4161,
+          "position": [
+            -0.06956937037051433,
+            0.4943042231669243,
+            0.04943092256508119
+          ],
+          "nearest": {
+            "triangle": [
+              940,
+              1217,
+              1219
+            ],
+            "distanceMM": 13.250209236661128,
+            "signedDistanceMM": -12.424219200216339
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandPinky2": {
+        "minimumGapMM": -33.99789313259567,
+        "negativeSamples": 9521,
+        "worst": {
+          "time": 1.35,
+          "vertex": 4166
+        },
+        "worst3D": {
+          "time": 1.35,
+          "vertex": 4166,
+          "position": [
+            -0.0671640492563712,
+            0.49155169286567246,
+            0.049982978816456455
+          ],
+          "nearest": {
+            "triangle": [
+              940,
+              1217,
+              1219
+            ],
+            "distanceMM": 11.24224790789828,
+            "signedDistanceMM": -7.98726988958707
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      },
+      "RightHandPinky3": {
+        "minimumGapMM": -32.10726706038042,
+        "negativeSamples": 14761,
+        "worst": {
+          "time": 0.9166666666666666,
+          "vertex": 4108
+        },
+        "worst3D": {
+          "time": 0.9166666666666666,
+          "vertex": 4108,
+          "position": [
+            -0.061296171408013155,
+            0.47448567678892095,
+            0.046039850950193084
+          ],
+          "nearest": {
+            "triangle": [
+              1207,
+              1209,
+              1218
+            ],
+            "distanceMM": 21.169038790715412,
+            "signedDistanceMM": -21.169038790715412
+          },
+          "positiveXRayIntersections": 1,
+          "insideByOddParity": true
+        }
+      }
+    },
+    "worst3D": {
+      "time": 1.1666666666666667,
+      "vertex": 998,
+      "position": [
+        -0.018132327255734604,
+        0.5313607469005084,
+        -0.0037050867889378697
+      ],
+      "nearest": {
+        "triangle": [
+          4509,
+          4493,
+          4469
+        ],
+        "distanceMM": 135.3957160930087,
+        "signedDistanceMM": -117.07626708781802
+      },
+      "positiveXRayIntersections": 1,
+      "insideByOddParity": true
+    }
+  },
+  "cords": {
+    "minimumGapMM": 2.754881644347856,
+    "penetratingSamples": 0,
+    "samples": 65520,
+    "missing": 0,
+    "worst": {
+      "time": 4.05,
+      "vertex": 7523
+    }
+  },
+  "pelvisRanges": {
+    "x": [
+      0.7621422603520048,
+      0.7621422603520048
+    ],
+    "y": [
+      929.5420619130248,
+      929.5426075619383
+    ],
+    "z": [
+      5.325390163572137,
+      5.325390163572137
+    ]
+  },
+  "forwardLeanDegrees": [
+    -0.8144815875463645,
+    2.933007182933397
+  ],
+  "endpoints": {
+    "maximumPositionDifferenceMM": 0.03364965557425147,
+    "maximumLocalRotationDegrees": 0.03224720319754052
+  },
+  "animationMixerParity": {
+    "maximumVertexErrorMM": 0.000027632597955114862
+  },
+  "method": "Source clip independently loaded with Three.GLTFLoader, 60 Hz sampling with current approved drawstring skinning patch. Directional hand/body and cord/front-chest measurements use actual deformed mesh vertices. Units normalized to 1.83 m character.",
+  "limitations": "Risk diagnostics only, not edited-asset acceptance. Body subset includes waist and upper legs, is open and uncapped, and is not limited to the camera-facing surface. Negative directional gaps and nearest-triangle normal projections are contact-risk diagnostics, not certified closed-volume penetration depths. Ray parity against this open subset does not prove inside/outside status. Missing projections are unmeasured, not positive clearance. Finger/sleeve and arbitrary mesh self intersections require visual or broader geometry review.",
+  "sourceSHA256": "abf0aa454793056dd78d3a5799482c102ee22f86632039e81ebc0d4a9774a4d0",
+  "interpretationClarifiedAt": "2026-10-23T18:04:10.299Z"
+}

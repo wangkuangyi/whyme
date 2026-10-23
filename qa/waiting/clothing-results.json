@@ -1,0 +1,4188 @@
+{
+  "generatedAt": "2026-10-23T18:05:47.890Z",
+  "asset": "public/models/person-authored-animated.glb",
+  "assetSHA256": "dbcc30a95bcc6a96e94708822bf4a960fa93ecbe594aac22b2ef2c0e906ed922",
+  "sourceSHA256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "imageHashes": [
+    {
+      "mimeType": "image/jpeg",
+      "bytes": 3106959,
+      "sha256": "c931d3555581a035ff2445b148f2676d70c5b22a60ec3b99b191c7341ed8c1ec"
+    }
+  ],
+  "moduleSHA256": {
+    "src/motion.js": "b9082c2cda7d8feb5bd7a2a78ae7ebed024ff9544150de68256e5efcc65f4e27",
+    "src/hoodie-skinning.js": "bd19d0e339442ab6fc568c8b4b789aa1b78627fba188b8eb4746fc60962a650a",
+    "src/hoodie-skinning-data.js": "45af6211d6c787f8a532460628b860da5e43eb1aeb7f0f0db549a9da66887cca",
+    "qa/waiting/test-clothing.mjs": "ac4dd6e802a407e677de19b24a7feaa4c8736b801d3d1b69c6bd423abe91c913"
+  },
+  "testedClips": [
+    "Walk",
+    "Nod",
+    "Wait",
+    "Wave"
+  ],
+  "passed": 26,
+  "failed": 8,
+  "checks": [
+    {
+      "name": "source-asset-matches-reviewed-immutable-sha",
+      "passed": true
+    },
+    {
+      "name": "all-original-binary-bytes-are-preserved-as-an-exact-prefix",
+      "passed": true
+    },
+    {
+      "name": "original-mesh-skeleton-materials-images-and-scene-json-are-identical",
+      "passed": true
+    },
+    {
+      "name": "original-embedded-texture-bytes-identical",
+      "passed": true
+    },
+    {
+      "name": "drawstring-and-hand-subsets-cover-real-mesh-vertices",
+      "passed": true
+    },
+    {
+      "name": "runtime-patch-only-changes-the-approved-180-skinning-rows",
+      "passed": true
+    },
+    {
+      "name": "Walk-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "Walk-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "Walk-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "Walk-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Walk-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Nod-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "Nod-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "Nod-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "Nod-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Nod-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Wait-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "Wait-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "Wait-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "Wait-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n305096 !== 0\n"
+    },
+    {
+      "name": "Wait-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\n64730 !== 0\n"
+    },
+    {
+      "name": "Wave-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "Wave-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "Wave-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "Wave-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Wave-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Walk-to-Wait-midperformance-interruption-retains-tested-cord-and-hand-clearance",
+      "passed": false,
+      "error": "{\"time\":0.7,\"vertex\":6660}\n\n4921 !== 0\n"
+    },
+    {
+      "name": "Nod-to-Wait-midperformance-interruption-retains-tested-cord-and-hand-clearance",
+      "passed": false,
+      "error": "{\"time\":0.7,\"vertex\":6660}\n\n4943 !== 0\n"
+    },
+    {
+      "name": "Wait-to-Walk-midperformance-interruption-retains-tested-cord-and-hand-clearance",
+      "passed": false,
+      "error": "{\"time\":0.1,\"vertex\":6635}\n\n1592 !== 0\n"
+    },
+    {
+      "name": "Wait-to-Nod-midperformance-interruption-retains-tested-cord-and-hand-clearance",
+      "passed": false,
+      "error": "{\"time\":0.11666666666666667,\"vertex\":6660}\n\n2182 !== 0\n"
+    },
+    {
+      "name": "Wait-to-Wave-midperformance-interruption-retains-tested-cord-and-hand-clearance",
+      "passed": false,
+      "error": "{\"time\":0.11666666666666667,\"vertex\":6660}\n\n2247 !== 0\n"
+    },
+    {
+      "name": "Wave-to-Wait-midperformance-interruption-retains-tested-cord-and-hand-clearance",
+      "passed": false,
+      "error": "{\"time\":0.7,\"vertex\":6660}\n\n4893 !== 0\n"
+    },
+    {
+      "name": "source-and-static-and-historical-report-sha256-are-unchanged",
+      "passed": true
+    },
+    {
+      "name": "authored-asset-remained-unchanged-during-the-test",
+      "passed": true
+    }
+  ],
+  "method": "Actual Three.GLTFLoader skeleton/geometry/animation; only headless texture decoding is replaced. Runtime entry/action/authored return followed by more than two full real Idle loops at 60 Hz. All 180 patched cord vertices use deformed front-chest triangle depth at every frame. All dominant LeftHand/RightHand and finger mesh vertices use actual waist/upper-leg side silhouette depth: Wait at 60 Hz, unchanged performances at 30 Hz. Six actual midperformance transitions involving Wait are separately sampled at 60 Hz for their first second. The worst sample per hand/station is separately replayed and measured with true 3D point-to-triangle distance, outward-normal signed distance, and deduplicated ray parity. No posture correction or synthetic breathing is imported or applied.",
+  "coverage": {
+    "heightMetres": 1.83,
+    "sourceHeight": 0.9995117485523206,
+    "cordVertices": 180,
+    "chestTriangles": 656,
+    "rightHandVertices": 851,
+    "leftHandVertices": 835,
+    "bodySideTriangles": 1130
+  },
+  "limits": "The waist/upper-leg bodySide triangle subset is an uncapped, open surface selected from rest-position height and skin weights; it is not a closed solid or a camera-facing-only surface. minimumGapMM and penetratingSamples mean directional side-depth gaps and the count below -0.1 mm, not certified penetration depth or collision count. nearest.signedDistanceMM is the point-to-nearest-tested-triangle vector projected on that triangle normal; it may concern a near or far side surface and is not a closed-volume penetration depth. insideByOddParity records parity of one +X ray against that same open subset, not a proof that the point lies inside a closed body. Six interruption assertions include Wait poses that already have the retained source hand/hip contact, so their negative-gap failures do not independently demonstrate six new transition defects. Side misses are unmeasured, not positive clearance. Finger/sleeve and other body regions are outside coverage. Visible hand silhouette, contact and cloth appearance require the selected left-front camera and actual browser review.",
+  "runtime": [
+    {
+      "name": "Walk",
+      "station": 1,
+      "seconds": 14.500000476837158,
+      "frames": 872,
+      "cords": {
+        "minimumGapMM": 2.894341445279545,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 156960,
+        "worst": {
+          "time": 6.216666666666667,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": 3.7974970885695223,
+        "penetratingSamples": 0,
+        "missing": 29209,
+        "samples": 341827,
+        "worst": {
+          "time": 0.26666666666666666,
+          "vertex": 1020
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": 59.74479228943791,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.26666666666666666,
+              "vertex": 773
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": 73.75799915072521,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.23333333333333334,
+              "vertex": 738
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": 29.290241181950304,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.26666666666666666,
+              "vertex": 485
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": 13.668237761896016,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.26666666666666666,
+              "vertex": 949
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": 45.29142626086367,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.26666666666666666,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": 3.7974970885695223,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.26666666666666666,
+              "vertex": 1020
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": 11.55215268824788,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.26666666666666666,
+              "vertex": 1041
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": 43.996516563961094,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.23333333333333334,
+              "vertex": 641
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": 57.54293445752716,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.23333333333333334,
+              "vertex": 651
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": 23.32551015330872,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.23333333333333334,
+              "vertex": 1063
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": 38.43184136352499,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.2,
+              "vertex": 1099
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": 49.10610853622992,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 1171
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": 16.829247794603674,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.26666666666666666,
+              "vertex": 1159
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": 84.05603862658229,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.16666666666666666,
+              "vertex": 4195
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": 71.55106123704824,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.16666666666666666,
+              "vertex": 4212
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": 52.01062996644843,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.13333333333333333,
+              "vertex": 4121
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": 7.503634860284792,
+        "penetratingSamples": 0,
+        "missing": 19470,
+        "samples": 344590,
+        "worst": {
+          "time": 0.8333333333333334,
+          "vertex": 6644
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 23.630654412591966,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2,
+              "vertex": 6596
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": 7.503634860284792,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8333333333333334,
+              "vertex": 6644
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": 11.60859498920661,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8666666666666667,
+              "vertex": 6688
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 39.13356321199502,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2,
+              "vertex": 6702
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": 54.3997101570185,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 12.6,
+              "vertex": 6755
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": 17.10630048749129,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8666666666666667,
+              "vertex": 6817
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 52.467933014361755,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2,
+              "vertex": 6839
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 43.4172439890717,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8333333333333334,
+              "vertex": 6897
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": 47.58687356594921,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8666666666666667,
+              "vertex": 6926
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 53.33226489729028,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": 73.06071859613256,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1666666666666665,
+              "vertex": 7018
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 68.27039203708475,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 88.51985227641808,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 67.75880818718757,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 8.066666666666666,
+              "vertex": 10104
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 84.42619889434235,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 12.833333333333334,
+              "vertex": 10162
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 98.08717862157815,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 12.866666666666667,
+              "vertex": 10194
+            }
+          }
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 245.77612685075576,
+        "maximum": 381.9813351329865
+      },
+      "idle": {
+        "frames": 607,
+        "firstTime": 4.416666666666667,
+        "lastTime": 14.516666666666667,
+        "cords": {
+          "minimumGapMM": 2.894341445279545,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109260,
+          "worst": {
+            "time": 6.216666666666667,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.817621284989833,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 257853,
+          "worst": {
+            "time": 6.7,
+            "vertex": 1038
+          },
+          "byJoint": {
+            "RightHandMiddle1": {
+              "minimumGapMM": 75.74184042247491,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 10.033333333333333,
+                "vertex": 783
+              }
+            },
+            "RightHandRing1": {
+              "minimumGapMM": 79.82329267641283,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 754
+              }
+            },
+            "RightHandIndex2": {
+              "minimumGapMM": 62.446243783412285,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 639
+              }
+            },
+            "RightHandIndex3": {
+              "minimumGapMM": 44.930481657797635,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 977
+              }
+            },
+            "RightHandIndex1": {
+              "minimumGapMM": 65.15430904878873,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14,
+                "vertex": 791
+              }
+            },
+            "RightHandThumb3": {
+              "minimumGapMM": 27.817621284989833,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 1038
+              }
+            },
+            "RightHandThumb2": {
+              "minimumGapMM": 29.438161966572103,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 7.633333333333334,
+                "vertex": 1043
+              }
+            },
+            "RightHandMiddle2": {
+              "minimumGapMM": 57.563682783119134,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14,
+                "vertex": 643
+              }
+            },
+            "RightHandRing2": {
+              "minimumGapMM": 63.280651083698466,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 651
+              }
+            },
+            "RightHandMiddle3": {
+              "minimumGapMM": 38.27947556214119,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.966666666666667,
+                "vertex": 1082
+              }
+            },
+            "RightHandRing3": {
+              "minimumGapMM": 45.225588037334724,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 1092
+              }
+            },
+            "RightHand": {
+              "minimumGapMM": 49.106114393595675,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 1171
+              }
+            },
+            "RightHandThumb1": {
+              "minimumGapMM": 28.29994521410192,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.066666666666666,
+                "vertex": 1163
+              }
+            },
+            "RightHandPinky1": {
+              "minimumGapMM": 86.10619343748756,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 4206
+              }
+            },
+            "RightHandPinky2": {
+              "minimumGapMM": 73.649709184629,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 4212
+              }
+            },
+            "RightHandPinky3": {
+              "minimumGapMM": 53.3184345280978,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 4121
+              }
+            }
+          }
+        },
+        "durationSeconds": 10.100000000000001
+      },
+      "rightHandWorst3D": {
+        "time": 0.26666666666666666,
+        "vertex": 1020,
+        "position": [
+          -0.10625548610356021,
+          0.39865844335561673,
+          0.030496668610251045
+        ],
+        "nearest": {
+          "triangle": [
+            1114,
+            4403,
+            4402
+          ],
+          "distanceMM": 3.65116418669336,
+          "signedDistanceMM": 3.65116418669336
+        },
+        "positiveXRayIntersections": 2,
+        "insideByOddParity": false
+      },
+      "leftHandWorst3D": {
+        "time": 0.8333333333333334,
+        "vertex": 6644,
+        "position": [
+          0.11137573997360932,
+          0.4076704042464055,
+          0.03159971053423234
+        ],
+        "nearest": {
+          "triangle": [
+            10041,
+            6696,
+            10040
+          ],
+          "distanceMM": 7.219776252253268,
+          "signedDistanceMM": 6.899361221278914
+        },
+        "positiveXRayIntersections": 0,
+        "insideByOddParity": false
+      }
+    },
+    {
+      "name": "Nod",
+      "station": 2,
+      "seconds": 14.250000476837158,
+      "frames": 857,
+      "cords": {
+        "minimumGapMM": 2.8896056726742936,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 154260,
+        "worst": {
+          "time": 3.5,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": 25.797554589235205,
+        "penetratingSamples": 0,
+        "missing": 70323,
+        "samples": 294756,
+        "worst": {
+          "time": 3.6,
+          "vertex": 1161
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": 75.74184042247491,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 10.033333333333333,
+              "vertex": 783
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": 79.8232884785387,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 754
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": 62.446243783412285,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 6.7,
+              "vertex": 639
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": 44.930481657797635,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 6.7,
+              "vertex": 977
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": 63.05106437031612,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.6,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": 27.817621284989833,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 6.7,
+              "vertex": 1038
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": 29.438161966572103,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 7.633333333333334,
+              "vertex": 1043
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": 57.563682783119134,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 14,
+              "vertex": 643
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": 63.28064780095742,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 651
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": 38.27947556214119,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 9.966666666666667,
+              "vertex": 1082
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": 45.2255842194526,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 1092
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": 49.10610853622992,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 1171
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": 25.797554589235205,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.6,
+              "vertex": 1161
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": 86.10618624080415,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 4206
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": 73.64970279978164,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 4212
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": 53.318428519038285,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 4121
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": 23.10752392552548,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 358215,
+        "worst": {
+          "time": 3.066666666666667,
+          "vertex": 6650
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 39.51634419988542,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.066666666666667,
+              "vertex": 6616
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": 23.10752392552548,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.066666666666667,
+              "vertex": 6650
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": 26.43657131278925,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1,
+              "vertex": 6690
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 39.54385019242626,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1,
+              "vertex": 6725
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": 48.393386408970244,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1,
+              "vertex": 6755
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": 30.595930457102916,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2333333333333334,
+              "vertex": 6826
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 56.362241876023106,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2333333333333334,
+              "vertex": 6839
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 63.58118051349101,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.033333333333333,
+              "vertex": 6893
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": 63.763996827962174,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1,
+              "vertex": 7097
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 58.014394707590505,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1333333333333333,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": 68.880974462263,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1,
+              "vertex": 7027
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 74.3582811406155,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1333333333333333,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 84.76148469224044,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.1,
+              "vertex": 7162
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 61.211696179590646,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2666666666666666,
+              "vertex": 10104
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 78.68906523232141,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2,
+              "vertex": 10162
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 91.98267914837666,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 3.2333333333333334,
+              "vertex": 10194
+            }
+          }
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 169.6587098460136,
+        "maximum": 397.5329727645263
+      },
+      "idle": {
+        "frames": 607,
+        "firstTime": 4.166666666666667,
+        "lastTime": 14.266666666666667,
+        "cords": {
+          "minimumGapMM": 2.894341445279545,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109260,
+          "worst": {
+            "time": 6.216666666666667,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.817621284989833,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 258704,
+          "worst": {
+            "time": 6.7,
+            "vertex": 1038
+          },
+          "byJoint": {
+            "RightHandMiddle1": {
+              "minimumGapMM": 75.74184042247491,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 10.033333333333333,
+                "vertex": 783
+              }
+            },
+            "RightHandRing1": {
+              "minimumGapMM": 79.82329281502187,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.6,
+                "vertex": 754
+              }
+            },
+            "RightHandIndex2": {
+              "minimumGapMM": 62.446243783412285,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 639
+              }
+            },
+            "RightHandIndex3": {
+              "minimumGapMM": 44.930481657797635,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 977
+              }
+            },
+            "RightHandIndex1": {
+              "minimumGapMM": 65.15430904878873,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14,
+                "vertex": 791
+              }
+            },
+            "RightHandThumb3": {
+              "minimumGapMM": 27.817621284989833,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 1038
+              }
+            },
+            "RightHandThumb2": {
+              "minimumGapMM": 29.438161966572103,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 7.633333333333334,
+                "vertex": 1043
+              }
+            },
+            "RightHandMiddle2": {
+              "minimumGapMM": 57.563682783119134,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14,
+                "vertex": 643
+              }
+            },
+            "RightHandRing2": {
+              "minimumGapMM": 63.280651222400806,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.6,
+                "vertex": 651
+              }
+            },
+            "RightHandMiddle3": {
+              "minimumGapMM": 38.27947556214119,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.966666666666667,
+                "vertex": 1082
+              }
+            },
+            "RightHandRing3": {
+              "minimumGapMM": 45.225588179590865,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.6,
+                "vertex": 1092
+              }
+            },
+            "RightHand": {
+              "minimumGapMM": 49.10611450631728,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.6,
+                "vertex": 1171
+              }
+            },
+            "RightHandThumb1": {
+              "minimumGapMM": 28.29994521410192,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.066666666666666,
+                "vertex": 1163
+              }
+            },
+            "RightHandPinky1": {
+              "minimumGapMM": 86.10619357753541,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.6,
+                "vertex": 4206
+              }
+            },
+            "RightHandPinky2": {
+              "minimumGapMM": 73.64970933150683,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.6,
+                "vertex": 4212
+              }
+            },
+            "RightHandPinky3": {
+              "minimumGapMM": 53.318434675338146,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.6,
+                "vertex": 4121
+              }
+            }
+          }
+        },
+        "durationSeconds": 10.100000000000001
+      },
+      "rightHandWorst3D": {
+        "time": 3.6,
+        "vertex": 1161,
+        "position": [
+          -0.11564976719838553,
+          0.43065004233478066,
+          -0.0005658697503329505
+        ],
+        "nearest": {
+          "triangle": [
+            1132,
+            4408,
+            4407
+          ],
+          "distanceMM": 25.388145255403533,
+          "signedDistanceMM": 25.366366097487553
+        },
+        "positiveXRayIntersections": 2,
+        "insideByOddParity": false
+      },
+      "leftHandWorst3D": {
+        "time": 3.066666666666667,
+        "vertex": 6650,
+        "position": [
+          0.11309262254250792,
+          0.4083434805777691,
+          0.027304088203322537
+        ],
+        "nearest": {
+          "triangle": [
+            10047,
+            6769,
+            6697
+          ],
+          "distanceMM": 22.659032342508976,
+          "signedDistanceMM": 22.659032342508972
+        },
+        "positiveXRayIntersections": 0,
+        "insideByOddParity": false
+      }
+    },
+    {
+      "name": "Wait",
+      "station": 3,
+      "seconds": 18.100000381469727,
+      "frames": 1088,
+      "cords": {
+        "minimumGapMM": 2.75488213802383,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 195840,
+        "worst": {
+          "time": 5.05,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": -146.5268642369295,
+        "penetratingSamples": 305096,
+        "missing": 1,
+        "samples": 925887,
+        "worst": {
+          "time": 2.1666666666666665,
+          "vertex": 998
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": -75.83717971204435,
+            "negativeSamples": 28194,
+            "worst": {
+              "time": 2.25,
+              "vertex": 692
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": -53.364240961396234,
+            "negativeSamples": 26773,
+            "worst": {
+              "time": 2.1666666666666665,
+              "vertex": 598
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": -108.93131633838205,
+            "negativeSamples": 11656,
+            "worst": {
+              "time": 2.05,
+              "vertex": 483
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": -112.57622351361688,
+            "negativeSamples": 18299,
+            "worst": {
+              "time": 2.216666666666667,
+              "vertex": 943
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": -97.62514587724765,
+            "negativeSamples": 32604,
+            "worst": {
+              "time": 2.05,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": -146.5268642369295,
+            "negativeSamples": 34112,
+            "worst": {
+              "time": 2.1666666666666665,
+              "vertex": 998
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": -117.81976928003533,
+            "negativeSamples": 21791,
+            "worst": {
+              "time": 2.1666666666666665,
+              "vertex": 1120
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": -87.52592332236938,
+            "negativeSamples": 11818,
+            "worst": {
+              "time": 2.1666666666666665,
+              "vertex": 637
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": -67.32990469067279,
+            "negativeSamples": 12758,
+            "worst": {
+              "time": 2.1666666666666665,
+              "vertex": 646
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": -93.82498799115787,
+            "negativeSamples": 17593,
+            "worst": {
+              "time": 2.25,
+              "vertex": 1046
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": -71.12554641890061,
+            "negativeSamples": 18197,
+            "worst": {
+              "time": 2.25,
+              "vertex": 668
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": -65.08862108588119,
+            "negativeSamples": 11865,
+            "worst": {
+              "time": 2.1333333333333333,
+              "vertex": 861
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": -82.47894763114085,
+            "negativeSamples": 18234,
+            "worst": {
+              "time": 2.25,
+              "vertex": 862
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": -31.302045067620664,
+            "negativeSamples": 15670,
+            "worst": {
+              "time": 2.25,
+              "vertex": 4161
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": -33.99782078466739,
+            "negativeSamples": 9890,
+            "worst": {
+              "time": 2.35,
+              "vertex": 4166
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": -32.10732994063883,
+            "negativeSamples": 15642,
+            "worst": {
+              "time": 1.9166666666666667,
+              "vertex": 4108
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": -76.28741752577777,
+        "penetratingSamples": 64730,
+        "missing": 644,
+        "samples": 907836,
+        "worst": {
+          "time": 0.7,
+          "vertex": 6660
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 8.043113135203143,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 5.25,
+              "vertex": 6611
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": -76.28741752577777,
+            "negativeSamples": 31496,
+            "worst": {
+              "time": 0.7,
+              "vertex": 6660
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": -41.10643980634869,
+            "negativeSamples": 18366,
+            "worst": {
+              "time": 7.283333333333333,
+              "vertex": 6912
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 9.878593094385277,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 5.366666666666666,
+              "vertex": 6728
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": -18.43452590562973,
+            "negativeSamples": 11544,
+            "worst": {
+              "time": 1.4166666666666667,
+              "vertex": 6743
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": -14.590992349238274,
+            "negativeSamples": 898,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6828
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 11.504319113671485,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1.4166666666666667,
+              "vertex": 7183
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 19.62620901513349,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 5.333333333333333,
+              "vertex": 6897
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": -8.59301566224135,
+            "negativeSamples": 600,
+            "worst": {
+              "time": 7.25,
+              "vertex": 6935
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 6.74661334738161,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 5.333333333333333,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": -8.631597400942253,
+            "negativeSamples": 958,
+            "worst": {
+              "time": 5.366666666666666,
+              "vertex": 7017
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 12.59272684889945,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 5.833333333333333,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 9.83923184316781,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 5.833333333333333,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": -6.055158084057709,
+            "negativeSamples": 868,
+            "worst": {
+              "time": 1.4166666666666667,
+              "vertex": 10113
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 16.265395920354365,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1.4166666666666667,
+              "vertex": 10164
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 24.872068028736933,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1.4166666666666667,
+              "vertex": 10194
+            }
+          }
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 181.42207645025798,
+        "maximum": 276.10235237894045
+      },
+      "idle": {
+        "frames": 607,
+        "firstTime": 8.016666666666667,
+        "lastTime": 18.116666666666667,
+        "cords": {
+          "minimumGapMM": 2.894341445840672,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109260,
+          "worst": {
+            "time": 8.183333333333334,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.817622592063152,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 516557,
+          "worst": {
+            "time": 11.5,
+            "vertex": 1038
+          },
+          "byJoint": {
+            "RightHandMiddle1": {
+              "minimumGapMM": 75.67061984039766,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.183333333333334,
+                "vertex": 783
+              }
+            },
+            "RightHandRing1": {
+              "minimumGapMM": 79.8111805052645,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.583333333333334,
+                "vertex": 754
+              }
+            },
+            "RightHandIndex2": {
+              "minimumGapMM": 62.446244813869555,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 11.5,
+                "vertex": 639
+              }
+            },
+            "RightHandIndex3": {
+              "minimumGapMM": 44.93048272888895,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 11.5,
+                "vertex": 977
+              }
+            },
+            "RightHandIndex1": {
+              "minimumGapMM": 65.0560027718365,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.183333333333334,
+                "vertex": 791
+              }
+            },
+            "RightHandThumb3": {
+              "minimumGapMM": 27.817622592063152,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 11.5,
+                "vertex": 1038
+              }
+            },
+            "RightHandThumb2": {
+              "minimumGapMM": 29.43816253618441,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 12.433333333333334,
+                "vertex": 1043
+              }
+            },
+            "RightHandMiddle2": {
+              "minimumGapMM": 57.482287926494585,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.183333333333334,
+                "vertex": 643
+              }
+            },
+            "RightHandRing2": {
+              "minimumGapMM": 63.268530475160745,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.583333333333334,
+                "vertex": 651
+              }
+            },
+            "RightHandMiddle3": {
+              "minimumGapMM": 38.11174754823068,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.25,
+                "vertex": 1082
+              }
+            },
+            "RightHandRing3": {
+              "minimumGapMM": 45.213156620784524,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.583333333333334,
+                "vertex": 1092
+              }
+            },
+            "RightHand": {
+              "minimumGapMM": 49.096265422974874,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.583333333333334,
+                "vertex": 1171
+              }
+            },
+            "RightHandThumb1": {
+              "minimumGapMM": 28.17631074675589,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.25,
+                "vertex": 1163
+              }
+            },
+            "RightHandPinky1": {
+              "minimumGapMM": 86.0939559261713,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.583333333333334,
+                "vertex": 4206
+              }
+            },
+            "RightHandPinky2": {
+              "minimumGapMM": 73.63687497479337,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.583333333333334,
+                "vertex": 4212
+              }
+            },
+            "RightHandPinky3": {
+              "minimumGapMM": 53.3055679777468,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 9.583333333333334,
+                "vertex": 4121
+              }
+            }
+          }
+        },
+        "durationSeconds": 10.1
+      },
+      "rightHandWorst3D": {
+        "time": 2.1666666666666665,
+        "vertex": 998,
+        "position": [
+          -0.018132351600983785,
+          0.5313609113571469,
+          -0.0037051197583329917
+        ],
+        "nearest": {
+          "triangle": [
+            4509,
+            4493,
+            4469
+          ],
+          "distanceMM": 135.39578070087558,
+          "signedDistanceMM": -117.07651491221044
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      },
+      "leftHandWorst3D": {
+        "time": 0.7,
+        "vertex": 6660,
+        "position": [
+          0.06124004170824338,
+          0.501325332603458,
+          0.007206395102587675
+        ],
+        "nearest": {
+          "triangle": [
+            7403,
+            7408,
+            7420
+          ],
+          "distanceMM": 66.92615797259505,
+          "signedDistanceMM": -66.87096776164411
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      }
+    },
+    {
+      "name": "Wave",
+      "station": 4,
+      "seconds": 15.300000190734863,
+      "frames": 920,
+      "cords": {
+        "minimumGapMM": 2.8943414452794944,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 165600,
+        "worst": {
+          "time": 6.216666666666667,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": 15.93836586797168,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 391460,
+        "worst": {
+          "time": 2,
+          "vertex": 1038
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": 63.32396474347601,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2,
+              "vertex": 773
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": 72.45691412212683,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.1333333333333333,
+              "vertex": 754
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": 50.323368319247884,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1.9666666666666666,
+              "vertex": 639
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": 32.29471567932591,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2,
+              "vertex": 977
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": 54.879644780714955,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.2,
+              "vertex": 791
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": 15.93836586797168,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2,
+              "vertex": 1038
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": 16.93483312851902,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2,
+              "vertex": 1043
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": 46.27797989452101,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.1333333333333333,
+              "vertex": 641
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": 56.525827689479144,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.066666666666667,
+              "vertex": 657
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": 28.115561250762006,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.1333333333333333,
+              "vertex": 1075
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": 35.91754756194202,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.066666666666667,
+              "vertex": 1099
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": 43.17036796724097,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.2,
+              "vertex": 1171
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": 18.359472304778006,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.2333333333333334,
+              "vertex": 1159
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": 78.2276977354618,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.2333333333333334,
+              "vertex": 4195
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": 65.21891085100427,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.1,
+              "vertex": 4212
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": 48.06919999054914,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 2.2333333333333334,
+              "vertex": 4108
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": 5.7196539618526945,
+        "penetratingSamples": 0,
+        "missing": 54619,
+        "samples": 329481,
+        "worst": {
+          "time": 4.066666666666666,
+          "vertex": 6646
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 16.843334884898017,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 6616
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": 5.7196539618526945,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 6646
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": 11.236543315062642,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 6688
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 14.179030989585904,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 6710
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": 33.47253782946637,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.033333333333333,
+              "vertex": 6743
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": 17.08625584955167,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 6826
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 47.32522444635686,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.033333333333333,
+              "vertex": 6839
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 41.442946171280596,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 6893
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": 47.99973466888169,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 7097
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 35.74598213127402,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 6975
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": 50.76380704195782,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.033333333333333,
+              "vertex": 7018
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 54.693896671233595,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.066666666666666,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 68.01944930321383,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.033333333333333,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 54.0537704890981,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4,
+              "vertex": 10104
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 71.39905728493481,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.033333333333333,
+              "vertex": 10162
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 84.02709329765148,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 4.033333333333333,
+              "vertex": 10177
+            }
+          }
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 252.01534430894225,
+        "maximum": 277.0455120353015
+      },
+      "idle": {
+        "frames": 608,
+        "firstTime": 5.2,
+        "lastTime": 15.316666666666666,
+        "cords": {
+          "minimumGapMM": 2.8943414452794944,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109440,
+          "worst": {
+            "time": 6.216666666666667,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.81762128498958,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 258704,
+          "worst": {
+            "time": 6.7,
+            "vertex": 1038
+          },
+          "byJoint": {
+            "RightHandMiddle1": {
+              "minimumGapMM": 75.74183962764964,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.833333333333334,
+                "vertex": 783
+              }
+            },
+            "RightHandRing1": {
+              "minimumGapMM": 79.82329267641309,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 754
+              }
+            },
+            "RightHandIndex2": {
+              "minimumGapMM": 62.446243783412136,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 639
+              }
+            },
+            "RightHandIndex3": {
+              "minimumGapMM": 44.930481657797586,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 977
+              }
+            },
+            "RightHandIndex1": {
+              "minimumGapMM": 65.15430904878883,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14,
+                "vertex": 791
+              }
+            },
+            "RightHandThumb3": {
+              "minimumGapMM": 27.81762128498958,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 6.7,
+                "vertex": 1038
+              }
+            },
+            "RightHandThumb2": {
+              "minimumGapMM": 29.43816196657205,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 7.633333333333334,
+                "vertex": 1043
+              }
+            },
+            "RightHandMiddle2": {
+              "minimumGapMM": 57.563682783119184,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14,
+                "vertex": 643
+              }
+            },
+            "RightHandRing2": {
+              "minimumGapMM": 63.28065108369869,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 651
+              }
+            },
+            "RightHandMiddle3": {
+              "minimumGapMM": 38.279473659468195,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.766666666666667,
+                "vertex": 1082
+              }
+            },
+            "RightHandRing3": {
+              "minimumGapMM": 45.22558803733508,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 1092
+              }
+            },
+            "RightHand": {
+              "minimumGapMM": 49.10611439359585,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 1171
+              }
+            },
+            "RightHandThumb1": {
+              "minimumGapMM": 28.299945214101818,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.066666666666666,
+                "vertex": 1163
+              }
+            },
+            "RightHandPinky1": {
+              "minimumGapMM": 86.10619343748785,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 4206
+              }
+            },
+            "RightHandPinky2": {
+              "minimumGapMM": 73.64970918462922,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 4212
+              }
+            },
+            "RightHandPinky3": {
+              "minimumGapMM": 53.318434528098,
+              "negativeSamples": 0,
+              "worst": {
+                "time": 14.4,
+                "vertex": 4121
+              }
+            }
+          }
+        },
+        "durationSeconds": 10.116666666666667
+      },
+      "rightHandWorst3D": {
+        "time": 2,
+        "vertex": 1038,
+        "position": [
+          -0.10758889751012314,
+          0.41283603123130896,
+          0.028889421125554277
+        ],
+        "nearest": {
+          "triangle": [
+            1143,
+            1133,
+            1117
+          ],
+          "distanceMM": 13.904853433523156,
+          "signedDistanceMM": 12.895108171384406
+        },
+        "positiveXRayIntersections": 2,
+        "insideByOddParity": false
+      },
+      "leftHandWorst3D": {
+        "time": 4.066666666666666,
+        "vertex": 6646,
+        "position": [
+          0.10526138337709609,
+          0.4044227506007876,
+          0.017673456109715085
+        ],
+        "nearest": {
+          "triangle": [
+            10047,
+            6697,
+            10041
+          ],
+          "distanceMM": 5.5475226949259016,
+          "signedDistanceMM": 5.547522694925902
+        },
+        "positiveXRayIntersections": 0,
+        "insideByOddParity": false
+      }
+    }
+  ],
+  "interruptions": [
+    {
+      "from": "Walk",
+      "to": "Wait",
+      "interruptedFraction": 0.6,
+      "frames": 61,
+      "cords": {
+        "minimumGapMM": 2.757013258905237,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 10980,
+        "worst": {
+          "time": 1,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": -139.16489701785417,
+        "penetratingSamples": 16384,
+        "missing": 1,
+        "samples": 51910,
+        "worst": {
+          "time": 1,
+          "vertex": 998
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": -68.01208296370086,
+            "negativeSamples": 1347,
+            "worst": {
+              "time": 1,
+              "vertex": 692
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": -45.611236442004845,
+            "negativeSamples": 993,
+            "worst": {
+              "time": 1,
+              "vertex": 598
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": -101.32808066096759,
+            "negativeSamples": 621,
+            "worst": {
+              "time": 1,
+              "vertex": 483
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": -104.73411969222124,
+            "negativeSamples": 1071,
+            "worst": {
+              "time": 1,
+              "vertex": 943
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": -90.25372822642728,
+            "negativeSamples": 1936,
+            "worst": {
+              "time": 1,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": -139.16489701785417,
+            "negativeSamples": 3138,
+            "worst": {
+              "time": 1,
+              "vertex": 998
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": -110.19273776939454,
+            "negativeSamples": 1782,
+            "worst": {
+              "time": 1,
+              "vertex": 1120
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": -79.77237758558228,
+            "negativeSamples": 522,
+            "worst": {
+              "time": 1,
+              "vertex": 637
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": -59.37746432876869,
+            "negativeSamples": 452,
+            "worst": {
+              "time": 1,
+              "vertex": 646
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": -85.66752870853914,
+            "negativeSamples": 895,
+            "worst": {
+              "time": 1,
+              "vertex": 1046
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": -62.736901832583605,
+            "negativeSamples": 837,
+            "worst": {
+              "time": 1,
+              "vertex": 668
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": -57.37733601548131,
+            "negativeSamples": 499,
+            "worst": {
+              "time": 1,
+              "vertex": 861
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": -74.23655776879363,
+            "negativeSamples": 1219,
+            "worst": {
+              "time": 1,
+              "vertex": 862
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": -23.088280712015465,
+            "negativeSamples": 295,
+            "worst": {
+              "time": 1,
+              "vertex": 4161
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": -23.484002983799208,
+            "negativeSamples": 244,
+            "worst": {
+              "time": 1,
+              "vertex": 4082
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": -24.11817866145079,
+            "negativeSamples": 533,
+            "worst": {
+              "time": 1,
+              "vertex": 4108
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": -76.28741752577777,
+        "penetratingSamples": 4921,
+        "missing": 4255,
+        "samples": 46680,
+        "worst": {
+          "time": 0.7,
+          "vertex": 6660
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 11.835889132490196,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7833333333333333,
+              "vertex": 6611
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": -76.28741752577777,
+            "negativeSamples": 2564,
+            "worst": {
+              "time": 0.7,
+              "vertex": 6660
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": -41.06548007698823,
+            "negativeSamples": 1586,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6912
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 14.24778898202305,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 6728
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": -9.926000039686398,
+            "negativeSamples": 557,
+            "worst": {
+              "time": 1,
+              "vertex": 6999
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": -14.590992349238274,
+            "negativeSamples": 153,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6828
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 17.206203291021538,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.9833333333333333,
+              "vertex": 7183
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 21.899963908778133,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6897
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": -8.431313652663304,
+            "negativeSamples": 61,
+            "worst": {
+              "time": 0.75,
+              "vertex": 6935
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 13.429727197584265,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": 0.5017775018706698,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 7017
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 21.911869376628633,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.85,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 18.331051159817665,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 3.7052078430291013,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7833333333333333,
+              "vertex": 10113
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 25.913207552348183,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8,
+              "vertex": 10162
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 34.346597284366254,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 10172
+            }
+          }
+        }
+      },
+      "rightHandWorst3D": {
+        "time": 1,
+        "vertex": 998,
+        "position": [
+          -0.02240653740083583,
+          0.530644866320494,
+          -0.004309241728637819
+        ],
+        "nearest": {
+          "triangle": [
+            4448,
+            4455,
+            4465
+          ],
+          "distanceMM": 128.95233389287463,
+          "signedDistanceMM": -102.29235415110632
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      },
+      "leftHandWorst3D": {
+        "time": 0.7,
+        "vertex": 6660,
+        "position": [
+          0.06124004170824338,
+          0.501325332603458,
+          0.007206395102587675
+        ],
+        "nearest": {
+          "triangle": [
+            7403,
+            7408,
+            7420
+          ],
+          "distanceMM": 66.92615797259505,
+          "signedDistanceMM": -66.87096776164411
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      }
+    },
+    {
+      "from": "Nod",
+      "to": "Wait",
+      "interruptedFraction": 0.6,
+      "frames": 61,
+      "cords": {
+        "minimumGapMM": 2.757013258905237,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 10980,
+        "worst": {
+          "time": 1,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": -139.16489701785417,
+        "penetratingSamples": 15933,
+        "missing": 19007,
+        "samples": 32904,
+        "worst": {
+          "time": 1,
+          "vertex": 998
+        },
+        "byJoint": {
+          "RightHand": {
+            "minimumGapMM": -57.37733601548131,
+            "negativeSamples": 499,
+            "worst": {
+              "time": 1,
+              "vertex": 861
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": -74.23655776879363,
+            "negativeSamples": 1213,
+            "worst": {
+              "time": 1,
+              "vertex": 862
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": -23.088280712015465,
+            "negativeSamples": 295,
+            "worst": {
+              "time": 1,
+              "vertex": 4161
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": -45.611236442004845,
+            "negativeSamples": 993,
+            "worst": {
+              "time": 1,
+              "vertex": 598
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": -110.19273776939454,
+            "negativeSamples": 1715,
+            "worst": {
+              "time": 1,
+              "vertex": 1120
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": -23.484002983799208,
+            "negativeSamples": 244,
+            "worst": {
+              "time": 1,
+              "vertex": 4082
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": -24.11817866145079,
+            "negativeSamples": 533,
+            "worst": {
+              "time": 1,
+              "vertex": 4108
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": -90.25372822642728,
+            "negativeSamples": 1936,
+            "worst": {
+              "time": 1,
+              "vertex": 556
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": -59.37746432876869,
+            "negativeSamples": 452,
+            "worst": {
+              "time": 1,
+              "vertex": 646
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": -62.736901832583605,
+            "negativeSamples": 837,
+            "worst": {
+              "time": 1,
+              "vertex": 668
+            }
+          },
+          "RightHandMiddle1": {
+            "minimumGapMM": -68.01208296370086,
+            "negativeSamples": 1347,
+            "worst": {
+              "time": 1,
+              "vertex": 692
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": -139.16489701785417,
+            "negativeSamples": 2760,
+            "worst": {
+              "time": 1,
+              "vertex": 998
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": -79.77237758558228,
+            "negativeSamples": 522,
+            "worst": {
+              "time": 1,
+              "vertex": 637
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": -85.66752870853914,
+            "negativeSamples": 895,
+            "worst": {
+              "time": 1,
+              "vertex": 1046
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": -101.32808066096759,
+            "negativeSamples": 621,
+            "worst": {
+              "time": 1,
+              "vertex": 483
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": -104.73411969222124,
+            "negativeSamples": 1071,
+            "worst": {
+              "time": 1,
+              "vertex": 943
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": -76.28741752577777,
+        "penetratingSamples": 4943,
+        "missing": 283,
+        "samples": 50652,
+        "worst": {
+          "time": 0.7,
+          "vertex": 6660
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 11.835889132490196,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7833333333333333,
+              "vertex": 6611
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": -76.28741752577777,
+            "negativeSamples": 2586,
+            "worst": {
+              "time": 0.7,
+              "vertex": 6660
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": -41.06548007698823,
+            "negativeSamples": 1586,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6912
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 14.24778898202305,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 6728
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": -9.926000039686398,
+            "negativeSamples": 557,
+            "worst": {
+              "time": 1,
+              "vertex": 6999
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": -14.590992349238274,
+            "negativeSamples": 153,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6828
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 17.206203291021538,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.9833333333333333,
+              "vertex": 7183
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 21.899963908778133,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6897
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": -8.431313652663304,
+            "negativeSamples": 61,
+            "worst": {
+              "time": 0.75,
+              "vertex": 6935
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 13.429727197584265,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": 0.5017775018706698,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 7017
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 21.911869376628633,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.85,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 18.331051159817665,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 3.7052078430291013,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7833333333333333,
+              "vertex": 10113
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 25.913207552348183,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8,
+              "vertex": 10162
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 34.346597284366254,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 10172
+            }
+          }
+        }
+      },
+      "rightHandWorst3D": {
+        "time": 1,
+        "vertex": 998,
+        "position": [
+          -0.02240653740083583,
+          0.530644866320494,
+          -0.004309241728637819
+        ],
+        "nearest": {
+          "triangle": [
+            4448,
+            4455,
+            4465
+          ],
+          "distanceMM": 128.95233389287463,
+          "signedDistanceMM": -102.29235415110632
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      },
+      "leftHandWorst3D": {
+        "time": 0.7,
+        "vertex": 6660,
+        "position": [
+          0.06124004170824338,
+          0.501325332603458,
+          0.007206395102587675
+        ],
+        "nearest": {
+          "triangle": [
+            7403,
+            7408,
+            7420
+          ],
+          "distanceMM": 66.92615797259505,
+          "signedDistanceMM": -66.87096776164411
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Walk",
+      "interruptedFraction": 0.6,
+      "frames": 61,
+      "cords": {
+        "minimumGapMM": 2.757033328334978,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 10980,
+        "worst": {
+          "time": 0,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": -140.78614422849517,
+        "penetratingSamples": 5909,
+        "missing": 5958,
+        "samples": 45953,
+        "worst": {
+          "time": 0,
+          "vertex": 998
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": -69.72237212153802,
+            "negativeSamples": 444,
+            "worst": {
+              "time": 0,
+              "vertex": 692
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": -47.46271339742973,
+            "negativeSamples": 315,
+            "worst": {
+              "time": 0,
+              "vertex": 598
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": -102.85168090224093,
+            "negativeSamples": 213,
+            "worst": {
+              "time": 0,
+              "vertex": 483
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": -106.52531648021314,
+            "negativeSamples": 363,
+            "worst": {
+              "time": 0,
+              "vertex": 943
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": -91.84555970493558,
+            "negativeSamples": 680,
+            "worst": {
+              "time": 0,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": -140.78614422849517,
+            "negativeSamples": 1333,
+            "worst": {
+              "time": 0,
+              "vertex": 998
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": -112.14146863155663,
+            "negativeSamples": 719,
+            "worst": {
+              "time": 0,
+              "vertex": 1120
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": -81.62726711262412,
+            "negativeSamples": 171,
+            "worst": {
+              "time": 0,
+              "vertex": 637
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": -61.43781505277559,
+            "negativeSamples": 140,
+            "worst": {
+              "time": 0,
+              "vertex": 646
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": -87.81653698085142,
+            "negativeSamples": 297,
+            "worst": {
+              "time": 0,
+              "vertex": 1046
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": -64.75652632352742,
+            "negativeSamples": 274,
+            "worst": {
+              "time": 0,
+              "vertex": 668
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": -59.434308461559205,
+            "negativeSamples": 176,
+            "worst": {
+              "time": 0,
+              "vertex": 861
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": -76.71406207661454,
+            "negativeSamples": 440,
+            "worst": {
+              "time": 0,
+              "vertex": 862
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": -25.258994924139174,
+            "negativeSamples": 96,
+            "worst": {
+              "time": 0,
+              "vertex": 4161
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": -25.48039503364199,
+            "negativeSamples": 75,
+            "worst": {
+              "time": 0,
+              "vertex": 4082
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": -25.63039032814844,
+            "negativeSamples": 173,
+            "worst": {
+              "time": 0,
+              "vertex": 4108
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": -70.28796291905722,
+        "penetratingSamples": 1592,
+        "missing": 10949,
+        "samples": 39986,
+        "worst": {
+          "time": 0.1,
+          "vertex": 6635
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 12.413640196652654,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.05,
+              "vertex": 6611
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": -70.28796291905722,
+            "negativeSamples": 884,
+            "worst": {
+              "time": 0.1,
+              "vertex": 6635
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": -36.81407421420334,
+            "negativeSamples": 483,
+            "worst": {
+              "time": 0.1,
+              "vertex": 6690
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 12.388581942167713,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 6728
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": -12.70545802039885,
+            "negativeSamples": 152,
+            "worst": {
+              "time": 0,
+              "vertex": 7002
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": -10.092594103781682,
+            "negativeSamples": 36,
+            "worst": {
+              "time": 0.1,
+              "vertex": 6828
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 15.815852523675124,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 7183
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 19.65184071587812,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.06666666666666667,
+              "vertex": 6897
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": -7.932504089840688,
+            "negativeSamples": 25,
+            "worst": {
+              "time": 0.06666666666666667,
+              "vertex": 6935
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 10.852242951258088,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.016666666666666666,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": -5.812491733346576,
+            "negativeSamples": 12,
+            "worst": {
+              "time": 0,
+              "vertex": 7017
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 15.870511206242513,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.03333333333333333,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 13.17434408035072,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 1.4223516636430193,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.03333333333333333,
+              "vertex": 10113
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 23.676273986086134,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.03333333333333333,
+              "vertex": 10164
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 30.3725052554932,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 10172
+            }
+          }
+        }
+      },
+      "rightHandWorst3D": {
+        "time": 0,
+        "vertex": 998,
+        "position": [
+          -0.021358475713201326,
+          0.5311845228454772,
+          -0.0036528379597477035
+        ],
+        "nearest": {
+          "triangle": [
+            4448,
+            4455,
+            4465
+          ],
+          "distanceMM": 131.5771692013611,
+          "signedDistanceMM": -104.45000520701264
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      },
+      "leftHandWorst3D": {
+        "time": 0.1,
+        "vertex": 6635,
+        "position": [
+          0.06361464453717008,
+          0.5005794948822073,
+          0.00836699573594762
+        ],
+        "nearest": {
+          "triangle": [
+            7403,
+            7408,
+            7420
+          ],
+          "distanceMM": 65.06985916280888,
+          "signedDistanceMM": -65.06985916280887
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Nod",
+      "interruptedFraction": 0.6,
+      "frames": 61,
+      "cords": {
+        "minimumGapMM": 2.757033328334978,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 10980,
+        "worst": {
+          "time": 0,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": -140.78614422849517,
+        "penetratingSamples": 7008,
+        "missing": 21606,
+        "samples": 30305,
+        "worst": {
+          "time": 0,
+          "vertex": 998
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": -69.72237212153802,
+            "negativeSamples": 559,
+            "worst": {
+              "time": 0,
+              "vertex": 692
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": -47.46271339742973,
+            "negativeSamples": 394,
+            "worst": {
+              "time": 0,
+              "vertex": 598
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": -102.85168090224093,
+            "negativeSamples": 263,
+            "worst": {
+              "time": 0,
+              "vertex": 483
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": -106.52531648021314,
+            "negativeSamples": 468,
+            "worst": {
+              "time": 0,
+              "vertex": 943
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": -91.84555970493558,
+            "negativeSamples": 853,
+            "worst": {
+              "time": 0,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": -140.78614422849517,
+            "negativeSamples": 1358,
+            "worst": {
+              "time": 0,
+              "vertex": 998
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": -112.14146863155663,
+            "negativeSamples": 820,
+            "worst": {
+              "time": 0,
+              "vertex": 1120
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": -81.62726711262412,
+            "negativeSamples": 208,
+            "worst": {
+              "time": 0,
+              "vertex": 637
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": -61.43781505277559,
+            "negativeSamples": 171,
+            "worst": {
+              "time": 0,
+              "vertex": 646
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": -87.81653698085142,
+            "negativeSamples": 372,
+            "worst": {
+              "time": 0,
+              "vertex": 1046
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": -64.75652632352742,
+            "negativeSamples": 339,
+            "worst": {
+              "time": 0,
+              "vertex": 668
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": -59.434308461559205,
+            "negativeSamples": 215,
+            "worst": {
+              "time": 0,
+              "vertex": 861
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": -76.71406207661454,
+            "negativeSamples": 560,
+            "worst": {
+              "time": 0,
+              "vertex": 862
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": -25.258994924139174,
+            "negativeSamples": 116,
+            "worst": {
+              "time": 0,
+              "vertex": 4161
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": -25.48039503364199,
+            "negativeSamples": 96,
+            "worst": {
+              "time": 0,
+              "vertex": 4082
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": -25.63039032814844,
+            "negativeSamples": 216,
+            "worst": {
+              "time": 0,
+              "vertex": 4108
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": -70.89363018882223,
+        "penetratingSamples": 2182,
+        "missing": 70,
+        "samples": 50865,
+        "worst": {
+          "time": 0.11666666666666667,
+          "vertex": 6660
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 11.99218818866764,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.06666666666666667,
+              "vertex": 6611
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": -70.89363018882223,
+            "negativeSamples": 1219,
+            "worst": {
+              "time": 0.11666666666666667,
+              "vertex": 6660
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": -37.494701443406385,
+            "negativeSamples": 660,
+            "worst": {
+              "time": 0.13333333333333333,
+              "vertex": 6690
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 12.388581942167713,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 6728
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": -12.70545802039885,
+            "negativeSamples": 206,
+            "worst": {
+              "time": 0,
+              "vertex": 7002
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": -11.265590035282075,
+            "negativeSamples": 50,
+            "worst": {
+              "time": 0.11666666666666667,
+              "vertex": 6828
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 15.794029071852357,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.016666666666666666,
+              "vertex": 7183
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 19.128116274790138,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.08333333333333333,
+              "vertex": 6897
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": -8.18695807617564,
+            "negativeSamples": 34,
+            "worst": {
+              "time": 0.08333333333333333,
+              "vertex": 6935
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 10.925312959356635,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.016666666666666666,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": -5.812491733346576,
+            "negativeSamples": 13,
+            "worst": {
+              "time": 0,
+              "vertex": 7017
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 15.753881410612511,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.05,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 13.17434408035072,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 1.3459033653004584,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.05,
+              "vertex": 10113
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 23.49856697647848,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.03333333333333333,
+              "vertex": 10164
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 30.3725052554932,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 10172
+            }
+          }
+        }
+      },
+      "rightHandWorst3D": {
+        "time": 0,
+        "vertex": 998,
+        "position": [
+          -0.021358475713201326,
+          0.5311845228454772,
+          -0.0036528379597477035
+        ],
+        "nearest": {
+          "triangle": [
+            4448,
+            4455,
+            4465
+          ],
+          "distanceMM": 131.5771692013611,
+          "signedDistanceMM": -104.45000520701264
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      },
+      "leftHandWorst3D": {
+        "time": 0.11666666666666667,
+        "vertex": 6660,
+        "position": [
+          0.06283480445279542,
+          0.5016227966297977,
+          0.008326348497184523
+        ],
+        "nearest": {
+          "triangle": [
+            7403,
+            7408,
+            7420
+          ],
+          "distanceMM": 64.51703695172165,
+          "signedDistanceMM": -64.51703695172165
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      }
+    },
+    {
+      "from": "Wait",
+      "to": "Wave",
+      "interruptedFraction": 0.6,
+      "frames": 61,
+      "cords": {
+        "minimumGapMM": 2.757033328334978,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 10980,
+        "worst": {
+          "time": 0,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": -140.78614422849517,
+        "penetratingSamples": 7016,
+        "missing": 5,
+        "samples": 51906,
+        "worst": {
+          "time": 0,
+          "vertex": 998
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": -69.72237212153802,
+            "negativeSamples": 559,
+            "worst": {
+              "time": 0,
+              "vertex": 692
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": -47.46271339742973,
+            "negativeSamples": 398,
+            "worst": {
+              "time": 0,
+              "vertex": 598
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": -102.85168090224093,
+            "negativeSamples": 263,
+            "worst": {
+              "time": 0,
+              "vertex": 483
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": -106.52531648021314,
+            "negativeSamples": 468,
+            "worst": {
+              "time": 0,
+              "vertex": 943
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": -91.84555970493558,
+            "negativeSamples": 853,
+            "worst": {
+              "time": 0,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": -140.78614422849517,
+            "negativeSamples": 1353,
+            "worst": {
+              "time": 0,
+              "vertex": 998
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": -112.14146863155663,
+            "negativeSamples": 825,
+            "worst": {
+              "time": 0,
+              "vertex": 1120
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": -81.62726711262412,
+            "negativeSamples": 208,
+            "worst": {
+              "time": 0,
+              "vertex": 637
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": -61.43781505277559,
+            "negativeSamples": 171,
+            "worst": {
+              "time": 0,
+              "vertex": 646
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": -87.81653698085142,
+            "negativeSamples": 372,
+            "worst": {
+              "time": 0,
+              "vertex": 1046
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": -64.75652632352742,
+            "negativeSamples": 339,
+            "worst": {
+              "time": 0,
+              "vertex": 668
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": -59.434308461559205,
+            "negativeSamples": 215,
+            "worst": {
+              "time": 0,
+              "vertex": 861
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": -76.71406207661454,
+            "negativeSamples": 564,
+            "worst": {
+              "time": 0,
+              "vertex": 862
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": -25.258994924139174,
+            "negativeSamples": 116,
+            "worst": {
+              "time": 0,
+              "vertex": 4161
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": -25.48039503364199,
+            "negativeSamples": 96,
+            "worst": {
+              "time": 0,
+              "vertex": 4082
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": -25.63039032814844,
+            "negativeSamples": 216,
+            "worst": {
+              "time": 0,
+              "vertex": 4108
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": -70.9687627969006,
+        "penetratingSamples": 2247,
+        "missing": 66,
+        "samples": 50869,
+        "worst": {
+          "time": 0.11666666666666667,
+          "vertex": 6660
+        },
+        "byJoint": {
+          "LeftHandIndex3": {
+            "minimumGapMM": 11.969040876787352,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.06666666666666667,
+              "vertex": 6611
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": -70.9687627969006,
+            "negativeSamples": 1258,
+            "worst": {
+              "time": 0.11666666666666667,
+              "vertex": 6660
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": -37.552469708146184,
+            "negativeSamples": 686,
+            "worst": {
+              "time": 0.13333333333333333,
+              "vertex": 6690
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 12.388581942167713,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 6728
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": -12.70545802039885,
+            "negativeSamples": 206,
+            "worst": {
+              "time": 0,
+              "vertex": 7002
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": -11.290610377367573,
+            "negativeSamples": 50,
+            "worst": {
+              "time": 0.11666666666666667,
+              "vertex": 6828
+            }
+          },
+          "LeftHand": {
+            "minimumGapMM": 15.794018780872737,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.016666666666666666,
+              "vertex": 7183
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 19.06798096205518,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.08333333333333333,
+              "vertex": 6897
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": -8.204451953570178,
+            "negativeSamples": 34,
+            "worst": {
+              "time": 0.08333333333333333,
+              "vertex": 6935
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 10.925283225921628,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.016666666666666666,
+              "vertex": 6972
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": -5.812491733346576,
+            "negativeSamples": 13,
+            "worst": {
+              "time": 0,
+              "vertex": 7017
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 15.750909041049693,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.05,
+              "vertex": 7072
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 13.17434408035072,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 1.342396332111741,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.05,
+              "vertex": 10113
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 23.498095794199518,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.03333333333333333,
+              "vertex": 10164
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 30.3725052554932,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0,
+              "vertex": 10172
+            }
+          }
+        }
+      },
+      "rightHandWorst3D": {
+        "time": 0,
+        "vertex": 998,
+        "position": [
+          -0.021358475713201326,
+          0.5311845228454772,
+          -0.0036528379597477035
+        ],
+        "nearest": {
+          "triangle": [
+            4448,
+            4455,
+            4465
+          ],
+          "distanceMM": 131.5771692013611,
+          "signedDistanceMM": -104.45000520701264
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      },
+      "leftHandWorst3D": {
+        "time": 0.11666666666666667,
+        "vertex": 6660,
+        "position": [
+          0.06280804357596466,
+          0.5016253880741118,
+          0.008238242060246832
+        ],
+        "nearest": {
+          "triangle": [
+            7403,
+            7408,
+            7420
+          ],
+          "distanceMM": 64.55709403050234,
+          "signedDistanceMM": -64.55709403050234
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      }
+    },
+    {
+      "from": "Wave",
+      "to": "Wait",
+      "interruptedFraction": 0.6,
+      "frames": 61,
+      "cords": {
+        "minimumGapMM": 2.757013258905237,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 10980,
+        "worst": {
+          "time": 1,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": -139.16489701785417,
+        "penetratingSamples": 16037,
+        "missing": 1,
+        "samples": 51910,
+        "worst": {
+          "time": 1,
+          "vertex": 998
+        },
+        "byJoint": {
+          "RightHandMiddle1": {
+            "minimumGapMM": -68.01208296370086,
+            "negativeSamples": 1347,
+            "worst": {
+              "time": 1,
+              "vertex": 692
+            }
+          },
+          "RightHandRing1": {
+            "minimumGapMM": -45.611236442004845,
+            "negativeSamples": 993,
+            "worst": {
+              "time": 1,
+              "vertex": 598
+            }
+          },
+          "RightHandIndex2": {
+            "minimumGapMM": -101.32808066096759,
+            "negativeSamples": 621,
+            "worst": {
+              "time": 1,
+              "vertex": 483
+            }
+          },
+          "RightHandIndex3": {
+            "minimumGapMM": -104.73411969222124,
+            "negativeSamples": 1071,
+            "worst": {
+              "time": 1,
+              "vertex": 943
+            }
+          },
+          "RightHandIndex1": {
+            "minimumGapMM": -90.25372822642728,
+            "negativeSamples": 1936,
+            "worst": {
+              "time": 1,
+              "vertex": 556
+            }
+          },
+          "RightHandThumb3": {
+            "minimumGapMM": -139.16489701785417,
+            "negativeSamples": 2845,
+            "worst": {
+              "time": 1,
+              "vertex": 998
+            }
+          },
+          "RightHandThumb2": {
+            "minimumGapMM": -110.19273776939454,
+            "negativeSamples": 1732,
+            "worst": {
+              "time": 1,
+              "vertex": 1120
+            }
+          },
+          "RightHandMiddle2": {
+            "minimumGapMM": -79.77237758558228,
+            "negativeSamples": 522,
+            "worst": {
+              "time": 1,
+              "vertex": 637
+            }
+          },
+          "RightHandRing2": {
+            "minimumGapMM": -59.37746432876869,
+            "negativeSamples": 452,
+            "worst": {
+              "time": 1,
+              "vertex": 646
+            }
+          },
+          "RightHandMiddle3": {
+            "minimumGapMM": -85.66752870853914,
+            "negativeSamples": 895,
+            "worst": {
+              "time": 1,
+              "vertex": 1046
+            }
+          },
+          "RightHandRing3": {
+            "minimumGapMM": -62.736901832583605,
+            "negativeSamples": 837,
+            "worst": {
+              "time": 1,
+              "vertex": 668
+            }
+          },
+          "RightHand": {
+            "minimumGapMM": -57.37733601548131,
+            "negativeSamples": 499,
+            "worst": {
+              "time": 1,
+              "vertex": 861
+            }
+          },
+          "RightHandThumb1": {
+            "minimumGapMM": -74.23655776879363,
+            "negativeSamples": 1215,
+            "worst": {
+              "time": 1,
+              "vertex": 862
+            }
+          },
+          "RightHandPinky1": {
+            "minimumGapMM": -23.088280712015465,
+            "negativeSamples": 295,
+            "worst": {
+              "time": 1,
+              "vertex": 4161
+            }
+          },
+          "RightHandPinky2": {
+            "minimumGapMM": -23.484002983799208,
+            "negativeSamples": 244,
+            "worst": {
+              "time": 1,
+              "vertex": 4082
+            }
+          },
+          "RightHandPinky3": {
+            "minimumGapMM": -24.11817866145079,
+            "negativeSamples": 533,
+            "worst": {
+              "time": 1,
+              "vertex": 4108
+            }
+          }
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": -76.28741752577777,
+        "penetratingSamples": 4893,
+        "missing": 14997,
+        "samples": 35938,
+        "worst": {
+          "time": 0.7,
+          "vertex": 6660
+        },
+        "byJoint": {
+          "LeftHand": {
+            "minimumGapMM": 17.206203291021538,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.9833333333333333,
+              "vertex": 7183
+            }
+          },
+          "LeftHandPinky1": {
+            "minimumGapMM": 34.346597284366254,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 10172
+            }
+          },
+          "LeftHandThumb1": {
+            "minimumGapMM": -14.590992349238274,
+            "negativeSamples": 153,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6828
+            }
+          },
+          "LeftHandRing1": {
+            "minimumGapMM": 18.331051159817665,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 7147
+            }
+          },
+          "LeftHandPinky2": {
+            "minimumGapMM": 25.913207552348183,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.8,
+              "vertex": 10162
+            }
+          },
+          "LeftHandMiddle1": {
+            "minimumGapMM": 21.911869376628633,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.85,
+              "vertex": 7072
+            }
+          },
+          "LeftHandIndex1": {
+            "minimumGapMM": -8.431313652663304,
+            "negativeSamples": 61,
+            "worst": {
+              "time": 0.75,
+              "vertex": 6935
+            }
+          },
+          "LeftHandThumb2": {
+            "minimumGapMM": -41.06548007698823,
+            "negativeSamples": 1586,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6912
+            }
+          },
+          "LeftHandPinky3": {
+            "minimumGapMM": 3.7052078430291013,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7833333333333333,
+              "vertex": 10113
+            }
+          },
+          "LeftHandRing3": {
+            "minimumGapMM": -9.926000039686398,
+            "negativeSamples": 557,
+            "worst": {
+              "time": 1,
+              "vertex": 6999
+            }
+          },
+          "LeftHandRing2": {
+            "minimumGapMM": 0.5017775018706698,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 7017
+            }
+          },
+          "LeftHandThumb3": {
+            "minimumGapMM": -76.28741752577777,
+            "negativeSamples": 2536,
+            "worst": {
+              "time": 0.7,
+              "vertex": 6660
+            }
+          },
+          "LeftHandMiddle3": {
+            "minimumGapMM": 14.24778898202305,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 6728
+            }
+          },
+          "LeftHandMiddle2": {
+            "minimumGapMM": 13.429727197584265,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 1,
+              "vertex": 6972
+            }
+          },
+          "LeftHandIndex3": {
+            "minimumGapMM": 11.835889132490196,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7833333333333333,
+              "vertex": 6611
+            }
+          },
+          "LeftHandIndex2": {
+            "minimumGapMM": 21.899963908778133,
+            "negativeSamples": 0,
+            "worst": {
+              "time": 0.7166666666666667,
+              "vertex": 6897
+            }
+          }
+        }
+      },
+      "rightHandWorst3D": {
+        "time": 1,
+        "vertex": 998,
+        "position": [
+          -0.02240653740083583,
+          0.530644866320494,
+          -0.004309241728637819
+        ],
+        "nearest": {
+          "triangle": [
+            4448,
+            4455,
+            4465
+          ],
+          "distanceMM": 128.95233389287463,
+          "signedDistanceMM": -102.29235415110632
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      },
+      "leftHandWorst3D": {
+        "time": 0.7,
+        "vertex": 6660,
+        "position": [
+          0.06124004170824338,
+          0.501325332603458,
+          0.007206395102587675
+        ],
+        "nearest": {
+          "triangle": [
+            7403,
+            7408,
+            7420
+          ],
+          "distanceMM": 66.92615797259505,
+          "signedDistanceMM": -66.87096776164411
+        },
+        "positiveXRayIntersections": 1,
+        "insideByOddParity": true
+      }
+    }
+  ]
+}

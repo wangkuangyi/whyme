@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "name": "production loads authored GLB and precise mask",
+      "pass": true
+    },
+    {
+      "name": "production serves the verified Blender asset",
+      "pass": true,
+      "detail": {
+        "sha": "dbcc30a95bcc6a96e94708822bf4a960fa93ecbe594aac22b2ef2c0e906ed922",
+        "animations": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "Wave",
+          "Wait"
+        ],
+        "url": "http://127.0.0.1:4173/models/person-authored-animated.glb?v=waiting-1"
+      }
+    },
+    {
+      "name": "production asset includes Wait and excludes the withdrawn LookAround",
+      "pass": true,
+      "detail": {
+        "sha": "dbcc30a95bcc6a96e94708822bf4a960fa93ecbe594aac22b2ef2c0e906ed922",
+        "animations": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "Wave",
+          "Wait"
+        ],
+        "url": "http://127.0.0.1:4173/models/person-authored-animated.glb?v=waiting-1"
+      }
+    },
+    {
+      "name": "production does not request old PNG or processed model",
+      "pass": true
+    },
+    {
+      "name": "production chapter 1 matches its new title and color",
+      "pass": true,
+      "detail": {
+        "title": "随时出发",
+        "color": "#82756e"
+      }
+    },
+    {
+      "name": "production chapter 3 matches its new title and color",
+      "pass": true,
+      "detail": {
+        "title": "上线只是开始",
+        "color": "#327b60"
+      }
+    },
+    {
+      "name": "production chapter 4 matches its new title and color",
+      "pass": true,
+      "detail": {
+        "title": "好队友",
+        "color": "#a44c76"
+      }
+    },
+    {
+      "name": "production chapter 2 matches its new title and color",
+      "pass": true,
+      "detail": {
+        "title": "好看，也好用",
+        "color": "#3755a6"
+      }
+    },
+    {
+      "name": "production Idle continues to render motion after the performance",
+      "pass": true
+    },
+    {
+      "name": "production fallback uses newly rendered 2x frame",
+      "pass": true,
+      "detail": {
+        "src": "http://127.0.0.1:4173/images-tripo/angle-03.png?v=waiting-1",
+        "width": 2880,
+        "height": 2000
+      }
+    },
+    {
+      "name": "production mobile remains readable without overflow",
+      "pass": true
+    },
+    {
+      "name": "no production browser error",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": []
+}

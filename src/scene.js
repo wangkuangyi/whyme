@@ -21,18 +21,18 @@ const NODE_REVEAL_DELAY = 250, WALK_NODE_REVEAL_DELAY = 650;
 const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
 const NOD_STATION = STATION_CLIPS.indexOf('Nod'), WAVE_STATION = STATION_CLIPS.indexOf('Wave');
 const SHOTS = [
-  { azimuth: 38, fill: .56, camY: 2.25, lookY: .52, dist: 2.8, fov: 31, haloY: .52 },
+  { azimuth: -38, fill: .56, camY: 2.25, lookY: .52, dist: 2.8, fov: 31, haloY: .52 },
   { azimuth: 8, fill: 1.20, camY: 1.25, lookY: .68, dist: 2.8, fov: 28, haloY: .68 },
-  { azimuth: -35, fill: 1.18, camY: .12, lookY: .64, dist: 2.8, fov: 30, haloY: .66 },
+  { azimuth: 35, fill: 1.18, camY: .40, lookY: .64, dist: 2.8, fov: 30, haloY: .66 },
   { azimuth: 30, fill: 1.52, camY: .83, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
 ];
 const REST_FILLS = [.56, 1.20, 1.24, 2.10];
 const REST_LOOK_Y = [.52, .68, .64, .78], REST_HALO_Y = [.52, .68, .66, .83];
 const MOBILE_REST_FILLS = [.56, 1.10, 1.16, 1.72];
 const STATIONS = [
-  { azimuth: 38, camY: 2.25, dist: 2.8, lookY: .52, fov: 31, shift: -.04, fill: .56, haloY: .52, width: .52, roll: 9, openness: .24, color: '#82756E', rib: '#6B5E58', floor: '#F8F5F3' },
+  { azimuth: -38, camY: 2.25, dist: 2.8, lookY: .52, fov: 31, shift: -.04, fill: .56, haloY: .52, width: .52, roll: 9, openness: .24, color: '#82756E', rib: '#6B5E58', floor: '#F8F5F3' },
   { azimuth: 8, camY: 1.25, dist: 2.8, lookY: .68, fov: 28, shift: -.05, fill: 1.20, haloY: .68, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
-  { azimuth: -35, camY: .12, dist: 2.8, lookY: .64, fov: 30, shift: -.03, fill: 1.18, haloY: .66, width: .58, roll: 6, openness: .30, color: '#327B60', rib: '#23664E', floor: '#F0F9F5' },
+  { azimuth: 35, camY: .40, dist: 2.8, lookY: .64, fov: 30, shift: -.03, fill: 1.18, haloY: .66, width: .58, roll: 6, openness: .30, color: '#327B60', rib: '#23664E', floor: '#F0F9F5' },
   { azimuth: -65, camY: .82, dist: 2.8, lookY: .66, fov: 16.1, shift: .06, fill: 1.22, haloY: .68, width: .52, roll: 8, openness: .24, color: '#A44C76', rib: '#893C61', floor: '#FEF4F8' },
 ];
 const lch = (hex) => labToLCH(linearToOKLab(new THREE.Color(hex).toArray()));
@@ -97,7 +97,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   const meshes = [], skinnedBounds = [], skinBoundsByMesh = new Map(), clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
   let model = null, pendingModel = null, clothMask = null, nodePositions = [], lastProfile = STATIONS[0], posterLayout = null, lastPosterLayout = null;
   let framingPending = false, lastFramingAt = 0;
-  // Wave settles on a portrait; Nod retains its hands and LookAround stays wider.
+  // Wave settles on a portrait; Nod retains its hands and Wait stays wider.
   const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 0, 0];
   const timings = { frameMs: 0, poseMs: 0, renderMs: 0, nodesMs: 0 };
   const occlusionCache = Array.from({ length: 4 }, () => ({ at: -Infinity, hidden: false, footprintHidden: false, visible: null, clearSince: null }));
@@ -400,7 +400,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   document.addEventListener('visibilitychange', onVisibilityChange); canvas.addEventListener('webglcontextlost', onContextLost); const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(canvas); resize();
   signal?.addEventListener('abort', dispose, { once: true }); if (signal?.aborted) { dispose(); return; } animationFrame = requestAnimationFrame(render);
   try {
-    const url = new URL(USE_ANIMATIONS ? 'models/person-authored-animated.glb?v=blender-actions-1' : 'models/person-original.glb?v=original-4k', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href);
+    const url = new URL(USE_ANIMATIONS ? 'models/person-authored-animated.glb?v=waiting-1' : 'models/person-original.glb?v=original-4k', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href);
     pendingModel = gltf.scene;
     if (disposed) { disposeSceneResources([pendingModel]); pendingModel = null; return; }
     clothMask = await new THREE.TextureLoader().loadAsync(new URL('hoodie-mask.png?v=original-4k', url).href);
@@ -421,7 +421,9 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
         const cachedPositions = new Float64Array(count * 3), revisions = new Int32Array(count).fill(-1);
         object.getVertexPosition = (index, target) => {
           if (revisions[index] !== poseRevision) { originalPosition.call(object, index, target); target.toArray(cachedPositions, index * 3); revisions[index] = poseRevision; }
-          return target.fromArray(cachedPositions, index * 3);
+          const offset = index * 3;
+          target.x = cachedPositions[offset]; target.y = cachedPositions[offset + 1]; target.z = cachedPositions[offset + 2];
+          return target;
         };
       }
       const original = Array.isArray(object.material) ? object.material : [object.material], materials = original.map((source) => {
