@@ -34,7 +34,7 @@ document.querySelector('#app').innerHTML=`
     <span id="drag-label" class="drag-label" aria-hidden="true"></span>
     <svg class="node-connector" aria-hidden="true"><path pathLength="1"/></svg>
   </div>
-  <header class="identity"><a class="wordmark" href="#behind-the-scenes" aria-label="Why me? 网站幕后" title="了解这个网站">Why me?</a><h1>${esc(profile.name)}</h1><span class="print-name">${esc(profile.nameEn)}</span><p class="identity-line"><span>AI 系统 · Agent<span class="role-extra"> · 平台开发</span></span><span class="availability">${esc(availability)}</span></p></header>
+  <header class="identity"><a class="wordmark" href="#behind-the-scenes" aria-label="Why me? 网站幕后" title="了解这个网站"><svg class="wordmark-art" viewBox="0 0 180 32" aria-hidden="true" focusable="false"><text x="0" y="25" textLength="180" lengthAdjust="spacingAndGlyphs">Why me?</text></svg></a><h1>${esc(profile.name)}</h1><span class="print-name">${esc(profile.nameEn)}</span></header>
   <nav class="contact" aria-label="简历与联系"><a href="#contact" class="contact-link">联系</a><a class="resume" href="${esc(profile.resume)}" target="_blank" rel="noopener noreferrer">简历 <span>↗</span></a></nav>
   <section id="strengths" class="strengths" aria-label="四个一起工作的理由" tabindex="-1" data-side="right">
     <span class="card-notch" aria-hidden="true"></span><div class="card-body">${advantages.map((a,i)=>`<article class="strength ${i===active?'is-active':''}" data-strength="${i}" aria-labelledby="title-${i}">
