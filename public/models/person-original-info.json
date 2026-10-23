@@ -1,0 +1,319 @@
+{
+  "version": 1,
+  "source": "动作素材/human+character+3d+model.glb",
+  "sourceSHA256": "489f55375ca109e670396da16a45f35b94f18a7247a2ff26bb35bbaaa2e6f9e8",
+  "sourceBytes": 4302728,
+  "earliestSource": "../human character 3d model.glb",
+  "earliestSourceSHA256": "46d5d4ce0579a7dbcfdab8263d4f56a9e1a1b6eb97823949135936fb0b12c124",
+  "baseline": "public/models/person-original.glb",
+  "output": "public/models/person-original-animated.glb",
+  "baselineSHA256": "2ff112ec1b79e6fa4ea32fe715062460bb0d1357dac20300e0e5674af807a03f",
+  "outputSHA256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "bytes": {
+    "static": 4180236,
+    "animated": 4693000
+  },
+  "preservation": {
+    "positions": true,
+    "normals": true,
+    "uvs": true,
+    "skinAttributes": true,
+    "originalTriangleWindingAndMultiset": true,
+    "jpegBytes": true,
+    "imageResolution": [
+      4096,
+      4096
+    ],
+    "newSubdivision": false,
+    "newDecimation": false,
+    "newQuantization": false,
+    "imageReencoding": false,
+    "syntheticFacialControls": false
+  },
+  "topology": {
+    "sourceVertices": 11922,
+    "triangles": 10892,
+    "originalIndexAccessorPreserved": true
+  },
+  "materials": {
+    "cloth": "Original",
+    "remainder": "Original",
+    "pbrSource": "../human character 3d model.glb",
+    "roughness": 0.8999999761581421,
+    "clothBaseColorTexturePreserved": true,
+    "clothLinearLuminance": {
+      "p10": 0.0111083984375,
+      "median": 0.0194091796875,
+      "p90": 0.0247802734375
+    },
+    "mask": {
+      "path": "public/models/hoodie-mask.png",
+      "bytes": 203380,
+      "sha256": "1f95bca0258a5e3d4a628dfe3fc2d0e1cb65f70f7108be4c462d66a03eebc361",
+      "resolution": [
+        4096,
+        4096
+      ],
+      "clothCandidateTriangles": 3800,
+      "maskPixels": 4575238,
+      "skinPixelsProtected": 234119
+    },
+    "classification": "Single original primitive/material. Original UVs rasterized at 4096px with per-texel body-region and original-colour skin exclusion; no whole-triangle colour boundaries and no new vertices or UVs."
+  },
+  "skeleton": {
+    "joints": 65,
+    "restSource": "动作素材/human+character+3d+model.glb",
+    "maxRestDeltaBetweenApprovedClips": 0,
+    "maxRestBindIdentityError": 5.187929386918366e-7,
+    "earliestStaticExportIssue": "Earliest static export contains no node TRS/matrix and its raw inverse-bind accessor contains invalid very large values. Use the supplied valid animated Tripo export as the geometry and rig baseline; no rig values are invented.",
+    "earliestExportEvidence": {
+      "nodesWithTransforms": 0,
+      "firstRawInverseBindMatrix": [
+        0.99951171875,
+        5.4955044174073146e-39,
+        0,
+        0,
+        0,
+        1.7140682815621162e-41,
+        869585536,
+        1.7837007753919214e+31,
+        3.3121873030029422e-18,
+        8.238783424778487e+32,
+        1.8394324191659592e+25,
+        0.0006196265458129346,
+        6.3372074254886e-10,
+        7.65837476922323e+23,
+        4.5443536670886656e+30,
+        4.742887091963239e+30
+      ]
+    }
+  },
+  "sources": [
+    {
+      "path": "动作素材/human+character+3d+model.glb",
+      "sha256": "489f55375ca109e670396da16a45f35b94f18a7247a2ff26bb35bbaaa2e6f9e8",
+      "bytes": 4302728
+    },
+    {
+      "path": "动作素材/human+character+3d+model+huangu.glb",
+      "sha256": "a5b3fd132e9a46d98d508f5a52e7371503995d424b7ef849c580039024672988",
+      "bytes": 4149852
+    },
+    {
+      "path": "动作素材/human+character+3d+model+walk2.glb",
+      "sha256": "1ac75a5eb67e65b4f0b49c9e37066bc69f682464ccd4c84770bd24418ab602b2",
+      "bytes": 3883444
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "source": "动作素材/human+character+3d+model.glb",
+      "sourceIndex": 0,
+      "sourceName": "角色自然站立.001",
+      "channels": 195,
+      "duration": 5
+    },
+    {
+      "name": "Greet",
+      "source": "动作素材/human+character+3d+model.glb",
+      "sourceIndex": 1,
+      "sourceName": "人物主动向面前的人打招呼，精神饱满，反应利",
+      "channels": 195,
+      "duration": 3
+    },
+    {
+      "name": "Box",
+      "source": "动作素材/human+character+3d+model.glb",
+      "sourceIndex": 2,
+      "sourceName": "box_01.001",
+      "channels": 195,
+      "duration": 2.25
+    },
+    {
+      "name": "Walk",
+      "source": "动作素材/human+character+3d+model+walk2.glb",
+      "sourceIndex": 0,
+      "sourceName": "walk.001",
+      "channels": 195,
+      "duration": 2.375
+    },
+    {
+      "name": "Nod",
+      "source": "动作素材/human+character+3d+model.glb",
+      "sourceIndex": 4,
+      "sourceName": "人物认真听完一句话后，给出明确、自信的肯定",
+      "channels": 195,
+      "duration": 3
+    },
+    {
+      "name": "Wave",
+      "source": "动作素材/human+character+3d+model.glb",
+      "sourceIndex": 5,
+      "sourceName": "角色小幅挥手，别有气无力的.001",
+      "channels": 195,
+      "duration": 5
+    },
+    {
+      "name": "LookAround",
+      "source": "动作素材/human+character+3d+model+huangu.glb",
+      "sourceIndex": 0,
+      "sourceName": "look_around.001",
+      "channels": 195,
+      "duration": 15.625
+    }
+  ],
+  "validation": {
+    "passed": 37,
+    "checks": [
+      {
+        "name": "cloth-mask-is-lossless-4096px-grayscale",
+        "passed": true
+      },
+      {
+        "name": "valid-rest-skeleton-times-inverse-bind-preserves-surface",
+        "passed": true
+      },
+      {
+        "name": "raw-source-binary-prefix-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-mesh-primitives-and-index-accessor-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-POSITION-accessor-bytes-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-NORMAL-accessor-bytes-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-TEXCOORD_0-accessor-bytes-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-JOINTS_0-accessor-bytes-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-WEIGHTS_0-accessor-bytes-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-4k-jpeg-bytes-preserved",
+        "passed": true
+      },
+      {
+        "name": "original-triangle-multiset-and-winding-preserved",
+        "passed": true
+      },
+      {
+        "name": "approved-source-nodes-preserved",
+        "passed": true
+      },
+      {
+        "name": "approved-source-skins-preserved",
+        "passed": true
+      },
+      {
+        "name": "approved-source-textures-preserved",
+        "passed": true
+      },
+      {
+        "name": "approved-source-images-preserved",
+        "passed": true
+      },
+      {
+        "name": "approved-source-samplers-preserved",
+        "passed": true
+      },
+      {
+        "name": "approved-source-scenes-preserved",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-nodes-identical",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-meshes-identical",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-skins-identical",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-materials-identical",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-textures-identical",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-images-identical",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-samplers-identical",
+        "passed": true
+      },
+      {
+        "name": "animated-vs-static-scenes-identical",
+        "passed": true
+      },
+      {
+        "name": "no-new-morph-targets-or-face-joints",
+        "passed": true
+      },
+      {
+        "name": "clip-Idle-samples-and-targets-identical",
+        "passed": true
+      },
+      {
+        "name": "clip-Greet-samples-and-targets-identical",
+        "passed": true
+      },
+      {
+        "name": "clip-Box-samples-and-targets-identical",
+        "passed": true
+      },
+      {
+        "name": "clip-Walk-samples-and-targets-identical",
+        "passed": true
+      },
+      {
+        "name": "clip-Nod-samples-and-targets-identical",
+        "passed": true
+      },
+      {
+        "name": "clip-Wave-samples-and-targets-identical",
+        "passed": true
+      },
+      {
+        "name": "clip-LookAround-samples-and-targets-identical",
+        "passed": true
+      },
+      {
+        "name": "source-unchanged-动作素材/human+character+3d+model.glb",
+        "passed": true
+      },
+      {
+        "name": "source-unchanged-动作素材/human+character+3d+model+huangu.glb",
+        "passed": true
+      },
+      {
+        "name": "source-unchanged-动作素材/human+character+3d+model+walk2.glb",
+        "passed": true
+      },
+      {
+        "name": "earliest-static-source-unchanged",
+        "passed": true
+      }
+    ]
+  }
+}

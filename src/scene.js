@@ -7,7 +7,6 @@ import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineSegments2 } from 'three/addons/lines/LineSegments2.js';
 import { LineSegmentsGeometry } from 'three/addons/lines/LineSegmentsGeometry.js';
-import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import { clamp, lerp, nearestStation, stationAzimuth, wrapStation, linearToOKLab, oklabToLinear, labToLCH, lchToLab, interpolateLCH, interpolateDragLCH } from './scene-math.js';
 
 const HEIGHT = 1.83, RAD = Math.PI / 180;
@@ -17,11 +16,11 @@ const ACTIVE_DOT_PROBES = [[-11, 0], [11, 0], [0, -11], [0, 11]];
 // 对应 .node-index 的右上角数字及其白色描边。
 const LABEL_PROBES = [[7, -22], [23, -22], [7, -5], [23, -5], [15, -13.5]];
 const NODE_REVEAL_DELAY = 250, WALK_NODE_REVEAL_DELAY = 650;
-// Retain the original static 3D model as an explicit, reproducible fallback.
+// Static and animated views share the same original-resolution Tripo surface.
 const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
 const SHOTS = [
   { azimuth: 38, fill: .56, camY: 2.25, lookY: .52, dist: 2.8, fov: 31, haloY: .52 },
-  { azimuth: 8, fill: 2.45, camY: .88, lookY: .80, dist: 2.8, fov: 25, haloY: .83 },
+  { azimuth: 8, fill: 2.45, camY: 1.80, lookY: .80, dist: 2.8, fov: 25, haloY: .83 },
   { azimuth: 30, fill: 1.52, camY: .83, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
   { azimuth: -48, fill: 1.70, camY: 1.30, lookY: .72, dist: 2.8, fov: 30, haloY: .77 },
 ];
@@ -45,16 +44,14 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' }); }
   catch (error) { onError(error); throw error; }
   renderer.setClearColor(0xffffff, 0); renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1; renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.VSMShadowMap;
-  RectAreaLightUniformsLib.init();
+  renderer.setPixelRatio(window.devicePixelRatio || 1); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.VSMShadowMap;
   const cameraAnchor = new THREE.Vector3(), contactShadows = [], studioLights = [];
   let characterMotion = null;
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(27, 1, .02, 100), modelGroup = new THREE.Group(); scene.add(modelGroup);
-  scene.add(new THREE.HemisphereLight(0xffffff, 0xd9d9df, .4)); scene.add(new THREE.AmbientLight(0xffffff, .10));
+  // Tripo's albedo already contains the authored facial/fabric shading. Keep
+  // that appearance directly; the studio light below only casts ground shadows.
   const key = new THREE.SpotLight(0xfffcf8, 72, 24, .76, .95, 2); key.position.set(-3.2, 6, 4.8); key.target.position.set(0, .4, 0); key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024); key.shadow.camera.near = .2; key.shadow.camera.far = 18; key.shadow.bias = -.00008; key.shadow.normalBias = .015; key.shadow.radius = 8; key.shadow.blurSamples = 8; scene.add(key, key.target); studioLights.push({ light: key, rest: key.position.clone() });
-  const addSoftbox = (intensity, w, h, position) => { const light = new THREE.RectAreaLight(0xffffff, intensity, w, h); light.position.set(...position); light.lookAt(0, 1, 0); scene.add(light); studioLights.push({ light, rest: light.position.clone() }); };
-  addSoftbox(2.2, 3.2, 4, [-3, 4.5, 4]); addSoftbox(1.4, 4, 4, [3.8, 2.4, 3]); addSoftbox(2, 3, 1.2, [0, 4, -.2]); addSoftbox(2.5, .8, 3, [-2.6, 2, -3]); addSoftbox(2.2, .8, 3, [2.6, 2, -2.5]);
 
   // A world-space light pool changes shape with the camera and has no hard horizon.
   const floorMaterial = new THREE.ShaderMaterial({ transparent: true, depthWrite: false, toneMapped: false, uniforms: { tint: { value: new THREE.Color(STATIONS[0].floor) }, edgeColor: { value: new THREE.Color('#f3f3f5') }, viewport: { value: new THREE.Vector2(1, 1) } },
@@ -95,7 +92,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   let presentationTime = previousTime, poseRevision = 0, boundsRevision = -1, occlusionPending = true;
   let cameraTransition = null, colorTransition = null, dragColorOrigin = null, settledPending = true, currentLCH = [...COLORS[firstStation]], currentRib = [...RIBS[firstStation]], currentFloor = [...FLOORS[firstStation]], lastCssColor = '';
   const meshes = [], skinnedBounds = [], skinBoundsByMesh = new Map(), clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
-  let model = null, nodePositions = [], lastProfile = STATIONS[0], posterLayout = null, lastPosterLayout = null;
+  let model = null, pendingModel = null, clothMask = null, nodePositions = [], lastProfile = STATIONS[0], posterLayout = null, lastPosterLayout = null;
   let framingPending = false, lastFramingAt = 0;
   // Gesture stations settle on a portrait; Walk keeps its small full-body shot.
   const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 0, 0];
@@ -284,7 +281,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       return { x, y, visible: cache.visible, depth: distance }; }); occlusionPending = false; onNodePositions(nodePositions);
   }
   function applyColors() {
-    for (const material of clothMaterials) { material.color.fromArray(oklabToLinear(lchToLab(material.userData.rib ? currentRib : currentLCH))); material.sheenColor.copy(material.color).lerp(new THREE.Color('#ffffff'), .18); }
+    for (const material of clothMaterials) material.userData.clothTint.fromArray(oklabToLinear(lchToLab(currentLCH)));
     floorMaterial.uniforms.tint.value.fromArray(oklabToLinear(lchToLab(currentFloor)));
     const css = `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentLCH))).getHexString()}`; if (css !== lastCssColor) { lastCssColor = css; onColorChange(css); }
   }
@@ -362,13 +359,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     const renderStart = performance.now(); renderer.render(scene, camera); const nodesStart = performance.now(); updateNodes(); notifySettled();
     if (framingPending && ready && !presentationPaused && !dragging && !cameraTransition && now - lastFramingAt > 80) { onFramingChange({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), ...protectedBounds() }); lastFramingAt = now; framingPending = false; }
     timings.frameMs = lerp(timings.frameMs, rawDelta * 1000, .1); timings.poseMs = lerp(timings.poseMs, renderStart - poseStart, .1); timings.renderMs = lerp(timings.renderMs, nodesStart - renderStart, .1); timings.nodesMs = lerp(timings.nodesMs, performance.now() - nodesStart, .1);
-    if (ready && !presentationPaused && now - loadedTime > 3500) {
-      // Degrade resolution and shadow cost first; a single healthy frame resets the fallback clock.
-      degradeDuration = !dragging && rawDelta > 1 / 28 ? degradeDuration + rawDelta : 0; slowDuration = !dragging && rawDelta > 1 / 20 ? slowDuration + rawDelta : 0;
-      if (degradeDuration > 1.2 && qualityLevel === 0) { qualityLevel = 1; renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25)); renderer.setSize(width, height, false); key.shadow.mapSize.set(512, 512); key.shadow.map?.dispose(); key.shadow.map = null; key.shadow.needsUpdate = true; degradeDuration = 0; }
-      else if (degradeDuration > 1.2 && qualityLevel === 1) { qualityLevel = 2; renderer.setPixelRatio(1); renderer.setSize(width, height, false); key.castShadow = false; degradeDuration = 0; }
-      if (slowDuration >= 5 && qualityLevel > 0 && !dragging && !fallbackTriggered) { fallbackTriggered = true; onPerformanceFallback({ reason: 'low-frame-rate', below20ForSeconds: slowDuration, qualityLevel }); }
-    }
+    // Loading waits for the full asset; runtime keeps the chosen source fidelity.
+    if (ready && !presentationPaused && now - loadedTime > 3500) slowDuration = !dragging && rawDelta > 1 / 20 ? slowDuration + rawDelta : 0;
     animationFrame = requestAnimationFrame(render);
   }
   function resize() { const rect = canvas.getBoundingClientRect(); width = Math.max(1, rect.width); height = Math.max(1, rect.height); mobile = window.innerWidth < 901; renderer.setSize(width, height, false); for (const material of [frontMaterial, backMaterial, tickMaterial]) material.resolution.set(width, height); settledPending = true; occlusionPending = true; }
@@ -403,9 +395,14 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   document.addEventListener('visibilitychange', onVisibilityChange); canvas.addEventListener('webglcontextlost', onContextLost); const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(canvas); resize();
   signal?.addEventListener('abort', dispose, { once: true }); if (signal?.aborted) { dispose(); return; } animationFrame = requestAnimationFrame(render);
   try {
-    const url = new URL(USE_ANIMATIONS ? 'models/person-animated.glb?v=walk2' : 'models/person.glb', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href); if (disposed) return;
-    model = gltf.scene; model.updateMatrixWorld(true); const box = new THREE.Box3().setFromObject(model), dimensions = box.getSize(vector()); model.scale.multiplyScalar(HEIGHT / Math.max(dimensions.y, .001)); model.updateMatrixWorld(true); box.setFromObject(model); const center = box.getCenter(vector()); model.position.x -= center.x; model.position.y -= box.min.y; model.position.z -= center.z; modelGroup.add(model);
-    const clothNoise = makeClothTextures();
+    const url = new URL(USE_ANIMATIONS ? 'models/person-original-animated.glb?v=original-4k' : 'models/person-original.glb?v=original-4k', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href);
+    pendingModel = gltf.scene;
+    if (disposed) { disposeSceneResources([pendingModel]); pendingModel = null; return; }
+    clothMask = await new THREE.TextureLoader().loadAsync(new URL('hoodie-mask.png?v=original-4k', url).href);
+    clothMask.flipY = false; clothMask.colorSpace = THREE.NoColorSpace;
+    clothMask.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    if (disposed) { disposeSceneResources([], [clothMask]); clothMask = null; return; }
+    model = gltf.scene; model.updateMatrixWorld(true); const box = new THREE.Box3().setFromObject(model), dimensions = box.getSize(vector()); model.scale.multiplyScalar(HEIGHT / Math.max(dimensions.y, .001)); model.updateMatrixWorld(true); box.setFromObject(model); const center = box.getCenter(vector()); model.position.x -= center.x; model.position.y -= box.min.y; model.position.z -= center.z; modelGroup.add(model); pendingModel = null;
     model.traverse((object) => {
       if (object.isBone) { const name = object.name.replace(/^mixamorig[:_]?/i, ''); bones.set(name, { bone: object, rest: object.quaternion.clone(), base: object.quaternion.clone(), turn: 0 }); }
       if (/^Eye(Left|Right)$/i.test(object.name)) eyes.push({ object, rest: object.quaternion.clone() });
@@ -421,20 +418,43 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
           return target.fromArray(cachedPositions, index * 3);
         };
       }
-      const original = Array.isArray(object.material) ? object.material : [object.material], materials = original.map((material) => {
-        material.side = THREE.FrontSide;
-        if (/hoodie|sweatshirt|卫衣/i.test(material.name)) {
-          const cloth = new THREE.MeshPhysicalMaterial(); THREE.MeshStandardMaterial.prototype.copy.call(cloth, material); cloth.defines = { STANDARD: '', PHYSICAL: '' }; cloth.name = material.name; cloth.userData.rib = /rib/i.test(material.name); cloth.map = clothNoise.color; cloth.normalMap = clothNoise.normal; cloth.normalScale.set(.16, .16); cloth.roughness = .92; cloth.metalness = 0; cloth.sheen = .7; cloth.sheenRoughness = .85; clothMaterials.push(cloth); return cloth;
+      const original = Array.isArray(object.material) ? object.material : [object.material], materials = original.map((source) => {
+        // Source PBR settings remain in the GLB for interchange. For the website,
+        // display its baked color directly instead of lighting the nose/lips twice.
+        const material = new THREE.MeshBasicMaterial({ map: source.map, color: source.color, side: source.side,
+          transparent: source.transparent, opacity: source.opacity, alphaTest: source.alphaTest, toneMapped: false });
+        material.name = source.name; material.userData = { ...source.userData, sourceRoughness: source.roughness };
+        source.dispose();
+        if (material.map && material.userData.clothMask) {
+          // The original surface is one unmodified indexed mesh. A full-size UV
+          // mask recolors cloth pixels, including triangles shared with skin.
+          // Never classify whole faces at the collar or replace the source map.
+          const cloth = material;
+          cloth.map.anisotropy = renderer.capabilities.getMaxAnisotropy();
+          cloth.userData.clothTint = new THREE.Color();
+          cloth.onBeforeCompile = shader => {
+            shader.uniforms.clothSourceLuminance = { value: cloth.userData.sourceLuminance || .022 };
+            shader.uniforms.clothMask = { value: clothMask };
+            shader.uniforms.clothTint = { value: cloth.userData.clothTint };
+            shader.fragmentShader = 'uniform float clothSourceLuminance; uniform sampler2D clothMask; uniform vec3 clothTint;\n' + shader.fragmentShader.replace('#include <map_fragment>', `
+              #ifdef USE_MAP
+                vec4 fabric = texture2D(map, vMapUv);
+                float detail = dot(fabric.rgb, vec3(.2126, .7152, .0722)) / clothSourceLuminance;
+                float garment = texture2D(clothMask, vMapUv).r;
+                diffuseColor *= vec4(mix(fabric.rgb, clothTint * detail, garment), fabric.a);
+              #endif
+            `);
+          };
+          cloth.customProgramCacheKey = () => 'original-fabric-mask-v2';
+          clothMaterials.push(cloth); return cloth;
         }
-        // The original scan shares a few finger triangles with the trousers
-        // material. Preserve its albedo until the corrected material split lands.
-        if (/trousers|pants/i.test(material.name)) { if (!material.map) material.color.set('#22232b'); material.roughness = .96; material.normalMap = clothNoise.twill; material.normalScale.set(.12, .12); }
-        if (/drawstring/i.test(material.name)) { material.map = null; material.color.set('#e8e1d3'); material.roughness = .78; }
-        if (/iris/i.test(material.name)) material.roughness = .3; return material;
+        return material;
       }); object.material = Array.isArray(object.material) ? materials : materials[0];
     });
     if (USE_ANIMATIONS && gltf.animations.length) characterMotion = createCharacterMotion({ model, animations: gltf.animations, bones, reducedMotion });
-    ready = true; loadedTime = performance.now(); settledPending = true; applyColors(); startPerformance(activeStation);
+    applyColors();
+    await renderer.compileAsync(scene, camera); if (disposed) return;
+    ready = true; loadedTime = performance.now(); settledPending = true; startPerformance(activeStation);
     // onReady means a complete, correctly framed t=0 image is already available.
     // The caller can decode capture() and hand off its poster before releasing time.
     cancelAnimationFrame(animationFrame); previousTime = loadedTime; occlusionPending = true; render(loadedTime, true);
@@ -442,7 +462,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   } catch (error) { onError(error); cancelAnimationFrame(animationFrame); dispose(); throw error; }
   function dispose() {
     if (disposed) return; disposed = true; cancelAnimationFrame(animationFrame); resizeObserver.disconnect(); document.removeEventListener('visibilitychange', onVisibilityChange); canvas.removeEventListener('webglcontextlost', onContextLost); signal?.removeEventListener('abort', dispose); characterMotion?.dispose();
-    const geometries = new Set(), materials = new Set(), textures = new Set(); scene.traverse((object) => { if (object.geometry) geometries.add(object.geometry); for (const material of Array.isArray(object.material) ? object.material : object.material ? [object.material] : []) { materials.add(material); for (const value of Object.values(material)) if (value?.isTexture) textures.add(value); } }); for (const item of [...geometries, ...materials, ...textures]) item.dispose(); renderer.dispose();
+    disposeSceneResources([scene, pendingModel], clothMask ? [clothMask] : []); pendingModel = null; clothMask = null;
+    key.shadow.dispose(); renderer.dispose();
   }
   function capture({ characterOnly = false } = {}) {
     if (!characterOnly) { renderer.render(scene, camera); return canvas.toDataURL('image/png'); }
@@ -460,8 +481,21 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     getState: () => ({ currentProgress, targetProgress, activeStation, ready, presentationPaused, posterLayout: posterLayout && { ...posterLayout, top: { ...posterLayout.top }, bottom: { ...posterLayout.bottom } }, dragging, moving: !!cameraTransition || dragging, mobile, width, height, dpr: renderer.getPixelRatio(), triangles: renderer.info.render.triangles,
       colors: { hoodie: lastCssColor, rib: `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentRib))).getHexString()}`, lch: [...currentLCH], durationMs: 600, throughBlack: false }, ring: { openness: lastProfile.openness, linewidth: 1.25, frontInk: .7, backDash: [3, 4], ticks: 4 }, camera: { azimuth: lastProfile.azimuth, shift: lastProfile.shift, fill: lastProfile.fill, restClose: [...restClose], position: camera.position.toArray(), target: lookAt.toArray(), anchor: cameraAnchor.toArray(), tracking: characterMotion?.getState().walking || false }, nodes: nodePositions,
       animation: { ...(characterMotion?.getState() || { action: 'OriginalRest', clips: [], walking: false, position: [0, 0, 0] }), reducedMotion, eyes: 0, morphs: {}, pose: Object.fromEntries(['Hips','Head','LeftHand','RightHand','LeftFoot','RightFoot'].map((name) => [name, bones.get(name)?.bone.getWorldPosition(vector()).toArray()])) }, protectedBounds: protectedBounds(),
-      studio: { ambient: .5, shadowOpacity: .10, shadowWorldPosition: key.position.toArray(), shadowFade: [.45, 1.7], shadowEnabled: key.castShadow, mapSize: key.shadow.mapSize.x, floorTintStrength: .5, floorEdge: '#f3f3f5', floorRadiusH: 1.8 }, quality: { level: qualityLevel, slowDuration, fallbackTriggered, staticThresholdSeconds: 5, staticThresholdFps: 20, timings: { ...timings } }, cloth: clothMaterials.map((material) => ({ name: material.name, rib: !!material.userData.rib, normalMap: !!material.normalMap, aoMap: !!material.aoMap, sheen: `#${material.sheenColor.getHexString()}` })) }),
+      studio: { surface: 'original-baked-albedo', ambient: 0, shadowOpacity: .10, shadowWorldPosition: key.position.toArray(), shadowFade: [.45, 1.7], shadowEnabled: key.castShadow, mapSize: key.shadow.mapSize.x, floorTintStrength: .5, floorEdge: '#f3f3f5', floorRadiusH: 1.8 }, quality: { level: qualityLevel, slowDuration, fallbackTriggered, automaticDowngrade: false, timings: { ...timings } }, cloth: clothMaterials.map((material) => ({ name: material.name, normalMap: false, originalAlbedo: !!material.map, textureSize: [material.map?.image?.width, material.map?.image?.height], sourceRoughness: material.userData.sourceRoughness, surface: material.type, colorMaskSize: [clothMask?.image?.width, clothMask?.image?.height] })) }),
   };
+}
+function disposeSceneResources(roots, extraTextures = []) {
+  const geometries = new Set(), materials = new Set(), textures = new Set(extraTextures), bitmaps = new Set(), skeletons = new Set();
+  for (const root of roots) root?.traverse(object => {
+    if (object.geometry) geometries.add(object.geometry);
+    if (object.skeleton) skeletons.add(object.skeleton);
+    for (const material of Array.isArray(object.material) ? object.material : object.material ? [object.material] : []) {
+      materials.add(material); for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+    }
+  });
+  for (const texture of textures) if (texture.image?.close) bitmaps.add(texture.image);
+  for (const resource of [...geometries, ...materials, ...textures, ...skeletons]) resource.dispose();
+  for (const bitmap of bitmaps) bitmap.close();
 }
 function makeSkinnedBounds(mesh) {
   const positions = mesh.geometry.attributes.position, indices = mesh.geometry.attributes.skinIndex, weights = mesh.geometry.attributes.skinWeight;
@@ -493,12 +527,6 @@ function makeSkinnedBounds(mesh) {
 }
 function updateLine(geometry, positions) { if (!geometry.attributes.instanceStart) { geometry.setPositions(positions); return; } const data = geometry.attributes.instanceStart.data; for (let i = 0; i < positions.length / 3 - 1; i += 1) for (let component = 0; component < 3; component += 1) { data.array[i * 6 + component] = positions[i * 3 + component]; data.array[i * 6 + component + 3] = positions[i * 3 + component + 3]; } data.needsUpdate = true; }
 function makeShadowTexture() { const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128; const context = canvas.getContext('2d'), gradient = context.createRadialGradient(64, 64, 0, 64, 64, 64); for (const [stop, alpha] of [[0, 1], [.18, .8], [.46, .35], [1, 0]]) gradient.addColorStop(stop, `rgba(255,255,255,${alpha})`); context.fillStyle = gradient; context.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(canvas); }
-function makeClothTextures() {
-  const size = 256, data = new Uint8Array(size * size * 4), normal = new Uint8Array(size * size * 4), twill = new Uint8Array(size * size * 4);
-  for (let y = 0; y < size; y += 1) for (let x = 0; x < size; x += 1) { const i = (y * size + x) * 4, noise = (Math.sin(x * .049 + Math.sin(y * .041)) + Math.cos(y * .071 - x * .027)) * .5, brightness = Math.round(250 + noise * 5); data.set([brightness, brightness, brightness, 255], i); const stitchX = Math.sin((x + Math.sin(y * Math.PI / 4) * 1.6) * Math.PI / 4), stitchY = Math.cos(y * Math.PI / 4); normal.set([128 + Math.round(stitchX * 28), 128 + Math.round(stitchY * 22), 250, 255], i); const diagonal = Math.sin((x + y) * Math.PI / 3); twill.set([128 + Math.round(diagonal * 23), 128 + Math.round(diagonal * 23), 252, 255], i); }
-  const texture = (bytes, repeat, color = false) => { const tex = new THREE.DataTexture(bytes, size, size, THREE.RGBAFormat); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(repeat, repeat); tex.minFilter = THREE.LinearMipmapLinearFilter; tex.magFilter = THREE.LinearFilter; tex.generateMipmaps = true; tex.anisotropy = 4; tex.colorSpace = color ? THREE.SRGBColorSpace : THREE.NoColorSpace; tex.needsUpdate = true; return tex; };
-  return { color: texture(data, 2, true), normal: texture(normal, 5), twill: texture(twill, 6) };
-}
 
 
 

@@ -1,20 +1,31 @@
 /** Exercise the actual supplied animation samples without a rendering context. */
 import assert from 'node:assert/strict';
-import { writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import * as THREE from 'three';
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
+import { getBounds } from '@gltf-transform/functions';
 import { MeshoptDecoder } from 'meshoptimizer';
-import { fileURLToPath } from 'node:url';
 import { createCharacterMotion, STATION_CLIPS, WALK_STATION } from '../src/motion.js';
 
 const NOD_STATION = STATION_CLIPS.indexOf('Nod'), LOOK_AROUND_STATION = STATION_CLIPS.indexOf('LookAround'), WAVE_STATION = STATION_CLIPS.indexOf('Wave');
 
 await MeshoptDecoder.ready;
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder});
-const document = await io.read(fileURLToPath(new URL('../public/models/person-animated.glb',import.meta.url)));
+const assetPath = '../public/models/person-original-animated.glb';
+const assetBytes = await readFile(new URL(assetPath,import.meta.url));
+const assetSHA256 = createHash('sha256').update(assetBytes).digest('hex');
+const document = await io.readBinary(assetBytes);
+// The restored Tripo mesh remains at its authored unit scale in the file.
+// Match scene.js's whole-model normalization before measuring any world-space
+// feet/continuity tolerances, so the existing metre thresholds stay meaningful.
+const sourceBounds = getBounds(document.getRoot().listScenes()[0]);
+const sourceHeight = sourceBounds.max[1] - sourceBounds.min[1];
+const sceneHeight = 1.83, normalizationScale = sceneHeight / Math.max(sourceHeight, .001);
 function rig({reducedMotion=false,yaw=0,scale=1,rootMotionFixture=false}={}) {
   const model = new THREE.Group(), outer = new THREE.Group(), mapping = new Map(), bones = new Map();
+  model.scale.setScalar(normalizationScale);
   outer.rotation.y = yaw; outer.scale.setScalar(scale); outer.add(model);
   const joints = new Set(document.getRoot().listSkins().flatMap(skin=>skin.listJoints()));
   for (const node of document.getRoot().listNodes()) {
@@ -46,6 +57,10 @@ const finishEntry=(context)=>{const state=context.motion.getState();tick(context
 const savePose=context=>[...context.bones].map(([name,{bone}])=>({name,position:bone.position.clone(),quaternion:bone.quaternion.clone(),scale:bone.scale.clone()}));
 const poseError=(context,saved)=>Math.max(...saved.map(value=>{const bone=context.bones.get(value.name).bone;return Math.max(bone.position.distanceTo(value.position),bone.quaternion.clone().normalize().angleTo(value.quaternion.clone().normalize()),bone.scale.distanceTo(value.scale));}));
 const sample = rig(), unchanged = sample.sourceSnapshot;
+check('original-surface-rig-has-all-65-unique-joint-bindings',()=>{assert.equal(sample.bones.size,65);const names=document.getRoot().listNodes().map(node=>THREE.PropertyBinding.sanitizeNodeName(node.getName()));assert.equal(new Set(names).size,names.length);});
+check('all-source-animation-channels-bind-to-existing-body-bones',()=>{for(const animation of document.getRoot().listAnimations())for(const channel of animation.listChannels()){const name=THREE.PropertyBinding.sanitizeNodeName(channel.getTargetNode().getName()).replace(/^mixamorig[:_]?/i,'');assert.ok(sample.bones.has(name),`${animation.getName()} target ${name}`);assert.ok(['translation','rotation','scale'].includes(channel.getTargetPath()),`${animation.getName()} path ${channel.getTargetPath()}`);}});
+check('runtime-does-not-create-face-or-morph-animation',()=>{assert.equal(sample.motion.getState().faceAnimation,false);for(const animation of document.getRoot().listAnimations())assert.ok(animation.listChannels().every(channel=>channel.getTargetPath()!=='weights'));});
+check('world-space-tests-use-scene-height-without-changing-source-scale',()=>{assert.ok(Number.isFinite(normalizationScale)&&normalizationScale>0);assert.ok(Math.abs(sourceHeight*normalizationScale-sceneHeight)<1e-12);assert.ok(Math.abs(sample.model.scale.y-normalizationScale)<1e-12);});
 check('reviewed-station-map',()=>{assert.deepEqual(STATION_CLIPS,['Walk','Nod','Wave','LookAround']);assert.equal(WALK_STATION,0);assert.equal(NOD_STATION,1);assert.equal(WAVE_STATION,2);assert.equal(LOOK_AROUND_STATION,3);assert.equal(Object.isFrozen(STATION_CLIPS),true);});
 const suppliedWalk=sample.animations.find(clip=>clip.name==='Walk'), walkSourceDuration=suppliedWalk?.duration,walkDuration=sample.motion.getState().walkPlayback.duration;
 check('walk2-keeps-the-complete-2_375-second-source',()=>{assert.ok(suppliedWalk);assert.equal(walkSourceDuration,2.375);});
@@ -254,6 +269,6 @@ for(const fps of[20,30,60,120]){
 check('walk-settles-at-20-through-120-fps',()=>{assert.ok(frameRates.every(r=>r.action==='Idle'));assert.ok(Math.max(...frameRates.map(r=>r.position[2]))-Math.min(...frameRates.map(r=>r.position[2]))<.001);});
 check('walk-idle-feet-stay-planted-at-20-through-120-fps',()=>assert.ok(frameRates.every(r=>r.idleMode==='walk-source-hold'&&Math.abs(r.feet.depthDifference)<.035&&Math.abs(r.feet.toeHeightDifference)<.001)));
 for(const context of[sample,walk,interrupted,paused,rootFixture,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt,excerptProbe,walkPoseProbe,stableWalk,interruptedHold,initialDefault,entryContinuity,seamRootFixture,initialNonWalk,resumedDrag])context.motion.dispose();
-const result={checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walkOpening:{sourceTime:2.5,wholeBody:true,walkOpeningSourceError,walkOpeningFeet,maxOpeningBoneStep},walkIdle:{sourceTime:2.5,mode:'whole-body-source-hold',idleSourceFeet,stableFeet,stableSourceError,stableLongIdleError,postNodSourceError,resumedIdlePoseChange,interruptedLoopSourceError},walk2:{sourceDuration:walkSourceDuration,runtimeDuration:walkDuration,speed:1,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray(),seam:{at:walkSourceDuration,maxSeamBoneStep,maxSeamRootStep,minFixtureForwardStep,maxFixtureForwardStep,samples:seamSamples}},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual GLB animation arrays used, except the explicitly labelled nonzero parent-transform fixtures. Walk initial and settled poses hold the entire supplied Idle source at2.5sec. Walk duration extends from2.375 to3.6sec by continuing its forward cycle at unchanged rate1; source arrays and GLB are not modified. Other station entries and idle loops are retained. Walk2 remains authored in place; no extra travel is added. No browser rendering asserted by this test.'};
-await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/walk-entry-motion.json',import.meta.url),JSON.stringify(result,null,2));
+const result={asset:{path:assetPath,bytes:assetBytes.length,sha256:assetSHA256,sourceBounds,sourceHeight,sceneHeight,normalizationScale,joints:sample.bones.size},checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walkOpening:{sourceTime:2.5,wholeBody:true,walkOpeningSourceError,walkOpeningFeet,maxOpeningBoneStep},walkIdle:{sourceTime:2.5,mode:'whole-body-source-hold',idleSourceFeet,stableFeet,stableSourceError,stableLongIdleError,postNodSourceError,resumedIdlePoseChange,interruptedLoopSourceError},walk2:{sourceDuration:walkSourceDuration,runtimeDuration:walkDuration,speed:1,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray(),seam:{at:walkSourceDuration,maxSeamBoneStep,maxSeamRootStep,minFixtureForwardStep,maxFixtureForwardStep,samples:seamSamples}},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual restored original-resolution GLB animation arrays used. World-space tolerances retain the same values after matching the scene whole-model height of 1.83m; no geometry or skeleton edits are made by this test. Only the explicitly labelled nonzero parent-transform fixtures contain synthetic root displacement. Walk initial and settled poses hold the entire supplied Idle source at2.5sec. Walk duration extends from2.375 to3.6sec by continuing its forward cycle at unchanged rate1; source arrays and GLB are not modified. Other station entries and idle loops are retained. Walk2 remains authored in place; no extra travel is added. No browser rendering asserted by this test.'};
+await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/original-motion.json',import.meta.url),JSON.stringify(result,null,2));
 console.log(JSON.stringify(result,null,2));

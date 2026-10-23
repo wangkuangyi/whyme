@@ -1,0 +1,27 @@
+{
+  "checks": [
+    {
+      "name": "cancel during glb: release source bitmap and keep replacement ready",
+      "pass": true,
+      "state": {
+        "closed": 1,
+        "generation": 2,
+        "ready": true
+      }
+    },
+    {
+      "name": "cancel during mask: release source bitmap and keep replacement ready",
+      "pass": true,
+      "state": {
+        "closed": 1,
+        "generation": 2,
+        "ready": true
+      }
+    },
+    {
+      "name": "no unhandled browser errors",
+      "pass": true,
+      "errors": []
+    }
+  ]
+}

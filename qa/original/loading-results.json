@@ -1,0 +1,1113 @@
+{
+  "date": "2026-10-23",
+  "baseUrl": "http://127.0.0.1:5173",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "passed": 31,
+  "total": 31,
+  "checks": [
+    {
+      "name": "模型下载停住2秒时仅显示白底加载文字",
+      "pass": true,
+      "detail": {
+        "phase": "loading",
+        "appOpacity": "0",
+        "inert": true,
+        "busy": "true",
+        "label": "正在加载王匡义的形象…",
+        "loaderHidden": false,
+        "loaderBackground": "rgb(255, 255, 255)",
+        "staticMode": false,
+        "image": 0
+      }
+    },
+    {
+      "name": "普通3D启动没有请求任何人物PNG",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "加载期间键盘不能切换站点",
+      "pass": true
+    },
+    {
+      "name": "模型失败后静帧解码完成再显示页面",
+      "pass": true,
+      "detail": {
+        "phase": "static-ready",
+        "appOpacity": "1",
+        "inert": false,
+        "busy": "false",
+        "label": "正在加载王匡义的形象…",
+        "loaderHidden": true,
+        "loaderBackground": "rgb(255, 255, 255)",
+        "staticMode": true,
+        "image": 1440
+      }
+    },
+    {
+      "name": "失败后出现可操作的重试入口",
+      "pass": true
+    },
+    {
+      "name": "重试重新回到完整白色加载页",
+      "pass": true
+    },
+    {
+      "name": "主动静帧模式等待当前图片解码",
+      "pass": true
+    },
+    {
+      "name": "静帧加载期间改变尺寸后使用正确版本",
+      "pass": true
+    },
+    {
+      "name": "模型及静帧均失败时仍显示正文和重试按钮",
+      "pass": true
+    },
+    {
+      "name": "减少动态模式不使用加载淡出",
+      "pass": true
+    },
+    {
+      "name": "手机页面显示后正文立即可见",
+      "pass": true
+    },
+    {
+      "name": "没有浏览器未处理异常",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "desktop: 淡入之前人物完整就绪",
+      "pass": true,
+      "detail": 102
+    },
+    {
+      "name": "desktop: 淡入全程人物动作暂停",
+      "pass": true,
+      "detail": [
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        }
+      ]
+    },
+    {
+      "name": "desktop: 淡入全程禁止操作",
+      "pass": true
+    },
+    {
+      "name": "desktop: 揭幕后才从开头播放走路",
+      "pass": true,
+      "detail": {
+        "t": 1017.5,
+        "phase": "ready",
+        "appOpacity": "1",
+        "inert": false,
+        "busy": "false",
+        "fontStatus": "loaded",
+        "loaderHidden": true,
+        "sceneReady": true,
+        "paused": false,
+        "action": "Walk",
+        "animationTime": 0,
+        "end": false,
+        "cardOpen": true,
+        "cardOpacity": "1"
+      }
+    },
+    {
+      "name": "desktop: 动作解冻前页面已完全显现",
+      "pass": true,
+      "detail": {
+        "t": 1017.5,
+        "phase": "ready",
+        "appOpacity": "1",
+        "inert": false,
+        "busy": "false",
+        "fontStatus": "loaded",
+        "loaderHidden": true,
+        "sceneReady": true,
+        "paused": false,
+        "action": "Walk",
+        "animationTime": 0,
+        "end": false,
+        "cardOpen": true,
+        "cardOpacity": "1"
+      }
+    },
+    {
+      "name": "desktop: 正文在走路开始时显示",
+      "pass": true,
+      "detail": {
+        "t": 1017.5,
+        "phase": "ready",
+        "appOpacity": "1",
+        "inert": false,
+        "busy": "false",
+        "fontStatus": "loaded",
+        "loaderHidden": true,
+        "sceneReady": true,
+        "paused": false,
+        "action": "Walk",
+        "animationTime": 0,
+        "end": false,
+        "cardOpen": true,
+        "cardOpacity": "1"
+      }
+    },
+    {
+      "name": "desktop: 字体已就绪才开始正常揭幕",
+      "pass": true
+    },
+    {
+      "name": "mobile: 淡入之前人物完整就绪",
+      "pass": true,
+      "detail": 107
+    },
+    {
+      "name": "mobile: 淡入全程人物动作暂停",
+      "pass": true,
+      "detail": [
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        },
+        {
+          "time": 0,
+          "paused": true
+        }
+      ]
+    },
+    {
+      "name": "mobile: 淡入全程禁止操作",
+      "pass": true
+    },
+    {
+      "name": "mobile: 揭幕后才从开头播放走路",
+      "pass": true,
+      "detail": {
+        "t": 1083.4000000003725,
+        "phase": "ready",
+        "appOpacity": "1",
+        "inert": false,
+        "busy": "false",
+        "fontStatus": "loaded",
+        "loaderHidden": true,
+        "sceneReady": true,
+        "paused": false,
+        "action": "Walk",
+        "animationTime": 0,
+        "end": false,
+        "cardOpen": true,
+        "cardOpacity": "1"
+      }
+    },
+    {
+      "name": "mobile: 动作解冻前页面已完全显现",
+      "pass": true,
+      "detail": {
+        "t": 1083.4000000003725,
+        "phase": "ready",
+        "appOpacity": "1",
+        "inert": false,
+        "busy": "false",
+        "fontStatus": "loaded",
+        "loaderHidden": true,
+        "sceneReady": true,
+        "paused": false,
+        "action": "Walk",
+        "animationTime": 0,
+        "end": false,
+        "cardOpen": true,
+        "cardOpacity": "1"
+      }
+    },
+    {
+      "name": "mobile: 正文在走路开始时显示",
+      "pass": true,
+      "detail": {
+        "t": 1083.4000000003725,
+        "phase": "ready",
+        "appOpacity": "1",
+        "inert": false,
+        "busy": "false",
+        "fontStatus": "loaded",
+        "loaderHidden": true,
+        "sceneReady": true,
+        "paused": false,
+        "action": "Walk",
+        "animationTime": 0,
+        "end": false,
+        "cardOpen": true,
+        "cardOpacity": "1"
+      }
+    },
+    {
+      "name": "mobile: 字体已就绪才开始正常揭幕",
+      "pass": true
+    },
+    {
+      "name": "两次正常3D加载未请求旧PNG首屏",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "字体一直不返回时使用后备字体继续展示",
+      "pass": true,
+      "detail": {
+        "wait": 2007.199999999255,
+        "fontStatus": "loading"
+      }
+    },
+    {
+      "name": "等待字体时没有提前消费动作",
+      "pass": true
+    },
+    {
+      "name": "减少动态3D保持原静姿并立即揭幕",
+      "pass": true
+    },
+    {
+      "name": "无浏览器未处理异常",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "pageErrors": [],
+  "fullTrace": "output/playwright/original-loading/reveal-ui.json",
+  "scope": "Loading and reveal state/timing; static-image visual quality and final camera/light matching require separate review."
+}
