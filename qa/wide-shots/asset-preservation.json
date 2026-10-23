@@ -1,0 +1,77 @@
+{
+  "sourceSHA256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "outputSHA256": "7a4b7bebe8848a88bd10b83a04f50383651dfe039d73708647d0cb7b2de1a4fc",
+  "bytes": 6248908,
+  "blender": "5.1.0",
+  "waitSourceSHA256": "abf0aa454793056dd78d3a5799482c102ee22f86632039e81ebc0d4a9774a4d0",
+  "retainedAnimations": [
+    {
+      "name": "Idle",
+      "beforeSHA256": "721469713c0215ba2cb1869d02c148a955fb00cd7ad53816a1d23045cace39d6",
+      "afterSHA256": "721469713c0215ba2cb1869d02c148a955fb00cd7ad53816a1d23045cace39d6",
+      "allSamplerBytesIdentical": true
+    },
+    {
+      "name": "Walk",
+      "beforeSHA256": "61e293a6c7020347921b146789636f3b78450b2a8a57f1d0a67b5ef7b558b71f",
+      "afterSHA256": "61e293a6c7020347921b146789636f3b78450b2a8a57f1d0a67b5ef7b558b71f",
+      "allSamplerBytesIdentical": true
+    },
+    {
+      "name": "Nod",
+      "beforeSHA256": "e5f4a72c31f205f2f3e665f0cfe2c6bea9138c0a2dcd28d1e51a0ee8fbd7cece",
+      "afterSHA256": "e5f4a72c31f205f2f3e665f0cfe2c6bea9138c0a2dcd28d1e51a0ee8fbd7cece",
+      "allSamplerBytesIdentical": true
+    },
+    {
+      "name": "Wave",
+      "beforeSHA256": "5222052a861f67f2570fe149d5e7741194ddaaa6347bd404b8192be77e5c368e",
+      "afterSHA256": "5222052a861f67f2570fe149d5e7741194ddaaa6347bd404b8192be77e5c368e",
+      "allSamplerBytesIdentical": true
+    }
+  ],
+  "originalBinaryPrefixPreserved": true,
+  "originalBinaryBytes": 4344360,
+  "preserved": [
+    "nodes",
+    "meshes",
+    "skins",
+    "materials",
+    "textures",
+    "images",
+    "samplers",
+    "scenes"
+  ],
+  "actions": [
+    {
+      "name": "Idle",
+      "duration": 4.8,
+      "fps": 60,
+      "frames": 289
+    },
+    {
+      "name": "Walk",
+      "duration": 4.4,
+      "fps": 60,
+      "frames": 265
+    },
+    {
+      "name": "Nod",
+      "duration": 4.15,
+      "fps": 60,
+      "frames": 250
+    },
+    {
+      "name": "Wave",
+      "duration": 5.2,
+      "fps": 60,
+      "frames": 313
+    },
+    {
+      "name": "Wait",
+      "duration": 7,
+      "fps": 60,
+      "frames": 421
+    }
+  ]
+}

@@ -1,16 +1,22 @@
 /** Synthetic controller regression. This does not certify the Blender asset or appearance. */
 import assert from 'node:assert/strict';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import * as THREE from 'three';
 import { createCharacterMotion, STATION_CLIPS } from '../../src/motion.js';
+
+const root = new URL('../../', import.meta.url);
+const reportDirectory = process.argv.find(argument => argument.startsWith('--output-dir='))?.slice('--output-dir='.length) || 'qa/waiting';
+const expectedWaitDuration = Number(process.argv.find(argument => argument.startsWith('--wait-duration='))?.slice('--wait-duration='.length) || 8);
+if (!/^(?:qa|output)\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(reportDirectory)) throw new Error('Output directory must be a project-relative qa/... or output/... path.');
+if (!Number.isFinite(expectedWaitDuration) || expectedWaitDuration <= 0) throw new Error('Expected Wait duration must be positive.');
 
 function fixture(reducedMotion = false) {
   const model = new THREE.Group(), hips = new THREE.Bone(), chest = new THREE.Bone();
   hips.name = 'mixamorigHips'; chest.name = 'mixamorigSpine2';
   hips.position.y = 1; chest.position.y = .5; hips.add(chest); model.add(hips);
   const bones = new Map([['Hips', { bone: hips }], ['Spine2', { bone: chest }]]);
-  const period = 4.8, lengths = { Idle: period, Walk: 4.4, Nod: 4.15, Wave: 5.2, Wait: 8 };
+  const period = 4.8, lengths = { Idle: period, Walk: 4.4, Nod: 4.15, Wave: 5.2, Wait: expectedWaitDuration };
   const animations = Object.entries(lengths).map(([name, duration]) => {
     const times = [], rotations = [], positions = [], pelvis = [];
     for (let i = 0, count = Math.ceil(duration * 240); i <= count; i++) {
@@ -82,9 +88,10 @@ const motionSHA256 = createHash('sha256').update(await readFile(new URL('../../s
 const result = {
   method: 'Independent synthetic two-bone controller fixture with deliberately nonstatic Idle and authored matching gesture endpoints.',
   limitations: 'Does not validate the real model, Blender edits, cloth intersections or browser appearance. Those require the separate authored-motion and clothing reports and screenshot review.',
-  motionSHA256, passed: checks.filter(item => item.passed).length, total: checks.length, checks,
+  expectedWaitDuration, motionSHA256, passed: checks.filter(item => item.passed).length, total: checks.length, checks,
 };
-await writeFile(new URL('./player-results.json', import.meta.url), JSON.stringify(result, null, 2) + '\n');
+await mkdir(new URL(`${reportDirectory}/`, root), { recursive: true });
+await writeFile(new URL(`${reportDirectory}/player-results.json`, root), JSON.stringify(result, null, 2) + '\n');
 console.log(`${result.passed}/${result.total} synthetic controller checks passed.`);
 for (const item of checks.filter(item => !item.passed)) console.error(item.name, item.error);
 process.exitCode = result.passed === result.total ? 0 : 1;

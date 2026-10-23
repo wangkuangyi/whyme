@@ -1,0 +1,98 @@
+{
+  "method": "Independent synthetic two-bone controller fixture with deliberately nonstatic Idle and authored matching gesture endpoints.",
+  "limitations": "Does not validate the real model, Blender edits, cloth intersections or browser appearance. Those require the separate authored-motion and clothing reports and screenshot review.",
+  "expectedWaitDuration": 7,
+  "motionSHA256": "b9082c2cda7d8feb5bd7a2a78ae7ebed024ff9544150de68256e5efcc65f4e27",
+  "passed": 22,
+  "total": 22,
+  "checks": [
+    {
+      "name": "Walk-20fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Nod-20fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wait-20fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wave-20fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Walk-30fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Nod-30fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wait-30fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wave-30fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Walk-60fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Nod-60fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wait-60fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wave-60fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Walk-120fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Nod-120fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wait-120fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Wave-120fps-phase-matched-zero-fade-return-and-source-preservation",
+      "passed": true
+    },
+    {
+      "name": "Idle-actually-advances-an-independent-bone-rotation-clip",
+      "passed": true
+    },
+    {
+      "name": "zero-delta-presentation-pause-preserves-all-state",
+      "passed": true
+    },
+    {
+      "name": "dragging-preserves-evaluated-bone-pose",
+      "passed": true
+    },
+    {
+      "name": "reduced-motion-holds-Idle-zero-across-all-stations",
+      "passed": true
+    },
+    {
+      "name": "100-rapid-station-changes-retire-all-outgoing-actions",
+      "passed": true
+    },
+    {
+      "name": "station-01-click-plays-Nod-not-Walk",
+      "passed": true
+    }
+  ]
+}

@@ -11,12 +11,12 @@ from mathutils import Matrix, Quaternion, Vector
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from blender_motion_helpers import solve_arm_to_target, world_rotate_pose_bone
-OUT = ROOT / 'output/waiting'
+OUT = ROOT / 'output/wide-shots'
 OUT.mkdir(parents=True, exist_ok=True)
 SOURCE = ROOT / 'public/models/person-original-animated.glb'
 WAIT_SOURCE = ROOT / '动作素材/human+character+3d+model+dengdai.glb'
 FPS, IDLE_SECONDS = 60, 4.8
-DURATIONS = {'Idle': 4.8, 'Walk': 4.4, 'Nod': 4.15, 'Wave': 5.2, 'Wait': 8.0}
+DURATIONS = {'Idle': 4.8, 'Walk': 4.4, 'Nod': 4.15, 'Wave': 5.2, 'Wait': 7.0}
 
 def glb_json(path):
     data = path.read_bytes()
@@ -219,6 +219,48 @@ g2b = Matrix.Rotation(math.pi / 2, 4, 'X')
 b2g = g2b.inverted()
 scene.render.fps = FPS
 scene.render.fps_base = 1
+
+def right_wait_contact(weight):
+    """Keep the near-side hand on the hip for the right-front wide shot.
+
+    Mirror the accepted left hand orientation through the world sagittal
+    plane, then solve only the right arm to its hip-side wrist target. The
+    torso's leaning chest plane is deliberately not used for reflection: it
+    puts the wrist inside the waist. Blend every edit out at the Idle joins.
+    """
+    if weight <= 0:
+        return
+    reflect = Matrix.Diagonal((-1, 1, 1, 1))
+    targets = []
+    for n, left in bones.items():
+        if not n.startswith('LeftHand'):
+            continue
+        right = bones['Right' + n[4:]]
+        target = reflect @ left.matrix @ left.bone.matrix_local.inverted() @ reflect @ right.bone.matrix_local
+        targets.append((right, target.to_quaternion()))
+    left_wrist = (arm.matrix_world @ bones['LeftHand'].matrix).translation
+    right_wrist = (arm.matrix_world @ bones['RightHand'].matrix).translation
+    left_elbow = (arm.matrix_world @ bones['LeftForeArm'].matrix).translation
+    right_elbow = (arm.matrix_world @ bones['RightForeArm'].matrix).translation
+    target = right_wrist.lerp(Vector((-left_wrist.x, left_wrist.y, left_wrist.z)), weight)
+    pole = right_elbow.lerp(Vector((-left_elbow.x, left_elbow.y, left_elbow.z)), weight)
+    solve_arm_to_target(arm, 'Right', target, pole)
+    arm_rotation = arm.matrix_world.to_quaternion()
+    for right, desired in targets:
+        current = right.matrix.to_quaternion()
+        turn = arm_rotation @ (desired @ current.inverted()) @ arm_rotation.inverted()
+        world_rotate_pose_bone(arm, right, IDENTITY.slerp(turn, weight))
+    for digit in ['Index', 'Middle', 'Ring', 'Pinky']:
+        for segment in [2, 3]:
+            bone = bones['RightHand' + digit + str(segment)]
+            bone.rotation_quaternion = bone.rotation_quaternion.slerp(IDENTITY, .5 * weight)
+    update()
+    wrist = (arm.matrix_world @ bones['RightHand'].matrix).translation
+    tip = (arm.matrix_world @ bones['RightHandMiddle4'].matrix).translation
+    direction = tip - wrist
+    turn = direction.rotation_difference(direction + Vector((-.012, .018, -.060)))
+    world_rotate_pose_bone(arm, bones['RightHand'], IDENTITY.slerp(turn, weight))
+
 exports, summaries = [], []
 for name, poses in poses_by_action.items():
     action = bpy.data.actions.new('Edited_' + name)
@@ -243,6 +285,7 @@ for name, poses in poses_by_action.items():
                 desired = end - start + Vector((.018, -.014, -.004))
                 turn = (end - start).rotation_difference(desired)
                 world_rotate_pose_bone(arm, base, IDENTITY.slerp(turn, envelope))
+            right_wait_contact(envelope)
             update()
         if name == 'Walk':
             t = i / FPS
@@ -300,5 +343,37 @@ EDITABLE = ROOT / 'animation/character-actions.blend'
 EDITABLE.parent.mkdir(parents=True, exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(EDITABLE))
 (OUT / 'authored-animations.json').write_text(json.dumps({'sourceSHA256': hashlib.sha256(raw).hexdigest(), 'waitSourceSHA256': hashlib.sha256(WAIT_SOURCE.read_bytes()).hexdigest(), 'blender': bpy.app.version_string, 'actions': exports}), encoding='utf8')
-(OUT / 'editing-summary.json').write_text(json.dumps({'blender': bpy.app.version_string, 'actions': summaries, 'sourceSHA256': hashlib.sha256(raw).hexdigest(), 'waitSourceSHA256': hashlib.sha256(WAIT_SOURCE.read_bytes()).hexdigest(), 'originalMeshUnchanged': True, 'neutralRanges': neutral_ranges, 'waitAdaptation': {'visualVariant': 'L-full-local-fingers', 'sourceSeconds': 6.041666666666667, 'editedSeconds': 8, 'sourceSpeed': 1, 'entrySeconds': 1, 'exitSeconds': 1, 'armGesture': 'original source shoulder, elbow, wrist, palm contact and thumb retained; no whole-hand offset', 'visibleFingerAdjustment': {'bones': ['LeftHandIndex1', 'LeftHandMiddle1'], 'method': 'world direction to current tip plus small cloth-tangent vector, quintic envelope', 'tipDirectionOffsetBlenderSourceUnits': [.018, -.014, -.004]}, 'torso': 'complete original source torso and pelvis relationship retained', 'legs': 'original relaxed source stance; entry and exit blend into shared Idle', 'endPose': 'same phase of independent Idle', 'limits': 'Hidden original right-side hand contact is retained for the requested left-front camera; no claim of all-angle collision-free hands'}}, indent=2), encoding='utf8')
+summary = {
+    'blender': bpy.app.version_string, 'actions': summaries,
+    'sourceSHA256': hashlib.sha256(raw).hexdigest(),
+    'waitSourceSHA256': hashlib.sha256(WAIT_SOURCE.read_bytes()).hexdigest(),
+    'originalMeshUnchanged': True, 'neutralRanges': neutral_ranges,
+    'waitAdaptation': {
+        'visualVariant': 'R4-right-hand-down-on-L-body',
+        'sourceSeconds': 6.041666666666667, 'editedSeconds': DURATIONS['Wait'],
+        'idleEndPhaseSeconds': DURATIONS['Wait'] % IDLE_SECONDS,
+        'sourceWindowSeconds': [0, 6], 'sourceSpeed': 1,
+        'entrySeconds': 1, 'exitSeconds': 1,
+        'armGesture': 'left contact preserved; right arm IK places wrist at reflected left wrist on hip side, without a forward offset',
+        'visibleFingerAdjustment': {
+            'bones': ['LeftHandIndex1', 'LeftHandMiddle1'],
+            'method': 'unchanged L cloth-tangent direction correction with quintic envelope',
+            'tipDirectionOffsetBlenderSourceUnits': [.018, -.014, -.004],
+        },
+        'rightHandAdjustment': {
+            'armBones': ['RightArm', 'RightForeArm'],
+            'wristTarget': 'reflection of current left wrist across world X=0; pole follows reflected left elbow',
+            'handOrientation': 'left hand orientation reflected with original rest-bone conversion; no chest-plane reflection',
+            'fingerUncurlBones': [f'RightHand{digit}{segment}' for digit in ['Index', 'Middle', 'Ring', 'Pinky'] for segment in [2, 3]],
+            'fingerUncurlFactor': .5,
+            'wristDirectionOffsetBlenderSourceUnits': [-.012, .018, -.060],
+            'envelope': 'quintic entry/exit shared by IK, hand orientation, finger uncurl and wrist direction; exact identity at both joins',
+        },
+        'torso': 'complete original source torso and pelvis relationship retained',
+        'legs': 'original relaxed source stance; entry and exit blend into shared Idle',
+        'endPose': 'same phase of independent Idle',
+        'limits': 'Natural visible right-side contact is the visual target; original occluded left-side contact remains, with no all-angle collision-free claim',
+    },
+}
+(OUT / 'editing-summary.json').write_text(json.dumps(summary, indent=2), encoding='utf8')
 print('SAVED', EDITABLE, flush=True)

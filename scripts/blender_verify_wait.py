@@ -2,7 +2,7 @@ from pathlib import Path
 import bpy, json, math, hashlib, struct
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / 'animation/character-actions.blend'
-OUT = ROOT / 'qa/waiting/blender-source.json'
+OUT = ROOT / 'qa/wide-shots/blender-source.json'
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 tracked = {'editableBlend': TARGET, 'originalPersonBlend': ROOT.parent / 'person.blend', 'originalGLB': ROOT / 'public/models/person-original-animated.glb', 'authoredGLB': ROOT / 'public/models/person-authored-animated.glb'}
@@ -15,7 +15,7 @@ fps = bpy.context.scene.render.fps / bpy.context.scene.render.fps_base
 check('Blender-source-is-baked-at-60-fps', abs(fps - 60) < 1e-8, fps)
 armatures = [obj for obj in bpy.data.objects if obj.type == 'ARMATURE']
 check('one-real-armature-with-65-bones', len(armatures) == 1 and len(armatures[0].data.bones) == 65)
-expected = {'Idle': (289, 4.8), 'Walk': (265, 4.4), 'Nod': (250, 4.15), 'Wave': (313, 5.2), 'Wait': (481, 8.0)}
+expected = {'Idle': (289, 4.8), 'Walk': (265, 4.4), 'Nod': (250, 4.15), 'Wave': (313, 5.2), 'Wait': (421, 7.0)}
 actions = []
 for name, (frames, seconds) in expected.items():
     action = bpy.data.actions.get('Edited_' + name)

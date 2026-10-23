@@ -10,7 +10,7 @@ from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[1]
 mode = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'raw'
-OUT = ROOT / 'output/waiting' / mode
+OUT = ROOT / 'output/wide-shots' / mode
 OUT.mkdir(parents=True, exist_ok=True)
 if mode == 'raw':
     source = ROOT / '动作素材/human+character+3d+model+dengdai.glb'
@@ -20,7 +20,7 @@ if mode == 'raw':
 else:
     source = ROOT / 'animation/character-actions.blend'
     bpy.ops.wm.open_mainfile(filepath=str(source), load_ui=False, use_scripts=False)
-    action_name, fps, times = 'Edited_Wait', 60, [0, .4, .7, 1, 3.7, 6.5, 7.3, 7.6, 8]
+    action_name, fps, times = 'Edited_Wait', 60, [0, .4, .7, 1, 3.2, 5.5, 6.3, 6.6, 7]
 
 scene = bpy.context.scene
 arm = next(o for o in scene.objects if o.type == 'ARMATURE')
@@ -58,9 +58,10 @@ scene.collection.objects.link(camera)
 scene.camera = camera
 camera.data.type = 'ORTHO'
 camera.data.ortho_scale = 1.20
+# Current wide shot: anatomical right front, facing screen right, mild low angle.
 # In Blender X+ is the character's anatomical left, -Y is forward, Z is up.
 target = Vector((0, 0, .5))
-camera.location = (1.05, -2.25, 1.0)
+camera.location = target + Vector((math.sin(math.radians(-32)) * 2, -math.cos(math.radians(-32)) * 2, -.16 / 2.8 * 2))
 camera.rotation_euler = (target - camera.location).to_track_quat('-Z', 'Y').to_euler()
 samples = []
 for time in times:

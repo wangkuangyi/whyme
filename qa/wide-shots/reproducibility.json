@@ -1,0 +1,40 @@
+{
+  "assetSHA256": "7a4b7bebe8848a88bd10b83a04f50383651dfe039d73708647d0cb7b2de1a4fc",
+  "editableBlendSHA256": "4f7718e27da19c5904022b8edf8e4acffb2b84f162863f4f3d34bccee8734090",
+  "scriptSHA256": "158b6416dbe6b3b154346a00bc2dc41ec3175926e4d8f921ff9dbe2573f2c112",
+  "method": "Re-executed the final authoring script in Blender with only ROOT resolution and output paths redirected to output/wide-shots/repro. Compared every sampled TRS value in all five Actions; official GLB and editable blend hashes remained unchanged.",
+  "checks": [
+    {
+      "name": "Idle",
+      "frames": 289,
+      "durationSeconds": 4.8,
+      "allSampledValuesIdentical": true
+    },
+    {
+      "name": "Walk",
+      "frames": 265,
+      "durationSeconds": 4.4,
+      "allSampledValuesIdentical": true
+    },
+    {
+      "name": "Nod",
+      "frames": 250,
+      "durationSeconds": 4.15,
+      "allSampledValuesIdentical": true
+    },
+    {
+      "name": "Wave",
+      "frames": 313,
+      "durationSeconds": 5.2,
+      "allSampledValuesIdentical": true
+    },
+    {
+      "name": "Wait",
+      "frames": 421,
+      "durationSeconds": 7,
+      "allSampledValuesIdentical": true
+    }
+  ],
+  "passed": 5,
+  "total": 5
+}

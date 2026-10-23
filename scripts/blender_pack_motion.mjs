@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 const root = new URL('../', import.meta.url);
 const source = await readFile(new URL('public/models/person-original-animated.glb', root));
-const authored = JSON.parse(await readFile(new URL('output/waiting/authored-animations.json', root), 'utf8'));
+const authored = JSON.parse(await readFile(new URL('output/wide-shots/authored-animations.json', root), 'utf8'));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 assert.equal(hash(source), authored.sourceSHA256);
 const waitSource = await readFile(new URL('动作素材/human+character+3d+model+dengdai.glb', root));
@@ -87,8 +87,8 @@ const retainedAnimations = ['Idle', 'Walk', 'Nod', 'Wave'].map(name => {
   return { name, beforeSHA256, afterSHA256, allSamplerBytesIdentical: true };
 });
 await writeFile(new URL('public/models/person-authored-animated.glb', root), output);
-await mkdir(new URL('qa/waiting/', root), { recursive: true });
-await writeFile(new URL('qa/waiting/asset-preservation.json', root), JSON.stringify({
+await mkdir(new URL('qa/wide-shots/', root), { recursive: true });
+await writeFile(new URL('qa/wide-shots/asset-preservation.json', root), JSON.stringify({
   sourceSHA256: hash(source), outputSHA256: hash(output), bytes: output.length, blender: authored.blender,
   waitSourceSHA256: authored.waitSourceSHA256,
   retainedAnimations,

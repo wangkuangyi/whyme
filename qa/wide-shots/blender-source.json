@@ -1,0 +1,876 @@
+{
+  "blenderVersion": "5.1.0",
+  "method": "Read-only Blender background open_mainfile with scripts disabled; inspected actual Action F-curves, dense keyframe values, packed image bytes and file hashes. No save operation performed.",
+  "source": "animation/character-actions.blend",
+  "fps": 60.0,
+  "hashesBefore": {
+    "editableBlend": "4f7718e27da19c5904022b8edf8e4acffb2b84f162863f4f3d34bccee8734090",
+    "originalPersonBlend": "51363cd344cf3538e1b82a26b1e6921d52e3bbd734b5b78375844c679bd0f16d",
+    "originalGLB": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+    "authoredGLB": "7a4b7bebe8848a88bd10b83a04f50383651dfe039d73708647d0cb7b2de1a4fc"
+  },
+  "hashesAfter": {
+    "editableBlend": "4f7718e27da19c5904022b8edf8e4acffb2b84f162863f4f3d34bccee8734090",
+    "originalPersonBlend": "51363cd344cf3538e1b82a26b1e6921d52e3bbd734b5b78375844c679bd0f16d",
+    "originalGLB": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+    "authoredGLB": "7a4b7bebe8848a88bd10b83a04f50383651dfe039d73708647d0cb7b2de1a4fc"
+  },
+  "armatures": [
+    {
+      "name": "Armature",
+      "bones": 65
+    }
+  ],
+  "actions": [
+    {
+      "name": "Edited_Idle",
+      "frameRange": [
+        1.0,
+        289.0
+      ],
+      "durationSeconds": 4.8,
+      "curveCount": 650,
+      "keyframeCount": 187850,
+      "keysPerCurve": [
+        289,
+        289
+      ],
+      "interpolations": [
+        "LINEAR"
+      ],
+      "nonconstantCurveCount": 52,
+      "maximumAbsoluteKeyValue": 1.0,
+      "animatedCurveExamples": [
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9999734163284302,
+          "maximum": 0.9999964833259583
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.001588456449098885,
+          "maximum": 0.006585777271538973
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.0010890669655054808,
+          "maximum": 0.0008756538154557347
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 3,
+          "minimum": 0.0026074706111103296,
+          "maximum": 0.00649405037984252
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9998781681060791,
+          "maximum": 0.99990314245224
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.0037083823699504137,
+          "maximum": -0.0019253372447565198
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.001948127755895257,
+          "maximum": 0.0021172778215259314
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 3,
+          "minimum": 0.013749808073043823,
+          "maximum": 0.015162039548158646
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9994985461235046,
+          "maximum": 0.9996325969696045
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 1,
+          "minimum": 0.0016463949577882886,
+          "maximum": 0.004940591286867857
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.006729658227413893,
+          "maximum": -0.002008273499086499
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 3,
+          "minimum": -0.030814895406365395,
+          "maximum": -0.02691810391843319
+        }
+      ]
+    },
+    {
+      "name": "Edited_Walk",
+      "frameRange": [
+        1.0,
+        265.0
+      ],
+      "durationSeconds": 4.4,
+      "curveCount": 650,
+      "keyframeCount": 172250,
+      "keysPerCurve": [
+        265,
+        265
+      ],
+      "interpolations": [
+        "LINEAR"
+      ],
+      "nonconstantCurveCount": 89,
+      "maximumAbsoluteKeyValue": 1.0000048875808716,
+      "animatedCurveExamples": [
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].location",
+          "component": 1,
+          "minimum": -0.023691922426223755,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9956191778182983,
+          "maximum": 1.0000001192092896
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.00025087594985961914,
+          "maximum": 0.031212985515594482
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.019094698131084442,
+          "maximum": 0.05572479963302612
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 3,
+          "minimum": 0.0,
+          "maximum": 0.08186593651771545
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 0,
+          "minimum": -1.0,
+          "maximum": -0.9766148924827576
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.008674578741192818,
+          "maximum": 0.06722136586904526
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.044978395104408264,
+          "maximum": 0.02402975969016552
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 3,
+          "minimum": -0.21118119359016418,
+          "maximum": 0.15737976133823395
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftLeg\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.860048234462738,
+          "maximum": 1.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftLeg\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.0171803068369627,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftLeg\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.006709516514092684,
+          "maximum": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Edited_Nod",
+      "frameRange": [
+        1.0,
+        250.0
+      ],
+      "durationSeconds": 4.15,
+      "curveCount": 650,
+      "keyframeCount": 162500,
+      "keysPerCurve": [
+        250,
+        250
+      ],
+      "interpolations": [
+        "LINEAR"
+      ],
+      "nonconstantCurveCount": 52,
+      "maximumAbsoluteKeyValue": 1.0,
+      "animatedCurveExamples": [
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9998853206634521,
+          "maximum": 0.9999963641166687
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.0025931992568075657,
+          "maximum": 0.006585738621652126
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.0010890669655054808,
+          "maximum": 0.0008914403151720762
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 3,
+          "minimum": 0.0025919447652995586,
+          "maximum": 0.013644319958984852
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9997924566268921,
+          "maximum": 0.99990314245224
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.004840748384594917,
+          "maximum": -0.0019253758946433663
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.0031341551803052425,
+          "maximum": 0.0030213019344955683
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 3,
+          "minimum": 0.013753307983279228,
+          "maximum": 0.019601289182901382
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9992539882659912,
+          "maximum": 0.9996325969696045
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.0015073594404384494,
+          "maximum": 0.008819696493446827
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.008776132017374039,
+          "maximum": -0.0019425725331529975
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 3,
+          "minimum": -0.037147052586078644,
+          "maximum": -0.02691819705069065
+        }
+      ]
+    },
+    {
+      "name": "Edited_Wave",
+      "frameRange": [
+        1.0,
+        313.0
+      ],
+      "durationSeconds": 5.2,
+      "curveCount": 650,
+      "keyframeCount": 203450,
+      "keysPerCurve": [
+        313,
+        313
+      ],
+      "interpolations": [
+        "LINEAR"
+      ],
+      "nonconstantCurveCount": 52,
+      "maximumAbsoluteKeyValue": 1.0,
+      "animatedCurveExamples": [
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9999583959579468,
+          "maximum": 0.9999892115592957
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.0020155825186520815,
+          "maximum": 0.006585738621652126
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.0010890669655054808,
+          "maximum": 0.0009278361103497446
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine\"].rotation_quaternion",
+          "component": 3,
+          "minimum": 0.0029296122957021,
+          "maximum": 0.007374356035143137
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9998596906661987,
+          "maximum": 0.99990314245224
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.004299307242035866,
+          "maximum": -0.0019253758946433663
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.003766749519854784,
+          "maximum": 0.0022755104582756758
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine1\"].rotation_quaternion",
+          "component": 3,
+          "minimum": 0.013753269799053669,
+          "maximum": 0.01560286059975624
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.999476969242096,
+          "maximum": 0.9996130466461182
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.00037607818376272917,
+          "maximum": 0.015608713030815125
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.00911138579249382,
+          "maximum": -0.003242691745981574
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Spine2\"].rotation_quaternion",
+          "component": 3,
+          "minimum": -0.030573640018701553,
+          "maximum": -0.026390835642814636
+        }
+      ]
+    },
+    {
+      "name": "Edited_Wait",
+      "frameRange": [
+        1.0,
+        421.0
+      ],
+      "durationSeconds": 7.0,
+      "curveCount": 650,
+      "keyframeCount": 273650,
+      "keysPerCurve": [
+        421,
+        421
+      ],
+      "interpolations": [
+        "LINEAR"
+      ],
+      "nonconstantCurveCount": 231,
+      "maximumAbsoluteKeyValue": 1.000004768371582,
+      "animatedCurveExamples": [
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].location",
+          "component": 0,
+          "minimum": 0.0,
+          "maximum": 0.0009564606007188559
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].location",
+          "component": 1,
+          "minimum": -0.009626567363739014,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].location",
+          "component": 2,
+          "minimum": 0.0,
+          "maximum": 0.0015359402168542147
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.980840802192688,
+          "maximum": 1.0000001192092896
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 1,
+          "minimum": -0.12606331706047058,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.010990947484970093,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:Hips\"].rotation_quaternion",
+          "component": 3,
+          "minimum": -0.14825251698493958,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9224675297737122,
+          "maximum": 1.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 1,
+          "minimum": 0.0,
+          "maximum": 0.21351207792758942
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 2,
+          "minimum": -0.10940973460674286,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftUpLeg\"].rotation_quaternion",
+          "component": 3,
+          "minimum": -0.3095097243785858,
+          "maximum": 0.0
+        },
+        {
+          "path": "pose.bones[\"mixamorig:LeftLeg\"].rotation_quaternion",
+          "component": 0,
+          "minimum": 0.9898736476898193,
+          "maximum": 1.0000001192092896
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "tripo_rgb_0b33f73e-7cf8-4384-8dfa-d6827d26507e",
+      "size": [
+        4096,
+        4096
+      ],
+      "packed": true,
+      "packedBytes": 3106959,
+      "packedSHA256": "c931d3555581a035ff2445b148f2676d70c5b22a60ec3b99b191c7341ed8c1ec"
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Icosphere",
+      "vertices": 42,
+      "polygons": 80,
+      "triangles": 80,
+      "uvLayers": 1,
+      "armatureModifiers": [],
+      "customShapeUsers": [
+        "mixamorig:Hips",
+        "mixamorig:LeftUpLeg",
+        "mixamorig:LeftLeg",
+        "mixamorig:LeftFoot",
+        "mixamorig:LeftToeBase",
+        "mixamorig:LeftToe_End",
+        "mixamorig:RightUpLeg",
+        "mixamorig:RightLeg",
+        "mixamorig:RightFoot",
+        "mixamorig:RightToeBase",
+        "mixamorig:RightToe_End",
+        "mixamorig:Spine",
+        "mixamorig:Spine1",
+        "mixamorig:Spine2",
+        "mixamorig:LeftShoulder",
+        "mixamorig:LeftArm",
+        "mixamorig:LeftForeArm",
+        "mixamorig:LeftHand",
+        "mixamorig:LeftHandIndex1",
+        "mixamorig:LeftHandIndex2",
+        "mixamorig:LeftHandIndex3",
+        "mixamorig:LeftHandIndex4",
+        "mixamorig:LeftHandMiddle1",
+        "mixamorig:LeftHandMiddle2",
+        "mixamorig:LeftHandMiddle3",
+        "mixamorig:LeftHandMiddle4",
+        "mixamorig:LeftHandPinky1",
+        "mixamorig:LeftHandPinky2",
+        "mixamorig:LeftHandPinky3",
+        "mixamorig:LeftHandPinky4",
+        "mixamorig:LeftHandRing1",
+        "mixamorig:LeftHandRing2",
+        "mixamorig:LeftHandRing3",
+        "mixamorig:LeftHandRing4",
+        "mixamorig:LeftHandThumb1",
+        "mixamorig:LeftHandThumb2",
+        "mixamorig:LeftHandThumb3",
+        "mixamorig:LeftHandThumb4",
+        "mixamorig:Neck",
+        "mixamorig:Head",
+        "mixamorig:HeadTop_End",
+        "mixamorig:RightShoulder",
+        "mixamorig:RightArm",
+        "mixamorig:RightForeArm",
+        "mixamorig:RightHand",
+        "mixamorig:RightHandIndex1",
+        "mixamorig:RightHandIndex2",
+        "mixamorig:RightHandIndex3",
+        "mixamorig:RightHandIndex4",
+        "mixamorig:RightHandMiddle1",
+        "mixamorig:RightHandMiddle2",
+        "mixamorig:RightHandMiddle3",
+        "mixamorig:RightHandMiddle4",
+        "mixamorig:RightHandPinky1",
+        "mixamorig:RightHandPinky2",
+        "mixamorig:RightHandPinky3",
+        "mixamorig:RightHandPinky4",
+        "mixamorig:RightHandRing1",
+        "mixamorig:RightHandRing2",
+        "mixamorig:RightHandRing3",
+        "mixamorig:RightHandRing4",
+        "mixamorig:RightHandThumb1",
+        "mixamorig:RightHandThumb2",
+        "mixamorig:RightHandThumb3",
+        "mixamorig:RightHandThumb4"
+      ]
+    },
+    {
+      "name": "tripo_node_c45c7618-aac7-4de8-b97c-529e058a8873",
+      "vertices": 11922,
+      "polygons": 10892,
+      "triangles": 10892,
+      "uvLayers": 1,
+      "armatureModifiers": [
+        "Armature"
+      ],
+      "customShapeUsers": []
+    }
+  ],
+  "checks": [
+    {
+      "name": "Blender-source-is-baked-at-60-fps",
+      "passed": true,
+      "detail": 60.0
+    },
+    {
+      "name": "one-real-armature-with-65-bones",
+      "passed": true
+    },
+    {
+      "name": "Idle-edited-action-exists",
+      "passed": true
+    },
+    {
+      "name": "Idle-duration-and-frame-range-match-authored-action",
+      "passed": true,
+      "detail": {
+        "frameRange": [
+          1.0,
+          289.0
+        ],
+        "duration": 4.8
+      }
+    },
+    {
+      "name": "Idle-has-all-650-real-bone-TRS-fcurves",
+      "passed": true,
+      "detail": {
+        "fcurves": 650,
+        "paths": 195
+      }
+    },
+    {
+      "name": "Idle-has-dense-finite-linear-keyframes",
+      "passed": true
+    },
+    {
+      "name": "Idle-contains-real-nonconstant-animation",
+      "passed": true,
+      "detail": 52
+    },
+    {
+      "name": "Walk-edited-action-exists",
+      "passed": true
+    },
+    {
+      "name": "Walk-duration-and-frame-range-match-authored-action",
+      "passed": true,
+      "detail": {
+        "frameRange": [
+          1.0,
+          265.0
+        ],
+        "duration": 4.4
+      }
+    },
+    {
+      "name": "Walk-has-all-650-real-bone-TRS-fcurves",
+      "passed": true,
+      "detail": {
+        "fcurves": 650,
+        "paths": 195
+      }
+    },
+    {
+      "name": "Walk-has-dense-finite-linear-keyframes",
+      "passed": true
+    },
+    {
+      "name": "Walk-contains-real-nonconstant-animation",
+      "passed": true,
+      "detail": 89
+    },
+    {
+      "name": "Nod-edited-action-exists",
+      "passed": true
+    },
+    {
+      "name": "Nod-duration-and-frame-range-match-authored-action",
+      "passed": true,
+      "detail": {
+        "frameRange": [
+          1.0,
+          250.0
+        ],
+        "duration": 4.15
+      }
+    },
+    {
+      "name": "Nod-has-all-650-real-bone-TRS-fcurves",
+      "passed": true,
+      "detail": {
+        "fcurves": 650,
+        "paths": 195
+      }
+    },
+    {
+      "name": "Nod-has-dense-finite-linear-keyframes",
+      "passed": true
+    },
+    {
+      "name": "Nod-contains-real-nonconstant-animation",
+      "passed": true,
+      "detail": 52
+    },
+    {
+      "name": "Wave-edited-action-exists",
+      "passed": true
+    },
+    {
+      "name": "Wave-duration-and-frame-range-match-authored-action",
+      "passed": true,
+      "detail": {
+        "frameRange": [
+          1.0,
+          313.0
+        ],
+        "duration": 5.2
+      }
+    },
+    {
+      "name": "Wave-has-all-650-real-bone-TRS-fcurves",
+      "passed": true,
+      "detail": {
+        "fcurves": 650,
+        "paths": 195
+      }
+    },
+    {
+      "name": "Wave-has-dense-finite-linear-keyframes",
+      "passed": true
+    },
+    {
+      "name": "Wave-contains-real-nonconstant-animation",
+      "passed": true,
+      "detail": 52
+    },
+    {
+      "name": "Wait-edited-action-exists",
+      "passed": true
+    },
+    {
+      "name": "Wait-duration-and-frame-range-match-authored-action",
+      "passed": true,
+      "detail": {
+        "frameRange": [
+          1.0,
+          421.0
+        ],
+        "duration": 7.0
+      }
+    },
+    {
+      "name": "Wait-has-all-650-real-bone-TRS-fcurves",
+      "passed": true,
+      "detail": {
+        "fcurves": 650,
+        "paths": 195
+      }
+    },
+    {
+      "name": "Wait-has-dense-finite-linear-keyframes",
+      "passed": true
+    },
+    {
+      "name": "Wait-contains-real-nonconstant-animation",
+      "passed": true,
+      "detail": 231
+    },
+    {
+      "name": "original-4096px-texture-is-packed-with-identical-JPEG-bytes",
+      "passed": true,
+      "detail": [
+        {
+          "name": "tripo_rgb_0b33f73e-7cf8-4384-8dfa-d6827d26507e",
+          "size": [
+            4096,
+            4096
+          ],
+          "packed": true,
+          "packedBytes": 3106959,
+          "packedSHA256": "c931d3555581a035ff2445b148f2676d70c5b22a60ec3b99b191c7341ed8c1ec"
+        }
+      ]
+    },
+    {
+      "name": "editable-character-has-original-topology-UVs-with-only-bone-shape-helpers",
+      "passed": true,
+      "detail": [
+        {
+          "name": "Icosphere",
+          "vertices": 42,
+          "polygons": 80,
+          "triangles": 80,
+          "uvLayers": 1,
+          "armatureModifiers": [],
+          "customShapeUsers": [
+            "mixamorig:Hips",
+            "mixamorig:LeftUpLeg",
+            "mixamorig:LeftLeg",
+            "mixamorig:LeftFoot",
+            "mixamorig:LeftToeBase",
+            "mixamorig:LeftToe_End",
+            "mixamorig:RightUpLeg",
+            "mixamorig:RightLeg",
+            "mixamorig:RightFoot",
+            "mixamorig:RightToeBase",
+            "mixamorig:RightToe_End",
+            "mixamorig:Spine",
+            "mixamorig:Spine1",
+            "mixamorig:Spine2",
+            "mixamorig:LeftShoulder",
+            "mixamorig:LeftArm",
+            "mixamorig:LeftForeArm",
+            "mixamorig:LeftHand",
+            "mixamorig:LeftHandIndex1",
+            "mixamorig:LeftHandIndex2",
+            "mixamorig:LeftHandIndex3",
+            "mixamorig:LeftHandIndex4",
+            "mixamorig:LeftHandMiddle1",
+            "mixamorig:LeftHandMiddle2",
+            "mixamorig:LeftHandMiddle3",
+            "mixamorig:LeftHandMiddle4",
+            "mixamorig:LeftHandPinky1",
+            "mixamorig:LeftHandPinky2",
+            "mixamorig:LeftHandPinky3",
+            "mixamorig:LeftHandPinky4",
+            "mixamorig:LeftHandRing1",
+            "mixamorig:LeftHandRing2",
+            "mixamorig:LeftHandRing3",
+            "mixamorig:LeftHandRing4",
+            "mixamorig:LeftHandThumb1",
+            "mixamorig:LeftHandThumb2",
+            "mixamorig:LeftHandThumb3",
+            "mixamorig:LeftHandThumb4",
+            "mixamorig:Neck",
+            "mixamorig:Head",
+            "mixamorig:HeadTop_End",
+            "mixamorig:RightShoulder",
+            "mixamorig:RightArm",
+            "mixamorig:RightForeArm",
+            "mixamorig:RightHand",
+            "mixamorig:RightHandIndex1",
+            "mixamorig:RightHandIndex2",
+            "mixamorig:RightHandIndex3",
+            "mixamorig:RightHandIndex4",
+            "mixamorig:RightHandMiddle1",
+            "mixamorig:RightHandMiddle2",
+            "mixamorig:RightHandMiddle3",
+            "mixamorig:RightHandMiddle4",
+            "mixamorig:RightHandPinky1",
+            "mixamorig:RightHandPinky2",
+            "mixamorig:RightHandPinky3",
+            "mixamorig:RightHandPinky4",
+            "mixamorig:RightHandRing1",
+            "mixamorig:RightHandRing2",
+            "mixamorig:RightHandRing3",
+            "mixamorig:RightHandRing4",
+            "mixamorig:RightHandThumb1",
+            "mixamorig:RightHandThumb2",
+            "mixamorig:RightHandThumb3",
+            "mixamorig:RightHandThumb4"
+          ]
+        },
+        {
+          "name": "tripo_node_c45c7618-aac7-4de8-b97c-529e058a8873",
+          "vertices": 11922,
+          "polygons": 10892,
+          "triangles": 10892,
+          "uvLayers": 1,
+          "armatureModifiers": [
+            "Armature"
+          ],
+          "customShapeUsers": []
+        }
+      ]
+    },
+    {
+      "name": "read-only-Blender-inspection-did-not-modify-any-source-or-asset",
+      "passed": true
+    }
+  ],
+  "passed": 30,
+  "total": 30
+}

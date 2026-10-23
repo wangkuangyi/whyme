@@ -7,7 +7,12 @@ import sharp from 'sharp';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createCharacterMotion, STATION_CLIPS } from '../../src/motion.js';
 
-const root = new URL('../../', import.meta.url), reportURL = new URL('qa/waiting/motion-results.json', root);
+const root = new URL('../../', import.meta.url);
+const reportDirectory = process.argv.find(argument => argument.startsWith('--output-dir='))?.slice('--output-dir='.length) || 'qa/waiting';
+const expectedWaitDuration = Number(process.argv.find(argument => argument.startsWith('--wait-duration='))?.slice('--wait-duration='.length) || 8);
+if (!/^(?:qa|output)\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(reportDirectory)) throw new Error('Output directory must be a project-relative qa/... or output/... path.');
+if (!Number.isFinite(expectedWaitDuration) || expectedWaitDuration <= 0) throw new Error('Expected Wait duration must be positive.');
+const reportURL = new URL(`${reportDirectory}/motion-results.json`, root);
 const authoredBytes = await readFile(new URL('public/models/person-authored-animated.glb', root));
 const originalBytes = await readFile(new URL('public/models/person-original-animated.glb', root));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -126,6 +131,7 @@ const reference = await rig(), idle = reference.gltf.animations.find(clip => cli
 const idle0 = sample(reference, 'Idle', 0), idleEnd = sample(reference, 'Idle', idlePeriod);
 check('actual-GLTFLoader-preserves-65-bones-and-original-topology', () => { assert.equal(reference.bones.size, 65); assert.equal(reference.meshes.length, 1); assert.equal(reference.meshes[0].geometry.attributes.position.count, 11922); assert.equal(reference.meshes[0].geometry.index.count / 3, 10892); });
 check('exactly-five-approved-actions-without-facial-tracks', () => { assert.deepEqual(reference.gltf.animations.map(clip => clip.name), ['Idle', 'Walk', 'Nod', 'Wave', 'Wait']); for (const clip of reference.gltf.animations) assert.ok(clip.tracks.every(track => !track.name.includes('morphTarget'))); });
+check(`Wait-has-the-requested-${expectedWaitDuration}-second-duration`, () => assert.ok(Math.abs(reference.gltf.animations.find(clip => clip.name === 'Wait').duration - expectedWaitDuration) < 1e-5));
 check('Idle-loop-endpoint-matches-start-on-all-65-bones', () => { const difference = errors(idleEnd, idle0); assert.ok(difference.world < limits.endpointMetres); assert.ok(difference.rotation < limits.endpointRadians); });
 const idleSeam = velocityMismatch(sample(reference, 'Idle', idlePeriod - 1 / 240), idle0, sample(reference, 'Idle', 1 / 240), 1 / 240);
 check('Idle-loop-velocity-has-no-visible-splice', () => { assert.ok(idleSeam.position < limits.velocityMismatchMetresPerSecond, JSON.stringify(idleSeam)); assert.ok(idleSeam.angular < limits.angularVelocityMismatchDegreesPerSecond, JSON.stringify(idleSeam)); });
@@ -251,9 +257,9 @@ const report = { createdAt: new Date().toISOString(), method: 'Actual GLTFLoader
   limitations: ['Numeric bone continuity does not substitute for visible gesture review.', 'Wrist-to-torso-axis distance is diagnostic and is not mesh collision proof.', 'Baked linear 60Hz animation is piecewise differentiable; 240Hz velocity checks bound the two sides of each clip splice rather than claiming mathematical C1 for every key.'],
   limits, hashes: { original: sha(originalBytes), originalBlend: originalBlendSHA256, authored: sha(authoredBytes), modules: moduleHashes,
     previousPublishedAsset: '28ddcb8629174322495add57936bc27e8851dd7a5bb682602a46b728902bfda0', previousPublishedAnimationSHA256, currentAnimationSHA256 }, images,
-  idlePeriod, idleSeam, endpointResults, idleMotion, runtimeResults, rapidResult, waitInterruptions, frameRates, longError,
+  expectedWaitDuration, idlePeriod, idleSeam, endpointResults, idleMotion, runtimeResults, rapidResult, waitInterruptions, frameRates, longError,
   checks, passed: checks.filter(item => item.passed).length, total: checks.length };
-await mkdir(new URL('qa/waiting/', root), { recursive: true }); await writeFile(reportURL, `${JSON.stringify(report, null, 2)}\n`);
+await mkdir(new URL(`${reportDirectory}/`, root), { recursive: true }); await writeFile(reportURL, `${JSON.stringify(report, null, 2)}\n`);
 console.log(`${report.passed}/${report.total} authored-motion checks passed.`);
 checks.filter(item => !item.passed).forEach(item => console.error(`${item.name}: ${item.error}`));
 process.exitCode = report.passed === report.total ? 0 : 1;
