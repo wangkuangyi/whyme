@@ -4,6 +4,9 @@ export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'LookAround', 'Wave']
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
 const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05, LookAround: 1 };
 const FADE_SECONDS = .5;
+// The reviewed first glance returns toward the camera before the next long
+// side-look. Keep its source timing; do not speed up or synthesize a gesture.
+const LOOK_AROUND_RANGE = Object.freeze([1.2, 7.0]);
 const cleanName = (name) => name.replace(/^mixamorig[:_]?/i, '');
 const smooth = (value) => value * value * (3 - 2 * value);
 
@@ -46,7 +49,8 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     // Preserve the authored hand/head movement. No additive gestures or face
     // tracks are generated here. Rejected Greet, Box and CrossArms are never bound.
     const clip = name === 'Idle' ? excerpt(source, name, 1.5, Math.min(3.5, source.duration))
-      : name === 'Wave' ? excerpt(source, name, 1.2, Math.min(4.3, source.duration)) : source.clone();
+      : name === 'Wave' ? excerpt(source, name, 1.2, Math.min(4.3, source.duration))
+      : name === 'LookAround' ? excerpt(source, name, LOOK_AROUND_RANGE[0], Math.min(LOOK_AROUND_RANGE[1], source.duration)) : source.clone();
     clip.name = name;
     for (const track of clip.tracks) {
       const binding = THREE.PropertyBinding.parseTrackName(track.name);
@@ -173,7 +177,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       transitions: history.map((item) => ({ ...item, from: [...item.from] })),
       weights: [...records].filter((record) => record.weight > .0001).map((record) => ({ action: record.name, weight: record.weight, time: record.action.time })),
       rootMotion: { extracted: true, space: 'world', bone: hips.name, horizontalRest: [restHips.x, restHips.z] },
-      idleRange: [1.5, 3.5], waveRange: [1.2, 4.3], faceAnimation: false };
+      idleRange: [1.5, 3.5], waveRange: [1.2, 4.3], lookAroundRange: [...LOOK_AROUND_RANGE], faceAnimation: false };
   }
   function dispose() { if (disposed) return; disposed = true; mixer.stopAllAction(); mixer.uncacheRoot(model); records.clear(); transition = null; rootRecord = null; restoreRest(); }
   if (reducedMotion) restoreRest(); else { start('Idle', 0, 'initial'); mixer.update(0); }

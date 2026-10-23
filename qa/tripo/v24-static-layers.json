@@ -1,0 +1,134 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "checks": [
+    {
+      "name": "1440px静帧节点真实绘制在海报之前",
+      "pass": true,
+      "detail": {
+        "pixels": 201,
+        "region": {
+          "x": 862,
+          "y": 485,
+          "width": 50,
+          "height": 50
+        }
+      }
+    },
+    {
+      "name": "1440px连线真实绘制可见",
+      "pass": true,
+      "detail": {
+        "pixels": 40,
+        "region": {
+          "x": 891,
+          "y": 507,
+          "width": 27,
+          "height": 7
+        }
+      }
+    },
+    {
+      "name": "1440px卡片标题可见且处于交互前层",
+      "pass": true,
+      "detail": {
+        "pixels": 2086,
+        "region": {
+          "x": 924,
+          "y": 534,
+          "width": 322,
+          "height": 43
+        },
+        "hit": true
+      }
+    },
+    {
+      "name": "1440px拖动标签真实绘制在海报之前",
+      "pass": true,
+      "detail": {
+        "pixels": 566,
+        "region": {
+          "x": 596,
+          "y": 448,
+          "width": 92,
+          "height": 33
+        },
+        "text": "04 团队精神"
+      }
+    },
+    {
+      "name": "1440px拖动后卡片恢复且角度一致",
+      "pass": true
+    },
+    {
+      "name": "390px静帧节点真实绘制在海报之前",
+      "pass": true,
+      "detail": {
+        "pixels": 119,
+        "region": {
+          "x": 286,
+          "y": 379,
+          "width": 50,
+          "height": 50
+        }
+      }
+    },
+    {
+      "name": "390px连线真实绘制可见",
+      "pass": true,
+      "detail": {
+        "pixels": 407,
+        "region": {
+          "x": 307,
+          "y": 412,
+          "width": 7,
+          "height": 211
+        }
+      }
+    },
+    {
+      "name": "390px卡片标题可见且处于交互前层",
+      "pass": true,
+      "detail": {
+        "pixels": 1344,
+        "region": {
+          "x": 17,
+          "y": 674,
+          "width": 356,
+          "height": 35
+        },
+        "hit": true
+      }
+    },
+    {
+      "name": "390px拖动标签真实绘制在海报之前",
+      "pass": true,
+      "detail": {
+        "pixels": 879,
+        "region": {
+          "x": 218,
+          "y": 429,
+          "width": 92,
+          "height": 33
+        },
+        "text": "03 长期意识"
+      }
+    },
+    {
+      "name": "390px拖动后卡片恢复且角度一致",
+      "pass": true
+    },
+    {
+      "name": "生产页面无未处理异常",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "output/playwright/v24-static-layers/1440-static.png",
+    "output/playwright/v24-static-layers/1440-drag.png",
+    "output/playwright/v24-static-layers/390-static.png",
+    "output/playwright/v24-static-layers/390-drag.png"
+  ],
+  "errors": [],
+  "method": "Actual screenshot pixel difference with a single UI layer temporarily hidden; no DEV helpers."
+}

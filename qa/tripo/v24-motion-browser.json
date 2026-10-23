@@ -1,0 +1,2112 @@
+{
+  "checks": [
+    {
+      "name": "1440px 动作 0.8s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "1440px 动作 2.3s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "1440px 动作 4.6s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "1440px 动作 5.2s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "1440px 5.8秒原速源片段",
+      "passed": true
+    },
+    {
+      "name": "1440px 完成后只保留待机",
+      "passed": true
+    },
+    {
+      "name": "1440px 待机手指隐藏",
+      "passed": true
+    },
+    {
+      "name": "1440px 禁止动作未绑定",
+      "passed": true
+    },
+    {
+      "name": "1440px 点击重播同一5.8秒片段",
+      "passed": true
+    },
+    {
+      "name": "1440px 重播后也回待机",
+      "passed": true
+    },
+    {
+      "name": "390px 动作 0.8s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "390px 动作 2.3s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "390px 动作 4.6s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "390px 动作 5.2s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "390px 5.8秒原速源片段",
+      "passed": true
+    },
+    {
+      "name": "390px 完成后只保留待机",
+      "passed": true
+    },
+    {
+      "name": "390px 待机手指隐藏",
+      "passed": true
+    },
+    {
+      "name": "390px 禁止动作未绑定",
+      "passed": true
+    },
+    {
+      "name": "390px 点击重播同一5.8秒片段",
+      "passed": true
+    },
+    {
+      "name": "390px 重播后也回待机",
+      "passed": true
+    },
+    {
+      "name": "320px 动作 0.8s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "320px 动作 2.3s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "320px 动作 4.6s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "320px 动作 5.2s 头顶完整",
+      "passed": true
+    },
+    {
+      "name": "320px 5.8秒原速源片段",
+      "passed": true
+    },
+    {
+      "name": "320px 完成后只保留待机",
+      "passed": true
+    },
+    {
+      "name": "320px 待机手指隐藏",
+      "passed": true
+    },
+    {
+      "name": "320px 禁止动作未绑定",
+      "passed": true
+    },
+    {
+      "name": "320px 点击重播同一5.8秒片段",
+      "passed": true
+    },
+    {
+      "name": "320px 重播后也回待机",
+      "passed": true
+    },
+    {
+      "name": "页面无脚本错误",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "width": 1440,
+      "phase": "action",
+      "time": 0.8194999999940394,
+      "animation": {
+        "action": "LookAround",
+        "time": 0.8194999999940394,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 0.8194999999940394
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9452040116627014,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.0036410175877721555,
+            1.5334632100353993,
+            0.04948680769216511
+          ],
+          "LeftHand": [
+            0.2672372956826785,
+            0.8622150546448465,
+            -0.03856539736252912
+          ],
+          "RightHand": [
+            -0.2045851170161943,
+            0.822847783871369,
+            0.12407545619172236
+          ],
+          "LeftFoot": [
+            0.10294003383185531,
+            0.1260825406120331,
+            -0.15503769699764675
+          ],
+          "RightFoot": [
+            -0.039344861440937046,
+            0.11435204509519192,
+            0.042503576851420574
+          ]
+        }
+      },
+      "face": {
+        "x": 518.4564301494138,
+        "y": 218.3708372235424,
+        "left": 518.4564301494138,
+        "right": 918.4740504969247,
+        "top": 218.3708372235424,
+        "bottom": 624.1958470295478,
+        "width": 400.01762034751096,
+        "height": 405.8250098060055
+      }
+    },
+    {
+      "width": 1440,
+      "phase": "action",
+      "time": 2.3947999999940395,
+      "animation": {
+        "action": "LookAround",
+        "time": 2.3947999999940395,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 2.3947999999940395
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9493115364802244,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.02466474468346635,
+            1.5388365721706376,
+            -0.007837903950287689
+          ],
+          "LeftHand": [
+            0.2914227804818344,
+            0.861969301292597,
+            0.11255765879214091
+          ],
+          "RightHand": [
+            -0.24521811504614555,
+            0.8482191161404571,
+            -0.0778172873591279
+          ],
+          "LeftFoot": [
+            0.020578376509651886,
+            0.12412772231997232,
+            -0.11557118032454515
+          ],
+          "RightFoot": [
+            -0.12283333583282519,
+            0.12205239966722908,
+            0.06282591227281178
+          ]
+        }
+      },
+      "face": {
+        "x": 492.76411838430204,
+        "y": 212.59019937462165,
+        "left": 492.76411838430204,
+        "right": 881.3691639623421,
+        "top": 212.59019937462165,
+        "bottom": 605.9381967414181,
+        "width": 388.60504557804006,
+        "height": 393.34799736679645
+      }
+    },
+    {
+      "width": 1440,
+      "phase": "action",
+      "time": 4.694499999994035,
+      "animation": {
+        "action": "LookAround",
+        "time": 4.694499999994035,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 4.694499999994035
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9497150744188071,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.03832518531176177,
+            1.5383626251661158,
+            -0.009954491724829262
+          ],
+          "LeftHand": [
+            0.3450874126035509,
+            0.855383148823774,
+            -0.1422924828869331
+          ],
+          "RightHand": [
+            -0.23502982324950866,
+            0.8571825709558651,
+            0.055952757204636445
+          ],
+          "LeftFoot": [
+            0.017018754179546618,
+            0.11984449817447984,
+            -0.10622388372417105
+          ],
+          "RightFoot": [
+            -0.1235653132328864,
+            0.12264208865941856,
+            0.07649359352208021
+          ]
+        }
+      },
+      "face": {
+        "x": 501.9576396977133,
+        "y": 213.3488756630601,
+        "left": 501.9576396977133,
+        "right": 887.9765390956543,
+        "top": 213.3488756630601,
+        "bottom": 603.9639033987527,
+        "width": 386.01889939794097,
+        "height": 390.6150277356926
+      }
+    },
+    {
+      "width": 1440,
+      "phase": "action",
+      "time": 5.223499999994032,
+      "animation": {
+        "action": "LookAround",
+        "time": 5.223499999994032,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 5.223499999994032
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9521116989357372,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.07289150300711895,
+            1.5356942873769852,
+            0.0046692722687847535
+          ],
+          "LeftHand": [
+            0.32679349601476454,
+            0.8233866296754118,
+            0.03089437199857939
+          ],
+          "RightHand": [
+            -0.227907699650169,
+            0.8705076114803834,
+            -0.06295182502306268
+          ],
+          "LeftFoot": [
+            0.01661415706727648,
+            0.12027410654058956,
+            -0.09841305760924907
+          ],
+          "RightFoot": [
+            -0.13370864084984385,
+            0.13266494652861038,
+            0.057547043411408635
+          ]
+        }
+      },
+      "face": {
+        "x": 539.1632637782404,
+        "y": 216.7670754955923,
+        "left": 539.1632637782404,
+        "right": 921.3363834307098,
+        "top": 216.7670754955923,
+        "bottom": 603.4939839355947,
+        "width": 382.1731196524694,
+        "height": 386.7269084400024
+      }
+    },
+    {
+      "width": 1440,
+      "phase": "idle",
+      "animation": {
+        "action": "Idle",
+        "time": 1.8778999999940333,
+        "duration": 2,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": true,
+        "completedAction": "LookAround",
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          },
+          {
+            "from": [
+              "LookAround"
+            ],
+            "to": "Idle",
+            "at": 5.3,
+            "fade": 0.5,
+            "reason": "settle"
+          }
+        ],
+        "weights": [
+          {
+            "action": "Idle",
+            "weight": 1,
+            "time": 1.8778999999940333
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9387424865269018,
+            0.0034396412097882365
+          ],
+          "Head": [
+            -0.00022875019398677652,
+            1.527216226644752,
+            -0.03156510082667026
+          ],
+          "LeftHand": [
+            0.22535427493744584,
+            0.8425429739167996,
+            0.04619273486246219
+          ],
+          "RightHand": [
+            -0.19927052130026607,
+            0.8376554824025613,
+            0.049853994329383845
+          ],
+          "LeftFoot": [
+            0.17799394685031442,
+            0.11329163357243921,
+            -0.08211871244554338
+          ],
+          "RightFoot": [
+            -0.13072804769625154,
+            0.11469824340915324,
+            -0.10307485124722177
+          ]
+        }
+      },
+      "face": {
+        "x": 427.99109685983035,
+        "y": 242.66260188240796,
+        "left": 427.99109685983035,
+        "right": 866.5961471163281,
+        "top": 242.66260188240796,
+        "bottom": 693.9253406066663,
+        "width": 438.60505025649775,
+        "height": 451.2627387242583
+      },
+      "hands": [
+        {
+          "x": 798.0016196020531,
+          "y": 1067.7379060710834,
+          "left": 798.0016196020531,
+          "right": 1004.1287128889592,
+          "top": 1067.7379060710834,
+          "bottom": 1380.0425307446847,
+          "width": 206.12709328690607,
+          "height": 312.3046246736012
+        },
+        {
+          "x": 464.4932063399847,
+          "y": 1242.8099446407884,
+          "left": 464.4932063399847,
+          "right": 724.2749308390376,
+          "top": 1242.8099446407884,
+          "bottom": 1648.7623592705042,
+          "width": 259.78172449905287,
+          "height": 405.9524146297158
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "phase": "action",
+      "time": 0.8292999999999999,
+      "animation": {
+        "action": "LookAround",
+        "time": 0.8292999999999999,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 0.8292999999999999
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9450671396181428,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.0039228241087778115,
+            1.533514699266497,
+            0.04801062491800523
+          ],
+          "LeftHand": [
+            0.2665159150653107,
+            0.8620693112057364,
+            -0.04240384072191371
+          ],
+          "RightHand": [
+            -0.2017640371813147,
+            0.8231528020525947,
+            0.12739378570976687
+          ],
+          "LeftFoot": [
+            0.10347904645289085,
+            0.1258523652839066,
+            -0.1560982364063902
+          ],
+          "RightFoot": [
+            -0.038536650583278986,
+            0.1143396830157844,
+            0.04160959776273458
+          ]
+        }
+      },
+      "face": {
+        "x": 121.95850140401913,
+        "y": 217.20838011153668,
+        "left": 121.95850140401913,
+        "right": 305.6565203438355,
+        "top": 217.20838011153668,
+        "bottom": 406.4954703752332,
+        "width": 183.69801893981636,
+        "height": 189.2870902636965
+      }
+    },
+    {
+      "width": 390,
+      "phase": "action",
+      "time": 2.3126000000000007,
+      "animation": {
+        "action": "LookAround",
+        "time": 2.3126000000000007,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 2.3126000000000007
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9490641422503886,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.02435962660771675,
+            1.5383759614867658,
+            -0.009061177985472499
+          ],
+          "LeftHand": [
+            0.3174199093638539,
+            0.8643489200453035,
+            0.09411684095662719
+          ],
+          "RightHand": [
+            -0.25312679981206665,
+            0.8496379270737893,
+            -0.06843460475282859
+          ],
+          "LeftFoot": [
+            0.021059641258040322,
+            0.12389883278431513,
+            -0.11622913338944178
+          ],
+          "RightFoot": [
+            -0.12261249818088923,
+            0.12107599001980834,
+            0.06224121371965064
+          ]
+        }
+      },
+      "face": {
+        "x": 109.40019601904717,
+        "y": 213.9111987807269,
+        "left": 109.40019601904717,
+        "right": 289.26244523365335,
+        "top": 213.9111987807269,
+        "bottom": 398.5082284521106,
+        "width": 179.86224921460618,
+        "height": 184.5970296713837
+      }
+    },
+    {
+      "width": 390,
+      "phase": "action",
+      "time": 4.6338999999999935,
+      "animation": {
+        "action": "LookAround",
+        "time": 4.6338999999999935,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 4.6338999999999935
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.003540607569884148,
+            0.949496083037008,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.034382678537400964,
+            1.5381511632439795,
+            -0.010552032270406644
+          ],
+          "LeftHand": [
+            0.33624597516133914,
+            0.8558429570482484,
+            -0.15075008833808848
+          ],
+          "RightHand": [
+            -0.23379293179042074,
+            0.855404942289314,
+            0.06276597888593118
+          ],
+          "LeftFoot": [
+            0.017834688082435074,
+            0.11986647863851901,
+            -0.10716702811512113
+          ],
+          "RightFoot": [
+            -0.12316022288377401,
+            0.1216570852927773,
+            0.07637405419970177
+          ]
+        }
+      },
+      "face": {
+        "x": 112.44311317238419,
+        "y": 213.85872576408192,
+        "left": 112.44311317238419,
+        "right": 291.6589029100793,
+        "top": 213.85872576408192,
+        "bottom": 397.7764283064826,
+        "width": 179.2157897376951,
+        "height": 183.9177025424007
+      }
+    },
+    {
+      "width": 390,
+      "phase": "action",
+      "time": 5.204799999999991,
+      "animation": {
+        "action": "LookAround",
+        "time": 5.204799999999991,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 5.204799999999991
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9520760878280122,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.07239116433339471,
+            1.535725394421899,
+            0.0039025113545645695
+          ],
+          "LeftHand": [
+            0.3308843585105677,
+            0.8245308446720896,
+            0.02437862442073053
+          ],
+          "RightHand": [
+            -0.22911019940219285,
+            0.8701747258350823,
+            -0.05793951097706225
+          ],
+          "LeftFoot": [
+            0.01638487792809111,
+            0.12026173809155727,
+            -0.09842363529832622
+          ],
+          "RightFoot": [
+            -0.13315943045977077,
+            0.13246561027401815,
+            0.05917659633300301
+          ]
+        }
+      },
+      "face": {
+        "x": 130.67818716754627,
+        "y": 214.6264481246872,
+        "left": 130.67818716754627,
+        "right": 308.3693672224869,
+        "top": 214.6264481246872,
+        "bottom": 397.14799668296257,
+        "width": 177.69118005494065,
+        "height": 182.52154855827538
+      }
+    },
+    {
+      "width": 390,
+      "phase": "idle",
+      "animation": {
+        "action": "Idle",
+        "time": 1.92969999999999,
+        "duration": 2,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": true,
+        "completedAction": "LookAround",
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          },
+          {
+            "from": [
+              "LookAround"
+            ],
+            "to": "Idle",
+            "at": 5.3,
+            "fade": 0.5,
+            "reason": "settle"
+          }
+        ],
+        "weights": [
+          {
+            "action": "Idle",
+            "weight": 1,
+            "time": 1.92969999999999
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9388035528092368,
+            0.003439641209788237
+          ],
+          "Head": [
+            0.0006053925140501314,
+            1.5272827727095277,
+            -0.03096727219143866
+          ],
+          "LeftHand": [
+            0.2244375790906319,
+            0.8418616759953139,
+            0.045966029722298435
+          ],
+          "RightHand": [
+            -0.20224196011064777,
+            0.837727949111029,
+            0.04751114335744522
+          ],
+          "LeftFoot": [
+            0.17701203251947073,
+            0.11326653879038062,
+            -0.08203103960528509
+          ],
+          "RightFoot": [
+            -0.1318022564458034,
+            0.11479922806415194,
+            -0.10311150766430292
+          ]
+        }
+      },
+      "face": {
+        "x": 82.55795901035155,
+        "y": 328.7408820364973,
+        "left": 82.55795901035155,
+        "right": 282.0174645170557,
+        "top": 328.7408820364973,
+        "bottom": 537.0209178741278,
+        "width": 199.45950550670415,
+        "height": 208.28003583763052
+      },
+      "hands": [
+        {
+          "x": 251.81415755427048,
+          "y": 720.6127744109315,
+          "left": 251.81415755427048,
+          "right": 349.0008139015979,
+          "top": 720.6127744109315,
+          "bottom": 861.982481462812,
+          "width": 97.18665634732741,
+          "height": 141.36970705188048
+        },
+        {
+          "x": 97.29711837604744,
+          "y": 789.7242419498352,
+          "left": 97.29711837604744,
+          "right": 213.4314467090075,
+          "top": 789.7242419498352,
+          "bottom": 960.419493642936,
+          "width": 116.13432833296007,
+          "height": 170.69525169310077
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "phase": "action",
+      "time": 0.8751,
+      "animation": {
+        "action": "LookAround",
+        "time": 0.8751,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 0.8751
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9447034260930607,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.00543712634367691,
+            1.5340919023708497,
+            0.041104586619855055
+          ],
+          "LeftHand": [
+            0.2621081894514167,
+            0.8609938344838348,
+            -0.06047449472983099
+          ],
+          "RightHand": [
+            -0.1878797217975949,
+            0.8256387468761831,
+            0.14378888872097934
+          ],
+          "LeftFoot": [
+            0.10521308074352016,
+            0.12451459960479194,
+            -0.1600427080678939
+          ],
+          "RightFoot": [
+            -0.03563446394741872,
+            0.11445963673318926,
+            0.038384190962638405
+          ]
+        }
+      },
+      "face": {
+        "x": 98.62132021087606,
+        "y": 184.18793851846982,
+        "left": 98.62132021087606,
+        "right": 248.7599766136108,
+        "top": 184.18793851846982,
+        "bottom": 339.0174635804944,
+        "width": 150.13865640273474,
+        "height": 154.82952506202457
+      }
+    },
+    {
+      "width": 320,
+      "phase": "action",
+      "time": 2.3498,
+      "animation": {
+        "action": "LookAround",
+        "time": 2.3498,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 2.3498
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9491759999859315,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.02430015842951804,
+            1.5384977502602173,
+            -0.00809373972044608
+          ],
+          "LeftHand": [
+            0.30664710138642337,
+            0.8637715641877879,
+            0.10470605340893195
+          ],
+          "RightHand": [
+            -0.24928214798702963,
+            0.8489215221076717,
+            -0.07441354759950994
+          ],
+          "LeftFoot": [
+            0.020674892669584895,
+            0.12405202573488433,
+            -0.11569698624158647
+          ],
+          "RightFoot": [
+            -0.12293046476390462,
+            0.12155493026354752,
+            0.06266897654266594
+          ]
+        }
+      },
+      "face": {
+        "x": 90.114849755677,
+        "y": 181.7193085876252,
+        "left": 90.114849755677,
+        "right": 237.541077194966,
+        "top": 181.7193085876252,
+        "bottom": 333.2251670924806,
+        "width": 147.426227439289,
+        "height": 151.5058585048554
+      }
+    },
+    {
+      "width": 320,
+      "phase": "action",
+      "time": 4.666099999999996,
+      "animation": {
+        "action": "LookAround",
+        "time": 4.666099999999996,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 4.666099999999996
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9496183203222532,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.03640701294085247,
+            1.5382966238024043,
+            -0.010289373886373063
+          ],
+          "LeftHand": [
+            0.3409706887317008,
+            0.8556616713730982,
+            -0.14653725633272982
+          ],
+          "RightHand": [
+            -0.23445670935596144,
+            0.8563463192153776,
+            0.05917606938360516
+          ],
+          "LeftFoot": [
+            0.017391103375401305,
+            0.11985817467070481,
+            -0.10668594603653961
+          ],
+          "RightFoot": [
+            -0.12338867501390548,
+            0.12217014846247987,
+            0.07645131674322528
+          ]
+        }
+      },
+      "face": {
+        "x": 93.00817112210517,
+        "y": 181.62666506511545,
+        "left": 93.00817112210517,
+        "right": 239.79189176094587,
+        "top": 181.62666506511545,
+        "bottom": 332.4506157117147,
+        "width": 146.7837206388407,
+        "height": 150.82395064659926
+      }
+    },
+    {
+      "width": 320,
+      "phase": "action",
+      "time": 5.2698999999999945,
+      "animation": {
+        "action": "LookAround",
+        "time": 5.2698999999999945,
+        "duration": 5.8,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": false,
+        "completedAction": null,
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          }
+        ],
+        "weights": [
+          {
+            "action": "LookAround",
+            "weight": 1,
+            "time": 5.2698999999999945
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9522637753578805,
+            0.0034396412097882365
+          ],
+          "Head": [
+            0.0737544565680244,
+            1.5357399933791056,
+            0.006624531183983665
+          ],
+          "LeftHand": [
+            0.3167751917562185,
+            0.8212276987571503,
+            0.04623842525817577
+          ],
+          "RightHand": [
+            -0.22455332537532888,
+            0.8712253825580377,
+            -0.07450217690504897
+          ],
+          "LeftFoot": [
+            0.01737810428542779,
+            0.12028388290649716,
+            -0.09855537481078032
+          ],
+          "RightFoot": [
+            -0.13493713095019177,
+            0.13324261622485462,
+            0.05298879196679371
+          ]
+        }
+      },
+      "face": {
+        "x": 108.43891371823278,
+        "y": 182.32205647759173,
+        "left": 108.43891371823278,
+        "right": 254.11422225264675,
+        "top": 182.32205647759173,
+        "bottom": 332.162456611701,
+        "width": 145.67530853441397,
+        "height": 149.84040013410925
+      }
+    },
+    {
+      "width": 320,
+      "phase": "idle",
+      "animation": {
+        "action": "Idle",
+        "time": 1.840899999999995,
+        "duration": 2,
+        "speed": 1,
+        "walking": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "station": 2,
+        "reducedMotion": false,
+        "dragging": false,
+        "end": true,
+        "completedAction": "LookAround",
+        "clips": [
+          "Idle",
+          "Walk",
+          "Nod",
+          "LookAround",
+          "Wave"
+        ],
+        "rejected": [
+          "Greet",
+          "Box",
+          "CrossArms"
+        ],
+        "transition": null,
+        "transitions": [
+          {
+            "from": [],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "initial"
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "LookAround",
+            "at": 0,
+            "fade": 0.5,
+            "reason": "station"
+          },
+          {
+            "from": [
+              "LookAround"
+            ],
+            "to": "Idle",
+            "at": 5.3,
+            "fade": 0.5,
+            "reason": "settle"
+          }
+        ],
+        "weights": [
+          {
+            "action": "Idle",
+            "weight": 1,
+            "time": 1.840899999999995
+          }
+        ],
+        "rootMotion": {
+          "extracted": true,
+          "space": "world",
+          "bone": "mixamorigHips",
+          "horizontalRest": [
+            0.001952208112925291,
+            0.0019521673675626516
+          ]
+        },
+        "idleRange": [
+          1.5,
+          3.5
+        ],
+        "waveRange": [
+          1.2,
+          4.3
+        ],
+        "lookAroundRange": [
+          1.2,
+          7
+        ],
+        "faceAnimation": false,
+        "eyes": 0,
+        "morphs": {},
+        "pose": {
+          "Hips": [
+            0.0035406075698841484,
+            0.9388118109467884,
+            0.0034396412097882365
+          ],
+          "Head": [
+            -0.0008860238777082924,
+            1.527360846150144,
+            -0.031642253588620405
+          ],
+          "LeftHand": [
+            0.22595032815937113,
+            0.8432880932700372,
+            0.04677891809396803
+          ],
+          "RightHand": [
+            -0.19714719245534473,
+            0.8377657966422964,
+            0.05177246676029893
+          ],
+          "LeftFoot": [
+            0.17887714170819707,
+            0.11342059310458114,
+            -0.0819928839885183
+          ],
+          "RightFoot": [
+            -0.12983839074572384,
+            0.11468807514685836,
+            -0.1028295482406133
+          ]
+        }
+      },
+      "face": {
+        "x": 67.18448882557607,
+        "y": 277.780636161538,
+        "left": 67.18448882557607,
+        "right": 230.65660533730605,
+        "top": 277.780636161538,
+        "bottom": 448.599252232718,
+        "width": 163.47211651172998,
+        "height": 170.81861607118003
+      },
+      "hands": [
+        {
+          "x": 207.64999020066819,
+          "y": 598.7873025473725,
+          "left": 207.64999020066819,
+          "right": 287.7165993120988,
+          "top": 598.7873025473725,
+          "bottom": 714.3753956536844,
+          "width": 80.06660911143064,
+          "height": 115.58809310631193
+        },
+        {
+          "x": 83.80692720877408,
+          "y": 655.1111519381225,
+          "left": 83.80692720877408,
+          "right": 179.19849991323838,
+          "top": 655.1111519381225,
+          "bottom": 794.1684332440113,
+          "width": 95.3915727044643,
+          "height": 139.05728130588886
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

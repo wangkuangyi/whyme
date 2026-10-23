@@ -102,6 +102,27 @@ check('idle-before-any-station-does-not-add-a-reaction',()=>{assert.equal(longId
 
 const lookAround=rig();lookAround.motion.setStation(LOOK_AROUND_STATION,{immediate:true});tick(lookAround,1/120);
 const lookAroundStart=lookAround.motion.getState(), lookAroundDuration=lookAroundStart.duration/lookAroundStart.speed;
+check('look-around-is-reviewed-5_8-second-excerpt-at-original-speed',()=>{assert.deepEqual(lookAroundStart.lookAroundRange,[1.2,7]);assert.ok(Math.abs(lookAroundDuration-5.8)<1e-6);assert.equal(lookAroundStart.speed,1);assert.ok(suppliedLookAround.duration>15);});
+// Compare live bone transforms with independent interpolation of the original
+// GLB. Checking both the entry and replay guards against an offset/retiming bug.
+const sourcePoseError=(context,sourceTime)=>{
+  let maximum=0;
+  for(const track of suppliedLookAround.tracks){
+    const binding=THREE.PropertyBinding.parseTrackName(track.name), name=binding.nodeName.replace(/^mixamorig[:_]?/i,''), bone=context.bones.get(name)?.bone;
+    if(!bone)continue;
+    const expected=Array.from(track.createInterpolant().evaluate(sourceTime)).slice(0,track.getValueSize());
+    if(binding.propertyName==='position'&&name==='Hips'){const[x,z]=context.motion.getState().rootMotion.horizontalRest;expected[0]=x;expected[2]=z;}
+    const actual=bone[binding.propertyName].toArray();
+    maximum=Math.max(maximum,...actual.map((v,i)=>Math.abs(v-expected[i])));
+  }
+  return maximum;
+};
+const excerptProbe=rig();excerptProbe.motion.setStation(LOOK_AROUND_STATION,{immediate:true});excerptProbe.motion.update(0);
+const sourcePoseSamples=[{time:0,error:sourcePoseError(excerptProbe,1.2)}];
+for(const time of [.1,1.3,2.4,3.8,5.2]){tick(excerptProbe,time-excerptProbe.motion.getState().time);sourcePoseSamples.push({time:excerptProbe.motion.getState().time,error:sourcePoseError(excerptProbe,1.2+excerptProbe.motion.getState().time)});}
+check('look-around-preserves-original-source-samples-through-excerpt',()=>assert.ok(sourcePoseSamples.every(s=>s.error<3e-6),JSON.stringify(sourcePoseSamples)));
+tick(excerptProbe,.8);
+check('look-around-is-finished-within-six-seconds',()=>{const state=excerptProbe.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.end,true);assert.equal(state.completedAction,'LookAround');assert.deepEqual(state.weights.map(item=>item.action),['Idle']);});
 const turnNames=['Head','Neck','Spine','Spine1','Spine2'];
 const firstTurns=turnNames.map(name=>lookAround.bones.get(name).bone.quaternion.clone().normalize());
 const turnExcursion=turnNames.map(()=>0);
@@ -125,7 +146,9 @@ check('five-minute-idle-after-look-around-keeps-pose-and-position',()=>{assert.o
 check('completed-look-around-does-not-replay-spontaneously',()=>{const state=lookAround.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.end,true);assert.equal(state.weights.length,1);assert.equal(state.transition,null);assert.deepEqual(state.transitions,postLookAroundIdle.transitions);});
 const beforeCompletedReselect=lookAround.motion.getState();
 check('reselecting-completed-look-around-keeps-idle-phase',()=>{assert.equal(lookAround.motion.setStation(LOOK_AROUND_STATION),false);assert.deepEqual(lookAround.motion.getState(),beforeCompletedReselect);});
-check('clicking-after-look-around-replays-the-entry',()=>{assert.equal(lookAround.motion.react(),true);const state=lookAround.motion.getState();assert.equal(state.action,'LookAround');assert.equal(state.time,0);assert.equal(state.end,false);assert.equal(state.transitions.at(-1).reason,'reaction');});
+check('clicking-after-look-around-replays-the-entry',()=>{assert.equal(lookAround.motion.react(),true);const state=lookAround.motion.getState();assert.equal(state.action,'LookAround');assert.equal(state.time,0);assert.equal(state.duration,lookAroundStart.duration);assert.deepEqual(state.lookAroundRange,lookAroundStart.lookAroundRange);assert.equal(state.speed,1);assert.equal(state.end,false);assert.equal(state.transitions.at(-1).reason,'reaction');});
+tick(lookAround,1.3);const replaySourceError=sourcePoseError(lookAround,2.5);
+check('look-around-replay-uses-the-same-source-pose',()=>assert.ok(replaySourceError<3e-6,`source pose error ${replaySourceError}`));
 finishEntry(lookAround);
 check('look-around-reaction-also-settles-once',()=>{const state=lookAround.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.completedAction,'LookAround');assert.equal(state.end,true);assert.equal(state.weights.length,1);assert.equal(lookAround.motion.position.length(),0);});
 const fadeInterrupt=rig();fadeInterrupt.motion.setStation(WALK_STATION);tick(fadeInterrupt,4.75);const atFade=fadeInterrupt.motion.position.clone();fadeInterrupt.motion.setStation(WAVE_STATION);tick(fadeInterrupt,5);
@@ -136,7 +159,7 @@ for(const fps of[20,30,60,120]){
   frameRates.push({fps,position:context.motion.position.toArray(),action:context.motion.getState().action});context.motion.dispose();
 }
 check('walk-settles-at-20-through-120-fps',()=>{assert.ok(frameRates.every(r=>r.action==='Idle'));assert.ok(Math.max(...frameRates.map(r=>r.position[2]))-Math.min(...frameRates.map(r=>r.position[2]))<.001);});
-for(const context of[sample,walk,interrupted,paused,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt])context.motion.dispose();
-const result={checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual GLB animation arrays used. No browser rendering asserted by this test.'};
-await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/motion-tests.json',import.meta.url),JSON.stringify(result,null,2));
+for(const context of[sample,walk,interrupted,paused,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt,excerptProbe])context.motion.dispose();
+const result={checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual GLB animation arrays used. No browser rendering asserted by this test.'};
+await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/v24-motion-tests.json',import.meta.url),JSON.stringify(result,null,2));
 console.log(JSON.stringify(result,null,2));

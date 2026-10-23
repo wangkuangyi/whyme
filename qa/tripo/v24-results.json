@@ -1,0 +1,5614 @@
+{
+  "motion": {
+    "passed": 54,
+    "total": 54,
+    "checks": [
+      {
+        "name": "reviewed-station-map",
+        "passed": true
+      },
+      {
+        "name": "look-around-exists-in-supplied-glb",
+        "passed": true
+      },
+      {
+        "name": "station-1-uses-reviewed-action",
+        "passed": true
+      },
+      {
+        "name": "station-1-settles-to-idle",
+        "passed": true
+      },
+      {
+        "name": "station-1-hips-horizontal-rest",
+        "passed": true
+      },
+      {
+        "name": "station-2-uses-reviewed-action",
+        "passed": true
+      },
+      {
+        "name": "station-2-settles-to-idle",
+        "passed": true
+      },
+      {
+        "name": "station-2-hips-horizontal-rest",
+        "passed": true
+      },
+      {
+        "name": "station-3-uses-reviewed-action",
+        "passed": true
+      },
+      {
+        "name": "station-3-settles-to-idle",
+        "passed": true
+      },
+      {
+        "name": "station-3-hips-horizontal-rest",
+        "passed": true
+      },
+      {
+        "name": "station-4-uses-reviewed-action",
+        "passed": true
+      },
+      {
+        "name": "station-4-settles-to-idle",
+        "passed": true
+      },
+      {
+        "name": "station-4-hips-horizontal-rest",
+        "passed": true
+      },
+      {
+        "name": "source-animation-arrays-preserved",
+        "passed": true
+      },
+      {
+        "name": "boxing-never-bound",
+        "passed": true
+      },
+      {
+        "name": "withdrawn-cross-arms-never-bound-or-played",
+        "passed": true
+      },
+      {
+        "name": "large-greet-never-bound-or-played",
+        "passed": true
+      },
+      {
+        "name": "walk-travels-in-world-metres",
+        "passed": true
+      },
+      {
+        "name": "walk-holds-position-after-finish",
+        "passed": true
+      },
+      {
+        "name": "station-switch-preserves-travel",
+        "passed": true
+      },
+      {
+        "name": "entering-look-around-preserves-walk-world-position",
+        "passed": true
+      },
+      {
+        "name": "look-around-completion-keeps-walk-world-position",
+        "passed": true
+      },
+      {
+        "name": "leaving-look-around-preserves-walk-world-position",
+        "passed": true
+      },
+      {
+        "name": "interrupted-walk-keeps-current-position",
+        "passed": true
+      },
+      {
+        "name": "dragging-freezes-action-and-root-motion",
+        "passed": true
+      },
+      {
+        "name": "root-motion-includes-parent-scale-and-rotation",
+        "passed": true
+      },
+      {
+        "name": "reduced-motion-keeps-original-rest-pose",
+        "passed": true
+      },
+      {
+        "name": "rapid-switches-retire-fading-actions",
+        "passed": true
+      },
+      {
+        "name": "walk-station-click-uses-nod-not-more-travel",
+        "passed": true
+      },
+      {
+        "name": "reaction-keeps-travel",
+        "passed": true
+      },
+      {
+        "name": "walk-ending-fades-to-zero-speed",
+        "passed": true
+      },
+      {
+        "name": "walk-ending-has-no-bone-position-pop",
+        "passed": true
+      },
+      {
+        "name": "crossfade-weights-stay-normalized",
+        "passed": true
+      },
+      {
+        "name": "five-minute-idle-has-no-root-drift",
+        "passed": true
+      },
+      {
+        "name": "five-minute-idle-returns-to-the-same-pose",
+        "passed": true
+      },
+      {
+        "name": "initial-idle-does-not-trigger-repeated-settling",
+        "passed": true
+      },
+      {
+        "name": "idle-before-any-station-does-not-add-a-reaction",
+        "passed": true
+      },
+      {
+        "name": "look-around-is-reviewed-5_8-second-excerpt-at-original-speed",
+        "passed": true
+      },
+      {
+        "name": "look-around-preserves-original-source-samples-through-excerpt",
+        "passed": true
+      },
+      {
+        "name": "look-around-is-finished-within-six-seconds",
+        "passed": true
+      },
+      {
+        "name": "look-around-has-real-head-and-chest-turning",
+        "passed": true
+      },
+      {
+        "name": "look-around-does-not-introduce-world-travel",
+        "passed": true
+      },
+      {
+        "name": "reselecting-look-around-does-not-restart-entry",
+        "passed": true
+      },
+      {
+        "name": "clicking-during-look-around-does-not-interrupt-it",
+        "passed": true
+      },
+      {
+        "name": "look-around-plays-once-and-returns-to-idle",
+        "passed": true
+      },
+      {
+        "name": "five-minute-idle-after-look-around-keeps-pose-and-position",
+        "passed": true
+      },
+      {
+        "name": "completed-look-around-does-not-replay-spontaneously",
+        "passed": true
+      },
+      {
+        "name": "reselecting-completed-look-around-keeps-idle-phase",
+        "passed": true
+      },
+      {
+        "name": "clicking-after-look-around-replays-the-entry",
+        "passed": true
+      },
+      {
+        "name": "look-around-replay-uses-the-same-source-pose",
+        "passed": true
+      },
+      {
+        "name": "look-around-reaction-also-settles-once",
+        "passed": true
+      },
+      {
+        "name": "switching-during-walk-settle-preserves-position",
+        "passed": true
+      },
+      {
+        "name": "walk-settles-at-20-through-120-fps",
+        "passed": true
+      }
+    ],
+    "source": "qa/tripo/v24-motion-tests.json"
+  },
+  "motionBrowser": {
+    "passed": 31,
+    "total": 31,
+    "checks": [
+      {
+        "name": "1440px 动作 0.8s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "1440px 动作 2.3s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "1440px 动作 4.6s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "1440px 动作 5.2s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "1440px 5.8秒原速源片段",
+        "passed": true
+      },
+      {
+        "name": "1440px 完成后只保留待机",
+        "passed": true
+      },
+      {
+        "name": "1440px 待机手指隐藏",
+        "passed": true
+      },
+      {
+        "name": "1440px 禁止动作未绑定",
+        "passed": true
+      },
+      {
+        "name": "1440px 点击重播同一5.8秒片段",
+        "passed": true
+      },
+      {
+        "name": "1440px 重播后也回待机",
+        "passed": true
+      },
+      {
+        "name": "390px 动作 0.8s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "390px 动作 2.3s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "390px 动作 4.6s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "390px 动作 5.2s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "390px 5.8秒原速源片段",
+        "passed": true
+      },
+      {
+        "name": "390px 完成后只保留待机",
+        "passed": true
+      },
+      {
+        "name": "390px 待机手指隐藏",
+        "passed": true
+      },
+      {
+        "name": "390px 禁止动作未绑定",
+        "passed": true
+      },
+      {
+        "name": "390px 点击重播同一5.8秒片段",
+        "passed": true
+      },
+      {
+        "name": "390px 重播后也回待机",
+        "passed": true
+      },
+      {
+        "name": "320px 动作 0.8s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "320px 动作 2.3s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "320px 动作 4.6s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "320px 动作 5.2s 头顶完整",
+        "passed": true
+      },
+      {
+        "name": "320px 5.8秒原速源片段",
+        "passed": true
+      },
+      {
+        "name": "320px 完成后只保留待机",
+        "passed": true
+      },
+      {
+        "name": "320px 待机手指隐藏",
+        "passed": true
+      },
+      {
+        "name": "320px 禁止动作未绑定",
+        "passed": true
+      },
+      {
+        "name": "320px 点击重播同一5.8秒片段",
+        "passed": true
+      },
+      {
+        "name": "320px 重播后也回待机",
+        "passed": true
+      },
+      {
+        "name": "页面无脚本错误",
+        "passed": true,
+        "detail": []
+      }
+    ],
+    "source": "qa/tripo/v24-motion-browser.json"
+  },
+  "scene": {
+    "passed": 23,
+    "total": 23,
+    "checks": [
+      {
+        "name": "暂停交接期间动作停留在完整首帧",
+        "pass": true,
+        "detail": {
+          "first": {
+            "action": "Walk",
+            "time": 0,
+            "duration": 5,
+            "speed": 1,
+            "walking": true,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "station": 0,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "LookAround",
+              "Wave"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": {
+              "to": "Walk",
+              "elapsed": 0,
+              "duration": 0.5
+            },
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Walk",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Idle",
+                "weight": 1,
+                "time": 0
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false,
+            "eyes": 0,
+            "morphs": {},
+            "pose": {
+              "Hips": [
+                0.0035406075698841484,
+                0.924536798647002,
+                0.0034396412097882365
+              ],
+              "Head": [
+                -0.014174488933575403,
+                1.510526065817495,
+                -0.013764948605688991
+              ],
+              "LeftHand": [
+                0.21565580646431606,
+                0.8350984654729876,
+                0.05297116376881364
+              ],
+              "RightHand": [
+                -0.23983538255267392,
+                0.8275764290332649,
+                0.050566563961656666
+              ],
+              "LeftFoot": [
+                0.008507878889422955,
+                0.11273060287203396,
+                -0.12547377371537982
+              ],
+              "RightFoot": [
+                -0.23439487223852928,
+                0.12346837728993237,
+                0.21036358586650541
+              ]
+            }
+          },
+          "held": {
+            "action": "Walk",
+            "time": 0,
+            "duration": 5,
+            "speed": 1,
+            "walking": true,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "station": 0,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "LookAround",
+              "Wave"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": {
+              "to": "Walk",
+              "elapsed": 0,
+              "duration": 0.5
+            },
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Walk",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Idle",
+                "weight": 1,
+                "time": 0
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false,
+            "eyes": 0,
+            "morphs": {},
+            "pose": {
+              "Hips": [
+                0.0035406075698841484,
+                0.924536798647002,
+                0.0034396412097882365
+              ],
+              "Head": [
+                -0.014174488933575403,
+                1.510526065817495,
+                -0.013764948605688991
+              ],
+              "LeftHand": [
+                0.21565580646431606,
+                0.8350984654729876,
+                0.05297116376881364
+              ],
+              "RightHand": [
+                -0.23983538255267392,
+                0.8275764290332649,
+                0.050566563961656666
+              ],
+              "LeftFoot": [
+                0.008507878889422955,
+                0.11273060287203396,
+                -0.12547377371537982
+              ],
+              "RightFoot": [
+                -0.23439487223852928,
+                0.12346837728993237,
+                0.21036358586650541
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "首帧蒙皮包围体覆盖所有顶点",
+        "pass": true,
+        "detail": {
+          "nodes": [
+            {
+              "index": 0,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 1,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 2,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 3,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            }
+          ],
+          "missedVertices": 0,
+          "vertices": 35301,
+          "shaders": [
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": true
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            }
+          ]
+        }
+      },
+      {
+        "name": "开场暂停不提前打开卡片",
+        "pass": true
+      },
+      {
+        "name": "影子和地面参数正确",
+        "pass": true,
+        "detail": {
+          "ambient": 0.5,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2,
+            6,
+            4.8
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        }
+      },
+      {
+        "name": "实际编译的阴影着色器包含远端羽化且全部着色器链接成功",
+        "pass": true,
+        "detail": [
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": true
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          },
+          {
+            "linked": true,
+            "shadowFade": false
+          }
+        ]
+      },
+      {
+        "name": "行走中更新后的包围体与无包围体精确射线结果相同",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "抽样的所有蒙皮顶点都位于更新后的包围体内",
+        "pass": true
+      },
+      {
+        "name": "行走中不存在可见且被身体遮挡的节点",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "前方无遮挡节点没有被遮挡缓存误判",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "完整行走结束后才允许卡片和跟随布局回调",
+        "pass": true,
+        "detail": [
+          {
+            "type": "settled",
+            "walking": false
+          },
+          {
+            "type": "framing",
+            "walking": false
+          },
+          {
+            "type": "framing",
+            "walking": false
+          }
+        ]
+      },
+      {
+        "name": "位移后的当前人物位置可点击",
+        "pass": true
+      },
+      {
+        "name": "暂停也冻结镜头、颜色和动作时间",
+        "pass": true,
+        "detail": {
+          "beforePause": {
+            "currentProgress": 0.194737772,
+            "targetProgress": 2,
+            "activeStation": 2,
+            "ready": true,
+            "presentationPaused": true,
+            "dragging": false,
+            "moving": true,
+            "mobile": false,
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1,
+            "triangles": 46846,
+            "colors": {
+              "hoodie": "#9c5fa0",
+              "rib": "#844e88",
+              "lch": [
+                0.5772629289750743,
+                0.11897850690656187,
+                324.64323441971
+              ],
+              "durationMs": 600,
+              "throughBlack": false
+            },
+            "ring": {
+              "openness": 0.24389475544,
+              "linewidth": 1.25,
+              "frontInk": 0.7,
+              "backDash": [
+                3,
+                4
+              ],
+              "ticks": 4
+            },
+            "camera": {
+              "azimuth": 40.210489120000005,
+              "shift": -0.04194737772,
+              "fill": 1.9910005300399998,
+              "walkClose": 1,
+              "restClose": [
+                0.5333047602208939,
+                0,
+                0,
+                0
+              ],
+              "position": [
+                1.587032022290398,
+                1.5082655152862348,
+                8.346507713955486
+              ],
+              "target": [
+                0.39913597378120275,
+                1.4345274024552,
+                6.9413444410156995
+              ],
+              "anchor": [
+                0.39913597378120275,
+                0,
+                6.9413444410156995
+              ],
+              "tracking": false
+            },
+            "nodes": [
+              {
+                "x": 703.699496411216,
+                "y": 547.5499711912241,
+                "visible": false,
+                "depth": 1.4229672011664178
+              },
+              {
+                "x": 1127.0513735557465,
+                "y": 349.2871907545635,
+                "visible": true,
+                "depth": 1.9054714156779207
+              },
+              {
+                "x": 631.7567048826471,
+                "y": 355.2620222379468,
+                "visible": false,
+                "depth": 2.261446313312236
+              },
+              {
+                "x": 185.31258559252555,
+                "y": 511.2268772014634,
+                "visible": true,
+                "depth": 1.8730066117404054
+              }
+            ],
+            "animation": {
+              "action": "Nod",
+              "time": 0.21890000000000004,
+              "duration": 3,
+              "speed": 1.1,
+              "walking": false,
+              "position": [
+                0.3991346738505988,
+                0,
+                6.941406089062432
+              ],
+              "station": 0,
+              "reducedMotion": false,
+              "dragging": false,
+              "end": false,
+              "completedAction": null,
+              "clips": [
+                "Idle",
+                "Walk",
+                "Nod",
+                "LookAround",
+                "Wave"
+              ],
+              "rejected": [
+                "Greet",
+                "Box",
+                "CrossArms"
+              ],
+              "transition": {
+                "to": "Nod",
+                "elapsed": 0.19900000000000004,
+                "duration": 0.5
+              },
+              "transitions": [
+                {
+                  "from": [],
+                  "to": "Idle",
+                  "at": 0,
+                  "fade": 0,
+                  "reason": "initial"
+                },
+                {
+                  "from": [
+                    "Idle"
+                  ],
+                  "to": "Walk",
+                  "at": 0,
+                  "fade": 0.5,
+                  "reason": "station"
+                },
+                {
+                  "from": [
+                    "Walk"
+                  ],
+                  "to": "Idle",
+                  "at": 4.45,
+                  "fade": 0.55,
+                  "reason": "settle"
+                },
+                {
+                  "from": [
+                    "Idle"
+                  ],
+                  "to": "Nod",
+                  "at": 5.1397999999880835,
+                  "fade": 0.5,
+                  "reason": "reaction"
+                }
+              ],
+              "weights": [
+                {
+                  "action": "Idle",
+                  "weight": 0.6508775839999998,
+                  "time": 0.8887999999880842
+                },
+                {
+                  "action": "Nod",
+                  "weight": 0.3491224160000001,
+                  "time": 0.21890000000000004
+                }
+              ],
+              "rootMotion": {
+                "extracted": true,
+                "space": "world",
+                "bone": "mixamorigHips",
+                "horizontalRest": [
+                  0.001952208112925291,
+                  0.0019521673675626516
+                ]
+              },
+              "idleRange": [
+                1.5,
+                3.5
+              ],
+              "waveRange": [
+                1.2,
+                4.3
+              ],
+              "lookAroundRange": [
+                1.2,
+                7
+              ],
+              "faceAnimation": false,
+              "eyes": 0,
+              "morphs": {},
+              "pose": {
+                "Hips": [
+                  0.402675281420483,
+                  0.9408300483505835,
+                  6.9448457302722195
+                ],
+                "Head": [
+                  0.4084999975861437,
+                  1.5266233470481632,
+                  6.930601209659834
+                ],
+                "LeftHand": [
+                  0.6539860121185362,
+                  0.8465256913087204,
+                  6.980466133615104
+                ],
+                "RightHand": [
+                  0.15475399162726008,
+                  0.9444787368873812,
+                  7.134893173746236
+                ],
+                "LeftFoot": [
+                  0.5510288882142502,
+                  0.11299112754533569,
+                  6.873792711897402
+                ],
+                "RightFoot": [
+                  0.251122168050606,
+                  0.11470990800023045,
+                  6.8700372505726355
+                ]
+              }
+            },
+            "protectedBounds": {
+              "faceBounds": {
+                "x": 468.88720253430574,
+                "y": 207.35819731044202,
+                "left": 468.88720253430574,
+                "right": 878.3826675847071,
+                "top": 207.35819731044202,
+                "bottom": 628.5295746656118,
+                "width": 409.4954650504013,
+                "height": 421.17137735516974
+              },
+              "handBounds": [
+                {
+                  "x": 709.1120113690864,
+                  "y": 1193.2232148549695,
+                  "left": 709.1120113690864,
+                  "right": 964.5382521745172,
+                  "top": 1193.2232148549695,
+                  "bottom": 1572.2710319625469,
+                  "width": 255.42624080543078,
+                  "height": 379.04781710757743
+                },
+                {
+                  "x": 87.67113899114572,
+                  "y": 1009.9412196289547,
+                  "left": 87.67113899114572,
+                  "right": 372.20909527347794,
+                  "top": 1009.9412196289547,
+                  "bottom": 1287.0250537385623,
+                  "width": 284.53795628233223,
+                  "height": 277.08383410960755
+                }
+              ]
+            },
+            "studio": {
+              "ambient": 0.5,
+              "shadowOpacity": 0.1,
+              "shadowWorldPosition": [
+                -2.8008640262187976,
+                6,
+                11.741344441015698
+              ],
+              "shadowFade": [
+                0.45,
+                1.7
+              ],
+              "shadowEnabled": true,
+              "mapSize": 1024,
+              "floorTintStrength": 0.5,
+              "floorEdge": "#f3f3f5",
+              "floorRadiusH": 1.8
+            },
+            "quality": {
+              "level": 0,
+              "slowDuration": 0,
+              "fallbackTriggered": false,
+              "staticThresholdSeconds": 5,
+              "staticThresholdFps": 20,
+              "timings": {
+                "frameMs": 7.839701740477585,
+                "poseMs": 0.33236878890339305,
+                "renderMs": 0.6058711890844816,
+                "nodesMs": 2.9101263615229205
+              }
+            },
+            "cloth": [
+              {
+                "name": "Hoodie",
+                "rib": false,
+                "normalMap": true,
+                "aoMap": false,
+                "sheen": "#b38fb6"
+              }
+            ]
+          },
+          "afterPause": {
+            "currentProgress": 0.194737772,
+            "targetProgress": 2,
+            "activeStation": 2,
+            "ready": true,
+            "presentationPaused": true,
+            "dragging": false,
+            "moving": true,
+            "mobile": false,
+            "width": 1440,
+            "height": 1000,
+            "dpr": 1,
+            "triangles": 46846,
+            "colors": {
+              "hoodie": "#9c5fa0",
+              "rib": "#844e88",
+              "lch": [
+                0.5772629289750743,
+                0.11897850690656187,
+                324.64323441971
+              ],
+              "durationMs": 600,
+              "throughBlack": false
+            },
+            "ring": {
+              "openness": 0.24389475544,
+              "linewidth": 1.25,
+              "frontInk": 0.7,
+              "backDash": [
+                3,
+                4
+              ],
+              "ticks": 4
+            },
+            "camera": {
+              "azimuth": 40.210489120000005,
+              "shift": -0.04194737772,
+              "fill": 1.9910005300399998,
+              "walkClose": 1,
+              "restClose": [
+                0.5333047602208939,
+                0,
+                0,
+                0
+              ],
+              "position": [
+                1.587032022290398,
+                1.5082655152862348,
+                8.346507713955486
+              ],
+              "target": [
+                0.39913597378120275,
+                1.4345274024552,
+                6.9413444410156995
+              ],
+              "anchor": [
+                0.39913597378120275,
+                0,
+                6.9413444410156995
+              ],
+              "tracking": false
+            },
+            "nodes": [
+              {
+                "x": 703.699496411216,
+                "y": 547.5499711912241,
+                "visible": false,
+                "depth": 1.4229672011664178
+              },
+              {
+                "x": 1127.0513735557465,
+                "y": 349.2871907545635,
+                "visible": true,
+                "depth": 1.9054714156779207
+              },
+              {
+                "x": 631.7567048826471,
+                "y": 355.2620222379468,
+                "visible": false,
+                "depth": 2.261446313312236
+              },
+              {
+                "x": 185.31258559252555,
+                "y": 511.2268772014634,
+                "visible": true,
+                "depth": 1.8730066117404054
+              }
+            ],
+            "animation": {
+              "action": "Nod",
+              "time": 0.21890000000000004,
+              "duration": 3,
+              "speed": 1.1,
+              "walking": false,
+              "position": [
+                0.3991346738505988,
+                0,
+                6.941406089062432
+              ],
+              "station": 0,
+              "reducedMotion": false,
+              "dragging": false,
+              "end": false,
+              "completedAction": null,
+              "clips": [
+                "Idle",
+                "Walk",
+                "Nod",
+                "LookAround",
+                "Wave"
+              ],
+              "rejected": [
+                "Greet",
+                "Box",
+                "CrossArms"
+              ],
+              "transition": {
+                "to": "Nod",
+                "elapsed": 0.19900000000000004,
+                "duration": 0.5
+              },
+              "transitions": [
+                {
+                  "from": [],
+                  "to": "Idle",
+                  "at": 0,
+                  "fade": 0,
+                  "reason": "initial"
+                },
+                {
+                  "from": [
+                    "Idle"
+                  ],
+                  "to": "Walk",
+                  "at": 0,
+                  "fade": 0.5,
+                  "reason": "station"
+                },
+                {
+                  "from": [
+                    "Walk"
+                  ],
+                  "to": "Idle",
+                  "at": 4.45,
+                  "fade": 0.55,
+                  "reason": "settle"
+                },
+                {
+                  "from": [
+                    "Idle"
+                  ],
+                  "to": "Nod",
+                  "at": 5.1397999999880835,
+                  "fade": 0.5,
+                  "reason": "reaction"
+                }
+              ],
+              "weights": [
+                {
+                  "action": "Idle",
+                  "weight": 0.6508775839999998,
+                  "time": 0.8887999999880842
+                },
+                {
+                  "action": "Nod",
+                  "weight": 0.3491224160000001,
+                  "time": 0.21890000000000004
+                }
+              ],
+              "rootMotion": {
+                "extracted": true,
+                "space": "world",
+                "bone": "mixamorigHips",
+                "horizontalRest": [
+                  0.001952208112925291,
+                  0.0019521673675626516
+                ]
+              },
+              "idleRange": [
+                1.5,
+                3.5
+              ],
+              "waveRange": [
+                1.2,
+                4.3
+              ],
+              "lookAroundRange": [
+                1.2,
+                7
+              ],
+              "faceAnimation": false,
+              "eyes": 0,
+              "morphs": {},
+              "pose": {
+                "Hips": [
+                  0.402675281420483,
+                  0.9408300483505835,
+                  6.9448457302722195
+                ],
+                "Head": [
+                  0.4084999975861437,
+                  1.5266233470481632,
+                  6.930601209659834
+                ],
+                "LeftHand": [
+                  0.6539860121185362,
+                  0.8465256913087204,
+                  6.980466133615104
+                ],
+                "RightHand": [
+                  0.15475399162726008,
+                  0.9444787368873812,
+                  7.134893173746236
+                ],
+                "LeftFoot": [
+                  0.5510288882142502,
+                  0.11299112754533569,
+                  6.873792711897402
+                ],
+                "RightFoot": [
+                  0.251122168050606,
+                  0.11470990800023045,
+                  6.8700372505726355
+                ]
+              }
+            },
+            "protectedBounds": {
+              "faceBounds": {
+                "x": 468.88720253430574,
+                "y": 207.35819731044202,
+                "left": 468.88720253430574,
+                "right": 878.3826675847071,
+                "top": 207.35819731044202,
+                "bottom": 628.5295746656118,
+                "width": 409.4954650504013,
+                "height": 421.17137735516974
+              },
+              "handBounds": [
+                {
+                  "x": 709.1120113690864,
+                  "y": 1193.2232148549695,
+                  "left": 709.1120113690864,
+                  "right": 964.5382521745172,
+                  "top": 1193.2232148549695,
+                  "bottom": 1572.2710319625469,
+                  "width": 255.42624080543078,
+                  "height": 379.04781710757743
+                },
+                {
+                  "x": 87.67113899114572,
+                  "y": 1009.9412196289547,
+                  "left": 87.67113899114572,
+                  "right": 372.20909527347794,
+                  "top": 1009.9412196289547,
+                  "bottom": 1287.0250537385623,
+                  "width": 284.53795628233223,
+                  "height": 277.08383410960755
+                }
+              ]
+            },
+            "studio": {
+              "ambient": 0.5,
+              "shadowOpacity": 0.1,
+              "shadowWorldPosition": [
+                -2.8008640262187976,
+                6,
+                11.741344441015698
+              ],
+              "shadowFade": [
+                0.45,
+                1.7
+              ],
+              "shadowEnabled": true,
+              "mapSize": 1024,
+              "floorTintStrength": 0.5,
+              "floorEdge": "#f3f3f5",
+              "floorRadiusH": 1.8
+            },
+            "quality": {
+              "level": 0,
+              "slowDuration": 0,
+              "fallbackTriggered": false,
+              "staticThresholdSeconds": 5,
+              "staticThresholdFps": 20,
+              "timings": {
+                "frameMs": 6.967649126332312,
+                "poseMs": 0.2864993359826259,
+                "renderMs": 0.5110975595574171,
+                "nodesMs": 0.3384418481554503
+              }
+            },
+            "cloth": [
+              {
+                "name": "Hoodie",
+                "rib": false,
+                "normalMap": true,
+                "aoMap": false,
+                "sheen": "#b38fb6"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "恢复后镜头与颜色正常完成",
+        "pass": true
+      },
+      {
+        "name": "深链机位 2 首帧相机、动作、颜色直接初始化",
+        "pass": true,
+        "detail": {
+          "currentProgress": 1,
+          "targetProgress": 1,
+          "activeStation": 1,
+          "ready": true,
+          "presentationPaused": true,
+          "dragging": false,
+          "moving": false,
+          "mobile": false,
+          "width": 1440,
+          "height": 1000,
+          "dpr": 1,
+          "triangles": 46844,
+          "colors": {
+            "hoodie": "#3755a6",
+            "rib": "#28428a",
+            "lch": [
+              0.47084408672993516,
+              0.13505631354657616,
+              266.0767237746677
+            ],
+            "durationMs": 600,
+            "throughBlack": false
+          },
+          "ring": {
+            "openness": 0.26,
+            "linewidth": 1.25,
+            "frontInk": 0.7,
+            "backDash": [
+              3,
+              4
+            ],
+            "ticks": 4
+          },
+          "camera": {
+            "azimuth": 8,
+            "shift": -0.05,
+            "fill": 2.45,
+            "walkClose": 0,
+            "restClose": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "position": [
+              0.22993569393558114,
+              1.5112044612786737,
+              1.6360774747246365
+            ],
+            "target": [
+              0,
+              1.4640000000000002,
+              0
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "tracking": false
+          },
+          "nodes": [
+            {
+              "x": 211.89331691728032,
+              "y": 641.5993936221644,
+              "visible": true,
+              "depth": 1.5423093503620873
+            },
+            {
+              "x": 905.6238450974512,
+              "y": 575.5641382785901,
+              "visible": true,
+              "depth": 1.3652083383731861
+            },
+            {
+              "x": 1017.0584115899987,
+              "y": 393.90986887226853,
+              "visible": true,
+              "depth": 1.8187124125719887
+            },
+            {
+              "x": 468.44675141549004,
+              "y": 459.96322967928796,
+              "visible": false,
+              "depth": 1.955157069059689
+            }
+          ],
+          "animation": {
+            "action": "Nod",
+            "time": 0,
+            "duration": 3,
+            "speed": 1.1,
+            "walking": false,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "station": 1,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "LookAround",
+              "Wave"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": {
+              "to": "Nod",
+              "elapsed": 0,
+              "duration": 0.5
+            },
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Nod",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Idle",
+                "weight": 1,
+                "time": 0
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false,
+            "eyes": 0,
+            "morphs": {},
+            "pose": {
+              "Hips": [
+                0.0035406075698841484,
+                0.924536798647002,
+                0.0034396412097882365
+              ],
+              "Head": [
+                -0.014174488933575403,
+                1.510526065817495,
+                -0.013764948605688991
+              ],
+              "LeftHand": [
+                0.21565580646431606,
+                0.8350984654729876,
+                0.05297116376881364
+              ],
+              "RightHand": [
+                -0.23983538255267392,
+                0.8275764290332649,
+                0.050566563961656666
+              ],
+              "LeftFoot": [
+                0.008507878889422955,
+                0.11273060287203396,
+                -0.12547377371537982
+              ],
+              "RightFoot": [
+                -0.23439487223852928,
+                0.12346837728993237,
+                0.21036358586650541
+              ]
+            }
+          },
+          "protectedBounds": {
+            "faceBounds": {
+              "x": 416.96512426438466,
+              "y": 265.86713036540533,
+              "left": 416.96512426438466,
+              "right": 819.3695282688246,
+              "top": 265.86713036540533,
+              "bottom": 770.4488216588672,
+              "width": 402.40440400444,
+              "height": 504.5816912934619
+            },
+            "handBounds": [
+              {
+                "x": 827.0714840647978,
+                "y": 1423.3730269541375,
+                "left": 827.0714840647978,
+                "right": 1061.5533719535867,
+                "top": 1423.3730269541375,
+                "bottom": 1843.8044549742256,
+                "width": 234.48188788878895,
+                "height": 420.4314280200881
+              },
+              {
+                "x": 141.5666554961282,
+                "y": 1396.937602763116,
+                "left": 141.5666554961282,
+                "right": 404.583233484478,
+                "top": 1396.937602763116,
+                "bottom": 1801.400969221181,
+                "width": 263.0165779883498,
+                "height": 404.4633664580649
+              }
+            ]
+          },
+          "studio": {
+            "ambient": 0.5,
+            "shadowOpacity": 0.1,
+            "shadowWorldPosition": [
+              -3.2,
+              6,
+              4.8
+            ],
+            "shadowFade": [
+              0.45,
+              1.7
+            ],
+            "shadowEnabled": true,
+            "mapSize": 1024,
+            "floorTintStrength": 0.5,
+            "floorEdge": "#f3f3f5",
+            "floorRadiusH": 1.8
+          },
+          "quality": {
+            "level": 0,
+            "slowDuration": 0,
+            "fallbackTriggered": false,
+            "staticThresholdSeconds": 5,
+            "staticThresholdFps": 20,
+            "timings": {
+              "frameMs": 3.559916339683244,
+              "poseMs": 0.09579385041383207,
+              "renderMs": 6.2867803399262705,
+              "nodesMs": 0.335904900229916
+            }
+          },
+          "cloth": [
+            {
+              "name": "Hoodie",
+              "rib": false,
+              "normalMap": true,
+              "aoMap": false,
+              "sheen": "#7f8aba"
+            }
+          ]
+        }
+      },
+      {
+        "name": "深链机位 2 首帧蒙皮包围体准确",
+        "pass": true,
+        "detail": {
+          "nodes": [
+            {
+              "index": 0,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 1,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 2,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 3,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": false
+            }
+          ],
+          "missedVertices": 0,
+          "vertices": 35301,
+          "shaders": [
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": true
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            }
+          ]
+        }
+      },
+      {
+        "name": "机位 2 动作中精确射线与原生结果一致",
+        "pass": true,
+        "detail": [
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": false
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": false
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": false
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": false
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "深链机位 3 首帧相机、动作、颜色直接初始化",
+        "pass": true,
+        "detail": {
+          "currentProgress": 2,
+          "targetProgress": 2,
+          "activeStation": 2,
+          "ready": true,
+          "presentationPaused": true,
+          "dragging": false,
+          "moving": false,
+          "mobile": false,
+          "width": 1440,
+          "height": 1000,
+          "dpr": 1,
+          "triangles": 46846,
+          "colors": {
+            "hoodie": "#327b60",
+            "rib": "#23664e",
+            "lch": [
+              0.5287863747539481,
+              0.08505163519236596,
+              165.97833234546624
+            ],
+            "durationMs": 600,
+            "throughBlack": false
+          },
+          "ring": {
+            "openness": 0.3,
+            "linewidth": 1.25,
+            "frontInk": 0.7,
+            "backDash": [
+              3,
+              4
+            ],
+            "ticks": 4
+          },
+          "camera": {
+            "azimuth": -48,
+            "shift": -0.03,
+            "fill": 1.7,
+            "walkClose": 0,
+            "restClose": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "position": [
+              -1.3236632857782926,
+              1.6865555326380435,
+              1.1918317758033423
+            ],
+            "target": [
+              0,
+              1.3176,
+              0
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "tracking": false
+          },
+          "nodes": [
+            {
+              "x": 550.0409856491102,
+              "y": 464.49372055553823,
+              "visible": false,
+              "depth": 2.168539339307765
+            },
+            {
+              "x": 268.1475246282431,
+              "y": 614.4912877764145,
+              "visible": true,
+              "depth": 1.710799339564318
+            },
+            {
+              "x": 865.8502102864463,
+              "y": 635.3820365270691,
+              "visible": true,
+              "depth": 1.45271386368112
+            },
+            {
+              "x": 1030.707797821687,
+              "y": 462.58348131270753,
+              "visible": true,
+              "depth": 1.9713208910786135
+            }
+          ],
+          "animation": {
+            "action": "LookAround",
+            "time": 0,
+            "duration": 5.8,
+            "speed": 1,
+            "walking": false,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "station": 2,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "LookAround",
+              "Wave"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": {
+              "to": "LookAround",
+              "elapsed": 0,
+              "duration": 0.5
+            },
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "LookAround",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Idle",
+                "weight": 1,
+                "time": 0
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false,
+            "eyes": 0,
+            "morphs": {},
+            "pose": {
+              "Hips": [
+                0.0035406075698841484,
+                0.924536798647002,
+                0.0034396412097882365
+              ],
+              "Head": [
+                -0.014174488933575403,
+                1.510526065817495,
+                -0.013764948605688991
+              ],
+              "LeftHand": [
+                0.21565580646431606,
+                0.8350984654729876,
+                0.05297116376881364
+              ],
+              "RightHand": [
+                -0.23983538255267392,
+                0.8275764290332649,
+                0.050566563961656666
+              ],
+              "LeftFoot": [
+                0.008507878889422955,
+                0.11273060287203396,
+                -0.12547377371537982
+              ],
+              "RightFoot": [
+                -0.23439487223852928,
+                0.12346837728993237,
+                0.21036358586650541
+              ]
+            }
+          },
+          "protectedBounds": {
+            "faceBounds": {
+              "x": 458.09167595302046,
+              "y": 245.386137237592,
+              "left": 458.09167595302046,
+              "right": 851.1996798235758,
+              "top": 245.386137237592,
+              "bottom": 643.1526804659477,
+              "width": 393.10800387055536,
+              "height": 397.76654322835566
+            },
+            "handBounds": [
+              {
+                "x": 783.0916977121215,
+                "y": 986.5568828074934,
+                "left": 783.0916977121215,
+                "right": 969.7843711907423,
+                "top": 986.5568828074934,
+                "bottom": 1256.1620562989854,
+                "width": 186.6926734786208,
+                "height": 269.605173491492
+              },
+              {
+                "x": 450.9612838730418,
+                "y": 1139.2165620068463,
+                "left": 450.9612838730418,
+                "right": 681.3883332926449,
+                "top": 1139.2165620068463,
+                "bottom": 1482.2079897190363,
+                "width": 230.42704941960312,
+                "height": 342.99142771219
+              }
+            ]
+          },
+          "studio": {
+            "ambient": 0.5,
+            "shadowOpacity": 0.1,
+            "shadowWorldPosition": [
+              -3.2,
+              6,
+              4.8
+            ],
+            "shadowFade": [
+              0.45,
+              1.7
+            ],
+            "shadowEnabled": true,
+            "mapSize": 1024,
+            "floorTintStrength": 0.5,
+            "floorEdge": "#f3f3f5",
+            "floorRadiusH": 1.8
+          },
+          "quality": {
+            "level": 0,
+            "slowDuration": 0,
+            "fallbackTriggered": false,
+            "staticThresholdSeconds": 5,
+            "staticThresholdFps": 20,
+            "timings": {
+              "frameMs": 4.053943799999989,
+              "poseMs": 0.06821372018236369,
+              "renderMs": 7.3207547405944435,
+              "nodesMs": 0.24187540978605598
+            }
+          },
+          "cloth": [
+            {
+              "name": "Hoodie",
+              "rib": false,
+              "normalMap": true,
+              "aoMap": false,
+              "sheen": "#7d9e8f"
+            }
+          ]
+        }
+      },
+      {
+        "name": "深链机位 3 首帧蒙皮包围体准确",
+        "pass": true,
+        "detail": {
+          "nodes": [
+            {
+              "index": 0,
+              "bounded": true,
+              "reference": true,
+              "cached": true,
+              "visible": false
+            },
+            {
+              "index": 1,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 2,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 3,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            }
+          ],
+          "missedVertices": 0,
+          "vertices": 35301,
+          "shaders": [
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": true
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            }
+          ]
+        }
+      },
+      {
+        "name": "机位 3 动作中精确射线与原生结果一致",
+        "pass": true,
+        "detail": [
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 1,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "深链机位 4 首帧相机、动作、颜色直接初始化",
+        "pass": true,
+        "detail": {
+          "currentProgress": 3,
+          "targetProgress": 3,
+          "activeStation": 3,
+          "ready": true,
+          "presentationPaused": true,
+          "dragging": false,
+          "moving": false,
+          "mobile": false,
+          "width": 1440,
+          "height": 1000,
+          "dpr": 1,
+          "triangles": 46848,
+          "colors": {
+            "hoodie": "#a44c76",
+            "rib": "#893c61",
+            "lch": [
+              0.5402033702092013,
+              0.12566044782800478,
+              352.23606733715434
+            ],
+            "durationMs": 600,
+            "throughBlack": false
+          },
+          "ring": {
+            "openness": 0.24,
+            "linewidth": 1.25,
+            "frontInk": 0.7,
+            "backDash": [
+              3,
+              4
+            ],
+            "ticks": 4
+          },
+          "camera": {
+            "azimuth": 30,
+            "shift": 0.06,
+            "fill": 1.52,
+            "walkClose": 0,
+            "restClose": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "position": [
+              1.1872154660256082,
+              1.3814215466025608,
+              2.0563175066879165
+            ],
+            "target": [
+              0,
+              1.2627,
+              0
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "tracking": false
+          },
+          "nodes": [
+            {
+              "x": 1173.3926469927594,
+              "y": 453.0011510845707,
+              "visible": true,
+              "depth": 2.2311023094825724
+            },
+            {
+              "x": 930.5435790521254,
+              "y": 396.30365551765476,
+              "visible": false,
+              "depth": 2.7738271557175778
+            },
+            {
+              "x": 491.30931394255293,
+              "y": 486.41727507886293,
+              "visible": true,
+              "depth": 2.5855860980918908
+            },
+            {
+              "x": 633.8394825752209,
+              "y": 574.7820825019805,
+              "visible": true,
+              "depth": 1.9922238569569057
+            }
+          ],
+          "animation": {
+            "action": "Wave",
+            "time": 0,
+            "duration": 3.0999999999999996,
+            "speed": 1.05,
+            "walking": false,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "station": 3,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "LookAround",
+              "Wave"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": {
+              "to": "Wave",
+              "elapsed": 0,
+              "duration": 0.5
+            },
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Wave",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Idle",
+                "weight": 1,
+                "time": 0
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false,
+            "eyes": 0,
+            "morphs": {},
+            "pose": {
+              "Hips": [
+                0.0035406075698841484,
+                0.924536798647002,
+                0.0034396412097882365
+              ],
+              "Head": [
+                -0.014174488933575403,
+                1.510526065817495,
+                -0.013764948605688991
+              ],
+              "LeftHand": [
+                0.21565580646431606,
+                0.8350984654729876,
+                0.05297116376881364
+              ],
+              "RightHand": [
+                -0.23983538255267392,
+                0.8275764290332649,
+                0.050566563961656666
+              ],
+              "LeftFoot": [
+                0.008507878889422955,
+                0.11273060287203396,
+                -0.12547377371537982
+              ],
+              "RightFoot": [
+                -0.23439487223852928,
+                0.12346837728993237,
+                0.21036358586650541
+              ]
+            }
+          },
+          "protectedBounds": {
+            "faceBounds": {
+              "x": 648.7796660106666,
+              "y": 190.21237132470813,
+              "left": 648.7796660106666,
+              "right": 948.9105590336527,
+              "top": 190.21237132470813,
+              "bottom": 500.4977190261608,
+              "width": 300.13089302298613,
+              "height": 310.2853477014527
+            },
+            "handBounds": [
+              {
+                "x": 845.4860987484458,
+                "y": 918.1361232452765,
+                "left": 845.4860987484458,
+                "right": 1023.7501166088631,
+                "top": 918.1361232452765,
+                "bottom": 1161.1757288510555,
+                "width": 178.2640178604173,
+                "height": 243.039605605779
+              },
+              {
+                "x": 501.4340472740694,
+                "y": 881.5396482950666,
+                "left": 501.4340472740694,
+                "right": 670.4343911956679,
+                "top": 881.5396482950666,
+                "bottom": 1098.1743696730675,
+                "width": 169.00034392159847,
+                "height": 216.6347213780009
+              }
+            ]
+          },
+          "studio": {
+            "ambient": 0.5,
+            "shadowOpacity": 0.1,
+            "shadowWorldPosition": [
+              -3.2,
+              6,
+              4.8
+            ],
+            "shadowFade": [
+              0.45,
+              1.7
+            ],
+            "shadowEnabled": true,
+            "mapSize": 1024,
+            "floorTintStrength": 0.5,
+            "floorEdge": "#f3f3f5",
+            "floorRadiusH": 1.8
+          },
+          "quality": {
+            "level": 0,
+            "slowDuration": 0,
+            "fallbackTriggered": false,
+            "staticThresholdSeconds": 5,
+            "staticThresholdFps": 20,
+            "timings": {
+              "frameMs": 4.026260951999945,
+              "poseMs": 0.0612579505314743,
+              "renderMs": 7.800705958589969,
+              "nodesMs": 0.1
+            }
+          },
+          "cloth": [
+            {
+              "name": "Hoodie",
+              "rib": false,
+              "normalMap": true,
+              "aoMap": false,
+              "sheen": "#b9869b"
+            }
+          ]
+        }
+      },
+      {
+        "name": "深链机位 4 首帧蒙皮包围体准确",
+        "pass": true,
+        "detail": {
+          "nodes": [
+            {
+              "index": 0,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 1,
+              "bounded": true,
+              "reference": true,
+              "cached": true,
+              "visible": false
+            },
+            {
+              "index": 2,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            },
+            {
+              "index": 3,
+              "bounded": false,
+              "reference": false,
+              "cached": false,
+              "visible": true
+            }
+          ],
+          "missedVertices": 0,
+          "vertices": 35301,
+          "shaders": [
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": true
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            },
+            {
+              "linked": true,
+              "shadowFade": false
+            }
+          ]
+        }
+      },
+      {
+        "name": "机位 4 动作中精确射线与原生结果一致",
+        "pass": true,
+        "detail": [
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 1,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          },
+          {
+            "nodes": [
+              {
+                "index": 0,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 1,
+                "bounded": true,
+                "reference": true,
+                "cached": true,
+                "visible": false
+              },
+              {
+                "index": 2,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              },
+              {
+                "index": 3,
+                "bounded": false,
+                "reference": false,
+                "cached": false,
+                "visible": true
+              }
+            ],
+            "missedVertices": 0,
+            "vertices": 0,
+            "shaders": [
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": true
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              },
+              {
+                "linked": true,
+                "shadowFade": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "浏览器无脚本异常",
+        "pass": true,
+        "detail": []
+      }
+    ],
+    "source": "output/playwright/v24/scene-checks.json"
+  },
+  "ui": {
+    "passed": 40,
+    "total": 40,
+    "checks": [
+      {
+        "name": "模型延迟下载时已有完整静图",
+        "pass": true
+      },
+      {
+        "name": "模型尚未下载时没有播放走路",
+        "pass": true
+      },
+      {
+        "name": "首个完整人物出现后没有把所有人物层一起降为半透明",
+        "pass": true
+      },
+      {
+        "name": "接管后3D已完全显示",
+        "pass": true
+      },
+      {
+        "name": "提示与目录自动交接没有同帧叠字",
+        "pass": true
+      },
+      {
+        "name": "目录最终出现",
+        "pass": true
+      },
+      {
+        "name": "静帧连续切换没有两张人物同时可见",
+        "pass": true
+      },
+      {
+        "name": "手动操作触发提示与目录交接不叠字",
+        "pass": true
+      },
+      {
+        "name": "快速切换最终URL、卡片与图一致",
+        "pass": true
+      },
+      {
+        "name": "静帧先淡到空白再显示下一张",
+        "pass": true
+      },
+      {
+        "name": "390px第1站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.05963706970215,
+            "right": 370.05963706970215
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第1站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.05963706970215,
+            "right": 370.05963706970215
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第1站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 217.890625,
+          "expanded": 243.6875
+        }
+      },
+      {
+        "name": "390px第2站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.05868911743164,
+            "right": 370.05868911743164
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第2站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.05868911743164,
+            "right": 370.05868911743164
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第2站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 217.890625,
+          "expanded": 243.6875
+        }
+      },
+      {
+        "name": "390px第3站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.0579891204834,
+            "right": 370.0579891204834
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第3站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.0579891204834,
+            "right": 370.0579891204834
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第3站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 217.890625,
+          "expanded": 243.6875
+        }
+      },
+      {
+        "name": "390px第4站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.054903030395508,
+            "right": 370.0549030303955
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第4站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 626.109375,
+            "height": 626.109375,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "strengths": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "body": {
+            "top": 626.109375,
+            "bottom": 844,
+            "height": 217.890625,
+            "width": 390,
+            "left": 0,
+            "right": 390
+          },
+          "article": {
+            "top": 646.109375,
+            "bottom": 818,
+            "height": 171.890625,
+            "width": 350,
+            "left": 20,
+            "right": 370
+          },
+          "actions": {
+            "top": 788,
+            "bottom": 818,
+            "height": 30,
+            "width": 350,
+            "left": 20.054903030395508,
+            "right": 370.0549030303955
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 390,
+          "viewportWidth": 390,
+          "viewportHeight": 844
+        }
+      },
+      {
+        "name": "390px第4站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 217.890625,
+          "expanded": 243.6875
+        }
+      },
+      {
+        "name": "320px第1站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 462.109375,
+            "height": 462.109375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 462.109375,
+            "bottom": 680,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 462.109375,
+            "bottom": 680,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 482.109375,
+            "bottom": 654,
+            "height": 171.890625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 624,
+            "bottom": 654,
+            "height": 30,
+            "width": 288,
+            "left": 16.05962371826172,
+            "right": 304.0596237182617
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第1站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": 0,
+            "bottom": 462.109375,
+            "height": 462.109375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 462.109375,
+            "bottom": 680,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 462.109375,
+            "bottom": 680,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 482.109375,
+            "bottom": 654,
+            "height": 171.890625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 624,
+            "bottom": 654,
+            "height": 30,
+            "width": 288,
+            "left": 16.05962371826172,
+            "right": 304.0596237182617
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第1站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 217.890625,
+          "expanded": 243.6875
+        }
+      },
+      {
+        "name": "320px第2站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": -40,
+            "bottom": 422.109375,
+            "height": 462.109375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 442.109375,
+            "bottom": 614,
+            "height": 171.890625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 584,
+            "bottom": 614,
+            "height": 30,
+            "width": 288,
+            "left": 16.058629989624023,
+            "right": 304.058629989624
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第2站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": -40,
+            "bottom": 422.109375,
+            "height": 462.109375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 442.109375,
+            "bottom": 614,
+            "height": 171.890625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 584,
+            "bottom": 614,
+            "height": 30,
+            "width": 288,
+            "left": 16.058629989624023,
+            "right": 304.058629989624
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第2站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 217.890625,
+          "expanded": 243.6875
+        }
+      },
+      {
+        "name": "320px第3站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": -40,
+            "bottom": 422.109375,
+            "height": 462.109375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 442.109375,
+            "bottom": 614,
+            "height": 171.890625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 584,
+            "bottom": 614,
+            "height": 30,
+            "width": 288,
+            "left": 16.059974670410156,
+            "right": 304.05997467041016
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第3站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": -40,
+            "bottom": 422.109375,
+            "height": 462.109375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 422.109375,
+            "bottom": 640,
+            "height": 217.890625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 442.109375,
+            "bottom": 614,
+            "height": 171.890625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 584,
+            "bottom": 614,
+            "height": 30,
+            "width": 288,
+            "left": 16.059974670410156,
+            "right": 304.05997467041016
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 217,
+          "bodyClientHeight": 217,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第3站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 217.890625,
+          "expanded": 243.6875
+        }
+      },
+      {
+        "name": "320px第4站内容下方无额外空白",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": -40,
+            "bottom": 396.609375,
+            "height": 436.609375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 396.609375,
+            "bottom": 640,
+            "height": 243.390625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 396.609375,
+            "bottom": 640,
+            "height": 243.390625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 416.609375,
+            "bottom": 614,
+            "height": 197.390625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 584,
+            "bottom": 614,
+            "height": 30,
+            "width": 288,
+            "left": 16.05596351623535,
+            "right": 304.05596351623535
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 242,
+          "bodyClientHeight": 242,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第4站无横向溢出及内容内部滚动",
+        "pass": true,
+        "detail": {
+          "stage": {
+            "top": -40,
+            "bottom": 396.609375,
+            "height": 436.609375,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "strengths": {
+            "top": 396.609375,
+            "bottom": 640,
+            "height": 243.390625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "body": {
+            "top": 396.609375,
+            "bottom": 640,
+            "height": 243.390625,
+            "width": 320,
+            "left": 0,
+            "right": 320
+          },
+          "article": {
+            "top": 416.609375,
+            "bottom": 614,
+            "height": 197.390625,
+            "width": 288,
+            "left": 16,
+            "right": 304
+          },
+          "actions": {
+            "top": 584,
+            "bottom": 614,
+            "height": 30,
+            "width": 288,
+            "left": 16.05596351623535,
+            "right": 304.05596351623535
+          },
+          "paddingBottom": 26,
+          "bodyScrollHeight": 242,
+          "bodyClientHeight": 242,
+          "documentWidth": 320,
+          "viewportWidth": 320,
+          "viewportHeight": 640
+        }
+      },
+      {
+        "name": "320px第4站展开后说明区随内容增长",
+        "pass": true,
+        "detail": {
+          "collapsed": 243.390625,
+          "expanded": 269.1875
+        }
+      },
+      {
+        "name": "手机降级提示位于舞台之外",
+        "pass": true,
+        "detail": {
+          "top": 596.515625,
+          "bottom": 627.109375,
+          "stageTop": 0,
+          "stageBottom": 596.515625
+        }
+      },
+      {
+        "name": "降级后切站和重试期间切站保留最后选择",
+        "pass": true
+      },
+      {
+        "name": "重试成功后降级提示消失",
+        "pass": true
+      },
+      {
+        "name": "运行时减少动态保留当前站",
+        "pass": true
+      },
+      {
+        "name": "减少动态首次打开仍在指定站",
+        "pass": true
+      },
+      {
+        "name": "浏览器没有未处理异常",
+        "pass": true,
+        "detail": []
+      }
+    ],
+    "source": "output/playwright/v24-ui/results.json"
+  },
+  "introInterruption": {
+    "passed": 12,
+    "total": 12,
+    "checks": [
+      {
+        "name": "下载中换站没有沿用旧站的配准样式",
+        "passed": true,
+        "detail": {
+          "before": {
+            "src": "http://127.0.0.1:5173/images-intro/angle-01.png",
+            "style": "width: 1296px; height: 900px; left: 66.24px; top: 0px;",
+            "rect": {
+              "x": 66.23958587646484,
+              "y": 0,
+              "width": 1296,
+              "height": 900,
+              "top": 0,
+              "right": 1362.2395858764648,
+              "bottom": 900,
+              "left": 66.23958587646484
+            }
+          },
+          "after": {
+            "src": "http://127.0.0.1:5173/images-intro/angle-02.png",
+            "style": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 1440,
+              "height": 900,
+              "top": 0,
+              "right": 1440,
+              "bottom": 900,
+              "left": 0
+            },
+            "active": 1,
+            "sceneAssigned": false
+          }
+        }
+      },
+      {
+        "name": "下载中换站最终场景为第二站",
+        "passed": true
+      },
+      {
+        "name": "快速2/4/3确实从开场交接中开始",
+        "passed": true
+      },
+      {
+        "name": "快速换站后保持3D且最终第三站一致",
+        "passed": true
+      },
+      {
+        "name": "交接中拖拽不改变实时机位",
+        "passed": true,
+        "detail": {
+          "before": 0,
+          "after": 0,
+          "paused": true
+        }
+      },
+      {
+        "name": "松手后切到最终目标且无误降级",
+        "passed": true
+      },
+      {
+        "name": "resize从交接中开始",
+        "passed": true
+      },
+      {
+        "name": "交接时跨断点resize后维持第二站3D",
+        "passed": true
+      },
+      {
+        "name": "刚切静帧后快速换站最终第三站一致",
+        "passed": true
+      },
+      {
+        "name": "静帧内联transition没有残留none",
+        "passed": true,
+        "detail": [
+          {
+            "inline": "",
+            "computed": "0.12s",
+            "opacity": 0,
+            "current": false
+          },
+          {
+            "inline": "",
+            "computed": "0.12s",
+            "opacity": 0,
+            "current": false
+          },
+          {
+            "inline": "",
+            "computed": "0.2s",
+            "opacity": 1,
+            "current": true
+          },
+          {
+            "inline": "",
+            "computed": "0.12s",
+            "opacity": 0,
+            "current": false
+          }
+        ]
+      },
+      {
+        "name": "静帧CSS淡入淡出时长仍生效",
+        "passed": true,
+        "detail": [
+          {
+            "inline": "",
+            "computed": "0.12s",
+            "opacity": 0,
+            "current": false
+          },
+          {
+            "inline": "",
+            "computed": "0.12s",
+            "opacity": 0,
+            "current": false
+          },
+          {
+            "inline": "",
+            "computed": "0.2s",
+            "opacity": 1,
+            "current": true
+          },
+          {
+            "inline": "",
+            "computed": "0.12s",
+            "opacity": 0,
+            "current": false
+          }
+        ]
+      },
+      {
+        "name": "无页面异常或未处理拒绝",
+        "passed": true,
+        "detail": []
+      }
+    ],
+    "source": "qa/tripo/v24-intro-interruption.json"
+  },
+  "color": {
+    "passed": 32,
+    "total": 32,
+    "checks": [
+      {
+        "name": "点击时节点不提前跳到目标色",
+        "pass": true,
+        "detail": {
+          "before": "#c2603d",
+          "cloth": "#c2603d",
+          "accent": "#c2603d"
+        }
+      },
+      {
+        "name": "拖拽确实接管尚未结束的镜头切换",
+        "pass": true,
+        "detail": {
+          "before": {
+            "p": 0.18253704083399977,
+            "target": 1,
+            "moving": true,
+            "color": [
+              0.5414353301457433,
+              0.13506196816788354,
+              339.0677010016353
+            ],
+            "hex": "#a04c89",
+            "accent": "#a04c89",
+            "dragging": false
+          },
+          "after": {
+            "p": 0.18253704083399977,
+            "target": 0.18253704083399977,
+            "moving": true,
+            "color": [
+              0.5414353301457433,
+              0.13506196816788354,
+              339.0677010016353
+            ],
+            "hex": "#a04c89",
+            "accent": "#a04c89",
+            "dragging": true
+          },
+          "frames": [
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            },
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            },
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "切换中接管拖拽不跳镜头",
+        "pass": true,
+        "detail": {
+          "before": {
+            "p": 0.18253704083399977,
+            "target": 1,
+            "moving": true,
+            "color": [
+              0.5414353301457433,
+              0.13506196816788354,
+              339.0677010016353
+            ],
+            "hex": "#a04c89",
+            "accent": "#a04c89",
+            "dragging": false
+          },
+          "after": {
+            "p": 0.18253704083399977,
+            "target": 0.18253704083399977,
+            "moving": true,
+            "color": [
+              0.5414353301457433,
+              0.13506196816788354,
+              339.0677010016353
+            ],
+            "hex": "#a04c89",
+            "accent": "#a04c89",
+            "dragging": true
+          },
+          "frames": [
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            },
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            },
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "接管后连续三帧亮度、饱和度、色相不跳变",
+        "pass": true,
+        "detail": {
+          "before": {
+            "p": 0.18253704083399977,
+            "target": 1,
+            "moving": true,
+            "color": [
+              0.5414353301457433,
+              0.13506196816788354,
+              339.0677010016353
+            ],
+            "hex": "#a04c89",
+            "accent": "#a04c89",
+            "dragging": false
+          },
+          "after": {
+            "p": 0.18253704083399977,
+            "target": 0.18253704083399977,
+            "moving": true,
+            "color": [
+              0.5414353301457433,
+              0.13506196816788354,
+              339.0677010016353
+            ],
+            "hex": "#a04c89",
+            "accent": "#a04c89",
+            "dragging": true
+          },
+          "frames": [
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            },
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            },
+            {
+              "p": 0.18253704083399977,
+              "target": 0.18253704083399977,
+              "moving": true,
+              "color": [
+                0.5414353301457433,
+                0.13506196816788354,
+                339.0677010016353
+              ],
+              "hex": "#a04c89",
+              "accent": "#a04c89",
+              "dragging": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "切到2期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到2最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到3期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到3最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到4期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到4最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到1期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到1最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到3期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到3最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到1期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到1最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到4期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到4最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到3期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到3最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到2期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到2最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到4期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到4最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到2期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到2最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "切到1期间卫衣、强调色和节点同步",
+        "pass": true
+      },
+      {
+        "name": "切到1最终颜色正确",
+        "pass": true
+      },
+      {
+        "name": "连续快速切站沿用当前颜色",
+        "pass": true,
+        "detail": [
+          {
+            "before": "#c2603d",
+            "after": "#c2603d",
+            "accent": "#c2603d"
+          },
+          {
+            "before": "#c2603d",
+            "after": "#c2603d",
+            "accent": "#c2603d"
+          },
+          {
+            "before": "#ba5973",
+            "after": "#ba5973",
+            "accent": "#ba5973"
+          },
+          {
+            "before": "#b75773",
+            "after": "#b75773",
+            "accent": "#b75773"
+          },
+          {
+            "before": "#ab5383",
+            "after": "#ab5383",
+            "accent": "#ab5383"
+          }
+        ]
+      },
+      {
+        "name": "渐变中切静帧恢复该站准确颜色",
+        "pass": true,
+        "detail": {
+          "before": "#1b7c9d",
+          "accent": "#C2603D",
+          "angle": "1",
+          "static": true
+        }
+      },
+      {
+        "name": "静帧恢复3D颜色同步",
+        "pass": true
+      },
+      {
+        "name": "没有脚本异常",
+        "pass": true,
+        "detail": []
+      }
+    ],
+    "source": "output/playwright/v24/color-continuity.json"
+  },
+  "production": {
+    "passed": 20,
+    "total": 20,
+    "checks": [
+      {
+        "name": "默认打开加载3D动画版本",
+        "pass": true
+      },
+      {
+        "name": "生产没有开发调试接口",
+        "pass": true
+      },
+      {
+        "name": "默认人物画面随时间变化",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度2",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度3",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度4",
+        "pass": true
+      },
+      {
+        "name": "键盘切换到角度1",
+        "pass": true
+      },
+      {
+        "name": "390px真实触摸横滑切换角度1到2",
+        "pass": true
+      },
+      {
+        "name": "static参数启用静帧模式",
+        "pass": true
+      },
+      {
+        "name": "静帧角度1图片加载",
+        "pass": true
+      },
+      {
+        "name": "静帧角度2图片加载",
+        "pass": true
+      },
+      {
+        "name": "静帧角度3图片加载",
+        "pass": true
+      },
+      {
+        "name": "静帧角度4图片加载",
+        "pass": true
+      },
+      {
+        "name": "幕后按钮从静帧启用3D",
+        "pass": true
+      },
+      {
+        "name": "幕后按钮从3D切换静帧",
+        "pass": true
+      },
+      {
+        "name": "再次切回3D可恢复",
+        "pass": true
+      },
+      {
+        "name": "Escape关闭幕后说明",
+        "pass": true
+      },
+      {
+        "name": "全程无404或其他失败HTTP资源",
+        "pass": true,
+        "details": []
+      },
+      {
+        "name": "全程无页面脚本错误",
+        "pass": true,
+        "details": []
+      },
+      {
+        "name": "移动版无横向滚动溢出",
+        "pass": true
+      }
+    ],
+    "source": "output/playwright/v24/production.json"
+  },
+  "nodePerformance": {
+    "walk": {
+      "frames": 619,
+      "meanNodesMs": 1.5782693784037252,
+      "p95NodesMs": 2.6329928420177984,
+      "maxNodesMs": 3.3574450356545595,
+      "maxQualityLevel": 0
+    },
+    "idle": {
+      "frames": 523,
+      "meanNodesMs": 0.09651886090130356,
+      "p95NodesMs": 0.2315489432037321,
+      "maxNodesMs": 0.3194515530835975,
+      "maxQualityLevel": 0
+    },
+    "fallbacks": []
+  },
+  "staticLayers": {
+    "passed": 11,
+    "total": 11,
+    "checks": [
+      {
+        "name": "1440px静帧节点真实绘制在海报之前",
+        "pass": true,
+        "detail": {
+          "pixels": 201,
+          "region": {
+            "x": 862,
+            "y": 485,
+            "width": 50,
+            "height": 50
+          }
+        }
+      },
+      {
+        "name": "1440px连线真实绘制可见",
+        "pass": true,
+        "detail": {
+          "pixels": 40,
+          "region": {
+            "x": 891,
+            "y": 507,
+            "width": 27,
+            "height": 7
+          }
+        }
+      },
+      {
+        "name": "1440px卡片标题可见且处于交互前层",
+        "pass": true,
+        "detail": {
+          "pixels": 2086,
+          "region": {
+            "x": 924,
+            "y": 534,
+            "width": 322,
+            "height": 43
+          },
+          "hit": true
+        }
+      },
+      {
+        "name": "1440px拖动标签真实绘制在海报之前",
+        "pass": true,
+        "detail": {
+          "pixels": 566,
+          "region": {
+            "x": 596,
+            "y": 448,
+            "width": 92,
+            "height": 33
+          },
+          "text": "04 团队精神"
+        }
+      },
+      {
+        "name": "1440px拖动后卡片恢复且角度一致",
+        "pass": true
+      },
+      {
+        "name": "390px静帧节点真实绘制在海报之前",
+        "pass": true,
+        "detail": {
+          "pixels": 119,
+          "region": {
+            "x": 286,
+            "y": 379,
+            "width": 50,
+            "height": 50
+          }
+        }
+      },
+      {
+        "name": "390px连线真实绘制可见",
+        "pass": true,
+        "detail": {
+          "pixels": 407,
+          "region": {
+            "x": 307,
+            "y": 412,
+            "width": 7,
+            "height": 211
+          }
+        }
+      },
+      {
+        "name": "390px卡片标题可见且处于交互前层",
+        "pass": true,
+        "detail": {
+          "pixels": 1344,
+          "region": {
+            "x": 17,
+            "y": 674,
+            "width": 356,
+            "height": 35
+          },
+          "hit": true
+        }
+      },
+      {
+        "name": "390px拖动标签真实绘制在海报之前",
+        "pass": true,
+        "detail": {
+          "pixels": 879,
+          "region": {
+            "x": 218,
+            "y": 429,
+            "width": 92,
+            "height": 33
+          },
+          "text": "03 长期意识"
+        }
+      },
+      {
+        "name": "390px拖动后卡片恢复且角度一致",
+        "pass": true
+      },
+      {
+        "name": "生产页面无未处理异常",
+        "pass": true,
+        "detail": []
+      }
+    ],
+    "source": "qa/tripo/v24-static-layers.json"
+  },
+  "build": {
+    "check": "npm run check passed",
+    "build": "npm run build passed",
+    "assets": [
+      "index-B3V9uq5l.css",
+      "index-BUm4S3ZX.js",
+      "scene-DWgmAhBx.js"
+    ],
+    "warning": "Three.js chunk exceeds 500 kB; build succeeded"
+  }
+}

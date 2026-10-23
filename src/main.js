@@ -20,14 +20,19 @@ let pointer=null,dragged=false,firstInput=false,moving=false;
 let wheelLast=0,wheelAmount=0,wheelUsed=false;
 let lineTimer,cardTimer,staticTimer,resizeTimer;
 let frameMetadata=null,lastPositions=[],lastSettled=null;
+let posterGeneration=0,revealGeneration=0,introPending=true,introMetadata=null,introLayout=null;
+const holdIntro=import.meta.env.DEV&&new URLSearchParams(location.search).has('holdIntro');
 const framePath=(i,variant=mobile()?'mobile':'desktop')=>`${IMAGE_ROOT}/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png`;
+const introPath=(i)=>restored?framePath(i):`/images-intro/${mobile()?'mobile':'angle'}-0${i+1}.png`;
+const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const nextFrame=()=>new Promise(resolve=>requestAnimationFrame(resolve));
 
 document.title=`${profile.name} ${profile.nameEn} — Why me?`;
 document.querySelector('#app').innerHTML=`
 <a class="skip-link" href="#strengths">跳到文字介绍</a>
 <main class="portfolio" aria-label="王匡义的四个角度">
   <div class="stage" id="stage" aria-label="人物展示，左右拖动切换角度">
-    <div class="poster-stack" aria-hidden="true">${advantages.map((_,i)=>`<img class="poster ${i===active?'is-current':''}" src="${framePath(i)}" alt="" ${i===active?'fetchpriority="high"':'loading="lazy"'} draggable="false">`).join('')}</div>
+    <div class="poster-stack" aria-hidden="true"><img class="intro-poster" src="${introPath(active)}" alt="" fetchpriority="high" draggable="false">${advantages.map((_,i)=>`<img class="poster ${i===active?'is-current':''}" src="${framePath(i)}" alt="" ${staticMode&&i===active?'fetchpriority="high"':'loading="lazy"'} draggable="false">`).join('')}</div>
     <canvas id="scene" aria-hidden="true"></canvas>
     <svg class="loading-halo" viewBox="0 0 1000 400" aria-hidden="true"><ellipse cx="500" cy="200" rx="370" ry="90" transform="rotate(-9 500 200)" pathLength="100"/></svg>
     <div class="nodes" aria-label="选择光环节点">${advantages.map((a,i)=>`<button class="node ${i===active?'is-active':''}" data-index="${i}" aria-label="角度 ${i+1}：${esc(a.category)}" aria-pressed="${i===active}"><span class="node-dot"></span><span class="node-index">0${i+1}</span><span class="node-tooltip">${esc(a.category)}</span></button>`).join('')}</div>
@@ -49,16 +54,15 @@ document.querySelector('#app').innerHTML=`
   </header>
   <nav class="contact" aria-label="简历与联系"><a href="#contact" class="contact-link">联系</a><a class="resume" href="${esc(profile.resume)}" target="_blank" rel="noopener noreferrer">简历 <span>↗</span></a></nav>
   <section id="strengths" class="strengths" aria-label="四个一起工作的理由" tabindex="-1" data-side="right">
-    <span class="card-notch" aria-hidden="true"></span><div class="card-body">${advantages.map((a,i)=>`<article class="strength ${i===active?'is-active':''}" data-strength="${i}" aria-labelledby="title-${i}">
+    <span class="card-notch" aria-hidden="true"></span><p class="fallback-status" hidden>已为你切换到静帧展示 · <button id="retry-3d">重试 3D</button></p><div class="card-body">${advantages.map((a,i)=>`<article class="strength ${i===active?'is-active':''}" data-strength="${i}" aria-labelledby="title-${i}">
       <div class="card-label card-reveal"><span class="color-dot" style="--dot-color:${COLORS[i]}"></span><span><span class="card-number">0${i+1}</span>　${esc(a.category)}</span></div>
       <h2 class="card-reveal" id="title-${i}">${esc(a.title)}</h2><p class="claim card-reveal">${esc(a.claim)}</p>
       <ul class="proofs card-reveal">${a.proofs.slice(0,2).map((p,n)=>`<li ${n===1?`class="extra-proof" id="proof-${i}"`:''}>${esc(p)}</li>`).join('')}</ul>
       <div class="card-actions card-reveal"><a class="proof-link" href="${esc(a.link.href)}" ${a.link.href.startsWith('https:')?'target="_blank" rel="noopener noreferrer"':''}>${esc(a.link.label.replace(/\s*↗$/,''))} <span>↗</span></a>${a.proofs.length>1?`<button class="expand-proof" aria-expanded="false" aria-controls="proof-${i}">展开 <span>＋</span></button>`:''}</div>
-    </article>`).join('')}</div>
-    <nav class="mobile-directory" aria-label="选择角度">${advantages.map((a,i)=>`<button class="mobile-tab ${i===active?'is-active':''}" data-index="${i}" aria-label="${esc(a.category)}" aria-pressed="${i===active}"><span></span></button>`).join('')}</nav>
+    </article>`).join('')}
+    <nav class="mobile-directory" aria-label="选择角度">${advantages.map((a,i)=>`<button class="mobile-tab ${i===active?'is-active':''}" data-index="${i}" aria-label="${esc(a.category)}" aria-pressed="${i===active}"><span></span></button>`).join('')}</nav></div>
   </section>
   <div class="navigation"><p class="interaction-hint">左右拖动光环，换个角度看我 <span>↔</span></p><nav class="directory" aria-label="优点目录">${advantages.map((a,i)=>`<button class="directory-item ${i===active?'is-active':''}" data-index="${i}" aria-pressed="${i===active}">${esc(a.category)}</button>`).join('')}</nav></div>
-  <p class="fallback-status" hidden>已为你切换到静帧展示 · <button id="retry-3d">重试 3D</button></p>
   <p class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></p>
 </main>
 <dialog id="detail-dialog" aria-labelledby="dialog-title"><header class="dialog-header"><span>关于这个作品</span><button id="close-dialog" aria-label="关闭说明">关闭 ×</button></header><div id="dialog-content"></div></dialog>`;
@@ -73,14 +77,16 @@ function applyActive(index,{announce=true}={}){
   active=wrap(index);if(staticMode||!scene)document.documentElement.style.setProperty('--accent',COLORS[active]);document.body.dataset.angle=active+1;
   document.querySelectorAll('[data-index]').forEach(el=>{const selected=Number(el.dataset.index)===active;el.classList.toggle('is-active',selected);el.setAttribute('aria-pressed',String(selected));});
   panels.forEach((p,i)=>{p.classList.toggle('is-active',i===active);p.classList.remove('is-expanded');p.querySelectorAll('a,button').forEach(el=>el.tabIndex=i===active?0:-1);const b=p.querySelector('.expand-proof');if(b){b.setAttribute('aria-expanded','false');b.innerHTML='展开 <span>＋</span>';}});
-  document.querySelectorAll('.poster').forEach((p,i)=>p.classList.toggle('is-current',i===active));
+  if(introPending&&!scene&&!staticMode){const poster=document.querySelector('.intro-poster');poster.src=introPath(active);poster.classList.remove('is-live');poster.removeAttribute('style');introLayout=null;}
   if(announce)document.querySelector('#announcement').textContent=`角度 ${active+1}，${advantages[active].title}。${advantages[active].claim}`;
   const url=new URL(location.href);url.searchParams.set('angle',active+1);history.replaceState(null,'',url);
 }
-function noteInput(){firstInput=true;document.body.classList.add('has-interacted');}
+function showDirectory(){document.body.classList.add('show-directory');setTimeout(()=>{document.querySelector('.directory').inert=false;},reducedMotion?0:260);}
+function noteInput(){firstInput=true;showDirectory();document.body.classList.add('has-interacted');}
 function beginMotion(){moving=true;clearTimeout(lineTimer);clearTimeout(cardTimer);clearTimeout(staticTimer);document.body.classList.add('is-moving');document.body.classList.remove('card-open','line-open');}
 function settled(data){
   if(data?.index!==undefined&&wrap(data.index)!==active)return;if(pointer?.started)return;
+  if(introPending&&!staticMode){lastSettled=data||lastSettled;return;}
   moving=false;lastSettled=data||lastSettled;if(data?.nodes)positionNodes(data.nodes);document.body.classList.remove('is-moving');layoutCard(lastSettled);
   nodes[active].classList.remove('node-arrive');void nodes[active].offsetWidth;nodes[active].classList.add('node-arrive');
   clearTimeout(lineTimer);lineTimer=setTimeout(()=>document.body.classList.add('line-open'),reducedMotion?0:240);
@@ -88,9 +94,35 @@ function settled(data){
 }
 function select(index,{immediate=false}={}){
   noteInput();const next=wrap(Math.round(index));if(next===active&&!dragged)return;beginMotion();applyActive(next);
-  if(staticMode){positionStaticNodes();staticTimer=setTimeout(()=>settled(),reducedMotion?0:260);return;}
-  if(reducedMotion&&!immediate){canvas.animate([{opacity:1},{opacity:0},{opacity:1}],{duration:250});setTimeout(()=>scene?.setStation(active,{immediate:true}),125);}else scene?.setStation(active,{immediate});
+  if(staticMode){switchStaticPoster(next);return;}
+  if(introPending&&scene){revealScene(scene,generation);return;}
+  scene?.setStation(active,{immediate:immediate||reducedMotion});
   if(!scene)layoutCard();
+}
+async function switchStaticPoster(index,{immediate=false}={}){
+  const own=++posterGeneration,images=[...document.querySelectorAll('.poster')],target=images[index];
+  try{await target.decode();}catch{}
+  if(own!==posterGeneration||!staticMode)return;
+  if(immediate||reducedMotion){
+    images.forEach(img=>{img.style.transition='none';img.classList.toggle('is-current',img===target);});
+    positionStaticNodes();settled();void target.offsetWidth;
+    images.forEach(img=>img.style.removeProperty('transition'));
+    return;
+  }
+  const duration=reducedMotion||immediate?0:120;
+  images.forEach(img=>img.classList.remove('is-current'));
+  if(duration)await delay(duration);
+  if(own!==posterGeneration||!staticMode)return;
+  target.classList.add('is-current');positionStaticNodes();
+  if(!reducedMotion&&!immediate)await delay(200);
+  if(own===posterGeneration&&staticMode&&!pointer?.started)settled();
+}
+function layoutIntroPoster(){
+  const image=document.querySelector('.intro-poster'),reference=introMetadata?.[mobile()?'mobile':'desktop']?.[active];
+  if(!image||image.classList.contains('is-live')||!introLayout||!reference?.posterLayout)return;
+  const from=reference.posterLayout,to=introLayout,scale=(to.bottom.y-to.top.y)/(from.bottom.y-from.top.y);
+  if(!Number.isFinite(scale)||scale<=0)return;
+  Object.assign(image.style,{width:`${reference.width*scale}px`,height:`${reference.height*scale}px`,left:`${to.top.x-from.top.x*scale}px`,top:`${to.top.y-from.top.y*scale}px`});
 }
 function positionNodes(positions){
   if(staticMode&&!positions.static)return;lastPositions=positions;
@@ -115,7 +147,7 @@ function layoutCard(data){
   let cw=w<1120?300:340,x=side==='right'?p.x+28:p.x-cw-28;
   if(x<frame||x+cw>w-frame){cw=300;x=side==='right'?p.x+28:p.x-cw-28;}
   x=clamp(x,frame,w-frame-cw);card.style.width=`${cw}px`;
-  const ch=panels[active].getBoundingClientRect().height+24,tagOffset=23;
+  const status=document.querySelector('.fallback-status'),ch=panels[active].getBoundingClientRect().height+24+(status.hidden?0:status.getBoundingClientRect().height),tagOffset=23;
   let y=clamp(p.y-tagOffset,150,h-ch-85);
   const obstacles=[data?.faceBounds,...(Array.isArray(data?.handBounds)?data.handBounds:[data?.handBounds])].map(rect).filter(Boolean);
   const safe=[y,y+12,y-12,y+20,y-20].filter(v=>v>=150&&v+ch<h-70).find(v=>!obstacles.some(r=>overlap({left:x,right:x+cw,top:v,bottom:v+ch},r,8)));
@@ -150,8 +182,8 @@ function moveDrag(e){
     pointer.started=true;dragged=true;noteInput();beginMotion();document.body.classList.add('is-dragging');e.currentTarget.setPointerCapture?.(e.pointerId);
   }
   if(!pointer.started)return;const now=performance.now();pointer.velocity=(e.clientX-pointer.lastX)/Math.max(8,now-pointer.lastTime)*1000;pointer.lastX=e.clientX;pointer.lastTime=now;
-  pointer.progress=pointer.origin-(e.clientX-pointer.anchorX)/(stage.clientWidth*(mobile()?.55:.3));if(!reducedMotion)scene?.setDragProgress(pointer.progress);
-  if(staticMode){const n=wrap(Math.round(pointer.progress));if(n!==active){applyActive(n,{announce:false});positionStaticNodes();}}
+  pointer.progress=pointer.origin-(e.clientX-pointer.anchorX)/(stage.clientWidth*(mobile()?.55:.3));if(!reducedMotion&&!introPending)scene?.setDragProgress(pointer.progress);
+  if(staticMode){const n=wrap(Math.round(pointer.progress));if(n!==active){applyActive(n,{announce:false});switchStaticPoster(n);}}
 }
 function endDrag(e){
   if(!pointer||e.pointerId!==pointer.id)return;
@@ -163,24 +195,58 @@ function endDrag(e){
 stage.addEventListener('wheel',e=>{if(dialog.open||e.ctrlKey)return;e.preventDefault();const now=performance.now();if(now-wheelLast>160){wheelAmount=0;wheelUsed=false;}wheelLast=now;if(wheelUsed)return;wheelAmount+=(Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY)*(e.deltaMode===1?16:1);if(Math.abs(wheelAmount)>48){select(active+Math.sign(wheelAmount));wheelUsed=true;}},{passive:false});
 
 async function bootScene(){
-  if(staticMode){enableStatic('requested');return;}controller?.abort();controller=new AbortController();const own=++generation;
+  if(staticMode){enableStatic('requested');return;}controller?.abort();controller=new AbortController();const own=++generation;introPending=true;beginMotion();
+  document.body.classList.add('scene-loading');document.body.classList.remove('scene-ready');
   try{const {createScene}=await import('./scene.js');if(own!==generation)return;
-    const created=await createScene({canvas,reducedMotion,signal:controller.signal,
+    const initialStation=active;
+    const created=await createScene({canvas,reducedMotion,initialStation,presentationPaused:true,signal:controller.signal,
+      onPosterLayout:layout=>{if(own===generation&&(scene||active===initialStation)){introLayout=layout;layoutIntroPoster();}},
       onNodePositions:p=>{if(own===generation)positionNodes(p);},onColorChange:c=>{if(own===generation)document.documentElement.style.setProperty('--accent',c);},onSettled:d=>{if(own===generation)settled(d);},
       onFramingChange:d=>{if(own===generation&&!moving){lastSettled=d;layoutCard(d);}},
-      onReady:()=>{if(own===generation){document.body.classList.add('scene-ready');document.body.classList.remove('scene-loading');}},onError:()=>{if(own===generation)enableStatic('unavailable');},onPerformanceFallback:()=>{if(own===generation)enableStatic('performance');}});
-    if(own!==generation||staticMode){created?.dispose();return;}scene=created;scene?.setStation(active,{immediate:reducedMotion||firstInput||active!==0});
+      onError:()=>{if(own===generation)enableStatic('unavailable');},onPerformanceFallback:()=>{if(own===generation)enableStatic('performance');}});
+    if(own!==generation||staticMode){created?.dispose();return;}scene=created;scene.setStation(active,{immediate:true});
+    if(holdIntro)return;
+    await revealScene(created,own);
   }catch(error){if(own===generation){console.warn('3D 展示暂不可用，已启用静帧。',error);enableStatic('unavailable');}}
 }
+async function revealScene(created,own){
+  const reveal=++revealGeneration,poster=document.querySelector('.intro-poster');
+  document.body.classList.add('scene-loading');document.body.classList.remove('scene-ready');
+  // Freeze both sides of the handoff on the same rendered frame. The opaque
+  // poster background fades over a fully opaque canvas, never over empty space.
+  try{
+    let shown=-1;
+    while(own===generation&&reveal===revealGeneration&&shown!==active){
+      shown=active;created.setStation(active,{immediate:true});await nextFrame();
+      if(own!==generation||reveal!==revealGeneration)return;
+      const frame=new Image();frame.src=created.capture({characterOnly:true});await frame.decode();
+      if(own!==generation||reveal!==revealGeneration)return;
+      poster.src=frame.src;poster.classList.add('is-live');poster.removeAttribute('style');await poster.decode();
+    }
+    if(own!==generation||reveal!==revealGeneration)return;
+    document.body.classList.add('scene-ready');document.body.classList.remove('scene-loading');
+    const overlay=document.querySelector('.poster-stack');void overlay.offsetWidth;
+    await Promise.all(overlay.getAnimations().map(animation=>animation.finished.catch(()=>{})));
+    if(own!==generation||reveal!==revealGeneration)return;
+    introPending=false;created.setPresentationPaused(false);
+  }catch(error){
+    if(own!==generation||reveal!==revealGeneration)return;
+    console.warn('首帧暂不可用，已启用静帧。',error);enableStatic('unavailable');
+  }
+}
 function syncModeButton(){const b=document.querySelector('#mode-toggle');if(b){b.textContent=staticMode?'启用 3D 展示':'切换到静帧展示';b.setAttribute('aria-pressed',String(staticMode));}}
-function enableStatic(reason='requested'){++generation;controller?.abort();scene?.dispose();scene=null;staticMode=true;document.documentElement.style.setProperty('--accent',COLORS[active]);document.body.classList.add('static-mode','scene-ready');document.body.classList.remove('scene-loading');document.querySelector('.fallback-status').hidden=!['performance','unavailable'].includes(reason);positionStaticNodes();settled();syncModeButton();}
-function retry3D(){staticMode=false;document.body.classList.remove('static-mode','scene-ready');document.body.classList.add('scene-loading');document.querySelector('.fallback-status').hidden=true;bootScene();syncModeButton();}
+function enableStatic(reason='requested'){++generation;++posterGeneration;introPending=false;controller?.abort();scene?.dispose();scene=null;staticMode=true;document.documentElement.style.setProperty('--accent',COLORS[active]);document.body.classList.add('static-mode','scene-ready');document.body.classList.remove('scene-loading');document.querySelector('.fallback-status').hidden=!['performance','unavailable'].includes(reason);positionStaticNodes();switchStaticPoster(active,{immediate:true});syncModeButton();}
+function retry3D(){++posterGeneration;staticMode=false;document.querySelector('.intro-poster').src=document.querySelector('.poster.is-current')?.src||introPath(active);document.body.classList.remove('static-mode','scene-ready');document.body.classList.add('scene-loading');document.querySelector('.fallback-status').hidden=true;bootScene();syncModeButton();}
 document.querySelector('#retry-3d').addEventListener('click',retry3D);
 matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',e=>{reducedMotion=e.matches;controller?.abort();scene?.dispose();scene=null;if(!staticMode)bootScene();});
 window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(staticMode){positionStaticNodes();settled();}else{layoutCard(lastSettled);scene?.resize();}},120);});
 setupDialogs({profile,availability,getStatic:()=>staticMode,toggleMode:()=>staticMode?retry3D():enableStatic('requested')});
-applyActive(active,{announce:false});positionStaticNodes();document.body.classList.add('scene-loading','card-open');
+document.querySelector('.directory').inert=true;
+new ResizeObserver(()=>{if(mobile())updateMobileConnection();}).observe(card);
+new ResizeObserver(()=>{if(introPending&&!staticMode&&scene&&!holdIntro)revealScene(scene,generation);}).observe(stage);
+applyActive(active,{announce:false});positionStaticNodes();document.body.classList.add('scene-loading');
 fetch(`${IMAGE_ROOT}/frames.json`).then(r=>r.ok?r.json():null).then(d=>{frameMetadata=d;if(staticMode){positionStaticNodes();settled();}}).catch(()=>{});
-bootScene();setTimeout(()=>document.body.classList.add('show-poster'),1500);setTimeout(()=>document.body.classList.add('show-directory'),6500);
+if(!restored)fetch('/images-intro/frames.json').then(r=>r.ok?r.json():null).then(d=>{introMetadata=d;layoutIntroPoster();}).catch(()=>{});
+bootScene();setTimeout(showDirectory,6500);
 if(import.meta.env.DEV)window.__WHYME__={getScene:()=>scene,select,getActive:()=>active,getLayout:()=>({moving,staticMode,active,lastSettled,lastPositions,nodeDistance:card.dataset.nodeDistance,overlapsProtected:card.dataset.overlapsProtected}),settled};
 

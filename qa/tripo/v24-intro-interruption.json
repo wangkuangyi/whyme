@@ -1,0 +1,6021 @@
+{
+  "checks": [
+    {
+      "name": "下载中换站没有沿用旧站的配准样式",
+      "passed": true,
+      "detail": {
+        "before": {
+          "src": "http://127.0.0.1:5173/images-intro/angle-01.png",
+          "style": "width: 1296px; height: 900px; left: 66.24px; top: 0px;",
+          "rect": {
+            "x": 66.23958587646484,
+            "y": 0,
+            "width": 1296,
+            "height": 900,
+            "top": 0,
+            "right": 1362.2395858764648,
+            "bottom": 900,
+            "left": 66.23958587646484
+          }
+        },
+        "after": {
+          "src": "http://127.0.0.1:5173/images-intro/angle-02.png",
+          "style": null,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 900,
+            "top": 0,
+            "right": 1440,
+            "bottom": 900,
+            "left": 0
+          },
+          "active": 1,
+          "sceneAssigned": false
+        }
+      }
+    },
+    {
+      "name": "下载中换站最终场景为第二站",
+      "passed": true
+    },
+    {
+      "name": "快速2/4/3确实从开场交接中开始",
+      "passed": true
+    },
+    {
+      "name": "快速换站后保持3D且最终第三站一致",
+      "passed": true
+    },
+    {
+      "name": "交接中拖拽不改变实时机位",
+      "passed": true,
+      "detail": {
+        "before": 0,
+        "after": 0,
+        "paused": true
+      }
+    },
+    {
+      "name": "松手后切到最终目标且无误降级",
+      "passed": true
+    },
+    {
+      "name": "resize从交接中开始",
+      "passed": true
+    },
+    {
+      "name": "交接时跨断点resize后维持第二站3D",
+      "passed": true
+    },
+    {
+      "name": "刚切静帧后快速换站最终第三站一致",
+      "passed": true
+    },
+    {
+      "name": "静帧内联transition没有残留none",
+      "passed": true,
+      "detail": [
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.2s",
+          "opacity": 1,
+          "current": true
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        }
+      ]
+    },
+    {
+      "name": "静帧CSS淡入淡出时长仍生效",
+      "passed": true,
+      "detail": [
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.2s",
+          "opacity": 1,
+          "current": true
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        }
+      ]
+    },
+    {
+      "name": "无页面异常或未处理拒绝",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "snapshots": [
+    {
+      "name": "pending-switch",
+      "before": {
+        "src": "http://127.0.0.1:5173/images-intro/angle-01.png",
+        "style": "width: 1296px; height: 900px; left: 66.24px; top: 0px;",
+        "rect": {
+          "x": 66.23958587646484,
+          "y": 0,
+          "width": 1296,
+          "height": 900,
+          "top": 0,
+          "right": 1362.2395858764648,
+          "bottom": 900,
+          "left": 66.23958587646484
+        }
+      },
+      "after": {
+        "src": "http://127.0.0.1:5173/images-intro/angle-02.png",
+        "style": null,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "active": 1,
+        "sceneAssigned": false
+      }
+    },
+    {
+      "name": "rapid-stations",
+      "layout": {
+        "moving": false,
+        "staticMode": false,
+        "active": 2,
+        "lastSettled": {
+          "index": 2,
+          "nodes": [
+            {
+              "x": 552.7825829557868,
+              "y": 412.66877245465815,
+              "visible": false,
+              "depth": 2.207965283275489
+            },
+            {
+              "x": 266.6337328396211,
+              "y": 561.4843859680084,
+              "visible": true,
+              "depth": 1.7061704649286014
+            },
+            {
+              "x": 870.0300794512661,
+              "y": 584.3353552929336,
+              "visible": true,
+              "depth": 1.4170226814621107
+            },
+            {
+              "x": 1026.6188988570093,
+              "y": 410.0895604400712,
+              "visible": true,
+              "depth": 1.9929993267769064
+            }
+          ],
+          "modelBounds": {
+            "x": 70.08397157552841,
+            "y": -56.03236857208932,
+            "left": 70.08397157552841,
+            "right": 1340.3930782098494,
+            "top": -56.03236857208932,
+            "bottom": 2448.567287086388,
+            "width": 1270.3091066343209,
+            "height": 2504.5996556584773
+          },
+          "faceBounds": {
+            "x": 479.96250835771843,
+            "y": 220.8475235138328,
+            "left": 479.96250835771843,
+            "right": 833.7597118412183,
+            "top": 220.8475235138328,
+            "bottom": 578.8374124193529,
+            "width": 353.79720348349986,
+            "height": 357.98988890552005
+          },
+          "handBounds": [
+            {
+              "x": 772.4625279409094,
+              "y": 887.901194526744,
+              "left": 772.4625279409094,
+              "right": 940.4859340716681,
+              "top": 887.901194526744,
+              "bottom": 1130.5458506690868,
+              "width": 168.02340613075876,
+              "height": 242.6446561423428
+            },
+            {
+              "x": 473.5451554857377,
+              "y": 1025.2949058061615,
+              "left": 473.5451554857377,
+              "right": 680.9294999633804,
+              "top": 1025.2949058061615,
+              "bottom": 1333.9871907471327,
+              "width": 207.38434447764268,
+              "height": 308.69228494097115
+            }
+          ]
+        },
+        "lastPositions": [
+          {
+            "x": 552.7825829557868,
+            "y": 412.66877245465815,
+            "visible": false,
+            "depth": 2.207965283275489
+          },
+          {
+            "x": 266.6337328396211,
+            "y": 561.4843859680084,
+            "visible": true,
+            "depth": 1.7061704649286014
+          },
+          {
+            "x": 870.0300794512661,
+            "y": 584.3353552929336,
+            "visible": true,
+            "depth": 1.4170226814621107
+          },
+          {
+            "x": 1026.6188988570093,
+            "y": 410.0895604400712,
+            "visible": true,
+            "depth": 1.9929993267769064
+          }
+        ],
+        "nodeDistance": "28",
+        "overlapsProtected": "false"
+      },
+      "scene": {
+        "currentProgress": -2,
+        "targetProgress": -2,
+        "activeStation": 2,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 1440,
+          "height": 900,
+          "top": {
+            "x": 676.7999999999998,
+            "y": 72.0252150686174
+          },
+          "bottom": {
+            "x": 676.7999999999998,
+            "y": 1601.9747849313824
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": false,
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224,
+        "triangles": 46846,
+        "colors": {
+          "hoodie": "#327b60",
+          "rib": "#23664e",
+          "lch": [
+            0.5287863747539481,
+            0.08505163519236596,
+            165.97833234546624
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.3,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": -48,
+          "shift": -0.03,
+          "fill": 1.7,
+          "walkClose": 0,
+          "restClose": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "position": [
+            -1.3236632857782926,
+            1.6865555326380435,
+            1.1918317758033423
+          ],
+          "target": [
+            0,
+            1.3176,
+            0
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 552.7825829557868,
+            "y": 412.66877245465815,
+            "visible": false,
+            "depth": 2.207965283275489
+          },
+          {
+            "x": 266.6337328396211,
+            "y": 561.4843859680084,
+            "visible": true,
+            "depth": 1.7061704649286014
+          },
+          {
+            "x": 870.0300794512661,
+            "y": 584.3353552929336,
+            "visible": true,
+            "depth": 1.4170226814621107
+          },
+          {
+            "x": 1026.6188988570093,
+            "y": 410.0895604400712,
+            "visible": true,
+            "depth": 1.9929993267769064
+          }
+        ],
+        "animation": {
+          "action": "LookAround",
+          "time": 0.16569999999999993,
+          "duration": 5.8,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "station": 2,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": false,
+          "completedAction": null,
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "LookAround",
+            "Wave"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": {
+            "to": "LookAround",
+            "elapsed": 0.16569999999999993,
+            "duration": 0.5
+          },
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial"
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.5,
+              "reason": "station"
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 0,
+              "fade": 0.5,
+              "reason": "station"
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Wave",
+              "at": 0,
+              "fade": 0.5,
+              "reason": "station"
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "LookAround",
+              "at": 0,
+              "fade": 0.5,
+              "reason": "station"
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 0.7433147662880002,
+              "time": 0.16569999999999993
+            },
+            {
+              "action": "LookAround",
+              "weight": 0.2566852337119998,
+              "time": 0.16569999999999993
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521673675626516
+            ]
+          },
+          "idleRange": [
+            1.5,
+            3.5
+          ],
+          "waveRange": [
+            1.2,
+            4.3
+          ],
+          "lookAroundRange": [
+            1.2,
+            7
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035406075698841484,
+              0.9325423878488357,
+              0.0034396412097882365
+            ],
+            "Head": [
+              -0.0032096055771252065,
+              1.519046006666765,
+              0.00877885272337639
+            ],
+            "LeftHand": [
+              0.2352566545789242,
+              0.8407854709932725,
+              0.05527797357230918
+            ],
+            "RightHand": [
+              -0.250336067597702,
+              0.8338245306852811,
+              0.023245484875838412
+            ],
+            "LeftFoot": [
+              0.01839926622556999,
+              0.11329814812638317,
+              -0.10051496933050143
+            ],
+            "RightFoot": [
+              -0.2190422317533052,
+              0.11501239926268475,
+              0.1372593697149251
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 502.42938419766546,
+            "y": 212.72686301208103,
+            "left": 502.42938419766546,
+            "right": 857.7114704252766,
+            "top": 212.72686301208103,
+            "bottom": 571.7492328932601,
+            "width": 355.28208622761116,
+            "height": 359.0223698811791
+          },
+          "handBounds": [
+            {
+              "x": 784.4609393251797,
+              "y": 881.0975650220198,
+              "left": 784.4609393251797,
+              "right": 944.2540138704503,
+              "top": 881.0975650220198,
+              "bottom": 1119.953353005194,
+              "width": 159.79307454527066,
+              "height": 238.8557879831742
+            },
+            {
+              "x": 447.44110502735475,
+              "y": 1017.8290053426217,
+              "left": 447.44110502735475,
+              "right": 636.9910297632143,
+              "top": 1017.8290053426217,
+              "bottom": 1317.8345220083293,
+              "width": 189.54992473585958,
+              "height": 300.00551666570755
+            }
+          ]
+        },
+        "studio": {
+          "ambient": 0.5,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2,
+            6,
+            4.8
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "staticThresholdSeconds": 5,
+          "staticThresholdFps": 20,
+          "timings": {
+            "frameMs": 10.392659306130774,
+            "poseMs": 0.27725765444871875,
+            "renderMs": 0.4847504968441483,
+            "nodesMs": 1.146045513825387
+          }
+        },
+        "cloth": [
+          {
+            "name": "Hoodie",
+            "rib": false,
+            "normalMap": true,
+            "aoMap": false,
+            "sheen": "#7d9e8f"
+          }
+        ]
+      },
+      "classes": "show-directory has-interacted scene-ready",
+      "posterTransition": [
+        {
+          "inline": "",
+          "computed": "0.2s",
+          "opacity": 1,
+          "current": true
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        }
+      ],
+      "trace": [
+        {
+          "t": 241.19999998807907,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 260.29999999701977,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 265.8999999910593,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 275.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 314.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 324.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 334.29999999701977,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.967427,
+          "static": false
+        },
+        {
+          "t": 344,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.93476,
+          "static": false
+        },
+        {
+          "t": 353.79999999701977,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 375.19999998807907,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 382.79999999701977,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 404.29999999701977,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 412.09999999403954,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 421.8999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.967493,
+          "static": false
+        },
+        {
+          "t": 431.69999998807907,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.93516,
+          "static": false
+        },
+        {
+          "t": 441.29999999701977,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.902827,
+          "static": false
+        },
+        {
+          "t": 451.5,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.87016,
+          "static": false
+        },
+        {
+          "t": 461.09999999403954,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.837827,
+          "static": false
+        },
+        {
+          "t": 471,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.804493,
+          "static": false
+        },
+        {
+          "t": 480.59999999403954,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.772493,
+          "static": false
+        },
+        {
+          "t": 490.3999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.74016,
+          "static": false
+        },
+        {
+          "t": 500.29999999701977,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.707493,
+          "static": false
+        },
+        {
+          "t": 509.59999999403954,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.67516,
+          "static": false
+        },
+        {
+          "t": 519.5,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.642493,
+          "static": false
+        },
+        {
+          "t": 529.1999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.610493,
+          "static": false
+        },
+        {
+          "t": 538.8999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.577493,
+          "static": false
+        },
+        {
+          "t": 548.5999999940395,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.54516,
+          "static": false
+        },
+        {
+          "t": 558.5,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.512493,
+          "static": false
+        },
+        {
+          "t": 568.3999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.480493,
+          "static": false
+        },
+        {
+          "t": 577.8999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.447827,
+          "static": false
+        },
+        {
+          "t": 588,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.414493,
+          "static": false
+        },
+        {
+          "t": 597.7999999970198,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.38216,
+          "static": false
+        },
+        {
+          "t": 607.2999999970198,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.35016,
+          "static": false
+        },
+        {
+          "t": 617.2999999970198,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.317827,
+          "static": false
+        },
+        {
+          "t": 626.8999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.28516,
+          "static": false
+        },
+        {
+          "t": 636.3999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.25216,
+          "static": false
+        },
+        {
+          "t": 646.5,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.22016,
+          "static": false
+        },
+        {
+          "t": 656,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.187827,
+          "static": false
+        },
+        {
+          "t": 665.6999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.15516,
+          "static": false
+        },
+        {
+          "t": 675.6999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.122493,
+          "static": false
+        },
+        {
+          "t": 685.0999999940395,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.09016,
+          "static": false
+        },
+        {
+          "t": 695.5,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.0574933,
+          "static": false
+        },
+        {
+          "t": 704.7999999970198,
+          "active": 2,
+          "station": 2,
+          "paused": true,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0.02516,
+          "static": false
+        },
+        {
+          "t": 714.7999999970198,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 724.1999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 765.6999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.009799999999999955,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 772.8999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.04869999999999993,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 782.6999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.058499999999999996,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 792.5,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.06819999999999993,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 802.1999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.078,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 812.0999999940395,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.08769999999999993,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 821.6999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.0975,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 831.8999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.10719999999999993,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 841.1999999880791,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.117,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 850.8999999910593,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.12669999999999995,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 861.5,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.1364,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 870.5,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.14619999999999994,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 880.0999999940395,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.156,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 891.5,
+          "active": 2,
+          "station": 2,
+          "paused": false,
+          "progress": -2,
+          "dragging": false,
+          "action": "LookAround",
+          "actionTime": 0.16569999999999993,
+          "overlay": 0,
+          "static": false
+        }
+      ]
+    },
+    {
+      "name": "intro-drag",
+      "layout": {
+        "moving": false,
+        "staticMode": false,
+        "active": 3,
+        "lastSettled": {
+          "index": 3,
+          "nodes": [
+            {
+              "x": 1175.2095261603868,
+              "y": 405.8140814400997,
+              "visible": true,
+              "depth": 2.2204032713977404
+            },
+            {
+              "x": 928.2355882901737,
+              "y": 350.59393841101206,
+              "visible": false,
+              "depth": 2.8171912310446316
+            },
+            {
+              "x": 494.88681522810907,
+              "y": 439.1439503330738,
+              "visible": true,
+              "depth": 2.61150675624761
+            },
+            {
+              "x": 630.8547592498844,
+              "y": 529.479444922841,
+              "visible": true,
+              "depth": 1.9528419785753113
+            }
+          ],
+          "modelBounds": {
+            "x": 236.93288799979976,
+            "y": -81.19800897805078,
+            "left": 236.93288799979976,
+            "right": 1199.5607716255765,
+            "top": -81.19800897805078,
+            "bottom": 1988.8161594867513,
+            "width": 962.6278836257768,
+            "height": 2070.014168464802
+          },
+          "faceBounds": {
+            "x": 664.5416994096,
+            "y": 171.1911341922373,
+            "left": 664.5416994096,
+            "right": 934.6595031302874,
+            "top": 171.1911341922373,
+            "bottom": 450.44794712354474,
+            "width": 270.11780372068733,
+            "height": 279.2568129313074
+          },
+          "handBounds": [
+            {
+              "x": 841.5774888736012,
+              "y": 826.3225109207489,
+              "left": 841.5774888736012,
+              "right": 1002.0151049479767,
+              "top": 826.3225109207489,
+              "bottom": 1045.05815596595,
+              "width": 160.43761607437557,
+              "height": 218.73564504520107
+            },
+            {
+              "x": 531.9306425466625,
+              "y": 793.38568346556,
+              "left": 531.9306425466625,
+              "right": 684.0309520761011,
+              "top": 793.38568346556,
+              "bottom": 988.3569327057608,
+              "width": 152.10030952943862,
+              "height": 194.9712492402008
+            }
+          ]
+        },
+        "lastPositions": [
+          {
+            "x": 1175.2095261603868,
+            "y": 405.8140814400997,
+            "visible": true,
+            "depth": 2.2204032713977404
+          },
+          {
+            "x": 928.2355882901737,
+            "y": 350.59393841101206,
+            "visible": false,
+            "depth": 2.8171912310446316
+          },
+          {
+            "x": 494.88681522810907,
+            "y": 439.1439503330738,
+            "visible": true,
+            "depth": 2.61150675624761
+          },
+          {
+            "x": 630.8547592498844,
+            "y": 529.479444922841,
+            "visible": true,
+            "depth": 1.9528419785753113
+          }
+        ],
+        "nodeDistance": "28",
+        "overlapsProtected": "false"
+      },
+      "scene": {
+        "currentProgress": -1,
+        "targetProgress": -1,
+        "activeStation": 3,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 1440,
+          "height": 900,
+          "top": {
+            "x": 806.4000000000002,
+            "y": 72.0000292080856
+          },
+          "bottom": {
+            "x": 806.4000000000002,
+            "y": 1439.9999707919144
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": false,
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224,
+        "triangles": 46848,
+        "colors": {
+          "hoodie": "#a44c76",
+          "rib": "#893c61",
+          "lch": [
+            0.5402033702092013,
+            0.12566044782800478,
+            352.23606733715434
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.24,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 30,
+          "shift": 0.06,
+          "fill": 1.52,
+          "walkClose": 0,
+          "restClose": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "position": [
+            1.1872154660256082,
+            1.3814215466025608,
+            2.0563175066879165
+          ],
+          "target": [
+            0,
+            1.2627,
+            0
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 1175.2095261603868,
+            "y": 405.8140814400997,
+            "visible": true,
+            "depth": 2.2204032713977404
+          },
+          {
+            "x": 928.2355882901737,
+            "y": 350.59393841101206,
+            "visible": false,
+            "depth": 2.8171912310446316
+          },
+          {
+            "x": 494.88681522810907,
+            "y": 439.1439503330738,
+            "visible": true,
+            "depth": 2.61150675624761
+          },
+          {
+            "x": 630.8547592498844,
+            "y": 529.479444922841,
+            "visible": true,
+            "depth": 1.9528419785753113
+          }
+        ],
+        "animation": {
+          "action": "Wave",
+          "time": 0.011025,
+          "duration": 3.0999999999999996,
+          "speed": 1.05,
+          "walking": false,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "station": 3,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": false,
+          "completedAction": null,
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "LookAround",
+            "Wave"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": {
+            "to": "Wave",
+            "elapsed": 0.010499999999999999,
+            "duration": 0.5
+          },
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial"
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.5,
+              "reason": "station"
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Wave",
+              "at": 0,
+              "fade": 0.5,
+              "reason": "station"
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 0.998695522,
+              "time": 0.010499999999999999
+            },
+            {
+              "action": "Wave",
+              "weight": 0.001304478,
+              "time": 0.011025
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521673675626516
+            ]
+          },
+          "idleRange": [
+            1.5,
+            3.5
+          ],
+          "waveRange": [
+            1.2,
+            4.3
+          ],
+          "lookAroundRange": [
+            1.2,
+            7
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035406075698841484,
+              0.9248796130646821,
+              0.0034396412097882365
+            ],
+            "Head": [
+              -0.013871476918961935,
+              1.510829072223389,
+              -0.013270947367692083
+            ],
+            "LeftHand": [
+              0.2163185550798905,
+              0.8358521374051242,
+              0.0535139829353562
+            ],
+            "RightHand": [
+              -0.23970027228458604,
+              0.8279060242049269,
+              0.05010958217075552
+            ],
+            "LeftFoot": [
+              0.008165918774579853,
+              0.11280141365370733,
+              -0.12392012650165082
+            ],
+            "RightFoot": [
+              -0.23538151817276834,
+              0.12397108965730841,
+              0.2110924333807377
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 664.5174649737057,
+            "y": 170.8755296831177,
+            "left": 664.5174649737057,
+            "right": 934.7024243935523,
+            "top": 170.8755296831177,
+            "bottom": 450.2096328844442,
+            "width": 270.18495941984656,
+            "height": 279.3341032013265
+          },
+          "handBounds": [
+            {
+              "x": 841.7721442698282,
+              "y": 825.8809709021599,
+              "left": 841.7721442698282,
+              "right": 1002.3438257112351,
+              "top": 825.8809709021599,
+              "bottom": 1044.6365738102204,
+              "width": 160.5716814414069,
+              "height": 218.7556029080605
+            },
+            {
+              "x": 532.1582629593282,
+              "y": 793.0938471441161,
+              "left": 532.1582629593282,
+              "right": 684.1276008593144,
+              "top": 793.0938471441161,
+              "bottom": 987.9998676396135,
+              "width": 151.96933789998616,
+              "height": 194.9060204954974
+            }
+          ]
+        },
+        "studio": {
+          "ambient": 0.5,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2,
+            6,
+            4.8
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "staticThresholdSeconds": 5,
+          "staticThresholdFps": 20,
+          "timings": {
+            "frameMs": 5.218893241556707,
+            "poseMs": 0.2660137516730006,
+            "renderMs": 0.49741123392280767,
+            "nodesMs": 0.6424479134305431
+          }
+        },
+        "cloth": [
+          {
+            "name": "Hoodie",
+            "rib": false,
+            "normalMap": true,
+            "aoMap": false,
+            "sheen": "#b9869b"
+          }
+        ]
+      },
+      "classes": "show-directory has-interacted scene-ready",
+      "posterTransition": [
+        {
+          "inline": "",
+          "computed": "0.2s",
+          "opacity": 1,
+          "current": true
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        }
+      ],
+      "trace": [
+        {
+          "t": 282.79999999701977,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 332.5,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 333.70000000298023,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 336,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 340.70000000298023,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 345.29999999701977,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.984797,
+          "static": false
+        },
+        {
+          "t": 352,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.96613,
+          "static": false
+        },
+        {
+          "t": 355.79999999701977,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.950463,
+          "static": false
+        },
+        {
+          "t": 362.90000000596046,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.933463,
+          "static": false
+        },
+        {
+          "t": 365.79999999701977,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.917797,
+          "static": false
+        },
+        {
+          "t": 375.40000000596046,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.88513,
+          "static": false
+        },
+        {
+          "t": 379.40000000596046,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.871463,
+          "static": false
+        },
+        {
+          "t": 383.5,
+          "active": 0,
+          "station": 0,
+          "paused": true,
+          "progress": 0,
+          "dragging": false,
+          "action": "Walk",
+          "actionTime": 0,
+          "overlay": 0.857463,
+          "static": false
+        },
+        {
+          "t": 390.1000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 422.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 424.6000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 427.70000000298023,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 431.29999999701977,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 435.1000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 439.1000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.98623,
+          "static": false
+        },
+        {
+          "t": 444.29999999701977,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.969563,
+          "static": false
+        },
+        {
+          "t": 449.40000000596046,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.95423,
+          "static": false
+        },
+        {
+          "t": 458.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.921897,
+          "static": false
+        },
+        {
+          "t": 462.70000000298023,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.907897,
+          "static": false
+        },
+        {
+          "t": 466.79999999701977,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.893897,
+          "static": false
+        },
+        {
+          "t": 472.70000000298023,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.87423,
+          "static": false
+        },
+        {
+          "t": 478.70000000298023,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.854563,
+          "static": false
+        },
+        {
+          "t": 482.90000000596046,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.840563,
+          "static": false
+        },
+        {
+          "t": 487,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.82623,
+          "static": false
+        },
+        {
+          "t": 491.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.812563,
+          "static": false
+        },
+        {
+          "t": 496.40000000596046,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.795563,
+          "static": false
+        },
+        {
+          "t": 502.70000000298023,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.774563,
+          "static": false
+        },
+        {
+          "t": 507.40000000596046,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.75823,
+          "static": false
+        },
+        {
+          "t": 513.1000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.74023,
+          "static": false
+        },
+        {
+          "t": 518.2999999970198,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.722563,
+          "static": false
+        },
+        {
+          "t": 523.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.706563,
+          "static": false
+        },
+        {
+          "t": 528.2999999970198,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.68923,
+          "static": false
+        },
+        {
+          "t": 533.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.672563,
+          "static": false
+        },
+        {
+          "t": 538.6000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.655563,
+          "static": false
+        },
+        {
+          "t": 544.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.63623,
+          "static": false
+        },
+        {
+          "t": 549.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.618897,
+          "static": false
+        },
+        {
+          "t": 554.7000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.60123,
+          "static": false
+        },
+        {
+          "t": 560.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.583897,
+          "static": false
+        },
+        {
+          "t": 568.4000000059605,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.55623,
+          "static": false
+        },
+        {
+          "t": 574.6000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.535897,
+          "static": false
+        },
+        {
+          "t": 580.1000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.516897,
+          "static": false
+        },
+        {
+          "t": 586.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.496563,
+          "static": false
+        },
+        {
+          "t": 590.2999999970198,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.482563,
+          "static": false
+        },
+        {
+          "t": 594.7000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.468897,
+          "static": false
+        },
+        {
+          "t": 604.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.43623,
+          "static": false
+        },
+        {
+          "t": 608.6000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.422563,
+          "static": false
+        },
+        {
+          "t": 615.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.399563,
+          "static": false
+        },
+        {
+          "t": 625,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.367563,
+          "static": false
+        },
+        {
+          "t": 629,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.353563,
+          "static": false
+        },
+        {
+          "t": 633.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.339897,
+          "static": false
+        },
+        {
+          "t": 637.4000000059605,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.325897,
+          "static": false
+        },
+        {
+          "t": 641.6000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.31123,
+          "static": false
+        },
+        {
+          "t": 645.7000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.297897,
+          "static": false
+        },
+        {
+          "t": 651,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.279897,
+          "static": false
+        },
+        {
+          "t": 655.7000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.26423,
+          "static": false
+        },
+        {
+          "t": 661.4000000059605,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.245897,
+          "static": false
+        },
+        {
+          "t": 665.9000000059605,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.230563,
+          "static": false
+        },
+        {
+          "t": 671.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.212897,
+          "static": false
+        },
+        {
+          "t": 676.1000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.196897,
+          "static": false
+        },
+        {
+          "t": 681.4000000059605,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.178897,
+          "static": false
+        },
+        {
+          "t": 689.2000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.15323,
+          "static": false
+        },
+        {
+          "t": 703,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.114563,
+          "static": false
+        },
+        {
+          "t": 706.4000000059605,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.09523,
+          "static": false
+        },
+        {
+          "t": 710.6000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.08123,
+          "static": false
+        },
+        {
+          "t": 720.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.0488967,
+          "static": false
+        },
+        {
+          "t": 724.5,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.0348967,
+          "static": false
+        },
+        {
+          "t": 728.6000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.0208967,
+          "static": false
+        },
+        {
+          "t": 734,
+          "active": 3,
+          "station": 3,
+          "paused": true,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0.00389667,
+          "static": false
+        },
+        {
+          "t": 738.7000000029802,
+          "active": 3,
+          "station": 3,
+          "paused": false,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 744.7999999970198,
+          "active": 3,
+          "station": 3,
+          "paused": false,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 749.1000000089407,
+          "active": 3,
+          "station": 3,
+          "paused": false,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0.005985000000000048,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 754.5,
+          "active": 3,
+          "station": 3,
+          "paused": false,
+          "progress": -1,
+          "dragging": false,
+          "action": "Wave",
+          "actionTime": 0.011025,
+          "overlay": 0,
+          "static": false
+        }
+      ]
+    },
+    {
+      "name": "intro-resize",
+      "layout": {
+        "moving": false,
+        "staticMode": false,
+        "active": 1,
+        "lastSettled": {
+          "index": 1,
+          "nodes": [
+            {
+              "x": 74.93809564811055,
+              "y": 429.3645034209729,
+              "visible": true,
+              "depth": 2.3691218943561605
+            },
+            {
+              "x": 311.1590641629726,
+              "y": 406.2995788449804,
+              "visible": true,
+              "depth": 2.223880015261892
+            },
+            {
+              "x": 363.6307227808131,
+              "y": 339.0563229004604,
+              "visible": true,
+              "depth": 2.608376076798153
+            },
+            {
+              "x": 157.07223514832984,
+              "y": 362.3138241608557,
+              "visible": false,
+              "depth": 2.7332621509927315
+            }
+          ],
+          "modelBounds": {
+            "x": -158.38766746924446,
+            "y": 139.39760184334577,
+            "left": -158.38766746924446,
+            "right": 481.8061294143887,
+            "top": 139.39760184334577,
+            "bottom": 1612.094368015932,
+            "width": 640.1937968836331,
+            "height": 1472.6967661725864
+          },
+          "faceBounds": {
+            "x": 131.67027777370404,
+            "y": 284.9220324097179,
+            "left": 131.67027777370404,
+            "right": 299.4855979132353,
+            "top": 284.9220324097179,
+            "bottom": 489.85348194442355,
+            "width": 167.81532013953128,
+            "height": 204.93144953470568
+          },
+          "handBounds": [
+            {
+              "x": 298.5454900528446,
+              "y": 762.751999854634,
+              "left": 298.5454900528446,
+              "right": 393.95710753354916,
+              "top": 762.751999854634,
+              "bottom": 920.4043436769537,
+              "width": 95.41161748070454,
+              "height": 157.6523438223196
+            },
+            {
+              "x": 19.02504693826085,
+              "y": 756.4192700874049,
+              "left": 19.02504693826085,
+              "right": 123.97503621889825,
+              "top": 756.4192700874049,
+              "bottom": 910.4107338983815,
+              "width": 104.9499892806374,
+              "height": 153.9914638109766
+            }
+          ]
+        },
+        "lastPositions": [
+          {
+            "x": 74.93809564811055,
+            "y": 429.3645034209729,
+            "visible": true,
+            "depth": 2.3691218943561605
+          },
+          {
+            "x": 311.1590641629726,
+            "y": 406.2995788449804,
+            "visible": true,
+            "depth": 2.223880015261892
+          },
+          {
+            "x": 363.6307227808131,
+            "y": 339.0563229004604,
+            "visible": true,
+            "depth": 2.608376076798153
+          },
+          {
+            "x": 157.07223514832984,
+            "y": 362.3138241608557,
+            "visible": false,
+            "depth": 2.7332621509927315
+          }
+        ]
+      },
+      "scene": {
+        "currentProgress": 1,
+        "targetProgress": 1,
+        "activeStation": 1,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 390,
+          "height": 626.1146240234375,
+          "top": {
+            "x": 226.20000000000007,
+            "y": 203.79906300664499
+          },
+          "bottom": {
+            "x": 226.20000000000007,
+            "y": 1234.2490374992462
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": true,
+        "width": 390,
+        "height": 626.1146240234375,
+        "dpr": 1.0000000298023224,
+        "triangles": 46844,
+        "colors": {
+          "hoodie": "#3755a6",
+          "rib": "#28428a",
+          "lch": [
+            0.47084408672993516,
+            0.13505631354657616,
+            266.0767237746677
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.26,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 8,
+          "shift": 0.08,
+          "fill": 1.645784909763467,
+          "walkClose": 0,
+          "restClose": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "position": [
+            0.34439559876672465,
+            1.5347024143501793,
+            2.450502015987133
+          ],
+          "target": [
+            0,
+            1.4640000000000002,
+            0
+          ],
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 74.93809564811055,
+            "y": 429.3645034209729,
+            "visible": true,
+            "depth": 2.3691218943561605
+          },
+          {
+            "x": 311.1590641629726,
+            "y": 406.2995788449804,
+            "visible": true,
+            "depth": 2.223880015261892
+          },
+          {
+            "x": 363.6307227808131,
+            "y": 339.0563229004604,
+            "visible": true,
+            "depth": 2.608376076798153
+          },
+          {
+            "x": 157.07223514832984,
+            "y": 362.3138241608557,
+            "visible": false,
+            "depth": 2.7332621509927315
+          }
+        ],
+        "animation": {
+          "action": "Nod",
+          "time": 0.21824000000000013,
+          "duration": 3,
+          "speed": 1.1,
+          "walking": false,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "station": 1,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": false,
+          "completedAction": null,
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "LookAround",
+            "Wave"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": {
+            "to": "Nod",
+            "elapsed": 0.1984000000000001,
+            "duration": 0.5
+          },
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial"
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 0,
+              "fade": 0.5,
+              "reason": "station"
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 0.6526017904639998,
+              "time": 0.1984000000000001
+            },
+            {
+              "action": "Nod",
+              "weight": 0.34739820953600026,
+              "time": 0.21824000000000013
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521673675626516
+            ]
+          },
+          "idleRange": [
+            1.5,
+            3.5
+          ],
+          "waveRange": [
+            1.2,
+            4.3
+          ],
+          "lookAroundRange": [
+            1.2,
+            7
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035406075698841484,
+              0.9331859362676581,
+              0.0034396412097882365
+            ],
+            "Head": [
+              -0.007611735787212156,
+              1.515814363276592,
+              -0.012934035689725752
+            ],
+            "LeftHand": [
+              0.2491316024522177,
+              0.846602835461433,
+              0.03913641257317878
+            ],
+            "RightHand": [
+              -0.2569339679228287,
+              0.9183068314613989,
+              0.17207479353227695
+            ],
+            "LeftFoot": [
+              0.05329757896769048,
+              0.1097146509602468,
+              -0.08785083661970311
+            ],
+            "RightFoot": [
+              -0.22543027702512397,
+              0.11159056175709348,
+              0.06909936420317107
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 135.39437643247658,
+            "y": 281.6533016297936,
+            "left": 135.39437643247658,
+            "right": 303.01416083119733,
+            "top": 281.6533016297936,
+            "bottom": 486.76306921750506,
+            "width": 167.61978439872075,
+            "height": 205.10976758771147
+          },
+          "handBounds": [
+            {
+              "x": 315.4363376825952,
+              "y": 754.602756840948,
+              "left": 315.4363376825952,
+              "right": 410.7742798081571,
+              "top": 754.602756840948,
+              "bottom": 910.5890618874396,
+              "width": 95.33794212556188,
+              "height": 155.98630504649157
+            },
+            {
+              "x": -28.949840533288913,
+              "y": 722.0778206872111,
+              "left": -28.949840533288913,
+              "right": 81.16293047130664,
+              "top": 722.0778206872111,
+              "bottom": 865.3633521292986,
+              "width": 110.11277100459554,
+              "height": 143.28553144208752
+            }
+          ]
+        },
+        "studio": {
+          "ambient": 0.5,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2,
+            6,
+            4.8
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "staticThresholdSeconds": 5,
+          "staticThresholdFps": 20,
+          "timings": {
+            "frameMs": 6.148118049279455,
+            "poseMs": 0.28993462240380646,
+            "renderMs": 0.5619925956475024,
+            "nodesMs": 2.72810316289012
+          }
+        },
+        "cloth": [
+          {
+            "name": "Hoodie",
+            "rib": false,
+            "normalMap": true,
+            "aoMap": false,
+            "sheen": "#7f8aba"
+          }
+        ]
+      },
+      "classes": "scene-ready",
+      "posterTransition": [
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.2s",
+          "opacity": 1,
+          "current": true
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        }
+      ],
+      "trace": [
+        {
+          "t": 397.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 443.69999998807907,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 446.19999998807907,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 454.29999999701977,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 458.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.98609,
+          "static": false
+        },
+        {
+          "t": 462.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.97209,
+          "static": false
+        },
+        {
+          "t": 467.79999999701977,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.955757,
+          "static": false
+        },
+        {
+          "t": 490.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 523,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 557.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 562.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 567.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 571.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.985833,
+          "static": false
+        },
+        {
+          "t": 579.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.960167,
+          "static": false
+        },
+        {
+          "t": 589.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.9275,
+          "static": false
+        },
+        {
+          "t": 593.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.913833,
+          "static": false
+        },
+        {
+          "t": 597.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.899833,
+          "static": false
+        },
+        {
+          "t": 601.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.8855,
+          "static": false
+        },
+        {
+          "t": 605.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.872167,
+          "static": false
+        },
+        {
+          "t": 610.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.858167,
+          "static": false
+        },
+        {
+          "t": 615.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.8405,
+          "static": false
+        },
+        {
+          "t": 625.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.807833,
+          "static": false
+        },
+        {
+          "t": 629.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.793833,
+          "static": false
+        },
+        {
+          "t": 633.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.780167,
+          "static": false
+        },
+        {
+          "t": 637.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.766167,
+          "static": false
+        },
+        {
+          "t": 642.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.749833,
+          "static": false
+        },
+        {
+          "t": 647.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.734167,
+          "static": false
+        },
+        {
+          "t": 652.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.7185,
+          "static": false
+        },
+        {
+          "t": 657.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.700833,
+          "static": false
+        },
+        {
+          "t": 662.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.685167,
+          "static": false
+        },
+        {
+          "t": 666.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.671167,
+          "static": false
+        },
+        {
+          "t": 670.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.656167,
+          "static": false
+        },
+        {
+          "t": 675.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.640167,
+          "static": false
+        },
+        {
+          "t": 680.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.624833,
+          "static": false
+        },
+        {
+          "t": 689.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5935,
+          "static": false
+        },
+        {
+          "t": 694.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.575833,
+          "static": false
+        },
+        {
+          "t": 701.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5545,
+          "static": false
+        },
+        {
+          "t": 706.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5375,
+          "static": false
+        },
+        {
+          "t": 710.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5235,
+          "static": false
+        },
+        {
+          "t": 714.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5095,
+          "static": false
+        },
+        {
+          "t": 724.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4775,
+          "static": false
+        },
+        {
+          "t": 728.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4635,
+          "static": false
+        },
+        {
+          "t": 732.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4495,
+          "static": false
+        },
+        {
+          "t": 736.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4355,
+          "static": false
+        },
+        {
+          "t": 741,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.421833,
+          "static": false
+        },
+        {
+          "t": 745.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.407833,
+          "static": false
+        },
+        {
+          "t": 750.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.3885,
+          "static": false
+        },
+        {
+          "t": 761,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.355833,
+          "static": false
+        },
+        {
+          "t": 765,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.341833,
+          "static": false
+        },
+        {
+          "t": 770.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.322167,
+          "static": false
+        },
+        {
+          "t": 780.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.2895,
+          "static": false
+        },
+        {
+          "t": 784.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.2755,
+          "static": false
+        },
+        {
+          "t": 789.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.261833,
+          "static": false
+        },
+        {
+          "t": 793.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.247833,
+          "static": false
+        },
+        {
+          "t": 797.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.233833,
+          "static": false
+        },
+        {
+          "t": 801.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.220167,
+          "static": false
+        },
+        {
+          "t": 807.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.2005,
+          "static": false
+        },
+        {
+          "t": 817.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.168167,
+          "static": false
+        },
+        {
+          "t": 821.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.1545,
+          "static": false
+        },
+        {
+          "t": 827.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.132833,
+          "static": false
+        },
+        {
+          "t": 837.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.100167,
+          "static": false
+        },
+        {
+          "t": 841.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0861667,
+          "static": false
+        },
+        {
+          "t": 846.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0705,
+          "static": false
+        },
+        {
+          "t": 852.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0498333,
+          "static": false
+        },
+        {
+          "t": 857.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0328333,
+          "static": false
+        },
+        {
+          "t": 861.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0188333,
+          "static": false
+        },
+        {
+          "t": 866.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.00283333,
+          "static": false
+        },
+        {
+          "t": 876.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 882.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 887.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.004510000000000025,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 893,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.009239999999999976,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 898.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.018260000000000026,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 903.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.0242,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 908.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.02947999999999995,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 913.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.03563999999999998,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 918.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.04081000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 923.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.04542999999999995,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 933.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.05181000000000002,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 937.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.06237000000000005,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 943.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.06698999999999998,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 953.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.07381000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 958.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.08447999999999996,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 962.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.08910000000000001,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 966.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.09372000000000007,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 971.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.09834,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 976.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.10285000000000002,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 980.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.10747000000000008,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 989.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.11407000000000007,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 995.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.12474,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 999.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.12925000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1009,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.13541000000000006,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1018.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.14586000000000005,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1025.199999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.15576000000000004,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1030,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.16236000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1039.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.16852000000000006,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1047.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.1791900000000001,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1054.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.18842999999999996,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1059.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.1956900000000001,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1065.699999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.20140999999999992,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1070.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.20834000000000014,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1076,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.21285000000000004,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1084.699999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.21824000000000013,
+          "overlay": 0,
+          "static": false
+        }
+      ]
+    },
+    {
+      "name": "static-rapid",
+      "layout": {
+        "moving": false,
+        "staticMode": true,
+        "active": 2,
+        "lastSettled": {
+          "index": 2,
+          "nodes": [
+            {
+              "x": 141.2976924407397,
+              "y": 401.59534923848395,
+              "visible": false,
+              "depth": 2.443402866578256
+            },
+            {
+              "x": 36.70196404052065,
+              "y": 463.71289302616833,
+              "visible": true,
+              "depth": 2.084040850177064
+            },
+            {
+              "x": 264.11422653359546,
+              "y": 470.49212223741347,
+              "visible": true,
+              "depth": 1.8956363343664908
+            },
+            {
+              "x": 339.46953498745165,
+              "y": 402.5236429190956,
+              "visible": true,
+              "depth": 2.2848256859914993
+            }
+          ],
+          "faceBounds": {
+            "left": 82.9232868994236,
+            "right": 282.3481310574815,
+            "top": 328.5851658162304,
+            "bottom": 536.81858353998
+          },
+          "handBounds": [
+            {
+              "left": 251.59254542039128,
+              "right": 348.71903594480557,
+              "top": 720.6209649288822,
+              "bottom": 862.0283421025039
+            },
+            {
+              "left": 95.90315216318098,
+              "right": 211.87119885828304,
+              "top": 789.7323153271932,
+              "bottom": 960.5051029876206
+            }
+          ]
+        },
+        "lastPositions": [
+          {
+            "x": 141.2976924407397,
+            "y": 401.59534923848395,
+            "visible": false,
+            "depth": 2.443402866578256
+          },
+          {
+            "x": 36.70196404052065,
+            "y": 463.71289302616833,
+            "visible": true,
+            "depth": 2.084040850177064
+          },
+          {
+            "x": 264.11422653359546,
+            "y": 470.49212223741347,
+            "visible": true,
+            "depth": 1.8956363343664908
+          },
+          {
+            "x": 339.46953498745165,
+            "y": 402.5236429190956,
+            "visible": true,
+            "depth": 2.2848256859914993
+          }
+        ]
+      },
+      "classes": "scene-ready static-mode show-directory has-interacted",
+      "posterTransition": [
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        },
+        {
+          "inline": "",
+          "computed": "0.2s",
+          "opacity": 1,
+          "current": true
+        },
+        {
+          "inline": "",
+          "computed": "0.12s",
+          "opacity": 0,
+          "current": false
+        }
+      ],
+      "trace": [
+        {
+          "t": 397.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 443.69999998807907,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 446.19999998807907,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 454.29999999701977,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 458.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.98609,
+          "static": false
+        },
+        {
+          "t": 462.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.97209,
+          "static": false
+        },
+        {
+          "t": 467.79999999701977,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.955757,
+          "static": false
+        },
+        {
+          "t": 490.59999999403954,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 523,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 557.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 562.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 567.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 1,
+          "static": false
+        },
+        {
+          "t": 571.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.985833,
+          "static": false
+        },
+        {
+          "t": 579.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.960167,
+          "static": false
+        },
+        {
+          "t": 589.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.9275,
+          "static": false
+        },
+        {
+          "t": 593.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.913833,
+          "static": false
+        },
+        {
+          "t": 597.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.899833,
+          "static": false
+        },
+        {
+          "t": 601.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.8855,
+          "static": false
+        },
+        {
+          "t": 605.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.872167,
+          "static": false
+        },
+        {
+          "t": 610.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.858167,
+          "static": false
+        },
+        {
+          "t": 615.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.8405,
+          "static": false
+        },
+        {
+          "t": 625.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.807833,
+          "static": false
+        },
+        {
+          "t": 629.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.793833,
+          "static": false
+        },
+        {
+          "t": 633.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.780167,
+          "static": false
+        },
+        {
+          "t": 637.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.766167,
+          "static": false
+        },
+        {
+          "t": 642.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.749833,
+          "static": false
+        },
+        {
+          "t": 647.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.734167,
+          "static": false
+        },
+        {
+          "t": 652.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.7185,
+          "static": false
+        },
+        {
+          "t": 657.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.700833,
+          "static": false
+        },
+        {
+          "t": 662.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.685167,
+          "static": false
+        },
+        {
+          "t": 666.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.671167,
+          "static": false
+        },
+        {
+          "t": 670.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.656167,
+          "static": false
+        },
+        {
+          "t": 675.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.640167,
+          "static": false
+        },
+        {
+          "t": 680.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.624833,
+          "static": false
+        },
+        {
+          "t": 689.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5935,
+          "static": false
+        },
+        {
+          "t": 694.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.575833,
+          "static": false
+        },
+        {
+          "t": 701.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5545,
+          "static": false
+        },
+        {
+          "t": 706.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5375,
+          "static": false
+        },
+        {
+          "t": 710.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5235,
+          "static": false
+        },
+        {
+          "t": 714.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.5095,
+          "static": false
+        },
+        {
+          "t": 724.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4775,
+          "static": false
+        },
+        {
+          "t": 728.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4635,
+          "static": false
+        },
+        {
+          "t": 732.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4495,
+          "static": false
+        },
+        {
+          "t": 736.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.4355,
+          "static": false
+        },
+        {
+          "t": 741,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.421833,
+          "static": false
+        },
+        {
+          "t": 745.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.407833,
+          "static": false
+        },
+        {
+          "t": 750.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.3885,
+          "static": false
+        },
+        {
+          "t": 761,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.355833,
+          "static": false
+        },
+        {
+          "t": 765,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.341833,
+          "static": false
+        },
+        {
+          "t": 770.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.322167,
+          "static": false
+        },
+        {
+          "t": 780.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.2895,
+          "static": false
+        },
+        {
+          "t": 784.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.2755,
+          "static": false
+        },
+        {
+          "t": 789.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.261833,
+          "static": false
+        },
+        {
+          "t": 793.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.247833,
+          "static": false
+        },
+        {
+          "t": 797.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.233833,
+          "static": false
+        },
+        {
+          "t": 801.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.220167,
+          "static": false
+        },
+        {
+          "t": 807.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.2005,
+          "static": false
+        },
+        {
+          "t": 817.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.168167,
+          "static": false
+        },
+        {
+          "t": 821.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.1545,
+          "static": false
+        },
+        {
+          "t": 827.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.132833,
+          "static": false
+        },
+        {
+          "t": 837.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.100167,
+          "static": false
+        },
+        {
+          "t": 841.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0861667,
+          "static": false
+        },
+        {
+          "t": 846.5,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0705,
+          "static": false
+        },
+        {
+          "t": 852.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0498333,
+          "static": false
+        },
+        {
+          "t": 857.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0328333,
+          "static": false
+        },
+        {
+          "t": 861.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.0188333,
+          "static": false
+        },
+        {
+          "t": 866.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": true,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0.00283333,
+          "static": false
+        },
+        {
+          "t": 876.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 882.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 887.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.004510000000000025,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 893,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.009239999999999976,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 898.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.018260000000000026,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 903.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.0242,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 908.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.02947999999999995,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 913.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.03563999999999998,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 918.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.04081000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 923.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.04542999999999995,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 933.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.05181000000000002,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 937.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.06237000000000005,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 943.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.06698999999999998,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 953.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.07381000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 958.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.08447999999999996,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 962.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.08910000000000001,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 966.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.09372000000000007,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 971.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.09834,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 976.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.10285000000000002,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 980.6999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.10747000000000008,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 989.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.11407000000000007,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 995.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.12474,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 999.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.12925000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1009,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.13541000000000006,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1018.1999999880791,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.14586000000000005,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1025.199999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.15576000000000004,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1030,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.16236000000000003,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1039.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.16852000000000006,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1047.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.1791900000000001,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1054.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.18842999999999996,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1059.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.1956900000000001,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1065.699999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.20140999999999992,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1070.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.20834000000000014,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1076,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.21285000000000004,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1084.699999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.21824000000000013,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1092,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.22890999999999992,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1097.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.23352999999999996,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1102.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.2426599999999999,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1107.699999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.24727999999999994,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1111.199999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.25179000000000007,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1120.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.25817,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1126.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.26894999999999997,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1130.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.27345999999999987,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1139.0999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.28005999999999986,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1146.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.28885999999999984,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1156.199999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.29699999999999993,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1167.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.3077799999999999,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1173.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.31999000000000005,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1180,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.32747,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1189.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.3339599999999998,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1196.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.34429999999999994,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1225.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.35222,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1232.5,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.3842299999999999,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1244.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.39170999999999984,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1251.2999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.40249,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1256,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.4069999999999999,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1264.3999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.4161299999999999,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1273.8999999910593,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.42679999999999996,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1283.7999999970198,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.4371400000000001,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1304.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.44747999999999993,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1323.5999999940395,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.45705,
+          "overlay": 0,
+          "static": false
+        },
+        {
+          "t": 1380.199999988079,
+          "active": 1,
+          "station": 1,
+          "paused": false,
+          "progress": 1,
+          "dragging": false,
+          "action": "Nod",
+          "actionTime": 0.48322999999999994,
+          "overlay": 0,
+          "static": false
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

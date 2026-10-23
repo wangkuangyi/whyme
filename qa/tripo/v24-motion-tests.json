@@ -1,0 +1,437 @@
+{
+  "checks": [
+    {
+      "name": "reviewed-station-map",
+      "passed": true
+    },
+    {
+      "name": "look-around-exists-in-supplied-glb",
+      "passed": true
+    },
+    {
+      "name": "station-1-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-1-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-1-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-2-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-2-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-2-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-3-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-3-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-3-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-4-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-4-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-4-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "source-animation-arrays-preserved",
+      "passed": true
+    },
+    {
+      "name": "boxing-never-bound",
+      "passed": true
+    },
+    {
+      "name": "withdrawn-cross-arms-never-bound-or-played",
+      "passed": true
+    },
+    {
+      "name": "large-greet-never-bound-or-played",
+      "passed": true
+    },
+    {
+      "name": "walk-travels-in-world-metres",
+      "passed": true
+    },
+    {
+      "name": "walk-holds-position-after-finish",
+      "passed": true
+    },
+    {
+      "name": "station-switch-preserves-travel",
+      "passed": true
+    },
+    {
+      "name": "entering-look-around-preserves-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "look-around-completion-keeps-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "leaving-look-around-preserves-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "interrupted-walk-keeps-current-position",
+      "passed": true
+    },
+    {
+      "name": "dragging-freezes-action-and-root-motion",
+      "passed": true
+    },
+    {
+      "name": "root-motion-includes-parent-scale-and-rotation",
+      "passed": true
+    },
+    {
+      "name": "reduced-motion-keeps-original-rest-pose",
+      "passed": true
+    },
+    {
+      "name": "rapid-switches-retire-fading-actions",
+      "passed": true
+    },
+    {
+      "name": "walk-station-click-uses-nod-not-more-travel",
+      "passed": true
+    },
+    {
+      "name": "reaction-keeps-travel",
+      "passed": true
+    },
+    {
+      "name": "walk-ending-fades-to-zero-speed",
+      "passed": true
+    },
+    {
+      "name": "walk-ending-has-no-bone-position-pop",
+      "passed": true
+    },
+    {
+      "name": "crossfade-weights-stay-normalized",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-has-no-root-drift",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-returns-to-the-same-pose",
+      "passed": true
+    },
+    {
+      "name": "initial-idle-does-not-trigger-repeated-settling",
+      "passed": true
+    },
+    {
+      "name": "idle-before-any-station-does-not-add-a-reaction",
+      "passed": true
+    },
+    {
+      "name": "look-around-is-reviewed-5_8-second-excerpt-at-original-speed",
+      "passed": true
+    },
+    {
+      "name": "look-around-preserves-original-source-samples-through-excerpt",
+      "passed": true
+    },
+    {
+      "name": "look-around-is-finished-within-six-seconds",
+      "passed": true
+    },
+    {
+      "name": "look-around-has-real-head-and-chest-turning",
+      "passed": true
+    },
+    {
+      "name": "look-around-does-not-introduce-world-travel",
+      "passed": true
+    },
+    {
+      "name": "reselecting-look-around-does-not-restart-entry",
+      "passed": true
+    },
+    {
+      "name": "clicking-during-look-around-does-not-interrupt-it",
+      "passed": true
+    },
+    {
+      "name": "look-around-plays-once-and-returns-to-idle",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-after-look-around-keeps-pose-and-position",
+      "passed": true
+    },
+    {
+      "name": "completed-look-around-does-not-replay-spontaneously",
+      "passed": true
+    },
+    {
+      "name": "reselecting-completed-look-around-keeps-idle-phase",
+      "passed": true
+    },
+    {
+      "name": "clicking-after-look-around-replays-the-entry",
+      "passed": true
+    },
+    {
+      "name": "look-around-replay-uses-the-same-source-pose",
+      "passed": true
+    },
+    {
+      "name": "look-around-reaction-also-settles-once",
+      "passed": true
+    },
+    {
+      "name": "switching-during-walk-settle-preserves-position",
+      "passed": true
+    },
+    {
+      "name": "walk-settles-at-20-through-120-fps",
+      "passed": true
+    }
+  ],
+  "stationClips": [
+    "Walk",
+    "Nod",
+    "LookAround",
+    "Wave"
+  ],
+  "walkStation": 0,
+  "lookAround": {
+    "station": 2,
+    "sourceDuration": 15.625,
+    "sourceRange": [
+      1.2,
+      7
+    ],
+    "runtimeDuration": 5.8,
+    "speed": 1,
+    "sourcePoseSamples": [
+      {
+        "time": 0,
+        "error": 0
+      },
+      {
+        "time": 0.09999999999999999,
+        "error": 2.9298084625040133e-8
+      },
+      {
+        "time": 1.2999999999999978,
+        "error": 6.577064426416257e-8
+      },
+      {
+        "time": 2.399999999999994,
+        "error": 6.988130918372804e-8
+      },
+      {
+        "time": 3.799999999999989,
+        "error": 7.810263547014529e-8
+      },
+      {
+        "time": 5.200000000000048,
+        "error": 9.454529159569347e-8
+      }
+    ],
+    "replaySourceError": 6.577064426416257e-8,
+    "turnExcursionRadians": {
+      "Head": 0.7697299645016132,
+      "Neck": 0.2739454193308908,
+      "Spine": 0.08849741398608368,
+      "Spine1": 0.08459226921347765,
+      "Spine2": 0.0913836767352373
+    },
+    "postIdlePoseError": 5.960464477539063e-8
+  },
+  "walkWorldEnd": [
+    0.3870891251373866,
+    0,
+    7.196013876381541
+  ],
+  "interruptedWorldEnd": [
+    0.2213475458614861,
+    0,
+    2.7276818289538474
+  ],
+  "endingSamples": [
+    {
+      "time": 4.45,
+      "speed": 1.3987190242000966,
+      "position": [
+        0.41740792189328735,
+        0,
+        6.773061443769974
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 1,
+          "time": 4.450000000000069
+        }
+      ]
+    },
+    {
+      "time": 4.7,
+      "speed": 0.9418971203819044,
+      "position": [
+        0.3919560550073549,
+        0,
+        7.103976016924637
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.567993989481408,
+          "time": 4.700000000000054
+        },
+        {
+          "action": "Idle",
+          "weight": 0.432006010518592,
+          "time": 0.25000000000006833
+        }
+      ]
+    },
+    {
+      "time": 4.9,
+      "speed": 0.11613082701806657,
+      "position": [
+        0.3869018530633395,
+        0,
+        7.191917021456333
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.08715251690447334,
+          "time": 4.900000000000043
+        },
+        {
+          "action": "Idle",
+          "weight": 0.9128474830955267,
+          "time": 0.4500000000000676
+        }
+      ]
+    },
+    {
+      "time": 4.991666666666666,
+      "speed": 0.0016133623636787424,
+      "position": [
+        0.3870873480753766,
+        0,
+        7.196012690107857
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.0006817486156219799,
+          "time": 4.991666666666704
+        },
+        {
+          "action": "Idle",
+          "weight": 0.999318251384378,
+          "time": 0.541666666666734
+        }
+      ]
+    },
+    {
+      "time": 5.020833333333333,
+      "speed": 0,
+      "position": [
+        0.38708747781746833,
+        0,
+        7.196015806694073
+      ],
+      "weights": [
+        {
+          "action": "Idle",
+          "weight": 1,
+          "time": 0.5708333333334006
+        }
+      ]
+    },
+    {
+      "time": 5.2,
+      "speed": 0,
+      "position": [
+        0.38708747781746833,
+        0,
+        7.196015806694073
+      ],
+      "weights": [
+        {
+          "action": "Idle",
+          "weight": 1,
+          "time": 0.7500000000000666
+        }
+      ]
+    }
+  ],
+  "maxEndingBoneStep": 0.016551307066793915,
+  "maxWeightError": 0,
+  "idlePoseError": 4.2146848510894035e-8,
+  "frameRates": [
+    {
+      "fps": 20,
+      "position": [
+        0.38720908626124806,
+        0,
+        7.195850316628944
+      ],
+      "action": "Idle"
+    },
+    {
+      "fps": 30,
+      "position": [
+        0.38716479170425255,
+        0,
+        7.196000800430376
+      ],
+      "action": "Idle"
+    },
+    {
+      "fps": 60,
+      "position": [
+        0.38710331820064475,
+        0,
+        7.195996888162306
+      ],
+      "action": "Idle"
+    },
+    {
+      "fps": 120,
+      "position": [
+        0.3870891251373866,
+        0,
+        7.196013876381541
+      ],
+      "action": "Idle"
+    }
+  ],
+  "notes": "Actual GLB animation arrays used. No browser rendering asserted by this test."
+}

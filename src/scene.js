@@ -34,7 +34,7 @@ const vector = () => new THREE.Vector3();
 const ease = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
 
 /** Local WebGL studio. Position callbacks use canvas-local CSS pixels. */
-export async function createScene({ canvas, signal, onNodePositions = () => {}, onSettled = () => {}, onFramingChange = () => {}, onColorChange = () => {}, onReady = () => {}, onError = () => {}, reducedMotion = false, onPerformanceFallback = () => {} }) {
+export async function createScene({ canvas, signal, onNodePositions = () => {}, onSettled = () => {}, onFramingChange = () => {}, onColorChange = () => {}, onPosterLayout = () => {}, onReady = () => {}, onError = () => {}, reducedMotion = false, initialStation = 0, presentationPaused = false, onPerformanceFallback = () => {} }) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' }); }
   catch (error) { onError(error); throw error; }
@@ -45,22 +45,31 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   let characterMotion = null;
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(27, 1, .02, 100), modelGroup = new THREE.Group(); scene.add(modelGroup);
   scene.add(new THREE.HemisphereLight(0xffffff, 0xd9d9df, .4)); scene.add(new THREE.AmbientLight(0xffffff, .10));
-  const key = new THREE.SpotLight(0xfffcf8, 72, 24, .76, .95, 2); key.position.set(-3.2, 4.3, 4.8); key.target.position.set(0, .4, 0); key.castShadow = true;
+  const key = new THREE.SpotLight(0xfffcf8, 72, 24, .76, .95, 2); key.position.set(-3.2, 6, 4.8); key.target.position.set(0, .4, 0); key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024); key.shadow.camera.near = .2; key.shadow.camera.far = 18; key.shadow.bias = -.00008; key.shadow.normalBias = .015; key.shadow.radius = 8; key.shadow.blurSamples = 8; scene.add(key, key.target); studioLights.push({ light: key, rest: key.position.clone() });
   const addSoftbox = (intensity, w, h, position) => { const light = new THREE.RectAreaLight(0xffffff, intensity, w, h); light.position.set(...position); light.lookAt(0, 1, 0); scene.add(light); studioLights.push({ light, rest: light.position.clone() }); };
   addSoftbox(2.2, 3.2, 4, [-3, 4.5, 4]); addSoftbox(1.4, 4, 4, [3.8, 2.4, 3]); addSoftbox(2, 3, 1.2, [0, 4, -.2]); addSoftbox(2.5, .8, 3, [-2.6, 2, -3]); addSoftbox(2.2, .8, 3, [2.6, 2, -2.5]);
 
   // A world-space light pool changes shape with the camera and has no hard horizon.
-  const floorMaterial = new THREE.ShaderMaterial({ transparent: true, depthWrite: false, toneMapped: false, uniforms: { tint: { value: new THREE.Color(STATIONS[0].floor) } },
+  const floorMaterial = new THREE.ShaderMaterial({ transparent: true, depthWrite: false, toneMapped: false, uniforms: { tint: { value: new THREE.Color(STATIONS[0].floor) }, edgeColor: { value: new THREE.Color('#f3f3f5') }, viewport: { value: new THREE.Vector2(1, 1) } },
     vertexShader: 'varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
-    fragmentShader: `varying vec2 vUv; uniform vec3 tint; void main(){
-      float r=length((vUv-.5)*2.0); float pool=1.0-smoothstep(.20,.72,r);
-      vec3 c=mix(vec3(.8796,.8796,.8963),tint,pool); float a=(1.0-smoothstep(.64,1.0,r))*.86;
+    fragmentShader: `varying vec2 vUv; uniform vec3 tint; uniform vec3 edgeColor; uniform vec2 viewport; void main(){
+      float r=length((vUv-.5)*2.0); float pool=1.0-smoothstep(.12,.56,r);
+      vec2 frame=gl_FragCoord.xy/viewport; vec2 edge=min(frame,1.0-frame);
+      float frameFade=smoothstep(0.0,.10,edge.x)*smoothstep(0.0,.12,edge.y);
+      vec3 c=mix(edgeColor,tint,pool*.5); float a=(1.0-smoothstep(.22,.72,r))*.60*frameFade;
       gl_FragColor=vec4(c,a);
       #include <colorspace_fragment>
     }` });
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(HEIGHT * 5, HEIGHT * 5), floorMaterial); floor.rotation.x = -Math.PI / 2; floor.position.y = -.006; floor.renderOrder = -3; scene.add(floor);
-  const shadowReceiver = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ color: '#202027', opacity: .16, depthWrite: false })); shadowReceiver.rotation.x = -Math.PI / 2; shadowReceiver.receiveShadow = true; shadowReceiver.renderOrder = -2; scene.add(shadowReceiver);
+  const shadowMaterial = new THREE.ShadowMaterial({ color: '#202027', opacity: .10, depthWrite: false });
+  // Feather the distant cast shadow without weakening the feet's contact shadow.
+  shadowMaterial.onBeforeCompile = (shader) => {
+    shader.uniforms.shadowCenter = { value: modelGroup.position };
+    shader.vertexShader = `varying vec3 vShadowGround;\n${shader.vertexShader}`.replace('#include <worldpos_vertex>', '#include <worldpos_vertex>\nvShadowGround=(modelMatrix*vec4(position,1.0)).xyz;');
+    shader.fragmentShader = `varying vec3 vShadowGround; uniform vec3 shadowCenter;\n${shader.fragmentShader}`.replace('opacity * ( 1.0 - getShadowMask() )', 'opacity * (1.0-smoothstep(.45,1.7,length(vShadowGround.xz-shadowCenter.xz))) * ( 1.0 - getShadowMask() )');
+  };
+  const shadowReceiver = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), shadowMaterial); shadowReceiver.rotation.x = -Math.PI / 2; shadowReceiver.receiveShadow = true; shadowReceiver.renderOrder = -2; scene.add(shadowReceiver);
   const contactTexture = makeShadowTexture(), shadowGeometry = new THREE.PlaneGeometry(1, 1);
   for (const [x, z, sx, sz, opacity] of [[0, 0, 1.4, .85, .09], [-.14, .025, .44, .54, .32], [.14, .025, .44, .54, .32]]) {
     const shadow = new THREE.Mesh(shadowGeometry, new THREE.MeshBasicMaterial({ map: contactTexture, color: '#29292e', transparent: true, opacity, depthWrite: false, toneMapped: false }));
@@ -74,11 +83,13 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   const tickGeometry = new LineSegmentsGeometry(), tickMaterial = new LineMaterial({ color: '#232329', transparent: true, opacity: .3, linewidth: 1, worldUnits: false, depthTest: true, depthWrite: false, toneMapped: false });
   const ticks = new LineSegments2(tickGeometry, tickMaterial); ticks.frustumCulled = false; ticks.renderOrder = 2; scene.add(ticks);
 
-  let width = 1, height = 1, mobile = false, disposed = false, ready = false, currentProgress = 0, targetProgress = 0, dragging = false, activeStation = 0;
+  const firstStation = Number.isFinite(initialStation) ? Math.round(wrapStation(initialStation)) % 4 : 0;
+  let width = 1, height = 1, mobile = false, disposed = false, ready = false, currentProgress = firstStation, targetProgress = firstStation, dragging = false, activeStation = firstStation;
   let previousTime = performance.now(), loadedTime = 0, animationFrame = 0, slowDuration = 0, degradeDuration = 0, qualityLevel = 0, fallbackTriggered = false;
-  let cameraTransition = null, colorTransition = null, dragColorOrigin = null, settledPending = true, currentLCH = [...COLORS[0]], currentRib = [...RIBS[0]], currentFloor = [...FLOORS[0]], lastCssColor = '';
-  const meshes = [], clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
-  let model = null, nodePositions = [], lastProfile = STATIONS[0];
+  let presentationTime = previousTime, poseRevision = 0, boundsRevision = -1, occlusionPending = true;
+  let cameraTransition = null, colorTransition = null, dragColorOrigin = null, settledPending = true, currentLCH = [...COLORS[firstStation]], currentRib = [...RIBS[firstStation]], currentFloor = [...FLOORS[firstStation]], lastCssColor = '';
+  const meshes = [], skinnedBounds = [], skinBoundsByMesh = new Map(), clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
+  let model = null, nodePositions = [], lastProfile = STATIONS[0], posterLayout = null, lastPosterLayout = null;
   let walkClose = 0, framingPending = false, lastFramingAt = 0;
   // Keep the authored hands visible during gestures; settle on a chest portrait.
   const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 0, 0];
@@ -87,6 +98,76 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   const lookAt = vector(), projectedTop = vector(), projectedBottom = vector(), cameraRight = vector(), cameraUp = vector(), cameraTowards = vector();
   const ringU = vector(), ringV = vector(), ringNormal = vector(), ringCenter = vector(), point = vector(), rayDirection = vector(), projected = vector();
   const raycaster = new THREE.Raycaster(), nodes = Array.from({ length: 4 }, vector), frontPoints = new Float32Array(65 * 3), backPoints = new Float32Array(65 * 3), tickPoints = new Float32Array(4 * 6);
+  const boundMatrix = new THREE.Matrix4(), transformedBound = new THREE.Box3();
+  const localRay = new THREE.Ray(), inverseMesh = new THREE.Matrix4(), worldSphere = new THREE.Sphere();
+  const triangleA = vector(), triangleB = vector(), triangleC = vector(), intersection = vector();
+
+  function refreshRaycastBounds() {
+    if (boundsRevision === poseRevision) return;
+    // A vertex is a weighted blend of its bone transforms. The union of every
+    // influencing bone's transformed bounds conservatively contains that blend.
+    // Updating O(bones) boxes avoids skinning every vertex before each raycast.
+    for (const { mesh, influences } of skinnedBounds) {
+      mesh.boundingBox.makeEmpty();
+      for (const { bone, box } of influences) {
+        boundMatrix.multiplyMatrices(mesh.bindMatrixInverse, bone.matrixWorld);
+        mesh.boundingBox.union(transformedBound.copy(box).applyMatrix4(boundMatrix));
+      }
+      mesh.boundingBox.expandByScalar(.0001); mesh.boundingBox.getBoundingSphere(mesh.boundingSphere);
+    }
+    boundsRevision = poseRevision;
+  }
+  function hitsCharacter() {
+    // An occlusion ray only needs a yes/no answer. Test the same current skinned
+    // triangles as Three's raycaster, but stop at the first hit and skip unused
+    // UVs, normals, face records and sorting of every intersection.
+    for (const mesh of meshes) {
+      const geometry = mesh.geometry, bounds = mesh.isSkinnedMesh ? mesh : geometry;
+      if (!bounds.boundingSphere) bounds.computeBoundingSphere();
+      worldSphere.copy(bounds.boundingSphere).applyMatrix4(mesh.matrixWorld);
+      if (!raycaster.ray.intersectsSphere(worldSphere)) continue;
+      localRay.copy(raycaster.ray).applyMatrix4(inverseMesh.copy(mesh.matrixWorld).invert());
+      if (bounds.boundingBox && !localRay.intersectsBox(bounds.boundingBox)) continue;
+      const indices = geometry.index, count = indices ? indices.count : geometry.attributes.position.count;
+      const rangeStart = geometry.drawRange.start, rangeEnd = Math.min(count, rangeStart + geometry.drawRange.count);
+      const anyTriangle = (start, end, material) => {
+        if (!material) return false;
+        const skinBounds = skinBoundsByMesh.get(mesh);
+        const clusters = skinBounds?.clusters || [{ start: 0, end: count }];
+        for (const cluster of clusters) {
+          const first = Math.max(rangeStart, start, cluster.start), last = Math.min(rangeEnd, end, cluster.end);
+          if (first >= last) continue;
+          if (skinBounds) {
+            if (cluster.revision !== poseRevision) {
+              cluster.box.makeEmpty();
+              for (const { bone, box } of cluster.influences) {
+                boundMatrix.multiplyMatrices(mesh.bindMatrixInverse, bone.matrixWorld);
+                cluster.box.union(transformedBound.copy(box).applyMatrix4(boundMatrix));
+              }
+              cluster.box.expandByScalar(.0001); cluster.revision = poseRevision;
+            }
+            if (!localRay.intersectsBox(cluster.box)) continue;
+          }
+          for (let offset = first; offset < last; offset += 3) {
+            mesh.getVertexPosition(indices ? indices.getX(offset) : offset, triangleA);
+            mesh.getVertexPosition(indices ? indices.getX(offset + 1) : offset + 1, triangleB);
+            mesh.getVertexPosition(indices ? indices.getX(offset + 2) : offset + 2, triangleC);
+            const hit = material.side === THREE.BackSide ? localRay.intersectTriangle(triangleC, triangleB, triangleA, true, intersection)
+              : localRay.intersectTriangle(triangleA, triangleB, triangleC, material.side !== THREE.DoubleSide, intersection);
+            if (hit) {
+              const distanceSquared = intersection.applyMatrix4(mesh.matrixWorld).distanceToSquared(raycaster.ray.origin);
+              if (distanceSquared >= raycaster.near ** 2 && distanceSquared <= raycaster.far ** 2) return true;
+            }
+          }
+        }
+        return false;
+      };
+      if (Array.isArray(mesh.material)) {
+        for (const group of geometry.groups) if (anyTriangle(group.start, group.start + group.count, mesh.material[group.materialIndex])) return true;
+      } else if (anyTriangle(0, count, mesh.material)) return true;
+    }
+    return false;
+  }
 
   function sampleProfile(progress) {
     const local = wrapStation(progress), from = Math.floor(local), to = (from + 1) % 4, t = local - from, profile = {};
@@ -130,6 +211,19 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     // Navigation remains one continuous orbit while each chapter gets its own shot.
     return stationAzimuth(currentProgress);
   }
+  function updatePosterLayout() {
+    // Use the final camera, including setViewOffset. These two world landmarks
+    // register the character independently of the width-driven halo and floor.
+    projectedTop.copy(cameraAnchor).add(new THREE.Vector3(0, HEIGHT, 0)).project(camera);
+    projectedBottom.copy(cameraAnchor).project(camera);
+    posterLayout = { width, height, top: { x: (projectedTop.x + 1) * width / 2, y: (1 - projectedTop.y) * height / 2 }, bottom: { x: (projectedBottom.x + 1) * width / 2, y: (1 - projectedBottom.y) * height / 2 } };
+    if (presentationPaused || !ready) {
+      const coordinates = [width, height, posterLayout.top.x, posterLayout.top.y, posterLayout.bottom.x, posterLayout.bottom.y];
+      if (!lastPosterLayout || coordinates.some((value, index) => Math.abs(value - lastPosterLayout[index]) > .001)) {
+        lastPosterLayout = coordinates; onPosterLayout({ ...posterLayout, top: { ...posterLayout.top }, bottom: { ...posterLayout.bottom } });
+      }
+    }
+  }
   function ringPoint(angle, radius, out) { return out.copy(ringCenter).addScaledVector(ringU, Math.sin(angle) * radius).addScaledVector(ringV, Math.cos(angle) * radius); }
   function updateHalo(profile, azimuth) {
     ringCenter.copy(cameraAnchor).add(new THREE.Vector3(0, profile.haloY * HEIGHT, 0)); const roll = profile.roll * RAD;
@@ -145,15 +239,17 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   function updateNodes() {
     const now = performance.now();
     const face = USE_ANIMATIONS && ready ? boneBounds('Head', [.13, .17, .13]) : null;
+    const performing = characterMotion && characterMotion.getState().action !== 'Idle';
+    const interval = !presentationPaused && (dragging || cameraTransition || performing) ? 0 : 170;
     nodePositions = nodes.map((node, index) => { projected.copy(node).project(camera); rayDirection.copy(node).sub(camera.position); const distance = rayDirection.length(), cache = occlusionCache[index];
-      // Exact skinned-triangle occlusion is expensive; positions remain 60 fps while
-      // the small DOM hit targets refresh their occlusion at 14 Hz (idle: 6 Hz).
-      if (ready && (now - cache.at > (dragging || cameraTransition ? 70 : 170) || (settledPending && !dragging && !cameraTransition))) { raycaster.set(camera.position, rayDirection.divideScalar(distance)); raycaster.far = Math.max(0, distance - .018); cache.hidden = raycaster.intersectObjects(meshes, false).length > 0; cache.at = now; }
+      // Match every moving pose. Throttling during the walk left even correct
+      // bounds displaying yesterday's visibility when a shoulder crossed a node.
+      if (ready && (now - cache.at > interval || occlusionPending)) { refreshRaycastBounds(); raycaster.set(camera.position, rayDirection.divideScalar(distance)); raycaster.far = Math.max(0, distance - .018); cache.hidden = hitsCharacter(); cache.at = now; }
       const x = (projected.x + 1) * width / 2, y = (1 - projected.y) * height / 2;
       // DOM labels cannot be depth-tested with the skinned face. Suppress an
       // inactive node while its dot or number would cover the face in a close shot.
       const coversFace = face && index !== activeStation && x > face.left - 18 && x < face.right + 18 && y > face.top - 12 && y < face.bottom + 28;
-      return { x, y, visible: !cache.hidden && !coversFace && Math.abs(projected.x) < 1.1 && Math.abs(projected.y) < 1.1 && projected.z < 1, depth: distance }; }); onNodePositions(nodePositions);
+      return { x, y, visible: !cache.hidden && !coversFace && Math.abs(projected.x) < 1.1 && Math.abs(projected.y) < 1.1 && projected.z < 1, depth: distance }; }); occlusionPending = false; onNodePositions(nodePositions);
   }
   function applyColors() {
     for (const material of clothMaterials) { material.color.fromArray(oklabToLinear(lchToLab(material.userData.rib ? currentRib : currentLCH))); material.sheenColor.copy(material.color).lerp(new THREE.Color('#ffffff'), .18); }
@@ -197,6 +293,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     // Facial geometry, textures and expressions remain exactly the supplied scan.
     for (const mesh of morphMeshes) mesh.morphTargetInfluences.fill(0);
     modelGroup.updateMatrixWorld(true);
+    poseRevision += 1;
     for (const { light, rest } of studioLights) light.position.copy(rest).add(cameraAnchor);
     key.target.position.copy(cameraAnchor).add(new THREE.Vector3(0, .4, 0));
     floor.position.x = cameraAnchor.x; floor.position.z = cameraAnchor.z;
@@ -222,18 +319,20 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   }
   function protectedBounds() { return { faceBounds: boneBounds('Head', [.13, .17, .13]), handBounds: ['LeftHand', 'RightHand'].map(handBounds).filter(Boolean) }; }
   function notifySettled() {
-    if (!ready || dragging || cameraTransition || !settledPending) return; settledPending = false;
+    if (!ready || presentationPaused || dragging || cameraTransition || characterMotion?.getState().walking || !settledPending) return; settledPending = false;
     const box = new THREE.Box3().setFromObject(modelGroup), center = box.getCenter(vector()), half = box.getSize(vector()).multiplyScalar(.5);
     onSettled({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), modelBounds: projectBounds(center, half), ...protectedBounds() });
   }
-  function render(now) {
-    if (disposed || document.hidden) return; const rawDelta = Math.max(0, (now - previousTime) / 1000), dt = Math.min(rawDelta, .05); previousTime = now;
-    if (cameraTransition && !dragging) { const t = clamp((now - cameraTransition.started) / 1000, 0, 1); currentProgress = lerp(cameraTransition.from, targetProgress, ease(t)); if (t === 1) { cameraTransition = null; currentProgress = targetProgress; startPerformance(activeStation); } }
-    updateColor(now); const poseStart = performance.now(); updatePose(dt, now); lastProfile = sampleProfile(currentProgress); const azimuth = updateCamera(lastProfile); updateHalo(lastProfile, azimuth);
+  function render(now, force = false) {
+    if (disposed || (document.hidden && !force)) return; const rawDelta = Math.max(0, (now - previousTime) / 1000), dt = presentationPaused ? 0 : Math.min(rawDelta, .05); previousTime = now;
+    if (!presentationPaused) presentationTime += rawDelta * 1000;
+    if (cameraTransition && !dragging) { const t = clamp((presentationTime - cameraTransition.started) / 1000, 0, 1); currentProgress = lerp(cameraTransition.from, targetProgress, ease(t)); if (t === 1) { cameraTransition = null; currentProgress = targetProgress; startPerformance(activeStation); } }
+    updateColor(presentationTime); const poseStart = performance.now(); updatePose(dt); lastProfile = sampleProfile(currentProgress); const azimuth = updateCamera(lastProfile); updatePosterLayout(); updateHalo(lastProfile, azimuth);
+    renderer.getDrawingBufferSize(floorMaterial.uniforms.viewport.value);
     const renderStart = performance.now(); renderer.render(scene, camera); const nodesStart = performance.now(); updateNodes(); notifySettled();
-    if (framingPending && ready && !dragging && !cameraTransition && now - lastFramingAt > 80) { onFramingChange({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), ...protectedBounds() }); lastFramingAt = now; framingPending = false; }
+    if (framingPending && ready && !presentationPaused && !dragging && !cameraTransition && !characterMotion?.getState().walking && now - lastFramingAt > 80) { onFramingChange({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), ...protectedBounds() }); lastFramingAt = now; framingPending = false; }
     timings.frameMs = lerp(timings.frameMs, rawDelta * 1000, .1); timings.poseMs = lerp(timings.poseMs, renderStart - poseStart, .1); timings.renderMs = lerp(timings.renderMs, nodesStart - renderStart, .1); timings.nodesMs = lerp(timings.nodesMs, performance.now() - nodesStart, .1);
-    if (ready && now - loadedTime > 3500) {
+    if (ready && !presentationPaused && now - loadedTime > 3500) {
       // Degrade resolution and shadow cost first; a single healthy frame resets the fallback clock.
       degradeDuration = !dragging && rawDelta > 1 / 28 ? degradeDuration + rawDelta : 0; slowDuration = !dragging && rawDelta > 1 / 20 ? slowDuration + rawDelta : 0;
       if (degradeDuration > 1.2 && qualityLevel === 0) { qualityLevel = 1; renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25)); renderer.setSize(width, height, false); key.shadow.mapSize.set(512, 512); key.shadow.map?.dispose(); key.shadow.map = null; key.shadow.needsUpdate = true; degradeDuration = 0; }
@@ -242,13 +341,13 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     }
     animationFrame = requestAnimationFrame(render);
   }
-  function resize() { const rect = canvas.getBoundingClientRect(); width = Math.max(1, rect.width); height = Math.max(1, rect.height); mobile = window.innerWidth < 901; renderer.setSize(width, height, false); for (const material of [frontMaterial, backMaterial, tickMaterial]) material.resolution.set(width, height); settledPending = true; }
+  function resize() { const rect = canvas.getBoundingClientRect(); width = Math.max(1, rect.width); height = Math.max(1, rect.height); mobile = window.innerWidth < 901; renderer.setSize(width, height, false); for (const material of [frontMaterial, backMaterial, tickMaterial]) material.resolution.set(width, height); settledPending = true; occlusionPending = true; }
   function setStation(index, { immediate = false } = {}) {
     const nextStation = Math.round(wrapStation(index)) % 4;
     // Initialization reselects A01 after createScene resolves; preserve its opening action.
     if (!dragging && !cameraTransition && nextStation === activeStation && Math.abs(currentProgress - targetProgress) < .00001) { settledPending = true; return; }
     activeStation = nextStation; targetProgress = nearestStation(activeStation, currentProgress); dragging = false; dragColorOrigin = null;
-    const now = performance.now(); settledPending = true;
+    const now = presentationTime; settledPending = true; occlusionPending = true;
     colorTransition = { from: [...currentLCH], rib: [...currentRib], floor: [...currentFloor], started: now }; cameraTransition = { from: currentProgress, started: now };
     if (immediate || reducedMotion) { currentProgress = targetProgress; cameraTransition = null; colorTransition = null; currentLCH = [...COLORS[activeStation]]; currentRib = [...RIBS[activeStation]]; currentFloor = [...FLOORS[activeStation]]; applyColors(); if (ready) startPerformance(activeStation); }
   }
@@ -258,9 +357,14 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     dragging = true; currentProgress = progress; targetProgress = progress; cameraTransition = null; colorTransition = null; activeStation = wrapStation(Math.round(progress)); settledPending = true; slowDuration = 0;
   }
   function reactAt(x, y) {
-    if (!ready || dragging || cameraTransition) return false; raycaster.setFromCamera(new THREE.Vector2(x / width * 2 - 1, 1 - y / height * 2), camera); raycaster.far = 100;
-    if (!raycaster.intersectObjects(meshes, false).length) return false;
+    if (!ready || presentationPaused || dragging || cameraTransition) return false; refreshRaycastBounds(); raycaster.setFromCamera(new THREE.Vector2(x / width * 2 - 1, 1 - y / height * 2), camera); raycaster.far = 100;
+    if (!hitsCharacter()) return false;
     if (!reducedMotion) characterMotion?.react(); return true;
+  }
+  function setPresentationPaused(paused) {
+    if (presentationPaused === !!paused) return;
+    presentationPaused = !!paused; previousTime = performance.now();
+    loadedTime = previousTime; slowDuration = 0; degradeDuration = 0;
   }
   function onVisibilityChange() { cancelAnimationFrame(animationFrame); slowDuration = 0; degradeDuration = 0; if (!document.hidden && !disposed) { previousTime = performance.now(); animationFrame = requestAnimationFrame(render); } }
   function onContextLost(event) { event.preventDefault(); onPerformanceFallback({ reason: 'webgl-context-lost' }); }
@@ -274,6 +378,17 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       if (object.isBone) { const name = object.name.replace(/^mixamorig[:_]?/i, ''); bones.set(name, { bone: object, rest: object.quaternion.clone(), base: object.quaternion.clone(), turn: 0 }); }
       if (/^Eye(Left|Right)$/i.test(object.name)) eyes.push({ object, rest: object.quaternion.clone() });
       if (!object.isMesh) return; object.frustumCulled = false; object.castShadow = true; object.receiveShadow = false; meshes.push(object); if (object.morphTargetDictionary && object.morphTargetInfluences) morphMeshes.push(object);
+      if (object.isSkinnedMesh) {
+        const bounds = makeSkinnedBounds(object); skinnedBounds.push(bounds); skinBoundsByMesh.set(object, bounds);
+        // Indexed triangles share most vertices, as do the four node rays.
+        // Skin a requested vertex once per pose instead of once per triangle.
+        const originalPosition = object.getVertexPosition, count = object.geometry.attributes.position.count;
+        const cachedPositions = new Float64Array(count * 3), revisions = new Int32Array(count).fill(-1);
+        object.getVertexPosition = (index, target) => {
+          if (revisions[index] !== poseRevision) { originalPosition.call(object, index, target); target.toArray(cachedPositions, index * 3); revisions[index] = poseRevision; }
+          return target.fromArray(cachedPositions, index * 3);
+        };
+      }
       const original = Array.isArray(object.material) ? object.material : [object.material], materials = original.map((material) => {
         material.side = THREE.FrontSide;
         if (/hoodie|sweatshirt|卫衣/i.test(material.name)) {
@@ -288,19 +403,61 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     });
     if (USE_ANIMATIONS && gltf.animations.length) characterMotion = createCharacterMotion({ model, animations: gltf.animations, bones, reducedMotion });
     ready = true; loadedTime = performance.now(); settledPending = true; applyColors(); startPerformance(activeStation);
+    // onReady means a complete, correctly framed t=0 image is already available.
+    // The caller can decode capture() and hand off its poster before releasing time.
+    cancelAnimationFrame(animationFrame); previousTime = loadedTime; occlusionPending = true; render(loadedTime, true);
     onReady({ modelHeight: HEIGHT, materials: clothMaterials.length, animations: characterMotion?.getState().clips || [], morphTargets: [...new Set(morphMeshes.flatMap((mesh) => Object.keys(mesh.morphTargetDictionary)))], eyes: eyes.length });
   } catch (error) { onError(error); cancelAnimationFrame(animationFrame); dispose(); throw error; }
   function dispose() {
     if (disposed) return; disposed = true; cancelAnimationFrame(animationFrame); resizeObserver.disconnect(); document.removeEventListener('visibilitychange', onVisibilityChange); canvas.removeEventListener('webglcontextlost', onContextLost); signal?.removeEventListener('abort', dispose); characterMotion?.dispose();
     const geometries = new Set(), materials = new Set(), textures = new Set(); scene.traverse((object) => { if (object.geometry) geometries.add(object.geometry); for (const material of Array.isArray(object.material) ? object.material : object.material ? [object.material] : []) { materials.add(material); for (const value of Object.values(material)) if (value?.isTexture) textures.add(value); } }); for (const item of [...geometries, ...materials, ...textures]) item.dispose(); renderer.dispose();
   }
-  return { setStation, setDragProgress, reactAt, resize, dispose,
-    capture: () => { renderer.render(scene, camera); return canvas.toDataURL('image/png'); },
-    getState: () => ({ currentProgress, targetProgress, activeStation, ready, dragging, moving: !!cameraTransition || dragging, mobile, width, height, dpr: renderer.getPixelRatio(), triangles: renderer.info.render.triangles,
+  function capture({ characterOnly = false } = {}) {
+    if (!characterOnly) { renderer.render(scene, camera); return canvas.toDataURL('image/png'); }
+    const background = [floor, shadowReceiver, ...contactShadows, frontRing, backRing, ticks], visibility = background.map(object => object.visible);
+    try {
+      for (const object of background) object.visible = false;
+      renderer.render(scene, camera); return canvas.toDataURL('image/png');
+    } finally {
+      background.forEach((object, index) => { object.visible = visibility[index]; });
+      renderer.render(scene, camera);
+    }
+  }
+  return { setStation, setDragProgress, setPresentationPaused, reactAt, resize, dispose,
+    capture,
+    getState: () => ({ currentProgress, targetProgress, activeStation, ready, presentationPaused, posterLayout: posterLayout && { ...posterLayout, top: { ...posterLayout.top }, bottom: { ...posterLayout.bottom } }, dragging, moving: !!cameraTransition || dragging, mobile, width, height, dpr: renderer.getPixelRatio(), triangles: renderer.info.render.triangles,
       colors: { hoodie: lastCssColor, rib: `#${new THREE.Color().fromArray(oklabToLinear(lchToLab(currentRib))).getHexString()}`, lch: [...currentLCH], durationMs: 600, throughBlack: false }, ring: { openness: lastProfile.openness, linewidth: 1.25, frontInk: .7, backDash: [3, 4], ticks: 4 }, camera: { azimuth: lastProfile.azimuth, shift: lastProfile.shift, fill: lastProfile.fill, walkClose, restClose: [...restClose], position: camera.position.toArray(), target: lookAt.toArray(), anchor: cameraAnchor.toArray(), tracking: characterMotion?.getState().walking || false }, nodes: nodePositions,
       animation: { ...(characterMotion?.getState() || { action: 'OriginalRest', clips: [], walking: false, position: [0, 0, 0] }), reducedMotion, eyes: 0, morphs: {}, pose: Object.fromEntries(['Hips','Head','LeftHand','RightHand','LeftFoot','RightFoot'].map((name) => [name, bones.get(name)?.bone.getWorldPosition(vector()).toArray()])) }, protectedBounds: protectedBounds(),
-      studio: { ambient: .5, shadowOpacity: .16, shadowWorldPosition: key.position.toArray(), shadowEnabled: key.castShadow, mapSize: key.shadow.mapSize.x, floorRadiusH: 1.2 }, quality: { level: qualityLevel, slowDuration, fallbackTriggered, staticThresholdSeconds: 5, staticThresholdFps: 20, timings: { ...timings } }, cloth: clothMaterials.map((material) => ({ name: material.name, rib: !!material.userData.rib, normalMap: !!material.normalMap, aoMap: !!material.aoMap, sheen: `#${material.sheenColor.getHexString()}` })) }),
+      studio: { ambient: .5, shadowOpacity: .10, shadowWorldPosition: key.position.toArray(), shadowFade: [.45, 1.7], shadowEnabled: key.castShadow, mapSize: key.shadow.mapSize.x, floorTintStrength: .5, floorEdge: '#f3f3f5', floorRadiusH: 1.8 }, quality: { level: qualityLevel, slowDuration, fallbackTriggered, staticThresholdSeconds: 5, staticThresholdFps: 20, timings: { ...timings } }, cloth: clothMaterials.map((material) => ({ name: material.name, rib: !!material.userData.rib, normalMap: !!material.normalMap, aoMap: !!material.aoMap, sheen: `#${material.sheenColor.getHexString()}` })) }),
   };
+}
+function makeSkinnedBounds(mesh) {
+  const positions = mesh.geometry.attributes.position, indices = mesh.geometry.attributes.skinIndex, weights = mesh.geometry.attributes.skinWeight;
+  const influences = mesh.skeleton.bones.map((bone, i) => ({ bone, box: new THREE.Box3(), toBone: new THREE.Matrix4().multiplyMatrices(mesh.skeleton.boneInverses[i], mesh.bindMatrix) }));
+  const position = new THREE.Vector3(), local = new THREE.Vector3(), skinIndex = new THREE.Vector4(), skinWeight = new THREE.Vector4();
+  for (let i = 0; i < positions.count; i += 1) {
+    position.fromBufferAttribute(positions, i); skinIndex.fromBufferAttribute(indices, i); skinWeight.fromBufferAttribute(weights, i);
+    for (let j = 0; j < 4; j += 1) if (skinWeight.getComponent(j) > 0) { const influence = influences[skinIndex.getComponent(j)]; influence.box.expandByPoint(local.copy(position).applyMatrix4(influence.toBone)); }
+  }
+  // Small triangle batches retain the authored topology. Each batch carries the
+  // same conservative bone bounds, letting a ray reject distant limbs before
+  // computing their skinned vertices. No simplified body proxy is used.
+  const index = mesh.geometry.index, count = index ? index.count : positions.count, clusters = [];
+  for (let start = 0; start < count; start += 96 * 3) {
+    const end = Math.min(count, start + 96 * 3), byBone = new Map(), visited = new Set();
+    for (let offset = start; offset < end; offset += 1) {
+      const vertex = index ? index.getX(offset) : offset; if (visited.has(vertex)) continue; visited.add(vertex);
+      position.fromBufferAttribute(positions, vertex); skinIndex.fromBufferAttribute(indices, vertex); skinWeight.fromBufferAttribute(weights, vertex);
+      for (let j = 0; j < 4; j += 1) if (skinWeight.getComponent(j) > 0) {
+        const boneIndex = skinIndex.getComponent(j), influence = influences[boneIndex];
+        if (!byBone.has(boneIndex)) byBone.set(boneIndex, { bone: influence.bone, box: new THREE.Box3() });
+        byBone.get(boneIndex).box.expandByPoint(local.copy(position).applyMatrix4(influence.toBone));
+      }
+    }
+    clusters.push({ start, end, influences: [...byBone.values()], box: new THREE.Box3(), revision: -1 });
+  }
+  mesh.boundingBox = new THREE.Box3(); mesh.boundingSphere = new THREE.Sphere();
+  return { mesh, influences: influences.filter(({ box }) => !box.isEmpty()), clusters };
 }
 function updateLine(geometry, positions) { if (!geometry.attributes.instanceStart) { geometry.setPositions(positions); return; } const data = geometry.attributes.instanceStart.data; for (let i = 0; i < positions.length / 3 - 1; i += 1) for (let component = 0; component < 3; component += 1) { data.array[i * 6 + component] = positions[i * 3 + component]; data.array[i * 6 + component + 3] = positions[i * 3 + component + 3]; } data.needsUpdate = true; }
 function makeShadowTexture() { const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128; const context = canvas.getContext('2d'), gradient = context.createRadialGradient(64, 64, 0, 64, 64, 64); for (const [stop, alpha] of [[0, 1], [.18, .8], [.46, .35], [1, 0]]) gradient.addColorStop(stop, `rgba(255,255,255,${alpha})`); context.fillStyle = gradient; context.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(canvas); }
