@@ -145,7 +145,11 @@ dialog ul{padding-left:18px}.release-date{font-size:13px}
   .contact{top:20px;gap:16px;height:34px}
   .contact-link{font-size:13px}
   .resume{font-size:13px;padding:10px 12px;gap:15px}
+  /* 手机正文独立于人物动作：首屏、切站和拖动期间都保持可读。 */
   .strengths{position:relative;top:auto!important;left:auto!important;bottom:auto;width:100%!important;opacity:1;transform:none!important;padding:0;background:transparent;transition:none;overflow:visible}
+  .card-open .strengths{transition:none}
+  .strength.is-active{opacity:1;transition:none}
+  .strength .card-reveal,.card-open .strength.is-active .card-reveal{animation:none;opacity:1;transform:none}
   .card-body{height:auto;overflow:visible;padding:19px var(--frame) 26px;background:#fffffff5;border-top:1px solid #d9d9dc}
   .card-notch{display:block;position:absolute;width:8px;height:8px;border-top:1px solid #d9d9dc;border-left:1px solid #d9d9dc;background:#fff;transform:translate(-50%,-50%) rotate(45deg);left:var(--notch-x,60%);top:0;z-index:2}
   .node-connector{opacity:.65!important}
@@ -167,8 +171,7 @@ dialog ul{padding-left:18px}.release-date{font-size:13px}
   .navigation{display:none}
   .fallback-status{position:static;padding:12px var(--frame) 0;background:#fffffff5;border-top:1px solid #d9d9dc;font-size:11px}
   .fallback-status:not([hidden])+.card-body{border-top:0}
-  .is-moving .strengths{pointer-events:none}
-  .is-moving .strength.is-active{opacity:0;transition:opacity .15s}
+  .is-moving .strengths{pointer-events:auto}
   .node-tooltip{display:none}
   .loading-halo{left:5%;width:90%;top:30%;height:50%}
   dialog{padding:24px}dialog h2{font-size:28px}.dialog-header{margin-bottom:28px}
