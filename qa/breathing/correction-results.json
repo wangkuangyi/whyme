@@ -1,0 +1,991 @@
+{
+  "asset": "public/models/person-original-animated.glb",
+  "sha256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "moduleSha256": "b5b52e75505a620f3be84952511c37514f1e441f857e3b2db3674dcfa46eaa3d",
+  "checks": [
+    {
+      "name": "original-whole-body-rest-is-not-corrected",
+      "passed": true
+    },
+    {
+      "name": "all-four-source-performances-only-change-five-authorized-local-rotations",
+      "passed": true
+    },
+    {
+      "name": "hips-legs-and-feet-never-move-from-posture-correction",
+      "passed": true
+    },
+    {
+      "name": "source-head-world-gaze-is-preserved-through-all-samples",
+      "passed": true
+    },
+    {
+      "name": "head-compensation-is-bounded-by-the-15-degree-neck-support-limit",
+      "passed": true
+    },
+    {
+      "name": "fully-supported-nod-and-wave-reach-three-degree-chest-curve",
+      "passed": true
+    },
+    {
+      "name": "fully-supported-segments-reach-rest-based-targets",
+      "passed": true
+    },
+    {
+      "name": "correction-adds-no-5mm-pop-per-frame-at-240Hz",
+      "passed": true
+    },
+    {
+      "name": "naturally-upright-source-frames-are-untouched",
+      "passed": true
+    },
+    {
+      "name": "repeated-update-without-new-mixer-sample-does-not-accumulate",
+      "passed": true
+    },
+    {
+      "name": "reset-exactly-restores-the-uncorrected-source-frame",
+      "passed": true
+    },
+    {
+      "name": "omitted-spine-and-head-tracks-cannot-accumulate-correction",
+      "passed": true
+    },
+    {
+      "name": "omitted-track-fixture-restores-the-original-local-pose",
+      "passed": true
+    },
+    {
+      "name": "parent-yaw-and-scale-preserve-head-direction-and-correction-limit",
+      "passed": true
+    },
+    {
+      "name": "original-animation-time-and-value-arrays-stay-byte-equivalent",
+      "passed": true
+    },
+    {
+      "name": "support-gate-has-continuous-value-velocity-and-acceleration-at-both-boundaries",
+      "passed": true
+    },
+    {
+      "name": "all-correction-parameters-remain-bounded-on-extreme-source-poses",
+      "passed": true
+    },
+    {
+      "name": "nod-explicit-support-can-bake-source-without-changing-source-samples",
+      "passed": true
+    },
+    {
+      "name": "nod-return-to-rest-has-no-pop-and-reaches-original-support",
+      "passed": true
+    },
+    {
+      "name": "wave-explicit-support-can-bake-source-without-changing-source-samples",
+      "passed": true
+    },
+    {
+      "name": "wave-return-to-rest-has-no-pop-and-reaches-original-support",
+      "passed": true
+    }
+  ],
+  "frameCount": 3706,
+  "sampling": [
+    {
+      "clip": "Nod",
+      "start": 0,
+      "end": 3,
+      "frames": 721,
+      "maxCorrectionDegrees": 17.913780570022354,
+      "naturalFrames": 0
+    },
+    {
+      "clip": "Wave",
+      "start": 0.9,
+      "end": 4.75,
+      "frames": 925,
+      "maxCorrectionDegrees": 9.682714299143655,
+      "naturalFrames": 0
+    },
+    {
+      "clip": "LookAround",
+      "start": 1.2,
+      "end": 7.4,
+      "frames": 1489,
+      "maxCorrectionDegrees": 0,
+      "naturalFrames": 1489
+    },
+    {
+      "clip": "Walk",
+      "start": 0,
+      "end": 2.375,
+      "frames": 571,
+      "maxCorrectionDegrees": 0,
+      "naturalFrames": 571
+    }
+  ],
+  "unchangedFrames": 2060,
+  "maxHeadDirectionErrorRadians": 1.032382731180714e-7,
+  "maxHeadCompensationDegrees": 12.549936297429971,
+  "maxCorrectionOffsetChangePer240HzFrameMetres": 0.0009243352248856075,
+  "maxSupportedCurveDegrees": 3.0000011434502767,
+  "maxSupportedReferenceErrorDegrees": 0.000004925425859170218,
+  "examples": [
+    {
+      "clip": "Nod",
+      "time": 1,
+      "active": true,
+      "activation": 1,
+      "curveBefore": 20.65282122903045,
+      "curveAfter": 2.999998493484327,
+      "before": {
+        "lower": -16.287992010988123,
+        "middle": -23.710796482535887,
+        "upper": -3.0579752535053966,
+        "neck": 28.11966643928561,
+        "curve": 20.65282122903045
+      },
+      "after": {
+        "lower": -6.709840770271587,
+        "middle": -7.125010538870212,
+        "upper": -4.125012045385823,
+        "neck": 18.35401834263101,
+        "curve": 2.999998493484327
+      },
+      "deltaDegrees": 17.652820989264647,
+      "spineDegrees": 9.578151202733071,
+      "spine1Degrees": 7.0076349006348595,
+      "spine2Degrees": -17.652820989264647,
+      "neckDegrees": -8.698612291876906,
+      "headDirectionError": 2.9802322387695312e-8,
+      "correctionDegrees": 17.652820989264647,
+      "max": {
+        "deltaDegrees": 17.913780570022354,
+        "spineDegrees": 9.75770751266655,
+        "spine1Degrees": 7.027600617119259,
+        "spine2Degrees": 17.913780570022354,
+        "neckDegrees": 11.084126793120557,
+        "headDirectionError": 7.300048299977715e-8,
+        "correctionDegrees": 17.913780570022354
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "clip": "Wave",
+      "time": 2,
+      "active": true,
+      "activation": 1,
+      "curveBefore": 12.06055203972312,
+      "curveAfter": 3.000000070827241,
+      "before": {
+        "lower": -15.072861852538198,
+        "middle": -22.024367817737758,
+        "upper": -9.963815778014672,
+        "neck": 16.65736993853058,
+        "curve": 12.06055203972312
+      },
+      "after": {
+        "lower": -6.70984195468841,
+        "middle": -7.125010872235052,
+        "upper": -4.125010801407799,
+        "neck": 18.354019397676463,
+        "curve": 3.000000070827241
+      },
+      "deltaDegrees": 9.060551362734188,
+      "spineDegrees": 8.363021044283146,
+      "spine1Degrees": 6.5363374712233275,
+      "spine2Degrees": -9.060551362734188,
+      "neckDegrees": -4.142156383400312,
+      "headDirectionError": 5.960464477539063e-8,
+      "correctionDegrees": 9.060551362734188,
+      "max": {
+        "deltaDegrees": 17.913780570022354,
+        "spineDegrees": 9.75770751266655,
+        "spine1Degrees": 7.087800716831965,
+        "spine2Degrees": 17.913780570022354,
+        "neckDegrees": 11.084126793120557,
+        "headDirectionError": 1.032382731180714e-7,
+        "correctionDegrees": 17.913780570022354
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "clip": "LookAround",
+      "time": 2.5999999999999996,
+      "active": false,
+      "activation": 0,
+      "curveBefore": 4.661858075375903,
+      "curveAfter": 4.661858075375903,
+      "before": {
+        "lower": -7.810616067580145,
+        "middle": -5.070158497923615,
+        "upper": -0.4083004225476475,
+        "neck": 19.33729722727455,
+        "curve": 4.661858075375903
+      },
+      "after": {
+        "lower": -7.810616067580145,
+        "middle": -5.070158497923615,
+        "upper": -0.4083004225476475,
+        "neck": 19.33729722727455,
+        "curve": 4.661858075375903
+      },
+      "deltaDegrees": 0,
+      "spineDegrees": 0,
+      "spine1Degrees": 0,
+      "spine2Degrees": 0,
+      "neckDegrees": 0,
+      "headDirectionError": 0,
+      "correctionDegrees": 0,
+      "max": {
+        "deltaDegrees": 17.913780570022354,
+        "spineDegrees": 9.75770751266655,
+        "spine1Degrees": 7.087800716831965,
+        "spine2Degrees": 17.913780570022354,
+        "neckDegrees": 11.084126793120557,
+        "headDirectionError": 1.032382731180714e-7,
+        "correctionDegrees": 17.913780570022354
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "clip": "Walk",
+      "time": 1.2,
+      "active": false,
+      "activation": 0,
+      "curveBefore": 7.950536223078757,
+      "curveAfter": 7.950536223078757,
+      "before": {
+        "lower": -10.761500374960203,
+        "middle": -4.931586742029754,
+        "upper": 3.0189494810489994,
+        "neck": 22.59789893262019,
+        "curve": 7.950536223078757
+      },
+      "after": {
+        "lower": -10.761500374960203,
+        "middle": -4.931586742029754,
+        "upper": 3.0189494810489994,
+        "neck": 22.59789893262019,
+        "curve": 7.950536223078757
+      },
+      "deltaDegrees": 0,
+      "spineDegrees": 0,
+      "spine1Degrees": 0,
+      "spine2Degrees": 0,
+      "neckDegrees": 0,
+      "headDirectionError": 0,
+      "correctionDegrees": 0,
+      "max": {
+        "deltaDegrees": 17.913780570022354,
+        "spineDegrees": 9.75770751266655,
+        "spine1Degrees": 7.087800716831965,
+        "spine2Degrees": 17.913780570022354,
+        "neckDegrees": 11.084126793120557,
+        "headDirectionError": 1.032382731180714e-7,
+        "correctionDegrees": 17.913780570022354
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    }
+  ],
+  "gateSamples": [
+    {
+      "deviation": 3.999,
+      "active": false,
+      "activation": 0,
+      "curveBefore": 1.684672153399788,
+      "curveAfter": 1.684672153399788,
+      "before": {
+        "lower": -6.709840808255052,
+        "middle": -11.12401020651006,
+        "upper": -9.439338053110339,
+        "neck": 13.355019568447613,
+        "curve": 1.684672153399788
+      },
+      "after": {
+        "lower": -6.709840808255052,
+        "middle": -11.12401020651006,
+        "upper": -9.439338053110339,
+        "neck": 13.355019568447613,
+        "curve": 1.684672153399788
+      },
+      "deltaDegrees": 0,
+      "spineDegrees": 0,
+      "spine1Degrees": 0,
+      "spine2Degrees": 0,
+      "neckDegrees": 0,
+      "headDirectionError": 0,
+      "correctionDegrees": 0,
+      "max": {
+        "deltaDegrees": 0,
+        "spineDegrees": 0,
+        "spine1Degrees": 0,
+        "spine2Degrees": 0,
+        "neckDegrees": 0,
+        "headDirectionError": 0,
+        "correctionDegrees": 0
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "deviation": 4,
+      "active": false,
+      "activation": 0,
+      "curveBefore": 1.68467215340047,
+      "curveAfter": 1.68467215340047,
+      "before": {
+        "lower": -6.709840808255052,
+        "middle": -11.125010206478972,
+        "upper": -9.440338053078559,
+        "neck": 13.35401956847769,
+        "curve": 1.68467215340047
+      },
+      "after": {
+        "lower": -6.709840808255052,
+        "middle": -11.125010206478972,
+        "upper": -9.440338053078559,
+        "neck": 13.35401956847769,
+        "curve": 1.68467215340047
+      },
+      "deltaDegrees": 0,
+      "spineDegrees": 0,
+      "spine1Degrees": 0,
+      "spine2Degrees": 0,
+      "neckDegrees": 0,
+      "headDirectionError": 0,
+      "correctionDegrees": 0,
+      "max": {
+        "deltaDegrees": 0,
+        "spineDegrees": 0,
+        "spine1Degrees": 0,
+        "spine2Degrees": 0,
+        "neckDegrees": 0,
+        "headDirectionError": 0,
+        "correctionDegrees": 0
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "deviation": 4.001,
+      "active": true,
+      "activation": 7.994546682061055e-11,
+      "curveBefore": 1.6846721534011522,
+      "curveAfter": 1.6846721535584948,
+      "before": {
+        "lower": -6.709840808255052,
+        "middle": -11.12601020644786,
+        "upper": -9.441338053046763,
+        "neck": 13.353019568507742,
+        "curve": 1.6846721534011522
+      },
+      "after": {
+        "lower": -6.70984077554218,
+        "middle": -11.126010171536903,
+        "upper": -9.441338017978394,
+        "neck": 13.353020007976696,
+        "curve": 1.6846721535584948
+      },
+      "deltaDegrees": 4.2501629857981687e-10,
+      "spineDegrees": 0,
+      "spine1Degrees": 3.1986179974593284e-10,
+      "spine2Degrees": 4.2501629857981687e-10,
+      "neckDegrees": 3.9980726860889234e-10,
+      "headDirectionError": 0,
+      "correctionDegrees": 4.2501629857981687e-10,
+      "max": {
+        "deltaDegrees": 4.2501629857981687e-10,
+        "spineDegrees": 0,
+        "spine1Degrees": 3.1986179974593284e-10,
+        "spine2Degrees": 4.2501629857981687e-10,
+        "neckDegrees": 3.9980726860889234e-10,
+        "headDirectionError": 0,
+        "correctionDegrees": 4.2501629857981687e-10
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "deviation": 8.999,
+      "active": true,
+      "activation": 0.9999999999199577,
+      "curveBefore": 1.6846721576785058,
+      "curveAfter": 3.0000004755497685,
+      "before": {
+        "lower": -6.709840808255052,
+        "middle": -16.124010057406807,
+        "upper": -14.439337899728347,
+        "neck": 8.355019724567477,
+        "curve": 1.6846721576785058
+      },
+      "after": {
+        "lower": -6.70984077554218,
+        "middle": -7.125010619018378,
+        "upper": -4.1250101434686615,
+        "neck": 18.354019816591027,
+        "curve": 3.0000004755497685
+      },
+      "deltaDegrees": 8.998999684732306,
+      "spineDegrees": 0,
+      "spine1Degrees": 8.998999684732306,
+      "spine2Degrees": 1.3153281350599357,
+      "neckDegrees": -0.3153279500846178,
+      "headDirectionError": 2.9802322387695312e-8,
+      "correctionDegrees": 8.998999684732306,
+      "max": {
+        "deltaDegrees": 8.998999684732306,
+        "spineDegrees": 0,
+        "spine1Degrees": 8.998999684732306,
+        "spine2Degrees": 1.3153281350599357,
+        "neckDegrees": 0.3153279500846178,
+        "headDirectionError": 2.9802322387695312e-8,
+        "correctionDegrees": 8.998999684732306
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "deviation": 9,
+      "active": true,
+      "activation": 1.0000000000000004,
+      "curveBefore": 1.6846721576794152,
+      "curveAfter": 3.0000004749641676,
+      "before": {
+        "lower": -6.709840808255052,
+        "middle": -16.12501005737841,
+        "upper": -14.440337899698939,
+        "neck": 8.354019724599718,
+        "curve": 1.6846721576794152
+      },
+      "after": {
+        "lower": -6.70984077554218,
+        "middle": -7.1250106183275586,
+        "upper": -4.125010143363375,
+        "neck": 18.3540198165658,
+        "curve": 3.0000004749641676
+      },
+      "deltaDegrees": 8.999999685423646,
+      "spineDegrees": 0,
+      "spine1Degrees": 8.999999685423646,
+      "spine2Degrees": 1.3153281344744137,
+      "neckDegrees": -0.31532795021513155,
+      "headDirectionError": 4.2146848510894035e-8,
+      "correctionDegrees": 8.999999685423646,
+      "max": {
+        "deltaDegrees": 8.999999685423646,
+        "spineDegrees": 0,
+        "spine1Degrees": 8.999999685423646,
+        "spine2Degrees": 1.3153281350599357,
+        "neckDegrees": 0.31532795021513155,
+        "headDirectionError": 4.2146848510894035e-8,
+        "correctionDegrees": 8.999999685423646
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    },
+    {
+      "deviation": 9.001,
+      "active": true,
+      "activation": 1,
+      "curveBefore": 1.6846721576804384,
+      "curveAfter": 3.0000004749936124,
+      "before": {
+        "lower": -6.709840808255052,
+        "middle": -16.126010057350015,
+        "upper": -14.441337899669545,
+        "neck": 8.35301972463192,
+        "curve": 1.6846721576804384
+      },
+      "after": {
+        "lower": -6.70984077554218,
+        "middle": -7.125010618357042,
+        "upper": -4.1250101433633795,
+        "neck": 18.35401981656579,
+        "curve": 3.0000004749936124
+      },
+      "deltaDegrees": 9.00099968539471,
+      "spineDegrees": 0,
+      "spine1Degrees": 9.00099968539471,
+      "spine2Degrees": 1.31532813450388,
+      "neckDegrees": -0.3153279502151314,
+      "headDirectionError": 4.2146848510894035e-8,
+      "correctionDegrees": 9.00099968539471,
+      "max": {
+        "deltaDegrees": 9.00099968539471,
+        "spineDegrees": 0,
+        "spine1Degrees": 9.00099968539471,
+        "spine2Degrees": 1.3153281350599357,
+        "neckDegrees": 0.31532795021513155,
+        "headDirectionError": 4.2146848510894035e-8,
+        "correctionDegrees": 9.00099968539471
+      },
+      "reference": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -5.440338182611637,
+        "neck": 17.354019453076823,
+        "curve": 1.6846721511328724
+      },
+      "targets": {
+        "lower": -6.709840808255052,
+        "middle": -7.125010333744549,
+        "upper": -4.125010333744549,
+        "neck": 18.354019453076823
+      },
+      "limits": {
+        "curveDegrees": 3,
+        "correctionDegrees": 20,
+        "perJoint": {
+          "Spine": 14,
+          "Spine1": 14,
+          "Spine2": 20,
+          "Neck": 15
+        },
+        "supportStartDegrees": 4,
+        "supportFullDegrees": 9
+      },
+      "bones": [
+        "Spine",
+        "Spine1",
+        "Spine2",
+        "Neck",
+        "Head"
+      ]
+    }
+  ],
+  "blends": [
+    {
+      "clip": "Nod",
+      "sourceTime": 3,
+      "duration": 0.8,
+      "samples": 193,
+      "maxBoneStepMetres": 0.001633322577905758,
+      "maxCurveStepDegrees": 0.012856236546440414,
+      "maxCurveDegrees": 2.9999960107586503,
+      "maxMiddleDeviationFromRestDegrees": 0.001318335905016177,
+      "final": {
+        "active": false,
+        "activation": 0,
+        "curveBefore": 1.6846721511328724,
+        "curveAfter": 1.6846721511328724,
+        "before": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -5.440338182611637,
+          "neck": 17.354019453076823,
+          "curve": 1.6846721511328724
+        },
+        "after": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -5.440338182611637,
+          "neck": 17.354019453076823,
+          "curve": 1.6846721511328724
+        },
+        "deltaDegrees": 0,
+        "spineDegrees": 0,
+        "spine1Degrees": 0,
+        "spine2Degrees": 0,
+        "neckDegrees": 0,
+        "headDirectionError": 0,
+        "correctionDegrees": 0,
+        "max": {
+          "deltaDegrees": 16.145729750571565,
+          "spineDegrees": 6.208168307590189,
+          "spine1Degrees": 6.128126668518326,
+          "spine2Degrees": 16.145729750571565,
+          "neckDegrees": 1.475523354463398,
+          "headDirectionError": 5.16191365590357e-8,
+          "correctionDegrees": 16.145729750571565
+        },
+        "reference": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -5.440338182611637,
+          "neck": 17.354019453076823,
+          "curve": 1.6846721511328724
+        },
+        "targets": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -4.125010333744549,
+          "neck": 18.354019453076823
+        },
+        "limits": {
+          "curveDegrees": 3,
+          "correctionDegrees": 20,
+          "perJoint": {
+            "Spine": 14,
+            "Spine1": 14,
+            "Spine2": 20,
+            "Neck": 15
+          },
+          "supportStartDegrees": 4,
+          "supportFullDegrees": 9
+        },
+        "bones": [
+          "Spine",
+          "Spine1",
+          "Spine2",
+          "Neck",
+          "Head"
+        ],
+        "mode": "observed"
+      }
+    },
+    {
+      "clip": "Wave",
+      "sourceTime": 4.75,
+      "duration": 0.8,
+      "samples": 193,
+      "maxBoneStepMetres": 0.0022915322430312295,
+      "maxCurveStepDegrees": 0.01287345309765442,
+      "maxCurveDegrees": 2.9999992897468246,
+      "maxMiddleDeviationFromRestDegrees": 0.003227009517329016,
+      "final": {
+        "active": false,
+        "activation": 0,
+        "curveBefore": 1.6846721511328724,
+        "curveAfter": 1.6846721511328724,
+        "before": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -5.440338182611637,
+          "neck": 17.354019453076823,
+          "curve": 1.6846721511328724
+        },
+        "after": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -5.440338182611637,
+          "neck": 17.354019453076823,
+          "curve": 1.6846721511328724
+        },
+        "deltaDegrees": 0,
+        "spineDegrees": 0,
+        "spine1Degrees": 0,
+        "spine2Degrees": 0,
+        "neckDegrees": 0,
+        "headDirectionError": 0,
+        "correctionDegrees": 0,
+        "max": {
+          "deltaDegrees": 9.358696178773439,
+          "spineDegrees": 7.853062096921828,
+          "spine1Degrees": 6.513838292882714,
+          "spine2Degrees": 9.358696178773439,
+          "neckDegrees": 1.8025479660021304,
+          "headDirectionError": 7.300048299977715e-8,
+          "correctionDegrees": 9.358696178773439
+        },
+        "reference": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -5.440338182611637,
+          "neck": 17.354019453076823,
+          "curve": 1.6846721511328724
+        },
+        "targets": {
+          "lower": -6.709840808255052,
+          "middle": -7.125010333744549,
+          "upper": -4.125010333744549,
+          "neck": 18.354019453076823
+        },
+        "limits": {
+          "curveDegrees": 3,
+          "correctionDegrees": 20,
+          "perJoint": {
+            "Spine": 14,
+            "Spine1": 14,
+            "Spine2": 20,
+            "Neck": 15
+          },
+          "supportStartDegrees": 4,
+          "supportFullDegrees": 9
+        },
+        "bones": [
+          "Spine",
+          "Spine1",
+          "Spine2",
+          "Neck",
+          "Head"
+        ],
+        "mode": "observed"
+      }
+    }
+  ],
+  "notes": "Independent actual-GLB posture-module checks. Only local Spine/Spine1/Spine2/Neck/Head rotations may change; head world gaze and every lower-body transform remain unchanged. The test includes deliberately omitted corrected tracks and repeated update calls to detect cumulative corrections. Return-to-rest fixtures blend PRECORRECTED source poses into Rest and use inspect() only; runtime clip baking, timing and breathing are covered separately. Screenshot review is separate; this report does not assert all-frame cloth clearance."
+}

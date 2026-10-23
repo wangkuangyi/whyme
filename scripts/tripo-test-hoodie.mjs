@@ -1,4 +1,4 @@
-/** Validate actual GLTFLoader + drawstring correction + posture/motion modules. */
+/** Validate actual GLTFLoader + drawstrings + upright posture + continuous breathing. */
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -14,6 +14,7 @@ import { createCharacterMotion, STATION_CLIPS } from '../src/motion.js';
 const root = new URL('../', import.meta.url), sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const bytes = await readFile(new URL(HOODIE_BASELINE.source, root));
 const sourceSHA256 = sha(bytes), checks = [];
+const historicalReport = await readFile(new URL('qa/posture/hoodie-results.json', root));
 const check = (name, test) => { test(); checks.push({ name, passed: true }); };
 check('original-GLB-SHA256-is-the-reviewed-immutable-baseline', () => assert.equal(sourceSHA256, HOODIE_BASELINE.sourceSHA256));
 execFileSync(process.execPath, [fileURLToPath(new URL('scripts/hoodie-prepare.mjs', root)), '--check'], { cwd: root, stdio: 'pipe' });
@@ -30,6 +31,11 @@ async function rig(assetBytes = bytes) {
     if (object.isSkinnedMesh) { assert.equal(mesh, undefined); mesh = object; }
     if (object.isBone) bones.set(object.name.replace(/^mixamorig[:_]?/i, ''), { bone: object, rest: object.quaternion.clone() });
   });
+  // Breathing offsets are specified in world metres. Match scene.js before
+  // creating posture/motion, so its inverse-parent conversion is also tested.
+  mesh.geometry.computeBoundingBox();
+  const height = mesh.geometry.boundingBox.max.y - mesh.geometry.boundingBox.min.y;
+  gltf.scene.scale.setScalar(1.83 / height);
   gltf.scene.updateMatrixWorld(true);
   const rest = [...bones.values()].map(({ bone }) => [bone, bone.position.clone(), bone.quaternion.clone(), bone.scale.clone()]);
   return { gltf, model: gltf.scene, mesh, bones, rest };
@@ -132,7 +138,7 @@ function depthStatistics(values, result, time) {
 const empty = () => ({ minimumGapMM: Infinity, penetratingSamples: 0, missing: 0, samples: 0 });
 const posture = createPostureCorrection({ model, bones }), sourceClips = [], runtimeClips = [];
 const animationSnapshot = JSON.stringify(context.gltf.animations.map(clip => clip.tracks.map(track => [Array.from(track.times), Array.from(track.values)])));
-for (const [name, start, end] of [['Walk', 0, 2.375], ['Nod', 0, 3], ['Wave', 1.2, 4.3], ['LookAround', 1.2, 7]]) {
+for (const [name, start, end] of [['Walk', 0, 2.375], ['Nod', 0, 3], ['Wave', .9, 4.75], ['LookAround', 1.2, 7.4]]) {
   context.rest.forEach(([bone, p, q, s]) => { bone.position.copy(p); bone.quaternion.copy(q); bone.scale.copy(s); });
   const mixer = new THREE.AnimationMixer(model), clip = context.gltf.animations.find(clip => clip.name === name);
   const action = mixer.clipAction(clip).setLoop(THREE.LoopOnce, 1); action.clampWhenFinished = true; action.play();
@@ -142,7 +148,7 @@ for (const [name, start, end] of [['Walk', 0, 2.375], ['Nod', 0, 3], ['Wave', 1.
     mixer.setTime(time); model.updateMatrixWorld(true);
     depthStatistics(skinPositions(context, true), report.original, time);
     depthStatistics(skinPositions(context), report.corrected, time);
-    posture.update(); model.updateMatrixWorld(true);
+    posture.update(['Nod', 'Wave'].includes(name) ? { support: 1 } : undefined); model.updateMatrixWorld(true);
     depthStatistics(skinPositions(context), report.correctedWithPosture, time); report.frames++;
   }
   posture.reset(); mixer.stopAllAction(); mixer.uncacheRoot(model);
@@ -155,13 +161,34 @@ for (let station = 0; station < STATION_CLIPS.length; station++) {
   const c = await rig(); applyHoodieSkinning(c.mesh);
   const motion = createCharacterMotion({ model: c.model, animations: c.gltf.animations, bones: c.bones });
   motion.setStation(station);
-  const state = motion.getState(), seconds = state.duration / state.speed + 1.5;
-  const report = { station: station + 1, name: STATION_CLIPS[station], seconds, frames: 0, corrected: empty() };
+  const state = motion.getState(), seconds = state.duration / state.speed + 12.25;
+  check(`${STATION_CLIPS[station]}-uses-reviewed-source-ranges-and-scene-scale`, () => {
+    assert.deepEqual(state.waveRange, [.9, 4.75]); assert.deepEqual(state.lookAroundRange, [1.2, 7.4]);
+    assert.ok(Math.abs(c.model.scale.y - millimetres / 1000) < 1e-12);
+    assert.equal(state.posture.baked, true);
+    assert.equal(state.posture.clips.Nod.forcedSupport, true); assert.equal(state.posture.clips.Wave.forcedSupport, true);
+  });
+  const report = { station: station + 1, name: STATION_CLIPS[station], seconds, frames: 0, corrected: empty(),
+    idle: { frames: 0, firstTime: null, lastTime: null, minimumLiftMetres: Infinity, maximumLiftMetres: -Infinity, corrected: empty() } };
   for (let frame = 0; frame <= Math.ceil(seconds * 60); frame++) {
     if (frame) motion.update(1 / 60); c.model.updateMatrixWorld(true);
-    depthStatistics(skinPositions(c), report.corrected, frame / 60); report.frames++;
+    const live = motion.getState(), positions = skinPositions(c);
+    depthStatistics(positions, report.corrected, frame / 60); report.frames++;
+    if (live.action === 'Idle' && live.end && !live.transition) {
+      report.idle.frames++; report.idle.firstTime ??= live.breathing.time; report.idle.lastTime = live.breathing.time;
+      report.idle.minimumLiftMetres = Math.min(report.idle.minimumLiftMetres, live.breathing.liftMetres);
+      report.idle.maximumLiftMetres = Math.max(report.idle.maximumLiftMetres, live.breathing.liftMetres);
+      depthStatistics(positions, report.idle.corrected, frame / 60);
+    }
   }
   check(`${report.name}-actual-runtime-entry-action-exit-and-rest-clear-chest`, () => { assert.equal(report.corrected.missing, 0); assert.equal(report.corrected.penetratingSamples, 0); assert.ok(report.corrected.minimumGapMM > 0); assert.equal(motion.getState().action, 'Idle'); });
+  report.idle.durationSeconds = report.idle.lastTime - report.idle.firstTime;
+  check(`${report.name}-full-breathing-extremes-clear-chest-over-at-least-twelve-idle-seconds`, () => {
+    const { idle } = report;
+    assert.ok(idle.durationSeconds >= 12); assert.ok(idle.durationSeconds > motion.getState().breathing.periodSeconds * 2);
+    assert.ok(idle.minimumLiftMetres < .000001); assert.ok(idle.maximumLiftMetres > .002799);
+    assert.ok(idle.corrected.minimumGapMM > 0); assert.equal(idle.corrected.missing, 0); assert.equal(idle.corrected.penetratingSamples, 0);
+  });
   runtimeClips.push(report); motion.dispose(); console.log(`${report.name} runtime: ${report.corrected.minimumGapMM.toFixed(3)} mm minimum.`);
 }
 check('source-animation-samples-remain-unchanged', () => assert.equal(JSON.stringify(context.gltf.animations.map(clip => clip.tracks.map(track => [Array.from(track.times), Array.from(track.values)]))), animationSnapshot));
@@ -169,14 +196,16 @@ const afterAnimated = await readFile(new URL(HOODIE_BASELINE.source, root)), aft
 check('original-animated-and-static-GLB-files-remain-unchanged', () => {
   assert.equal(sha(afterAnimated), sourceSHA256); assert.equal(sha(afterStatic), sha(staticBytes));
 });
+const historicalReportAfter = await readFile(new URL('qa/posture/hoodie-results.json', root));
+check('previous-posture-only-acceptance-report-is-retained-unchanged', () => assert.equal(sha(historicalReportAfter), sha(historicalReport)));
 const report = {
   generatedAt: new Date().toISOString(), passed: checks.length, failed: 0, sourceSHA256, staticSHA256: sha(staticBytes),
-  moduleSHA256: Object.fromEntries(await Promise.all(['src/hoodie-skinning.js', 'src/hoodie-skinning-data.js', 'src/posture.js', 'src/motion.js'].map(async path => [path, sha(await readFile(new URL(path, root)))]))),
+  moduleSHA256: Object.fromEntries(await Promise.all(['src/hoodie-skinning.js', 'src/hoodie-skinning-data.js', 'src/posture.js', 'src/breathing.js', 'src/motion.js'].map(async path => [path, sha(await readFile(new URL(path, root)))]))),
   runtime: { loader: 'actual Three.js GLTFLoader; headless Texture placeholder only', sourceHeight, normalizationScale: millimetres / 1000, affectedVertices: selected.size, maximumWeightError, restMaximumDisplacementSourceUnits: restMaximumDisplacement },
-  method: 'All 180 original drawstring vertices (front, back, sides and UV duplicates) projected against actual deformed chest triangles at 60 Hz; gap measured at 1.83 m avatar height. Both source clips and actual runtime entry/action/exit/rest with posture correction are sampled.',
+  method: 'All 180 patched lower-drawstring vertices (front, back, sides and UV duplicates) projected against actual deformed chest triangles at 60 Hz; gap measured at 1.83 m avatar height. Both expanded source clips with forced Nod/Wave support and actual runtime entry/action/slowdown/settling are sampled. Runtime uses posture-corrected derived clips baked before Mixer blending, without a dynamic posture gate. Every station additionally covers at least twelve seconds of continuous Idle breathing including both full lift extremes.',
   limits: 'Front-direction chest depth test, not a proof of arbitrary mesh self-intersections or all viewing angles. Actual textured browser screenshots are reviewed separately.',
   checks, sourceClips, runtimeClips,
 };
-await mkdir(new URL('qa/posture/', root), { recursive: true });
-await writeFile(new URL('qa/posture/hoodie-results.json', root), JSON.stringify(report, null, 2) + '\n');
+await mkdir(new URL('qa/breathing/', root), { recursive: true });
+await writeFile(new URL('qa/breathing/hoodie-results.json', root), JSON.stringify(report, null, 2) + '\n');
 console.log(`Hoodie checks: ${checks.length}/${checks.length} passed.`);

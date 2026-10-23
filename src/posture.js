@@ -1,76 +1,93 @@
 import * as THREE from 'three';
 
-const MAX_CURVE_DEGREES = 8, MAX_CORRECTION_DEGREES = 8, LOWER_SHARE = .45;
+const SUPPORT_START = 4, SUPPORT_FULL = 9, TARGET_CURVE = 3, NECK_ALLOWANCE = 1;
+const LIMITS = { Spine: 14, Spine1: 14, Spine2: 20, Neck: 15 };
+const AFFECTED = ['Spine', 'Spine1', 'Spine2', 'Neck', 'Head'];
 const UP = new THREE.Vector3(0, 1, 0);
-const degrees = radians => radians * 180 / Math.PI;
+const degrees = THREE.MathUtils.radToDeg;
+const smootherstep = value => { const t = THREE.MathUtils.clamp(value, 0, 1); return t * t * t * (t * (t * 6 - 15) + 10); };
 
-/** Reduce excessive upper-back curvature without changing the authored gaze. */
+/** Create before animation starts, so the reference is the original bind/rest pose. */
 export function createPostureCorrection({ model, bones }) {
   const getBone = name => { const value = bones.get(name); return value?.bone || value; };
-  const names = ['LeftUpLeg', 'RightUpLeg', 'Spine1', 'Spine2', 'Neck', 'Head'];
+  const names = ['LeftUpLeg', 'RightUpLeg', ...AFFECTED];
   const joints = Object.fromEntries(names.map(name => [name, getBone(name)]));
   for (const name of names) if (!joints[name]) throw new Error(`Posture correction requires ${name}.`);
-  const affected = [joints.Spine1, joints.Spine2, joints.Head];
-  const original = affected.map(() => new THREE.Quaternion());
+  const affected = AFFECTED.map(name => joints[name]), original = affected.map(() => new THREE.Quaternion());
   const right = new THREE.Vector3(), forward = new THREE.Vector3(), axis = new THREE.Vector3();
   const a = new THREE.Vector3(), b = new THREE.Vector3(), segment = new THREE.Vector3();
   const world = new THREE.Quaternion(), parent = new THREE.Quaternion(), rotation = new THREE.Quaternion(), headWorld = new THREE.Quaternion();
-  const maximum = { deltaDegrees: 0, spine1Degrees: 0, spine2Degrees: 0, headDirectionError: 0 };
-  let applied = false;
-  let last = { active: false, curveBefore: 0, curveAfter: 0, deltaDegrees: 0, spine1Degrees: 0, spine2Degrees: 0, headDirectionError: 0 };
+  const maximum = { deltaDegrees: 0, spineDegrees: 0, spine1Degrees: 0, spine2Degrees: 0, neckDegrees: 0, headDirectionError: 0 };
+  let applied = false, last;
 
-  function measureCurve() {
+  function setBodyAxes() {
     joints.RightUpLeg.getWorldPosition(a); joints.LeftUpLeg.getWorldPosition(b);
     right.subVectors(a, b); right.y = 0;
     if (right.lengthSq() < 1e-12) right.set(-1, 0, 0); else right.normalize();
     forward.crossVectors(UP, right); axis.copy(right).negate();
-    const tilt = (top, bottom) => {
-      top.getWorldPosition(a); bottom.getWorldPosition(b); segment.subVectors(a, b);
-      return degrees(Math.atan2(segment.dot(forward), segment.y));
-    };
-    const middle = tilt(joints.Spine2, joints.Spine1), upper = tilt(joints.Neck, joints.Spine2);
-    return ((upper - middle + 180) % 360 + 360) % 360 - 180;
   }
+  function tilt(top, bottom) {
+    joints[top].getWorldPosition(a); joints[bottom].getWorldPosition(b); segment.subVectors(a, b);
+    return degrees(Math.atan2(segment.dot(forward), segment.y));
+  }
+  function measure() {
+    const lower = tilt('Spine1', 'Spine'), middle = tilt('Spine2', 'Spine1'), upper = tilt('Neck', 'Spine2');
+    return { lower, middle, upper, neck: tilt('Head', 'Neck'), curve: ((upper - middle + 180) % 360 + 360) % 360 - 180 };
+  }
+  model.updateWorldMatrix(true, true); setBodyAxes();
+  const reference = measure();
+  const targets = { lower: reference.lower, middle: reference.middle, upper: reference.middle + TARGET_CURVE, neck: reference.neck + NECK_ALLOWANCE };
+
   function rotateInWorld(joint, angleDegrees) {
     joint.getWorldQuaternion(world).normalize();
-    rotation.setFromAxisAngle(axis, THREE.MathUtils.degToRad(angleDegrees));
-    world.premultiply(rotation);
+    rotation.setFromAxisAngle(axis, THREE.MathUtils.degToRad(angleDegrees)); world.premultiply(rotation);
     joint.parent.getWorldQuaternion(parent).normalize().invert();
-    joint.quaternion.copy(parent.multiply(world)).normalize();
-    model.updateWorldMatrix(true, true);
+    joint.quaternion.copy(parent.multiply(world)).normalize(); model.updateWorldMatrix(true, true);
   }
-  // Undo the previous rendered frame before the AnimationMixer samples again.
-  // This is essential when a clip omits one of these tracks: no correction may
-  // become the next frame's starting pose and accumulate over time.
+  // Restore before mixer sampling, including when that clip omits these tracks.
   function reset() {
     if (!applied) return;
     affected.forEach((joint, index) => joint.quaternion.copy(original[index]));
     applied = false; last.active = false; model.updateWorldMatrix(true, true);
   }
-  function update() {
-    reset(); model.updateWorldMatrix(true, true);
-    const curveBefore = measureCurve();
-    const deltaDegrees = Math.min(MAX_CORRECTION_DEGREES, Math.max(0, curveBefore - MAX_CURVE_DEGREES));
-    last = { active: false, curveBefore, curveAfter: curveBefore, deltaDegrees: 0, spine1Degrees: 0, spine2Degrees: 0, headDirectionError: 0 };
-    if (deltaDegrees <= 1e-5) return;
+  function update({ support } = {}) {
+    reset(); model.updateWorldMatrix(true, true); setBodyAxes();
+    const before = measure(), backwardDeviation = reference.middle - before.middle;
+    // Explicit support is for source-clip baking, before the mixer crossfades.
+    // Applying a nonlinear gate after a crossfade can bend the torso halfway
+    // back down while its source weight fades, even with a smooth gate.
+    const activation = support === undefined ? smootherstep((backwardDeviation - SUPPORT_START) / (SUPPORT_FULL - SUPPORT_START)) : THREE.MathUtils.clamp(support, 0, 1);
+    last = { active: false, activation, curveBefore: before.curve, curveAfter: before.curve, before, after: { ...before }, deltaDegrees: 0, spineDegrees: 0, spine1Degrees: 0, spine2Degrees: 0, neckDegrees: 0, headDirectionError: 0 };
+    if (activation === 0) return;
     affected.forEach((joint, index) => original[index].copy(joint.quaternion));
     joints.Head.getWorldQuaternion(headWorld).normalize();
-    const spine1Degrees = deltaDegrees * LOWER_SHARE, spine2Degrees = -deltaDegrees;
-    rotateInWorld(joints.Spine1, spine1Degrees);
-    rotateInWorld(joints.Spine2, spine2Degrees);
-    // Counter only the inherited head rotation; preserve source nods and turns.
+    // Align each supporting segment. A single backward torso tilt would deepen
+    // the source's lumbar arch instead of straightening the chest.
+    const corrections = {};
+    for (const [name, top, bottom, target] of [
+      ['Spine', 'Spine1', 'Spine', targets.lower],
+      ['Spine1', 'Spine2', 'Spine1', targets.middle],
+      ['Spine2', 'Neck', 'Spine2', targets.upper],
+      ['Neck', 'Head', 'Neck', targets.neck],
+    ]) {
+      const delta = THREE.MathUtils.clamp((target - tilt(top, bottom)) * activation, -LIMITS[name], LIMITS[name]);
+      corrections[name] = delta; rotateInWorld(joints[name], delta);
+    }
+    // Preserve the authored nod/turn in world space while realigning its support.
     joints.Head.parent.getWorldQuaternion(parent).normalize().invert();
     joints.Head.quaternion.copy(parent.multiply(headWorld)).normalize();
     model.updateWorldMatrix(true, true); applied = true;
+    const after = measure(), deltaDegrees = Math.max(...Object.values(corrections).map(Math.abs));
     const headDirectionError = joints.Head.getWorldQuaternion(world).normalize().angleTo(headWorld);
-    last = { active: true, curveBefore, curveAfter: measureCurve(), deltaDegrees, spine1Degrees, spine2Degrees, headDirectionError };
-    maximum.deltaDegrees = Math.max(maximum.deltaDegrees, deltaDegrees);
-    maximum.spine1Degrees = Math.max(maximum.spine1Degrees, Math.abs(spine1Degrees));
-    maximum.spine2Degrees = Math.max(maximum.spine2Degrees, Math.abs(spine2Degrees));
-    maximum.headDirectionError = Math.max(maximum.headDirectionError, headDirectionError);
+    last = { ...last, active: true, after, curveAfter: after.curve, deltaDegrees, spineDegrees: corrections.Spine, spine1Degrees: corrections.Spine1, spine2Degrees: corrections.Spine2, neckDegrees: corrections.Neck, headDirectionError };
+    for (const key of Object.keys(maximum)) maximum[key] = Math.max(maximum[key], Math.abs(last[key]));
   }
   function state() {
-    return { ...last, correctionDegrees: last.deltaDegrees, max: { ...maximum, correctionDegrees: maximum.deltaDegrees }, limits: { curveDegrees: MAX_CURVE_DEGREES, correctionDegrees: MAX_CORRECTION_DEGREES }, bones: ['Spine1', 'Spine2', 'Head'] };
+    return { ...last, correctionDegrees: last?.deltaDegrees || 0, max: { ...maximum, correctionDegrees: maximum.deltaDegrees }, reference: { ...reference }, targets: { ...targets }, limits: { curveDegrees: TARGET_CURVE, correctionDegrees: 20, perJoint: { ...LIMITS }, supportStartDegrees: SUPPORT_START, supportFullDegrees: SUPPORT_FULL }, bones: [...AFFECTED] };
   }
-  return { update, reset, state };
+  function inspect() {
+    model.updateWorldMatrix(true, true); setBodyAxes(); const current = measure();
+    return { ...state(), mode: 'observed', active: false, activation: 0, curveBefore: current.curve, curveAfter: current.curve, before: { ...current }, after: { ...current }, correctionDegrees: 0, deltaDegrees: 0, spineDegrees: 0, spine1Degrees: 0, spine2Degrees: 0, neckDegrees: 0, headDirectionError: 0 };
+  }
+  return { update, reset, state, inspect };
 }

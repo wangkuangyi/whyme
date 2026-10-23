@@ -1,0 +1,47 @@
+{
+  "checks": [
+    {
+      "name": "production loads original GLB and precise mask",
+      "pass": true
+    },
+    {
+      "name": "production does not request old PNG or processed model",
+      "pass": true
+    },
+    {
+      "name": "production chapter 1",
+      "pass": true
+    },
+    {
+      "name": "production chapter 3",
+      "pass": true
+    },
+    {
+      "name": "production chapter 4",
+      "pass": true
+    },
+    {
+      "name": "production chapter 2",
+      "pass": true
+    },
+    {
+      "name": "production fallback uses newly rendered 2x frame",
+      "pass": true,
+      "detail": {
+        "src": "http://127.0.0.1:4173/images-tripo/angle-02.png?v=breathing-4k",
+        "width": 2880,
+        "height": 2000
+      }
+    },
+    {
+      "name": "production mobile remains readable without overflow",
+      "pass": true
+    },
+    {
+      "name": "no production browser error",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": []
+}

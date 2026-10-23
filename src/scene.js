@@ -309,7 +309,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       if (motion.walking) framingPending = true;
       if (!dragging && motion.station >= 0) {
         const index = cameraTransition ? activeStation : motion.station;
-        const target = reducedMotion || (!cameraTransition && motion.action === 'Idle') ? 1 : 0;
+        const target = reducedMotion ? 1 : !cameraTransition ? motion.settleProgress : 0;
         let next = lerp(restClose[index], target, 1 - Math.exp(-dt * 5));
         if (Math.abs(next - target) < .001) next = target;
         if (next !== restClose[index]) { restClose[index] = next; framingPending = true; }

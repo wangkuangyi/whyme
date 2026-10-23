@@ -1,0 +1,438 @@
+{
+  "generatedAt": "2026-10-23T15:34:19.633Z",
+  "passed": 32,
+  "failed": 0,
+  "sourceSHA256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "staticSHA256": "2ff112ec1b79e6fa4ea32fe715062460bb0d1357dac20300e0e5674af807a03f",
+  "moduleSHA256": {
+    "src/hoodie-skinning.js": "bd19d0e339442ab6fc568c8b4b789aa1b78627fba188b8eb4746fc60962a650a",
+    "src/hoodie-skinning-data.js": "45af6211d6c787f8a532460628b860da5e43eb1aeb7f0f0db549a9da66887cca",
+    "src/posture.js": "b5b52e75505a620f3be84952511c37514f1e441f857e3b2db3674dcfa46eaa3d",
+    "src/breathing.js": "9d359fdfcc1e42d1648e9ccac5adddc4b1816c1878fb50507d5cc944ba5a2226",
+    "src/motion.js": "b6139baeddf07f44bbe0f88bcabbca4bf59ab1a115349f6ec0daba98a2fe71d2"
+  },
+  "runtime": {
+    "loader": "actual Three.js GLTFLoader; headless Texture placeholder only",
+    "sourceHeight": 0.9995117485523206,
+    "normalizationScale": 1.8308939366150998,
+    "affectedVertices": 180,
+    "maximumWeightError": 4.0978193283081055e-8,
+    "restMaximumDisplacementSourceUnits": 4.4095107672159756e-8
+  },
+  "method": "All 180 patched lower-drawstring vertices (front, back, sides and UV duplicates) projected against actual deformed chest triangles at 60 Hz; gap measured at 1.83 m avatar height. Both expanded source clips with forced Nod/Wave support and actual runtime entry/action/slowdown/settling are sampled. Runtime uses posture-corrected derived clips baked before Mixer blending, without a dynamic posture gate. Every station additionally covers at least twelve seconds of continuous Idle breathing including both full lift extremes.",
+  "limits": "Front-direction chest depth test, not a proof of arbitrary mesh self-intersections or all viewing angles. Actual textured browser screenshots are reviewed separately.",
+  "checks": [
+    {
+      "name": "original-GLB-SHA256-is-the-reviewed-immutable-baseline",
+      "passed": true
+    },
+    {
+      "name": "table-reproduces-from-source-geometry-and-chest-projection",
+      "passed": true
+    },
+    {
+      "name": "runtime-patches-exactly-180-vertices-in-the-two-cords",
+      "passed": true
+    },
+    {
+      "name": "surface-normal-UV-index-and-texture-references-remain-untouched",
+      "passed": true
+    },
+    {
+      "name": "only-two-skin-attributes-are-cloned-and-source-arrays-are-unchanged",
+      "passed": true
+    },
+    {
+      "name": "corrected-weights-are-finite-nonnegative-normalized-and-valid",
+      "passed": true
+    },
+    {
+      "name": "original-rest-surface-is-unchanged-to-float32-tolerance",
+      "passed": true
+    },
+    {
+      "name": "idempotent-second-call-reuses-both-cloned-buffers",
+      "passed": true
+    },
+    {
+      "name": "guard-rejects-wrong-position-before-changing-attributes",
+      "passed": true
+    },
+    {
+      "name": "guard-rejects-wrong-original-weight-before-changing-attributes",
+      "passed": true
+    },
+    {
+      "name": "guard-rejects-wrong-joint-order-before-changing-attributes",
+      "passed": true
+    },
+    {
+      "name": "guard-rejects-wrong-inverse-bind-before-changing-attributes",
+      "passed": true
+    },
+    {
+      "name": "same-guard-and-correction-accept-the-original-static-GLB",
+      "passed": true
+    },
+    {
+      "name": "Walk-all-180-cord-vertices-clear-actual-chest-at-60Hz",
+      "passed": true
+    },
+    {
+      "name": "Nod-all-180-cord-vertices-clear-actual-chest-at-60Hz",
+      "passed": true
+    },
+    {
+      "name": "Wave-all-180-cord-vertices-clear-actual-chest-at-60Hz",
+      "passed": true
+    },
+    {
+      "name": "LookAround-all-180-cord-vertices-clear-actual-chest-at-60Hz",
+      "passed": true
+    },
+    {
+      "name": "Walk-uses-reviewed-source-ranges-and-scene-scale",
+      "passed": true
+    },
+    {
+      "name": "Walk-actual-runtime-entry-action-exit-and-rest-clear-chest",
+      "passed": true
+    },
+    {
+      "name": "Walk-full-breathing-extremes-clear-chest-over-at-least-twelve-idle-seconds",
+      "passed": true
+    },
+    {
+      "name": "Nod-uses-reviewed-source-ranges-and-scene-scale",
+      "passed": true
+    },
+    {
+      "name": "Nod-actual-runtime-entry-action-exit-and-rest-clear-chest",
+      "passed": true
+    },
+    {
+      "name": "Nod-full-breathing-extremes-clear-chest-over-at-least-twelve-idle-seconds",
+      "passed": true
+    },
+    {
+      "name": "Wave-uses-reviewed-source-ranges-and-scene-scale",
+      "passed": true
+    },
+    {
+      "name": "Wave-actual-runtime-entry-action-exit-and-rest-clear-chest",
+      "passed": true
+    },
+    {
+      "name": "Wave-full-breathing-extremes-clear-chest-over-at-least-twelve-idle-seconds",
+      "passed": true
+    },
+    {
+      "name": "LookAround-uses-reviewed-source-ranges-and-scene-scale",
+      "passed": true
+    },
+    {
+      "name": "LookAround-actual-runtime-entry-action-exit-and-rest-clear-chest",
+      "passed": true
+    },
+    {
+      "name": "LookAround-full-breathing-extremes-clear-chest-over-at-least-twelve-idle-seconds",
+      "passed": true
+    },
+    {
+      "name": "source-animation-samples-remain-unchanged",
+      "passed": true
+    },
+    {
+      "name": "original-animated-and-static-GLB-files-remain-unchanged",
+      "passed": true
+    },
+    {
+      "name": "previous-posture-only-acceptance-report-is-retained-unchanged",
+      "passed": true
+    }
+  ],
+  "sourceClips": [
+    {
+      "name": "Walk",
+      "start": 0,
+      "end": 2.375,
+      "frames": 144,
+      "original": {
+        "minimumGapMM": -23.188827346986116,
+        "penetratingSamples": 11759,
+        "missing": 0,
+        "samples": 25920,
+        "worst": {
+          "time": 2.216666666666667,
+          "vertex": 7523
+        }
+      },
+      "corrected": {
+        "minimumGapMM": 2.7223719026384625,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 25920,
+        "worst": {
+          "time": 2.25,
+          "vertex": 7523
+        }
+      },
+      "correctedWithPosture": {
+        "minimumGapMM": 2.7223719026384625,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 25920,
+        "worst": {
+          "time": 2.25,
+          "vertex": 7523
+        }
+      }
+    },
+    {
+      "name": "Nod",
+      "start": 0,
+      "end": 3,
+      "frames": 181,
+      "original": {
+        "minimumGapMM": -59.20879306839351,
+        "penetratingSamples": 23235,
+        "missing": 0,
+        "samples": 32580,
+        "worst": {
+          "time": 0.6333333333333333,
+          "vertex": 7523
+        }
+      },
+      "corrected": {
+        "minimumGapMM": 2.6240030508037644,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 32580,
+        "worst": {
+          "time": 2.6666666666666665,
+          "vertex": 1679
+        }
+      },
+      "correctedWithPosture": {
+        "minimumGapMM": 2.7954318361545267,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 32580,
+        "worst": {
+          "time": 3,
+          "vertex": 7523
+        }
+      }
+    },
+    {
+      "name": "Wave",
+      "start": 0.9,
+      "end": 4.75,
+      "frames": 232,
+      "original": {
+        "minimumGapMM": -59.604122106498686,
+        "penetratingSamples": 26033,
+        "missing": 0,
+        "samples": 41760,
+        "worst": {
+          "time": 2.533333333333333,
+          "vertex": 1641
+        }
+      },
+      "corrected": {
+        "minimumGapMM": 1.6074449048944386,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 41760,
+        "worst": {
+          "time": 2.533333333333333,
+          "vertex": 1679
+        }
+      },
+      "correctedWithPosture": {
+        "minimumGapMM": 1.972205342785574,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 41760,
+        "worst": {
+          "time": 2.533333333333333,
+          "vertex": 1679
+        }
+      }
+    },
+    {
+      "name": "LookAround",
+      "start": 1.2,
+      "end": 7.4,
+      "frames": 373,
+      "original": {
+        "minimumGapMM": -14.17782674854158,
+        "penetratingSamples": 14666,
+        "missing": 0,
+        "samples": 67140,
+        "worst": {
+          "time": 2.4166666666666665,
+          "vertex": 1641
+        }
+      },
+      "corrected": {
+        "minimumGapMM": 2.811324919965716,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 67140,
+        "worst": {
+          "time": 3.8666666666666663,
+          "vertex": 7523
+        }
+      },
+      "correctedWithPosture": {
+        "minimumGapMM": 2.811324919965716,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 67140,
+        "worst": {
+          "time": 3.8666666666666663,
+          "vertex": 7523
+        }
+      }
+    }
+  ],
+  "runtimeClips": [
+    {
+      "station": 1,
+      "name": "Walk",
+      "seconds": 15.85,
+      "frames": 952,
+      "corrected": {
+        "minimumGapMM": 2.7223847966715584,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 171360,
+        "worst": {
+          "time": 2.25,
+          "vertex": 7523
+        }
+      },
+      "idle": {
+        "frames": 736,
+        "firstTime": 3.599999999999992,
+        "lastTime": 15.850000000000367,
+        "minimumLiftMetres": 0,
+        "maximumLiftMetres": 0.0028,
+        "corrected": {
+          "minimumGapMM": 2.9330485178634533,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 132480,
+          "worst": {
+            "time": 4.8,
+            "vertex": 7523
+          }
+        },
+        "durationSeconds": 12.250000000000375
+      }
+    },
+    {
+      "station": 2,
+      "name": "Nod",
+      "seconds": 15.34090909090909,
+      "frames": 922,
+      "corrected": {
+        "minimumGapMM": 2.829541010996618,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 165960,
+        "worst": {
+          "time": 2.3833333333333333,
+          "vertex": 1641
+        }
+      },
+      "idle": {
+        "frames": 736,
+        "firstTime": 3.099999999999994,
+        "lastTime": 15.350000000000342,
+        "minimumLiftMetres": 0,
+        "maximumLiftMetres": 0.0028,
+        "corrected": {
+          "minimumGapMM": 2.9330485178634533,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 132480,
+          "worst": {
+            "time": 9.6,
+            "vertex": 7523
+          }
+        },
+        "durationSeconds": 12.250000000000348
+      }
+    },
+    {
+      "station": 3,
+      "name": "Wave",
+      "seconds": 16.297619047619047,
+      "frames": 979,
+      "corrected": {
+        "minimumGapMM": 1.9832045349806937,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 176220,
+        "worst": {
+          "time": 1.5666666666666667,
+          "vertex": 1679
+        }
+      },
+      "idle": {
+        "frames": 736,
+        "firstTime": 4.049999999999991,
+        "lastTime": 16.300000000000356,
+        "minimumLiftMetres": 0,
+        "maximumLiftMetres": 0.0028,
+        "corrected": {
+          "minimumGapMM": 2.9330485178634533,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 132480,
+          "worst": {
+            "time": 4.8,
+            "vertex": 7523
+          }
+        },
+        "durationSeconds": 12.250000000000366
+      }
+    },
+    {
+      "station": 4,
+      "name": "LookAround",
+      "seconds": 18.85,
+      "frames": 1132,
+      "corrected": {
+        "minimumGapMM": 2.8113470735479695,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 203760,
+        "worst": {
+          "time": 2.6666666666666665,
+          "vertex": 7523
+        }
+      },
+      "idle": {
+        "frames": 736,
+        "firstTime": 6.599999999999982,
+        "lastTime": 18.85000000000021,
+        "minimumLiftMetres": 0,
+        "maximumLiftMetres": 0.0028,
+        "corrected": {
+          "minimumGapMM": 2.9330485178634533,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 132480,
+          "worst": {
+            "time": 9.6,
+            "vertex": 7523
+          }
+        },
+        "durationSeconds": 12.25000000000023
+      }
+    }
+  ]
+}
