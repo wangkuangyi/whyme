@@ -8,7 +8,7 @@ const TEAM_STATION=advantages.findIndex(a=>a.category==='团队精神');
 const restored = new URLSearchParams(location.search).has('still');
 const assetPath=path=>`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 const IMAGE_ROOT=assetPath(restored?'images-v2':'images-tripo');
-const PORTRAIT_VERSION='walk-idle-first';
+const PORTRAIT_VERSION='walk-entry-long';
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const wrap=n=>((n%4)+4)%4;

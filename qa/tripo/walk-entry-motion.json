@@ -1,0 +1,1278 @@
+{
+  "checks": [
+    {
+      "name": "reviewed-station-map",
+      "passed": true
+    },
+    {
+      "name": "walk2-keeps-the-complete-2_375-second-source",
+      "passed": true
+    },
+    {
+      "name": "walk2-runtime-is-extended-to-3_6-seconds",
+      "passed": true
+    },
+    {
+      "name": "walk2-source-is-in-place-without-invented-travel",
+      "passed": true
+    },
+    {
+      "name": "look-around-exists-in-supplied-glb",
+      "passed": true
+    },
+    {
+      "name": "station-1-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-1-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-1-uses-its-own-idle-mode",
+      "passed": true
+    },
+    {
+      "name": "station-1-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-2-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-2-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-2-uses-its-own-idle-mode",
+      "passed": true
+    },
+    {
+      "name": "station-2-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-3-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-3-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-3-uses-its-own-idle-mode",
+      "passed": true
+    },
+    {
+      "name": "station-3-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "station-4-uses-reviewed-action",
+      "passed": true
+    },
+    {
+      "name": "station-4-settles-to-idle",
+      "passed": true
+    },
+    {
+      "name": "station-4-uses-its-own-idle-mode",
+      "passed": true
+    },
+    {
+      "name": "station-4-hips-horizontal-rest",
+      "passed": true
+    },
+    {
+      "name": "source-animation-arrays-preserved-from-before-motion-creation",
+      "passed": true
+    },
+    {
+      "name": "boxing-never-bound",
+      "passed": true
+    },
+    {
+      "name": "withdrawn-cross-arms-never-bound-or-played",
+      "passed": true
+    },
+    {
+      "name": "large-greet-never-bound-or-played",
+      "passed": true
+    },
+    {
+      "name": "walk2-plays-at-original-speed",
+      "passed": true
+    },
+    {
+      "name": "walk2-retains-authored-in-place-root-motion",
+      "passed": true
+    },
+    {
+      "name": "walk-holds-position-after-finish",
+      "passed": true
+    },
+    {
+      "name": "station-switch-preserves-travel",
+      "passed": true
+    },
+    {
+      "name": "entering-look-around-preserves-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "look-around-completion-keeps-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "leaving-look-around-preserves-walk-world-position",
+      "passed": true
+    },
+    {
+      "name": "interruption-occurs-during-walk2",
+      "passed": true
+    },
+    {
+      "name": "interrupted-walk-keeps-current-position",
+      "passed": true
+    },
+    {
+      "name": "dragging-freezes-action-and-root-motion",
+      "passed": true
+    },
+    {
+      "name": "nonzero-root-fixture-includes-parent-scale-and-rotation",
+      "passed": true
+    },
+    {
+      "name": "reduced-motion-keeps-original-rest-pose",
+      "passed": true
+    },
+    {
+      "name": "rapid-switches-retire-fading-actions",
+      "passed": true
+    },
+    {
+      "name": "walk-station-click-uses-nod-not-more-travel",
+      "passed": true
+    },
+    {
+      "name": "reaction-keeps-travel",
+      "passed": true
+    },
+    {
+      "name": "walk2-ending-keeps-zero-root-speed",
+      "passed": true
+    },
+    {
+      "name": "walk2-completes-once-and-releases-to-idle",
+      "passed": true
+    },
+    {
+      "name": "walk-ending-has-no-bone-position-pop",
+      "passed": true
+    },
+    {
+      "name": "crossfade-weights-stay-normalized",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-has-no-root-drift",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-returns-to-the-same-pose",
+      "passed": true
+    },
+    {
+      "name": "initial-idle-does-not-trigger-repeated-settling",
+      "passed": true
+    },
+    {
+      "name": "idle-before-any-station-does-not-add-a-reaction",
+      "passed": true
+    },
+    {
+      "name": "look-around-is-reviewed-5_8-second-excerpt-at-original-speed",
+      "passed": true
+    },
+    {
+      "name": "old-idle-loop-includes-the-forward-right-foot-step",
+      "passed": true
+    },
+    {
+      "name": "selected-source-frame-has-both-feet-planted-together",
+      "passed": true
+    },
+    {
+      "name": "walk-settles-to-the-complete-authored-idle-pose",
+      "passed": true
+    },
+    {
+      "name": "walk-settled-feet-match-the-selected-source-frame",
+      "passed": true
+    },
+    {
+      "name": "five-minute-walk-idle-keeps-all-bones-and-feet-still",
+      "passed": true
+    },
+    {
+      "name": "walk-stable-idle-reselect-does-not-restart-the-step",
+      "passed": true
+    },
+    {
+      "name": "walk-stable-idle-still-allows-the-reviewed-nod",
+      "passed": true
+    },
+    {
+      "name": "walk-nod-returns-to-the-same-stable-whole-body-pose",
+      "passed": true
+    },
+    {
+      "name": "leaving-walk-restores-the-other-station-idle-animation",
+      "passed": true
+    },
+    {
+      "name": "walk-idle-blend-is-active-before-interruption",
+      "passed": true
+    },
+    {
+      "name": "interrupting-walk-idle-blend-does-not-freeze-the-next-station",
+      "passed": true
+    },
+    {
+      "name": "initial-walk-dt0-shows-the-complete-planted-idle-source-pose",
+      "passed": true
+    },
+    {
+      "name": "paused-intro-never-advances-the-walk-or-unplants-the-feet",
+      "passed": true
+    },
+    {
+      "name": "walk2-original-and-repeated-cycles-keep-source-pose-and-rate",
+      "passed": true
+    },
+    {
+      "name": "default-initial-selection-also-starts-in-the-planted-source-pose",
+      "passed": true
+    },
+    {
+      "name": "first-unpaused-frame-fades-away-from-standing-without-a-pose-snap",
+      "passed": true
+    },
+    {
+      "name": "standing-to-walk-startup-has-no-bone-position-pop",
+      "passed": true
+    },
+    {
+      "name": "walk-repeat-seam-has-no-bone-or-root-pop",
+      "passed": true
+    },
+    {
+      "name": "nonzero-root-fixture-continues-forward-across-repeat-seam",
+      "passed": true
+    },
+    {
+      "name": "initial-non-walk-station-retains-its-original-entry-pose",
+      "passed": true
+    },
+    {
+      "name": "switching-to-walk-during-paused-intro-primes-the-planted-pose",
+      "passed": true
+    },
+    {
+      "name": "dragging-near-repeat-seam-keeps-pose-and-time-paused",
+      "passed": true
+    },
+    {
+      "name": "releasing-drag-continues-the-extended-forward-gait",
+      "passed": true
+    },
+    {
+      "name": "interrupting-the-repeated-cycle-retires-walk-and-keeps-next-idle",
+      "passed": true
+    },
+    {
+      "name": "look-around-preserves-original-source-samples-through-excerpt",
+      "passed": true
+    },
+    {
+      "name": "look-around-is-finished-within-six-seconds",
+      "passed": true
+    },
+    {
+      "name": "look-around-has-real-head-and-chest-turning",
+      "passed": true
+    },
+    {
+      "name": "look-around-does-not-introduce-world-travel",
+      "passed": true
+    },
+    {
+      "name": "reselecting-look-around-does-not-restart-entry",
+      "passed": true
+    },
+    {
+      "name": "clicking-during-look-around-does-not-interrupt-it",
+      "passed": true
+    },
+    {
+      "name": "look-around-plays-once-and-returns-to-idle",
+      "passed": true
+    },
+    {
+      "name": "five-minute-idle-after-look-around-keeps-pose-and-position",
+      "passed": true
+    },
+    {
+      "name": "completed-look-around-does-not-replay-spontaneously",
+      "passed": true
+    },
+    {
+      "name": "reselecting-completed-look-around-keeps-idle-phase",
+      "passed": true
+    },
+    {
+      "name": "clicking-after-look-around-replays-the-entry",
+      "passed": true
+    },
+    {
+      "name": "look-around-replay-uses-the-same-source-pose",
+      "passed": true
+    },
+    {
+      "name": "look-around-reaction-also-settles-once",
+      "passed": true
+    },
+    {
+      "name": "walk2-settle-check-occurs-during-idle-blend",
+      "passed": true
+    },
+    {
+      "name": "switching-during-walk-settle-preserves-position",
+      "passed": true
+    },
+    {
+      "name": "walk-settles-at-20-through-120-fps",
+      "passed": true
+    },
+    {
+      "name": "walk-idle-feet-stay-planted-at-20-through-120-fps",
+      "passed": true
+    }
+  ],
+  "stationClips": [
+    "Walk",
+    "Nod",
+    "Wave",
+    "LookAround"
+  ],
+  "walkStation": 0,
+  "walkOpening": {
+    "sourceTime": 2.5,
+    "wholeBody": true,
+    "walkOpeningSourceError": 1.1920928955078125e-7,
+    "walkOpeningFeet": {
+      "positions": {
+        "LeftFoot": [
+          0.1800763971273399,
+          -0.8243770274752451,
+          -0.07063505551612585
+        ],
+        "RightFoot": [
+          -0.12649487240121024,
+          -0.8237235719607393,
+          -0.09319226860773303
+        ],
+        "LeftToeBase": [
+          0.22872581181843232,
+          -0.9056408275186365,
+          0.04450842836254082
+        ],
+        "RightToeBase": [
+          -0.17143473764861344,
+          -0.9056875512882613,
+          0.022958030379037236
+        ]
+      },
+      "depthDifference": -0.022557213091607173,
+      "ankleHeightDifference": 0.0006534555145057963,
+      "toeHeightDifference": -0.00004672376962477909
+    },
+    "maxOpeningBoneStep": 0.012027625680994131
+  },
+  "walkIdle": {
+    "sourceTime": 2.5,
+    "mode": "whole-body-source-hold",
+    "idleSourceFeet": [
+      {
+        "time": 1.5,
+        "positions": {
+          "LeftFoot": [
+            0.004955596862371167,
+            -0.8098955664440439,
+            -0.12861000325116173
+          ],
+          "RightFoot": [
+            -0.237375474766239,
+            -0.7991830482023519,
+            0.2064369413748943
+          ],
+          "LeftToeBase": [
+            0.046642412613353036,
+            -0.8908328704680295,
+            -0.010542337749898198
+          ],
+          "RightToeBase": [
+            -0.2808138224919364,
+            -0.8894824523944868,
+            0.31683481330633256
+          ]
+        },
+        "depthDifference": 0.335046944626056,
+        "ankleHeightDifference": 0.01071251824169206,
+        "toeHeightDifference": 0.0013504180735427473
+      },
+      {
+        "time": 2.5,
+        "positions": {
+          "LeftFoot": [
+            0.18007639557486782,
+            -0.8243770174139105,
+            -0.0706350588343117
+          ],
+          "RightFoot": [
+            -0.1264948734846258,
+            -0.8237235365093538,
+            -0.09319226536350059
+          ],
+          "LeftToeBase": [
+            0.2287258106656916,
+            -0.9056408153163921,
+            0.044508431976895926
+          ],
+          "RightToeBase": [
+            -0.17143474172072598,
+            -0.9056875130102023,
+            0.022958039253411347
+          ]
+        },
+        "depthDifference": -0.022557206529188883,
+        "ankleHeightDifference": 0.0006534809045566359,
+        "toeHeightDifference": -0.000046697693810271446
+      },
+      {
+        "time": 3.5,
+        "positions": {
+          "LeftFoot": [
+            0.17195230383199725,
+            -0.8237192356829088,
+            -0.08517304977915419
+          ],
+          "RightFoot": [
+            -0.1363233066050914,
+            -0.822186670769135,
+            -0.10587438425075041
+          ],
+          "LeftToeBase": [
+            0.22039078618002092,
+            -0.9040617300162339,
+            0.030703555055391088
+          ],
+          "RightToeBase": [
+            -0.18274279777051483,
+            -0.90407902734376,
+            0.00974329405515477
+          ]
+        },
+        "depthDifference": -0.020701334471596222,
+        "ankleHeightDifference": 0.0015325649137738484,
+        "toeHeightDifference": -0.000017297327526089035
+      }
+    ],
+    "stableFeet": {
+      "positions": {
+        "LeftFoot": [
+          0.18007639712733986,
+          -0.8243770274752451,
+          -0.07063505551612587
+        ],
+        "RightFoot": [
+          -0.12649487240121027,
+          -0.8237235719607393,
+          -0.09319226860773303
+        ],
+        "LeftToeBase": [
+          0.2287258118184323,
+          -0.9056408275186365,
+          0.044508428362540806
+        ],
+        "RightToeBase": [
+          -0.17143473764861347,
+          -0.9056875512882613,
+          0.022958030379037236
+        ]
+      },
+      "depthDifference": -0.02255721309160716,
+      "ankleHeightDifference": 0.0006534555145057963,
+      "toeHeightDifference": -0.00004672376962477909
+    },
+    "stableSourceError": 1.1920928955078125e-7,
+    "stableLongIdleError": 5.16191365590357e-8,
+    "postNodSourceError": 1.1920928955078125e-7,
+    "resumedIdlePoseChange": 0.10696599469546714,
+    "interruptedLoopSourceError": 8.373033422159892e-8
+  },
+  "walk2": {
+    "sourceDuration": 2.375,
+    "runtimeDuration": 3.6,
+    "speed": 1,
+    "inPlace": true,
+    "sourceHorizontalExcursion": 8.059666362624887e-8,
+    "sourcePoseSamples": [
+      {
+        "time": 0.5000000000000007,
+        "sourceTime": 0.5000000000000007,
+        "error": 5.854027596008393e-8
+      },
+      {
+        "time": 0.7499999999999998,
+        "sourceTime": 0.7499999999999998,
+        "error": 5.4282801364990974e-8
+      },
+      {
+        "time": 1.4999999999999971,
+        "sourceTime": 1.4999999999999971,
+        "error": 5.21540641784668e-8
+      },
+      {
+        "time": 2.2499999999999947,
+        "sourceTime": 2.2499999999999947,
+        "error": 2.9482418506532326e-8
+      },
+      {
+        "time": 2.499999999999994,
+        "sourceTime": 0.12499999999999378,
+        "error": 4.5725176867073e-8
+      },
+      {
+        "time": 2.749999999999993,
+        "sourceTime": 0.3749999999999929,
+        "error": 6.716015699126388e-8
+      },
+      {
+        "time": 2.999999999999992,
+        "sourceTime": 0.624999999999992,
+        "error": 6.044414613270988e-8
+      }
+    ],
+    "nonzeroRootFixtureEnd": [
+      1.665958344790308,
+      0,
+      4.442555328782033
+    ],
+    "seam": {
+      "at": 2.375,
+      "maxSeamBoneStep": 0.013741831985464574,
+      "maxSeamRootStep": 2.1314411347006512e-10,
+      "minFixtureForwardStep": 0,
+      "maxFixtureForwardStep": 0.006103192417242553,
+      "samples": [
+        {
+          "time": 2.370833333333333,
+          "step": 0.010935314819475638,
+          "feet": {
+            "positions": {
+              "LeftFoot": [
+                0.048268591482765806,
+                -0.8194756201043536,
+                -0.03354707487492392
+              ],
+              "RightFoot": [
+                -0.10256118026842448,
+                -0.6966855432579215,
+                -0.09337104703544728
+              ],
+              "LeftToeBase": [
+                0.08368240012706246,
+                -0.8939004821605134,
+                0.09069219964595433
+              ],
+              "RightToeBase": [
+                -0.11980982124183587,
+                -0.8274545551208401,
+                -0.023869373870743733
+              ]
+            },
+            "depthDifference": -0.05982397216052336,
+            "ankleHeightDifference": 0.12279007684643206,
+            "toeHeightDifference": 0.06644592703967334
+          },
+          "state": {
+            "action": "Walk",
+            "time": 2.370833333333346,
+            "duration": 3.6,
+            "speed": 1,
+            "walking": true,
+            "position": [
+              -1.061650106850335e-12,
+              0,
+              -8.046437594807172e-8
+            ],
+            "station": 0,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "Wave",
+              "LookAround"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": null,
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "walk-opening"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Walk",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Walk",
+                "weight": 1,
+                "time": 2.370833333333346
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "idleMode": null,
+            "idleSourceTime": null,
+            "walkPlayback": {
+              "sourceDuration": 2.375,
+              "duration": 3.6,
+              "speed": 1
+            },
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false
+          }
+        },
+        {
+          "time": 2.375,
+          "step": 0.010941057628481589,
+          "feet": {
+            "positions": {
+              "LeftFoot": [
+                0.048052263527463994,
+                -0.8193389580048285,
+                -0.03780568732669078
+              ],
+              "RightFoot": [
+                -0.10257858616748615,
+                -0.6993235972376179,
+                -0.08539564300265483
+              ],
+              "LeftToeBase": [
+                0.08347835418503755,
+                -0.8937658208221064,
+                0.08642888626489255
+              ],
+              "RightToeBase": [
+                -0.11994301568600524,
+                -0.8288794406031463,
+                -0.013685859543492654
+              ]
+            },
+            "depthDifference": -0.047589955675964045,
+            "ankleHeightDifference": 0.12001536076721053,
+            "toeHeightDifference": 0.0648863802189601
+          },
+          "state": {
+            "action": "Walk",
+            "time": 2.375000000000013,
+            "duration": 3.6,
+            "speed": 1,
+            "walking": true,
+            "position": [
+              -1.061650106850335e-12,
+              0,
+              -8.046437594807172e-8
+            ],
+            "station": 0,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "Wave",
+              "LookAround"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": null,
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "walk-opening"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Walk",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Walk",
+                "weight": 1,
+                "time": 2.375000000000013
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "idleMode": null,
+            "idleSourceTime": null,
+            "walkPlayback": {
+              "sourceDuration": 2.375,
+              "duration": 3.6,
+              "speed": 1
+            },
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false
+          }
+        },
+        {
+          "time": 2.379166666666667,
+          "step": 0.00009479373411857222,
+          "feet": {
+            "positions": {
+              "LeftFoot": [
+                0.04804332754240365,
+                -0.8193356247489216,
+                -0.037837734840678115
+              ],
+              "RightFoot": [
+                -0.10257987534784947,
+                -0.6993523454472594,
+                -0.08532728917911493
+              ],
+              "LeftToeBase": [
+                0.0834696302076986,
+                -0.8937624798775611,
+                0.08639677870231574
+              ],
+              "RightToeBase": [
+                -0.11994574884859605,
+                -0.8288973432435338,
+                -0.01359826809216625
+              ]
+            },
+            "depthDifference": -0.04748955433843682,
+            "ankleHeightDifference": 0.1199832793016622,
+            "toeHeightDifference": 0.06486513663402727
+          },
+          "state": {
+            "action": "Walk",
+            "time": 2.3791666666666798,
+            "duration": 3.6,
+            "speed": 1,
+            "walking": true,
+            "position": [
+              -1.061650106850335e-12,
+              0,
+              -8.046437594807172e-8
+            ],
+            "station": 0,
+            "reducedMotion": false,
+            "dragging": false,
+            "end": false,
+            "completedAction": null,
+            "clips": [
+              "Idle",
+              "Walk",
+              "Nod",
+              "Wave",
+              "LookAround"
+            ],
+            "rejected": [
+              "Greet",
+              "Box",
+              "CrossArms"
+            ],
+            "transition": null,
+            "transitions": [
+              {
+                "from": [],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "initial"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Idle",
+                "at": 0,
+                "fade": 0,
+                "reason": "walk-opening"
+              },
+              {
+                "from": [
+                  "Idle"
+                ],
+                "to": "Walk",
+                "at": 0,
+                "fade": 0.5,
+                "reason": "station"
+              }
+            ],
+            "weights": [
+              {
+                "action": "Walk",
+                "weight": 1,
+                "time": 2.3791666666666798
+              }
+            ],
+            "rootMotion": {
+              "extracted": true,
+              "space": "world",
+              "bone": "mixamorigHips",
+              "horizontalRest": [
+                0.001952208112925291,
+                0.0019521673675626516
+              ]
+            },
+            "idleRange": [
+              1.5,
+              3.5
+            ],
+            "idleMode": null,
+            "idleSourceTime": null,
+            "walkPlayback": {
+              "sourceDuration": 2.375,
+              "duration": 3.6,
+              "speed": 1
+            },
+            "waveRange": [
+              1.2,
+              4.3
+            ],
+            "lookAroundRange": [
+              1.2,
+              7
+            ],
+            "faceAnimation": false
+          }
+        }
+      ]
+    }
+  },
+  "lookAround": {
+    "station": 3,
+    "sourceDuration": 15.625,
+    "sourceRange": [
+      1.2,
+      7
+    ],
+    "runtimeDuration": 5.8,
+    "speed": 1,
+    "sourcePoseSamples": [
+      {
+        "time": 0,
+        "error": 0
+      },
+      {
+        "time": 0.09999999999999999,
+        "error": 2.9298084625040133e-8
+      },
+      {
+        "time": 1.2999999999999978,
+        "error": 6.577064426416257e-8
+      },
+      {
+        "time": 2.399999999999994,
+        "error": 6.988130918372804e-8
+      },
+      {
+        "time": 3.799999999999989,
+        "error": 7.810263547014529e-8
+      },
+      {
+        "time": 5.200000000000048,
+        "error": 9.454529159569347e-8
+      }
+    ],
+    "replaySourceError": 6.577064426416257e-8,
+    "turnExcursionRadians": {
+      "Head": 0.7697299645016132,
+      "Neck": 0.2739454193308908,
+      "Spine": 0.08849741398608368,
+      "Spine1": 0.08459226921347765,
+      "Spine2": 0.0913836767352373
+    },
+    "postIdlePoseError": 5.960464477539063e-8
+  },
+  "walkWorldEnd": [
+    -8.357872810551052e-10,
+    0,
+    -6.046838721584081e-8
+  ],
+  "interruptedWorldEnd": [
+    -6.466802270464806e-10,
+    0,
+    2.866798193955405e-8
+  ],
+  "endingSamples": [
+    {
+      "time": 3.05,
+      "speed": 1.0230917446563126e-7,
+      "position": [
+        -1.4930704443973062e-9,
+        0,
+        -1.0646795779141966e-7
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 1,
+          "time": 3.050000000000046
+        }
+      ]
+    },
+    {
+      "time": 3.3,
+      "speed": 0,
+      "position": [
+        -1.5649391911472425e-9,
+        0,
+        -6.0468830501533e-8
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.567993989481467,
+          "time": 3.3000000000000584
+        },
+        {
+          "action": "Idle",
+          "weight": 0.4320060105185331,
+          "time": 0.2500000000000466
+        }
+      ]
+    },
+    {
+      "time": 3.5,
+      "speed": 0,
+      "position": [
+        -8.188521300046683e-10,
+        0,
+        -6.0468830501533e-8
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.08715251690450865,
+          "time": 3.5000000000000684
+        },
+        {
+          "action": "Idle",
+          "weight": 0.9128474830954914,
+          "time": 0.45000000000004586
+        }
+      ]
+    },
+    {
+      "time": 3.595833333333333,
+      "speed": 0,
+      "position": [
+        -8.308448967406239e-10,
+        0,
+        -6.0468830501533e-8
+      ],
+      "weights": [
+        {
+          "action": "Walk",
+          "weight": 0.00017130673122034423,
+          "time": 3.5958333333334065
+        },
+        {
+          "action": "Idle",
+          "weight": 0.9998286932687797,
+          "time": 0.5458333333333789
+        }
+      ]
+    },
+    {
+      "time": 3.625,
+      "speed": 0,
+      "position": [
+        -8.308448967406239e-10,
+        0,
+        -6.0468830501533e-8
+      ],
+      "weights": [
+        {
+          "action": "Idle",
+          "weight": 1,
+          "time": 0.5750000000000455
+        }
+      ]
+    },
+    {
+      "time": 3.8,
+      "speed": 0,
+      "position": [
+        -8.308448967406239e-10,
+        0,
+        -6.0468830501533e-8
+      ],
+      "weights": [
+        {
+          "action": "Idle",
+          "weight": 1,
+          "time": 0.7500000000000449
+        }
+      ]
+    }
+  ],
+  "maxEndingBoneStep": 0.013235642727867985,
+  "maxWeightError": 0,
+  "idlePoseError": 4.2146848510894035e-8,
+  "frameRates": [
+    {
+      "fps": 20,
+      "position": [
+        -8.517059419337364e-10,
+        0,
+        -6.010737311182018e-8
+      ],
+      "action": "Idle",
+      "idleMode": "walk-source-hold",
+      "feet": {
+        "positions": {
+          "LeftFoot": [
+            0.18007639712733986,
+            -0.8243770274752451,
+            -0.07063505551612587
+          ],
+          "RightFoot": [
+            -0.12649487240121027,
+            -0.8237235719607393,
+            -0.09319226860773304
+          ],
+          "LeftToeBase": [
+            0.22872581181843232,
+            -0.9056408275186365,
+            0.04450842836254081
+          ],
+          "RightToeBase": [
+            -0.17143473764861344,
+            -0.9056875512882613,
+            0.02295803037903723
+          ]
+        },
+        "depthDifference": -0.022557213091607173,
+        "ankleHeightDifference": 0.0006534555145057963,
+        "toeHeightDifference": -0.00004672376962477909
+      }
+    },
+    {
+      "fps": 30,
+      "position": [
+        -8.975729988451947e-10,
+        0,
+        -6.07005847031335e-8
+      ],
+      "action": "Idle",
+      "idleMode": "walk-source-hold",
+      "feet": {
+        "positions": {
+          "LeftFoot": [
+            0.18007639712733986,
+            -0.8243770274752451,
+            -0.07063505551612587
+          ],
+          "RightFoot": [
+            -0.12649487240121027,
+            -0.8237235719607393,
+            -0.09319226860773304
+          ],
+          "LeftToeBase": [
+            0.2287258118184323,
+            -0.9056408275186365,
+            0.04450842836254081
+          ],
+          "RightToeBase": [
+            -0.17143473764861347,
+            -0.9056875512882613,
+            0.02295803037903723
+          ]
+        },
+        "depthDifference": -0.022557213091607173,
+        "ankleHeightDifference": 0.0006534555145057963,
+        "toeHeightDifference": -0.00004672376962477909
+      }
+    },
+    {
+      "fps": 60,
+      "position": [
+        -8.622168049003979e-10,
+        0,
+        -6.059064107033405e-8
+      ],
+      "action": "Idle",
+      "idleMode": "walk-source-hold",
+      "feet": {
+        "positions": {
+          "LeftFoot": [
+            0.18007639712733986,
+            -0.8243770274752451,
+            -0.07063505551612585
+          ],
+          "RightFoot": [
+            -0.12649487240121027,
+            -0.8237235719607393,
+            -0.09319226860773303
+          ],
+          "LeftToeBase": [
+            0.2287258118184323,
+            -0.9056408275186365,
+            0.04450842836254082
+          ],
+          "RightToeBase": [
+            -0.17143473764861347,
+            -0.9056875512882613,
+            0.022958030379037233
+          ]
+        },
+        "depthDifference": -0.022557213091607173,
+        "ankleHeightDifference": 0.0006534555145057963,
+        "toeHeightDifference": -0.00004672376962477909
+      }
+    },
+    {
+      "fps": 120,
+      "position": [
+        -8.357872810551052e-10,
+        0,
+        -6.046838721584081e-8
+      ],
+      "action": "Idle",
+      "idleMode": "walk-source-hold",
+      "feet": {
+        "positions": {
+          "LeftFoot": [
+            0.18007639712733986,
+            -0.8243770274752451,
+            -0.07063505551612587
+          ],
+          "RightFoot": [
+            -0.12649487240121027,
+            -0.8237235719607393,
+            -0.09319226860773303
+          ],
+          "LeftToeBase": [
+            0.2287258118184323,
+            -0.9056408275186365,
+            0.044508428362540806
+          ],
+          "RightToeBase": [
+            -0.17143473764861347,
+            -0.9056875512882613,
+            0.022958030379037236
+          ]
+        },
+        "depthDifference": -0.02255721309160716,
+        "ankleHeightDifference": 0.0006534555145057963,
+        "toeHeightDifference": -0.00004672376962477909
+      }
+    }
+  ],
+  "notes": "Actual GLB animation arrays used, except the explicitly labelled nonzero parent-transform fixtures. Walk initial and settled poses hold the entire supplied Idle source at2.5sec. Walk duration extends from2.375 to3.6sec by continuing its forward cycle at unchanged rate1; source arrays and GLB are not modified. Other station entries and idle loops are retained. Walk2 remains authored in place; no extra travel is added. No browser rendering asserted by this test."
+}

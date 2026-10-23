@@ -37,17 +37,19 @@ function rig({reducedMotion=false,yaw=0,scale=1,rootMotionFixture=false}={}) {
     for(let i=0;i<track.times.length;i++){track.values[i*3]+=.3*track.times[i];track.values[i*3+2]+=.8*track.times[i];}
   }
   outer.updateMatrixWorld(true);
-  return {motion:createCharacterMotion({model,animations,bones,reducedMotion}),bones,model,outer,animations};
+  const sourceSnapshot=animations.map(clip=>clip.tracks.map(track=>({times:Array.from(track.times),values:Array.from(track.values)})));
+  return {motion:createCharacterMotion({model,animations,bones,reducedMotion}),bones,model,outer,animations,sourceSnapshot};
 }
 const reports = [], check=(name,test)=>{test();reports.push({name,passed:true});};
 const tick=(context,seconds,options={})=>{for(let i=0;i<Math.round(seconds*120);i++) {context.motion.update(1/120,options);context.outer.position.copy(context.motion.position);context.outer.updateMatrixWorld(true);}};
 const finishEntry=(context)=>{const state=context.motion.getState();tick(context,Math.max(0,(state.duration-state.time)/Math.max(state.speed,.001))+.8);};
 const savePose=context=>[...context.bones].map(([name,{bone}])=>({name,position:bone.position.clone(),quaternion:bone.quaternion.clone(),scale:bone.scale.clone()}));
 const poseError=(context,saved)=>Math.max(...saved.map(value=>{const bone=context.bones.get(value.name).bone;return Math.max(bone.position.distanceTo(value.position),bone.quaternion.clone().normalize().angleTo(value.quaternion.clone().normalize()),bone.scale.distanceTo(value.scale));}));
-const sample = rig(), unchanged = sample.animations.map(clip=>clip.tracks.map(track=>Array.from(track.values)));
+const sample = rig(), unchanged = sample.sourceSnapshot;
 check('reviewed-station-map',()=>{assert.deepEqual(STATION_CLIPS,['Walk','Nod','Wave','LookAround']);assert.equal(WALK_STATION,0);assert.equal(NOD_STATION,1);assert.equal(WAVE_STATION,2);assert.equal(LOOK_AROUND_STATION,3);assert.equal(Object.isFrozen(STATION_CLIPS),true);});
-const suppliedWalk=sample.animations.find(clip=>clip.name==='Walk'), walkDuration=suppliedWalk?.duration;
-check('walk2-uses-complete-2_375-second-supplied-clip',()=>{assert.ok(suppliedWalk);assert.equal(walkDuration,2.375);});
+const suppliedWalk=sample.animations.find(clip=>clip.name==='Walk'), walkSourceDuration=suppliedWalk?.duration,walkDuration=sample.motion.getState().walkPlayback.duration;
+check('walk2-keeps-the-complete-2_375-second-source',()=>{assert.ok(suppliedWalk);assert.equal(walkSourceDuration,2.375);});
+check('walk2-runtime-is-extended-to-3_6-seconds',()=>{assert.equal(walkDuration,3.6);assert.equal(sample.motion.getState().walkPlayback.sourceDuration,walkSourceDuration);});
 const sourceRoot=suppliedWalk.tracks.find(track=>/Hips\.position$/.test(track.name));
 const sourceRootStart=new THREE.Vector3().fromArray(sourceRoot.values), sourceRootTransform=new THREE.Matrix3().setFromMatrix4(sample.bones.get('Hips').bone.parent.matrixWorld);
 const sourceRootOffsets=Array.from(sourceRoot.times,(_,i)=>{const delta=new THREE.Vector3().fromArray(sourceRoot.values,i*3).sub(sourceRootStart);delta.y=0;return delta.applyMatrix3(sourceRootTransform);});
@@ -64,7 +66,7 @@ for (let station=0;station<STATION_CLIPS.length;station++) {
   check(`station-${station+1}-uses-its-own-idle-mode`,()=>{const state=sample.motion.getState();assert.equal(state.idleMode,station===WALK_STATION?'walk-source-hold':'source-loop');assert.equal(state.idleSourceTime,station===WALK_STATION?2.5:null);});
   check(`station-${station+1}-hips-horizontal-rest`,()=>{const [x,z]=sample.motion.getState().rootMotion.horizontalRest;assert.ok(Math.abs(sample.bones.get('Hips').bone.position.x-x)<1e-7);assert.ok(Math.abs(sample.bones.get('Hips').bone.position.z-z)<1e-7);});
 }
-check('source-animation-arrays-preserved',()=>sample.animations.forEach((clip,c)=>clip.tracks.forEach((track,t)=>assert.deepEqual(Array.from(track.values),unchanged[c][t]))));
+check('source-animation-arrays-preserved-from-before-motion-creation',()=>sample.animations.forEach((clip,c)=>clip.tracks.forEach((track,t)=>{assert.deepEqual(Array.from(track.times),unchanged[c][t].times);assert.deepEqual(Array.from(track.values),unchanged[c][t].values);})));
 check('boxing-never-bound',()=>assert.ok(!sample.motion.getState().clips.includes('Box')));
 check('withdrawn-cross-arms-never-bound-or-played',()=>{const state=sample.motion.getState();assert.ok(!state.clips.includes('CrossArms'));assert.ok(state.transitions.every(t=>t.to!=='CrossArms'&&!t.from.includes('CrossArms')));});
 check('large-greet-never-bound-or-played',()=>{const state=sample.motion.getState();assert.ok(!state.clips.includes('Greet'));assert.ok(state.rejected.includes('Greet'));assert.ok(state.transitions.every(t=>t.to!=='Greet'&&!t.from.includes('Greet')));});
@@ -171,9 +173,41 @@ const interruptedHoldState=interruptedHold.motion.getState(),interruptedLoopSour
 check('interrupting-walk-idle-blend-does-not-freeze-the-next-station',()=>{assert.equal(interruptedHoldState.completedAction,'Wave');assert.equal(interruptedHoldState.idleMode,'source-loop');assert.deepEqual(interruptedHoldState.weights.map(weight=>weight.action),['Idle']);assert.ok(interruptedLoopSourceError<3e-6);});
 idleSourceMixer.stopAllAction();idleSourceMixer.uncacheRoot(idleSourceProbe.model);
 const walkPoseProbe=rig();walkPoseProbe.motion.setStation(WALK_STATION,{immediate:true});walkPoseProbe.motion.update(0);
-const walkSourcePoseSamples=[{time:0,error:sourcePoseError(walkPoseProbe,0,suppliedWalk)}];
-for(const time of [.25,.75,1.5]){tick(walkPoseProbe,time-walkPoseProbe.motion.getState().time);const currentTime=walkPoseProbe.motion.getState().time;walkSourcePoseSamples.push({time:currentTime,error:sourcePoseError(walkPoseProbe,currentTime,suppliedWalk)});}
-check('walk2-preserves-authored-body-samples-before-idle-blend',()=>assert.ok(walkSourcePoseSamples.every(sample=>sample.error<3e-6),JSON.stringify(walkSourcePoseSamples)));
+const walkOpeningSourceError=sourcePoseError(walkPoseProbe,2.5,suppliedIdle),walkOpeningFeet=footPose(walkPoseProbe),walkOpeningPose=savePose(walkPoseProbe);
+check('initial-walk-dt0-shows-the-complete-planted-idle-source-pose',()=>{assert.ok(walkOpeningSourceError<3e-6);assert.ok(Math.abs(walkOpeningFeet.depthDifference)<.035);assert.ok(Math.abs(walkOpeningFeet.ankleHeightDifference)<.002);assert.ok(Math.abs(walkOpeningFeet.toeHeightDifference)<.001);assert.deepEqual(walkPoseProbe.motion.getState().weights.map(w=>w.action),['Idle']);});
+for(let frame=0;frame<600;frame++)walkPoseProbe.motion.update(0);
+check('paused-intro-never-advances-the-walk-or-unplants-the-feet',()=>{assert.equal(walkPoseProbe.motion.getState().time,0);assert.ok(poseError(walkPoseProbe,walkOpeningPose)<1e-6);});
+const walkSourcePoseSamples=[];
+for(const time of [.5,.75,1.5,2.25,2.5,2.75,3]){tick(walkPoseProbe,time-walkPoseProbe.motion.getState().time);const currentTime=walkPoseProbe.motion.getState().time,sourceTime=currentTime>walkSourceDuration?currentTime-walkSourceDuration:currentTime;walkSourcePoseSamples.push({time:currentTime,sourceTime,error:sourcePoseError(walkPoseProbe,sourceTime,suppliedWalk)});}
+check('walk2-original-and-repeated-cycles-keep-source-pose-and-rate',()=>assert.ok(walkSourcePoseSamples.every(sample=>sample.error<3e-6),JSON.stringify(walkSourcePoseSamples)));
+const initialDefault=rig();initialDefault.motion.setStation(WALK_STATION);initialDefault.motion.update(0);
+check('default-initial-selection-also-starts-in-the-planted-source-pose',()=>assert.ok(sourcePoseError(initialDefault,2.5,suppliedIdle)<3e-6));
+const openingFirstStep=savePose(initialDefault);initialDefault.motion.update(1/240);
+check('first-unpaused-frame-fades-away-from-standing-without-a-pose-snap',()=>{assert.ok(poseError(initialDefault,openingFirstStep)<.002);assert.equal(initialDefault.motion.getState().action,'Walk');assert.ok(initialDefault.motion.getState().time>0);});
+const entryContinuity=rig();entryContinuity.motion.setStation(WALK_STATION);entryContinuity.motion.update(0);
+let previousEntryBones=[...entryContinuity.bones.values()].map(({bone})=>bone.getWorldPosition(new THREE.Vector3())),maxOpeningBoneStep=0,maxSeamBoneStep=0,maxSeamRootStep=0;
+const seamSamples=[];
+for(let frame=1;frame<=Math.round((walkSourceDuration+.2)*240);frame++){
+  const previousRoot=entryContinuity.motion.position.clone();entryContinuity.motion.update(1/240);entryContinuity.outer.position.copy(entryContinuity.motion.position);entryContinuity.outer.updateMatrixWorld(true);
+  const time=frame/240,currentBones=[...entryContinuity.bones.values()].map(({bone})=>bone.getWorldPosition(new THREE.Vector3())),step=Math.max(...currentBones.map((p,i)=>p.distanceTo(previousEntryBones[i])));
+  if(time<.6)maxOpeningBoneStep=Math.max(maxOpeningBoneStep,step);
+  if(Math.abs(time-walkSourceDuration)<.1){maxSeamBoneStep=Math.max(maxSeamBoneStep,step);maxSeamRootStep=Math.max(maxSeamRootStep,entryContinuity.motion.position.distanceTo(previousRoot));}
+  if([Math.round((walkSourceDuration-1/240)*240),Math.round(walkSourceDuration*240),Math.round((walkSourceDuration+1/240)*240)].includes(frame))seamSamples.push({time,step,feet:footPose(entryContinuity),state:entryContinuity.motion.getState()});
+  previousEntryBones=currentBones;
+}
+check('standing-to-walk-startup-has-no-bone-position-pop',()=>assert.ok(maxOpeningBoneStep<.02,`240Hz startup step ${maxOpeningBoneStep}m`));
+check('walk-repeat-seam-has-no-bone-or-root-pop',()=>{assert.ok(maxSeamBoneStep<.02,`240Hz seam step ${maxSeamBoneStep}m`);assert.ok(maxSeamRootStep<1e-6);assert.ok(seamSamples.every(sample=>sample.state.action==='Walk'&&sample.state.walking&&!sample.state.end));});
+const seamRootFixture=rig({rootMotionFixture:true});seamRootFixture.motion.setStation(WALK_STATION);let lastFixtureRoot=seamRootFixture.motion.position.clone(),minFixtureForwardStep=Infinity,maxFixtureForwardStep=0;
+for(let frame=1;frame<=Math.round((walkSourceDuration+.2)*240);frame++){seamRootFixture.motion.update(1/240);const currentRoot=seamRootFixture.motion.position;if(Math.abs(frame/240-walkSourceDuration)<.1){const forwardStep=currentRoot.z-lastFixtureRoot.z;minFixtureForwardStep=Math.min(minFixtureForwardStep,forwardStep);maxFixtureForwardStep=Math.max(maxFixtureForwardStep,forwardStep);}lastFixtureRoot.copy(currentRoot);}
+check('nonzero-root-fixture-continues-forward-across-repeat-seam',()=>{assert.ok(minFixtureForwardStep>=-1e-6);assert.ok(maxFixtureForwardStep<.02);});
+const initialNonWalk=rig(),initialNonWalkPose=savePose(initialNonWalk);initialNonWalk.motion.setStation(NOD_STATION);initialNonWalk.motion.update(0);
+check('initial-non-walk-station-retains-its-original-entry-pose',()=>assert.ok(poseError(initialNonWalk,initialNonWalkPose)<1e-6));
+initialNonWalk.motion.setStation(WALK_STATION,{immediate:true,prepareOpening:true});initialNonWalk.motion.update(0);
+check('switching-to-walk-during-paused-intro-primes-the-planted-pose',()=>{assert.ok(sourcePoseError(initialNonWalk,2.5,suppliedIdle)<3e-6);assert.equal(initialNonWalk.motion.getState().time,0);assert.deepEqual(initialNonWalk.motion.getState().weights.map(w=>w.action),['Idle']);});
+const resumedDrag=rig();resumedDrag.motion.setStation(WALK_STATION);tick(resumedDrag,walkSourceDuration-.05);const beforeSeamDrag=savePose(resumedDrag),beforeSeamDragTime=resumedDrag.motion.getState().time;tick(resumedDrag,2,{dragging:true});
+check('dragging-near-repeat-seam-keeps-pose-and-time-paused',()=>{assert.equal(resumedDrag.motion.getState().time,beforeSeamDragTime);assert.ok(poseError(resumedDrag,beforeSeamDrag)<1e-6);});
+tick(resumedDrag,.2);check('releasing-drag-continues-the-extended-forward-gait',()=>{assert.ok(resumedDrag.motion.getState().time>walkSourceDuration);assert.equal(resumedDrag.motion.getState().action,'Walk');assert.equal(resumedDrag.motion.getState().speed,1);});
+resumedDrag.motion.setStation(WAVE_STATION);finishEntry(resumedDrag);check('interrupting-the-repeated-cycle-retires-walk-and-keeps-next-idle',()=>{assert.equal(resumedDrag.motion.getState().completedAction,'Wave');assert.equal(resumedDrag.motion.getState().idleMode,'source-loop');assert.equal(resumedDrag.motion.getState().walking,false);assert.deepEqual(resumedDrag.motion.getState().weights.map(w=>w.action),['Idle']);});
 const excerptProbe=rig();excerptProbe.motion.setStation(LOOK_AROUND_STATION,{immediate:true});excerptProbe.motion.update(0);
 const sourcePoseSamples=[{time:0,error:sourcePoseError(excerptProbe,1.2)}];
 for(const time of [.1,1.3,2.4,3.8,5.2]){tick(excerptProbe,time-excerptProbe.motion.getState().time);sourcePoseSamples.push({time:excerptProbe.motion.getState().time,error:sourcePoseError(excerptProbe,1.2+excerptProbe.motion.getState().time)});}
@@ -219,7 +253,7 @@ for(const fps of[20,30,60,120]){
 }
 check('walk-settles-at-20-through-120-fps',()=>{assert.ok(frameRates.every(r=>r.action==='Idle'));assert.ok(Math.max(...frameRates.map(r=>r.position[2]))-Math.min(...frameRates.map(r=>r.position[2]))<.001);});
 check('walk-idle-feet-stay-planted-at-20-through-120-fps',()=>assert.ok(frameRates.every(r=>r.idleMode==='walk-source-hold'&&Math.abs(r.feet.depthDifference)<.035&&Math.abs(r.feet.toeHeightDifference)<.001)));
-for(const context of[sample,walk,interrupted,paused,rootFixture,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt,excerptProbe,walkPoseProbe,stableWalk,interruptedHold])context.motion.dispose();
-const result={checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walkIdle:{sourceTime:2.5,mode:'whole-body-source-hold',idleSourceFeet,stableFeet,stableSourceError,stableLongIdleError,postNodSourceError,resumedIdlePoseChange,interruptedLoopSourceError},walk2:{sourceDuration:walkDuration,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray()},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual GLB animation arrays used, except the explicitly labelled nonzero parent-transform fixture. Walk idle holds the entire supplied Idle pose at source 2.5 seconds; other stations retain the 1.5-3.5 second source loop. Walk2 remains authored in place; no extra travel is added. No browser rendering asserted by this test.'};
-await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/walk-idle-motion.json',import.meta.url),JSON.stringify(result,null,2));
+for(const context of[sample,walk,interrupted,paused,rootFixture,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt,excerptProbe,walkPoseProbe,stableWalk,interruptedHold,initialDefault,entryContinuity,seamRootFixture,initialNonWalk,resumedDrag])context.motion.dispose();
+const result={checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walkOpening:{sourceTime:2.5,wholeBody:true,walkOpeningSourceError,walkOpeningFeet,maxOpeningBoneStep},walkIdle:{sourceTime:2.5,mode:'whole-body-source-hold',idleSourceFeet,stableFeet,stableSourceError,stableLongIdleError,postNodSourceError,resumedIdlePoseChange,interruptedLoopSourceError},walk2:{sourceDuration:walkSourceDuration,runtimeDuration:walkDuration,speed:1,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray(),seam:{at:walkSourceDuration,maxSeamBoneStep,maxSeamRootStep,minFixtureForwardStep,maxFixtureForwardStep,samples:seamSamples}},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual GLB animation arrays used, except the explicitly labelled nonzero parent-transform fixtures. Walk initial and settled poses hold the entire supplied Idle source at2.5sec. Walk duration extends from2.375 to3.6sec by continuing its forward cycle at unchanged rate1; source arrays and GLB are not modified. Other station entries and idle loops are retained. Walk2 remains authored in place; no extra travel is added. No browser rendering asserted by this test.'};
+await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/walk-entry-motion.json',import.meta.url),JSON.stringify(result,null,2));
 console.log(JSON.stringify(result,null,2));

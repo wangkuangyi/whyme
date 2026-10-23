@@ -8,6 +8,7 @@ const IDLE_RANGE = Object.freeze([1.5, 3.5]);
 // This authored whole-body frame has both feet planted. Holding it only on the
 // wide Walk station avoids looping back through Idle's forward right-foot step.
 const WALK_IDLE_SOURCE_TIME = 2.5;
+const WALK_PLAYBACK_SECONDS = 3.6;
 // The reviewed first glance returns toward the camera before the next long
 // side-look. Keep its source timing; do not speed up or synthesize a gesture.
 const LOOK_AROUND_RANGE = Object.freeze([1.2, 7.0]);
@@ -37,6 +38,43 @@ function holdPose(source, name, time) {
   return new THREE.AnimationClip(name, 1, tracks, source.blendMode);
 }
 
+/** Continue the authored forward gait at its original speed, without reversing it. */
+function extendWalk(source) {
+  const duration = Math.max(source.duration, WALK_PLAYBACK_SECONDS);
+  const tracks = source.tracks.map((track) => {
+    const size = track.getValueSize(), interpolant = track.createInterpolant();
+    const first = Array.from(interpolant.evaluate(0)).slice(0, size);
+    const last = Array.from(interpolant.evaluate(source.duration)).slice(0, size);
+    const binding = THREE.PropertyBinding.parseTrackName(track.name);
+    const rootPosition = cleanName(binding.nodeName || '') === 'Hips' && binding.propertyName === 'position';
+    const times = [], values = [];
+    function append(time, sourceTime, cycle) {
+      const value = Array.from(interpolant.evaluate(sourceTime)).slice(0, size);
+      // Keep real horizontal travel continuous if a future source contains it.
+      // Walk2 is in place; this adds no movement to its existing root track.
+      if (rootPosition) for (const axis of [0, 2]) value[axis] += (last[axis] - first[axis]) * cycle;
+      times.push(time); values.push(...value);
+    }
+    append(0, 0, 0);
+    for (let cycle = 0; cycle * source.duration < duration; cycle++) {
+      for (const time of track.times) {
+        const at = cycle * source.duration + time;
+        if (at > times.at(-1) && at < duration) append(at, time, cycle);
+      }
+      // The source's final pose is within 0.9 mm of its first pose. Retain that
+      // final key and interpolate into the repeated first key over one source
+      // frame, avoiding a hard reset at the cycle boundary.
+      const boundary = (cycle + 1) * source.duration;
+      if (boundary > times.at(-1) && boundary < duration) append(boundary, source.duration, cycle);
+    }
+    const cycle = Math.ceil(duration / source.duration) - 1;
+    append(duration, duration - cycle * source.duration, cycle);
+    const result = track.clone(); result.times = new Float32Array(times); result.values = new Float32Array(values);
+    return result;
+  });
+  return new THREE.AnimationClip(source.name, duration, tracks, source.blendMode);
+}
+
 /**
  * Play only user-supplied body animation. The face and original rest transforms
  * remain untouched. `position` is world-space travel; the scene applies it to
@@ -63,7 +101,8 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     // tracks are generated here. Rejected Greet, Box and CrossArms are never bound.
     const clip = name === 'Idle' ? excerpt(source, name, IDLE_RANGE[0], Math.min(IDLE_RANGE[1], source.duration))
       : name === 'Wave' ? excerpt(source, name, 1.2, Math.min(4.3, source.duration))
-      : name === 'LookAround' ? excerpt(source, name, LOOK_AROUND_RANGE[0], Math.min(LOOK_AROUND_RANGE[1], source.duration)) : source.clone();
+      : name === 'LookAround' ? excerpt(source, name, LOOK_AROUND_RANGE[0], Math.min(LOOK_AROUND_RANGE[1], source.duration))
+      : name === 'Walk' ? extendWalk(source) : source.clone();
     clip.name = name;
     for (const track of clip.tracks) {
       const binding = THREE.PropertyBinding.parseTrackName(track.name);
@@ -120,12 +159,17 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
   function finishIntoIdle(reason) {
     if (current?.name !== 'Idle') start('Idle', entry?.name === 'Walk' ? .55 : FADE_SECONDS, reason);
   }
-  function setStation(index, { immediate = false } = {}) {
+  function setStation(index, { immediate = false, prepareOpening = false } = {}) {
     const next = ((Math.round(index) % 4) + 4) % 4;
     if (!Number.isFinite(next) || disposed || next === station) return false;
+    const openingWalk = next === WALK_STATION && (station < 0 || prepareOpening);
     station = next;
     if (reducedMotion) { restoreRest(); return false; }
-    return enter(STATION_CLIPS[next], immediate, 'station');
+    // At dt=0 the outgoing action is still fully visible. Prime that action
+    // with the planted whole-body source pose before the paused intro render;
+    // once presentation time resumes, the existing fade starts the forward gait.
+    if (openingWalk) { start('Idle', 0, 'walk-opening'); mixer.update(0); }
+    return enter(STATION_CLIPS[next], immediate && !openingWalk, 'station');
   }
   function update(dt, options = {}) {
     if (disposed) return;
@@ -195,6 +239,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       rootMotion: { extracted: true, space: 'world', bone: hips.name, horizontalRest: [restHips.x, restHips.z] },
       idleRange: [...IDLE_RANGE], idleMode: current?.idleMode || null,
       idleSourceTime: current?.idleMode === 'walk-source-hold' ? WALK_IDLE_SOURCE_TIME : null,
+      walkPlayback: { sourceDuration: sourceClips.get('Walk')?.duration || 0, duration: clips.get('Walk')?.duration || 0, speed: SPEEDS.Walk },
       waveRange: [1.2, 4.3], lookAroundRange: [...LOOK_AROUND_RANGE], faceAnimation: false };
   }
   function dispose() { if (disposed) return; disposed = true; mixer.stopAllAction(); mixer.uncacheRoot(model); records.clear(); transition = null; rootRecord = null; restoreRest(); }

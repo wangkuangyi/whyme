@@ -298,7 +298,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     else if (colorTransition) { const t = clamp((now - colorTransition.started) / 600, 0, 1); currentLCH = interpolateLCH(colorTransition.from, COLORS[activeStation], t); currentRib = interpolateLCH(colorTransition.rib, RIBS[activeStation], t); currentFloor = interpolateLCH(colorTransition.floor, FLOORS[activeStation], t); if (t === 1) colorTransition = null; }
     applyColors();
   }
-  function startPerformance(index) { characterMotion?.setStation(index); }
+  function startPerformance(index) { characterMotion?.setStation(index, { prepareOpening: presentationPaused }); }
   function updatePose(dt) {
     if (characterMotion) {
       characterMotion.update(dt, { dragging });
