@@ -11,6 +11,12 @@ import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUnifo
 import { clamp, lerp, nearestStation, stationAzimuth, wrapStation, linearToOKLab, oklabToLinear, labToLCH, lchToLab, interpolateLCH, interpolateDragLCH } from './scene-math.js';
 
 const HEIGHT = 1.83, RAD = Math.PI / 180;
+// 可见圆点与数字的范围，不包括 44 px 的透明点击区域。
+const DOT_PROBES = [[-5, 0], [5, 0], [0, -5], [0, 5]];
+const ACTIVE_DOT_PROBES = [[-11, 0], [11, 0], [0, -11], [0, 11]];
+// 对应 .node-index 的右上角数字及其白色描边。
+const LABEL_PROBES = [[7, -22], [23, -22], [7, -5], [23, -5], [15, -13.5]];
+const NODE_REVEAL_DELAY = 250, WALK_NODE_REVEAL_DELAY = 650;
 // Retain the original static 3D model as an explicit, reproducible fallback.
 const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
 const SHOTS = [
@@ -84,7 +90,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   const ticks = new LineSegments2(tickGeometry, tickMaterial); ticks.frustumCulled = false; ticks.renderOrder = 2; scene.add(ticks);
 
   const firstStation = Number.isFinite(initialStation) ? Math.round(wrapStation(initialStation)) % 4 : 0;
-  let width = 1, height = 1, mobile = false, disposed = false, ready = false, currentProgress = firstStation, targetProgress = firstStation, dragging = false, activeStation = firstStation;
+  let width = 1, height = 1, mobile = false, disposed = false, ready = false, currentProgress = firstStation, targetProgress = firstStation, dragging = false, activeStation = firstStation, displayStation = firstStation;
   let previousTime = performance.now(), loadedTime = 0, animationFrame = 0, slowDuration = 0, degradeDuration = 0, qualityLevel = 0, fallbackTriggered = false;
   let presentationTime = previousTime, poseRevision = 0, boundsRevision = -1, occlusionPending = true;
   let cameraTransition = null, colorTransition = null, dragColorOrigin = null, settledPending = true, currentLCH = [...COLORS[firstStation]], currentRib = [...RIBS[firstStation]], currentFloor = [...FLOORS[firstStation]], lastCssColor = '';
@@ -94,13 +100,13 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   // Keep the authored hands visible during gestures; settle on a chest portrait.
   const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 0, 0];
   const timings = { frameMs: 0, poseMs: 0, renderMs: 0, nodesMs: 0 };
-  const occlusionCache = Array.from({ length: 4 }, () => ({ at: -Infinity, hidden: false }));
+  const occlusionCache = Array.from({ length: 4 }, () => ({ at: -Infinity, hidden: false, footprintHidden: false, visible: null, clearSince: null }));
   const lookAt = vector(), projectedTop = vector(), projectedBottom = vector(), cameraRight = vector(), cameraUp = vector(), cameraTowards = vector();
   const ringU = vector(), ringV = vector(), ringNormal = vector(), ringCenter = vector(), point = vector(), rayDirection = vector(), projected = vector();
   const raycaster = new THREE.Raycaster(), nodes = Array.from({ length: 4 }, vector), frontPoints = new Float32Array(65 * 3), backPoints = new Float32Array(65 * 3), tickPoints = new Float32Array(4 * 6);
   const boundMatrix = new THREE.Matrix4(), transformedBound = new THREE.Box3();
   const localRay = new THREE.Ray(), inverseMesh = new THREE.Matrix4(), worldSphere = new THREE.Sphere();
-  const triangleA = vector(), triangleB = vector(), triangleC = vector(), intersection = vector();
+  const triangleA = vector(), triangleB = vector(), triangleC = vector(), intersection = vector(), occlusionProbe = vector();
 
   function refreshRaycastBounds() {
     if (boundsRevision === poseRevision) return;
@@ -236,20 +242,44 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     for (let i = 0; i < 4; i += 1) { const theta = (45 + i * 90) * RAD - azimuth; ringPoint(theta, radius - tickWorldLength * .5, point).toArray(tickPoints, i * 6); ringPoint(theta, radius + tickWorldLength * .5, point).toArray(tickPoints, i * 6 + 3); ringPoint(i * Math.PI / 2 - azimuth, radius, nodes[i]); }
     if (!tickGeometry.attributes.instanceStart) tickGeometry.setPositions(tickPoints); else { tickGeometry.attributes.instanceStart.data.array.set(tickPoints); tickGeometry.attributes.instanceStart.data.needsUpdate = true; }
   }
+  function footprintOccluded(screenPoint, probes) {
+    for (const [dx, dy] of probes) {
+      // 保持节点的投影深度，把 CSS 像素偏移还原到同一相机平面。
+      // 射线只到这个平面为止，人物在节点后方时不会误遮挡。
+      occlusionProbe.set(screenPoint.x + 2 * dx / width, screenPoint.y - 2 * dy / height, screenPoint.z).unproject(camera);
+      rayDirection.copy(occlusionProbe).sub(camera.position); const distance = rayDirection.length();
+      raycaster.set(camera.position, rayDirection.divideScalar(distance)); raycaster.far = Math.max(0, distance - .018);
+      if (hitsCharacter()) return true;
+    }
+    return false;
+  }
   function updateNodes() {
     const now = performance.now();
     const face = USE_ANIMATIONS && ready ? boneBounds('Head', [.13, .17, .13]) : null;
-    const performing = characterMotion && characterMotion.getState().action !== 'Idle';
+    const motion = characterMotion?.getState(), performing = motion && motion.action !== 'Idle';
     const interval = !presentationPaused && (dragging || cameraTransition || performing) ? 0 : 170;
+    // 行走摆动可能露出约半秒的缝隙；稳定跟拍时多等一拍，转镜头仍及时响应。
+    const revealDelay = motion?.walking && !dragging && !cameraTransition ? WALK_NODE_REVEAL_DELAY : NODE_REVEAL_DELAY;
     nodePositions = nodes.map((node, index) => { projected.copy(node).project(camera); rayDirection.copy(node).sub(camera.position); const distance = rayDirection.length(), cache = occlusionCache[index];
       // Match every moving pose. Throttling during the walk left even correct
       // bounds displaying yesterday's visibility when a shoulder crossed a node.
-      if (ready && (now - cache.at > interval || occlusionPending)) { refreshRaycastBounds(); raycaster.set(camera.position, rayDirection.divideScalar(distance)); raycaster.far = Math.max(0, distance - .018); cache.hidden = hitsCharacter(); cache.at = now; }
+      if (ready && (now - cache.at > interval || occlusionPending)) {
+        refreshRaycastBounds(); raycaster.set(camera.position, rayDirection.divideScalar(distance)); raycaster.far = Math.max(0, distance - .018);
+        cache.hidden = hitsCharacter();
+        cache.footprintHidden = !cache.hidden && (footprintOccluded(projected, index === displayStation ? ACTIVE_DOT_PROBES : DOT_PROBES)
+          || (index !== displayStation && footprintOccluded(projected, LABEL_PROBES)));
+        cache.at = now;
+      }
       const x = (projected.x + 1) * width / 2, y = (1 - projected.y) * height / 2;
       // DOM labels cannot be depth-tested with the skinned face. Suppress an
       // inactive node while its dot or number would cover the face in a close shot.
-      const coversFace = face && index !== activeStation && x > face.left - 18 && x < face.right + 18 && y > face.top - 12 && y < face.bottom + 28;
-      return { x, y, visible: !cache.hidden && !coversFace && Math.abs(projected.x) < 1.1 && Math.abs(projected.y) < 1.1 && projected.z < 1, depth: distance }; }); occlusionPending = false; onNodePositions(nodePositions);
+      const coversFace = face && index !== displayStation && x > face.left - 18 && x < face.right + 18 && y > face.top - 12 && y < face.bottom + 28;
+      const blocked = cache.hidden || cache.footprintHidden || coversFace || Math.abs(projected.x) >= 1.1 || Math.abs(projected.y) >= 1.1 || projected.z >= 1;
+      // 一旦遮住就立即收起；重新露出需稳定一小段时间，过滤步态造成的短暂缝隙。
+      if (blocked) { cache.visible = false; cache.clearSince = null; }
+      else if (cache.visible === null || presentationPaused || reducedMotion || index === displayStation) { cache.visible = true; cache.clearSince = null; }
+      else if (!cache.visible) { cache.clearSince ??= now; if (now - cache.clearSince >= revealDelay) cache.visible = true; }
+      return { x, y, visible: cache.visible, depth: distance }; }); occlusionPending = false; onNodePositions(nodePositions);
   }
   function applyColors() {
     for (const material of clothMaterials) { material.color.fromArray(oklabToLinear(lchToLab(material.userData.rib ? currentRib : currentLCH))); material.sheenColor.copy(material.color).lerp(new THREE.Color('#ffffff'), .18); }
@@ -344,6 +374,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   function resize() { const rect = canvas.getBoundingClientRect(); width = Math.max(1, rect.width); height = Math.max(1, rect.height); mobile = window.innerWidth < 901; renderer.setSize(width, height, false); for (const material of [frontMaterial, backMaterial, tickMaterial]) material.resolution.set(width, height); settledPending = true; occlusionPending = true; }
   function setStation(index, { immediate = false } = {}) {
     const nextStation = Math.round(wrapStation(index)) % 4;
+    // DOM 高亮在松手选站时才更新，不随拖拽途中的镜头站点改变。
+    displayStation = nextStation;
     // Initialization reselects A01 after createScene resolves; preserve its opening action.
     if (!dragging && !cameraTransition && nextStation === activeStation && Math.abs(currentProgress - targetProgress) < .00001) { settledPending = true; return; }
     activeStation = nextStation; targetProgress = nearestStation(activeStation, currentProgress); dragging = false; dragColorOrigin = null;
