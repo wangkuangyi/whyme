@@ -2,7 +2,7 @@
 
 独立项目目录：`whyme-web`。当前版本为 v2.4.1，使用用户提供的 Tripo 动作，保留原人物的脸、几何与贴图。四站改为“走路、点头、环顾、小幅挥手”，并调整四站的摄影角度和距离，使镜头明显区分。原始 `../person.blend` 和 `public/models/person.glb` 保持不变。本轮验收与此前交付版本分开记录。
 
-网站地址：[wangkuangyi.github.io/whyme](https://wangkuangyi.github.io/whyme/)。代码仓库：[wangkuangyi/whyme](https://github.com/wangkuangyi/whyme)。
+正式域名：[whywky.website](https://whywky.website/)。代码仓库：[wangkuangyi/whyme](https://github.com/wangkuangyi/whyme)。原始 Pages 地址为 `https://wangkuangyi.github.io/whyme/`，绑定域名后由 GitHub 跳转至正式域名。
 
 ## 运行
 
@@ -24,7 +24,9 @@ npm run dev
 
 `.github/workflows/deploy.yml` 在推送 `main` 或手动运行时，执行 `npm ci`、语法检查、生产构建，再将 `dist` 发布到 GitHub Pages。CI 使用 Node.js 22；部署 Actions 固定到已核对的提交。仓库 Pages 的发布来源为 GitHub Actions。
 
-构建从 Pages 配置读取 `base_path`，因此图片、字体、模型、简历和页面图标都适配 `/whyme/` 子路径。以后在 Pages 中绑定自定义域名并配置 DNS 后，重新运行工作流即可按新地址构建；本地 `npm run dev` 仍使用根路径。
+构建从 Pages 配置读取 `base_path`，因此图片、字体、模型、简历和页面图标同时适配 `/whyme/` 子路径与独立域名根路径。当前 Pages 自定义域名为 `whywky.website`，部署使用根路径；本地 `npm run dev` 也使用根路径。
+
+域名 DNS 使用 `dns31.hichina.com` / `dns32.hichina.com`，`@` 的四条 A 记录为 `185.199.108.153` 至 `185.199.111.153`，`www` 的 CNAME 为 `wangkuangyi.github.io`。GitHub 自动申请并管理 HTTPS 证书。若日后更换域名，在 Pages 中修改域名并配置 DNS 后重新运行工作流即可；当前使用 Actions 发布，不需要额外的 CNAME 文件。
 
 如需在本机复验项目子路径：
 
