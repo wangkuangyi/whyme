@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createCharacterMotion, WALK_STATION } from './motion.js';
+import { createCharacterMotion, WALK_STATION, STATION_CLIPS } from './motion.js';
 import { applyHoodieSkinning } from './hoodie-skinning.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
@@ -19,19 +19,21 @@ const LABEL_PROBES = [[7, -22], [23, -22], [7, -5], [23, -5], [15, -13.5]];
 const NODE_REVEAL_DELAY = 250, WALK_NODE_REVEAL_DELAY = 650;
 // Static and animated views share the same original-resolution Tripo surface.
 const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
+const NOD_STATION = STATION_CLIPS.indexOf('Nod'), WAVE_STATION = STATION_CLIPS.indexOf('Wave');
 const SHOTS = [
   { azimuth: 38, fill: .56, camY: 2.25, lookY: .52, dist: 2.8, fov: 31, haloY: .52 },
-  { azimuth: 8, fill: 2.45, camY: 1.80, lookY: .80, dist: 2.8, fov: 25, haloY: .83 },
+  { azimuth: 8, fill: 1.20, camY: 1.25, lookY: .68, dist: 2.8, fov: 28, haloY: .68 },
+  { azimuth: -35, fill: 1.18, camY: .12, lookY: .64, dist: 2.8, fov: 30, haloY: .66 },
   { azimuth: 30, fill: 1.52, camY: .83, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
-  { azimuth: -48, fill: 1.70, camY: 1.30, lookY: .72, dist: 2.8, fov: 30, haloY: .77 },
 ];
-const REST_FILLS = [.56, 2.45, 2.10, 1.90];
-const MOBILE_REST_FILLS = [.56, 1.85, 1.72, 1.60];
+const REST_FILLS = [.56, 1.20, 1.24, 2.10];
+const REST_LOOK_Y = [.52, .68, .64, .78], REST_HALO_Y = [.52, .68, .66, .83];
+const MOBILE_REST_FILLS = [.56, 1.10, 1.16, 1.72];
 const STATIONS = [
   { azimuth: 38, camY: 2.25, dist: 2.8, lookY: .52, fov: 31, shift: -.04, fill: .56, haloY: .52, width: .52, roll: 9, openness: .24, color: '#82756E', rib: '#6B5E58', floor: '#F8F5F3' },
-  { azimuth: 65, camY: .22, dist: 2, lookY: .58, fov: 37.8, shift: -.05, fill: .72, haloY: .55, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
+  { azimuth: 8, camY: 1.25, dist: 2.8, lookY: .68, fov: 28, shift: -.05, fill: 1.20, haloY: .68, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
+  { azimuth: -35, camY: .12, dist: 2.8, lookY: .64, fov: 30, shift: -.03, fill: 1.18, haloY: .66, width: .58, roll: 6, openness: .30, color: '#327B60', rib: '#23664E', floor: '#F0F9F5' },
   { azimuth: -65, camY: .82, dist: 2.8, lookY: .66, fov: 16.1, shift: .06, fill: 1.22, haloY: .68, width: .52, roll: 8, openness: .24, color: '#A44C76', rib: '#893C61', floor: '#FEF4F8' },
-  { azimuth: 160, camY: 2.5, dist: 4.9, lookY: .50, fov: 19.5, shift: -.03, fill: .58, haloY: .55, width: .58, roll: 6, openness: .30, color: '#327B60', rib: '#23664E', floor: '#F0F9F5' },
 ];
 const lch = (hex) => labToLCH(linearToOKLab(new THREE.Color(hex).toArray()));
 const COLORS = STATIONS.map((s) => lch(s.color)), RIBS = STATIONS.map((s) => lch(s.rib)), FLOORS = STATIONS.map((s) => lch(s.floor));
@@ -95,7 +97,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   const meshes = [], skinnedBounds = [], skinBoundsByMesh = new Map(), clothMaterials = [], bones = new Map(), morphMeshes = [], eyes = [];
   let model = null, pendingModel = null, clothMask = null, nodePositions = [], lastProfile = STATIONS[0], posterLayout = null, lastPosterLayout = null;
   let framingPending = false, lastFramingAt = 0;
-  // Gesture stations settle on a portrait; Walk keeps its small full-body shot.
+  // Wave settles on a portrait; Nod retains its hands and LookAround stays wider.
   const restClose = reducedMotion ? [1, 1, 1, 1] : [0, 0, 0, 0];
   const timings = { frameMs: 0, poseMs: 0, renderMs: 0, nodesMs: 0 };
   const occlusionCache = Array.from({ length: 4 }, () => ({ at: -Infinity, hidden: false, footprintHidden: false, visible: null, clearSince: null }));
@@ -182,7 +184,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     if (USE_ANIMATIONS) {
       const shots = SHOTS.map((shot, i) => {
         if (i === WALK_STATION) return shot;
-        return { ...shot, fill: lerp(shot.fill, REST_FILLS[i], restClose[i]), lookY: lerp(shot.lookY, .78, restClose[i]), haloY: lerp(shot.haloY, .83, restClose[i]) };
+        return { ...shot, fill: lerp(shot.fill, REST_FILLS[i], restClose[i]), lookY: lerp(shot.lookY, REST_LOOK_Y[i], restClose[i]), haloY: lerp(shot.haloY, REST_HALO_Y[i], restClose[i]) };
       });
       for (const key of Object.keys(SHOTS[0])) profile[key] = lerp(shots[from][key], shots[to][key], t);
       profile.top = lerp(from === WALK_STATION ? .22 : .08, to === WALK_STATION ? .22 : .08, t);
@@ -192,14 +194,16 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       // Width/height matters here: a tall 320px phone needs more horizontal room.
       const gestureScale = Math.min(1, width / 390 * 557 / height);
       const walkWide = Math.min(.56, Math.max(.35, (height - 149) / height));
-      const activeFills = [walkWide, 1.85 * gestureScale, .98 * gestureScale, 1.45 * gestureScale];
-      const fills = USE_ANIMATIONS ? activeFills.map((fill, i) => i === WALK_STATION ? fill : lerp(fill, MOBILE_REST_FILLS[i] * gestureScale, restClose[i])) : [walkWide, .66, .70, .68];
+      const activeFills = [walkWide, 1.10 * gestureScale, 1.10 * gestureScale, .98 * gestureScale];
+      const fills = USE_ANIMATIONS ? activeFills.map((fill, i) => i === WALK_STATION ? fill : lerp(fill, MOBILE_REST_FILLS[i] * gestureScale, restClose[i])) : [walkWide, 1.10 * gestureScale, 1.10 * gestureScale, .70];
       profile.fill = lerp(fills[from], fills[to], t);
       if (!USE_ANIMATIONS && profile.fill < 1) profile.fill = Math.min(profile.fill, Math.max(.35, (height - 149) / height));
       const top = Math.max(135 / height, .25);
-      const shotTop = (i) => USE_ANIMATIONS && i !== WALK_STATION ? lerp(top, Math.max(top, 1 - fills[i] * (1 - 1.08 / HEIGHT)), i === 1 ? 1 : restClose[i]) : top;
+      const shotTop = (i) => USE_ANIMATIONS && i === WAVE_STATION ? lerp(top, Math.max(top, 1 - fills[i] * (1 - 1.08 / HEIGHT)), restClose[i]) : top;
       profile.top = lerp(shotTop(from), shotTop(to), t);
-      profile.shift = USE_ANIMATIONS ? lerp(from === 1 ? .08 : 0, to === 1 ? .08 : 0, t) : 0;
+      // The pointing hand reaches screen-left early in Nod; reserve space for
+      // that full arc instead of centering only the relaxed torso.
+      profile.shift = USE_ANIMATIONS ? lerp(from === NOD_STATION ? .11 : 0, to === NOD_STATION ? .11 : 0, t) : 0;
       profile.width = lerp(from === WALK_STATION ? .78 : .84, to === WALK_STATION ? .78 : .84, t);
     }
     return profile;

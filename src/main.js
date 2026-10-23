@@ -2,13 +2,13 @@ import './style.css';
 import { profile, advantages } from './content.js';
 import { setupDialogs } from './dialogs.js';
 
-const COLORS=['#82756E','#3755A6','#A44C76','#327B60'];
+const COLORS=['#82756E','#3755A6','#327B60','#A44C76'];
 const WALK_STATION=advantages.findIndex(a=>a.category==='迅速到岗');
 const TEAM_STATION=advantages.findIndex(a=>a.category==='团队精神');
 const restored = new URLSearchParams(location.search).has('still');
 const assetPath=path=>`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 const IMAGE_ROOT=assetPath(restored?'images-v2':'images-tripo');
-const PORTRAIT_VERSION='blender-actions-1';
+const PORTRAIT_VERSION='framing-2';
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const wrap=n=>((n%4)+4)%4;

@@ -14,7 +14,7 @@ export const profile = {
   availableFrom: '2026-12-01',
   resume: '/resume.pdf',
   version: 'v2.4.1',
-  updatedAt: '2026-10-23',
+  updatedAt: '2026-10-24',
 };
 
 export const advantages = [
@@ -42,17 +42,6 @@ export const advantages = [
   },
   {
     id: '03',
-    category: '团队精神',
-    title: '好队友',
-    claim: '认真配合，善于协作，把任务落实到位。',
-    proofs: [
-      '网易：前后端协同，优化接口、开发需求',
-      'NUS：Embodied Agent 协同开发',
-    ],
-    link: { label: '看看协作项目', href: '#teamwork' },
-  },
-  {
-    id: '04',
     category: '长期意识',
     title: '上线只是开始',
     claim: '把产品做出来，也把它持续做好。',
@@ -61,6 +50,17 @@ export const advantages = [
       'Benchmark Atlas：从面试任务开始，持续更新至今',
     ],
     link: { label: '看看持续更新的项目', href: '#ongoing-work' },
+  },
+  {
+    id: '04',
+    category: '团队精神',
+    title: '好队友',
+    claim: '认真配合，善于协作，把任务落实到位。',
+    proofs: [
+      '网易：前后端协同，优化接口、开发需求',
+      'NUS：Embodied Agent 协同开发',
+    ],
+    link: { label: '看看协作项目', href: '#teamwork' },
   },
 ];
 

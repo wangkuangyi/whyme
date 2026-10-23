@@ -1,0 +1,199 @@
+{
+  "count": 24,
+  "allTitlesAndColorsMatch": true,
+  "allRenderedAt2x": true,
+  "records": [
+    {
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 1,
+      "path": "public/images-intro/angle-01.png",
+      "title": "随时出发",
+      "color": "#82756e"
+    },
+    {
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 2,
+      "path": "public/images-intro/angle-02.png",
+      "title": "好看，也好用",
+      "color": "#3755a6"
+    },
+    {
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 3,
+      "path": "public/images-intro/angle-03.png",
+      "title": "上线只是开始",
+      "color": "#327b60"
+    },
+    {
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 4,
+      "path": "public/images-intro/angle-04.png",
+      "title": "好队友",
+      "color": "#a44c76"
+    },
+    {
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 1,
+      "path": "public/images-tripo/angle-01.png",
+      "title": "随时出发",
+      "color": "#82756e"
+    },
+    {
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 2,
+      "path": "public/images-tripo/angle-02.png",
+      "title": "好看，也好用",
+      "color": "#3755a6"
+    },
+    {
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 3,
+      "path": "public/images-tripo/angle-03.png",
+      "title": "上线只是开始",
+      "color": "#327b60"
+    },
+    {
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 4,
+      "path": "public/images-tripo/angle-04.png",
+      "title": "好队友",
+      "color": "#a44c76"
+    },
+    {
+      "kind": "still",
+      "variant": "desktop",
+      "station": 1,
+      "path": "public/images-v2/angle-01.png",
+      "title": "随时出发",
+      "color": "#82756e"
+    },
+    {
+      "kind": "still",
+      "variant": "desktop",
+      "station": 2,
+      "path": "public/images-v2/angle-02.png",
+      "title": "好看，也好用",
+      "color": "#3755a6"
+    },
+    {
+      "kind": "still",
+      "variant": "desktop",
+      "station": 3,
+      "path": "public/images-v2/angle-03.png",
+      "title": "上线只是开始",
+      "color": "#327b60"
+    },
+    {
+      "kind": "still",
+      "variant": "desktop",
+      "station": 4,
+      "path": "public/images-v2/angle-04.png",
+      "title": "好队友",
+      "color": "#a44c76"
+    },
+    {
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 1,
+      "path": "public/images-intro/mobile-01.png",
+      "title": "随时出发",
+      "color": "#82756e"
+    },
+    {
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 2,
+      "path": "public/images-intro/mobile-02.png",
+      "title": "好看，也好用",
+      "color": "#3755a6"
+    },
+    {
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 3,
+      "path": "public/images-intro/mobile-03.png",
+      "title": "上线只是开始",
+      "color": "#327b60"
+    },
+    {
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 4,
+      "path": "public/images-intro/mobile-04.png",
+      "title": "好队友",
+      "color": "#a44c76"
+    },
+    {
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 1,
+      "path": "public/images-tripo/mobile-01.png",
+      "title": "随时出发",
+      "color": "#82756e"
+    },
+    {
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 2,
+      "path": "public/images-tripo/mobile-02.png",
+      "title": "好看，也好用",
+      "color": "#3755a6"
+    },
+    {
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 3,
+      "path": "public/images-tripo/mobile-03.png",
+      "title": "上线只是开始",
+      "color": "#327b60"
+    },
+    {
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 4,
+      "path": "public/images-tripo/mobile-04.png",
+      "title": "好队友",
+      "color": "#a44c76"
+    },
+    {
+      "kind": "still",
+      "variant": "mobile",
+      "station": 1,
+      "path": "public/images-v2/mobile-01.png",
+      "title": "随时出发",
+      "color": "#82756e"
+    },
+    {
+      "kind": "still",
+      "variant": "mobile",
+      "station": 2,
+      "path": "public/images-v2/mobile-02.png",
+      "title": "好看，也好用",
+      "color": "#3755a6"
+    },
+    {
+      "kind": "still",
+      "variant": "mobile",
+      "station": 3,
+      "path": "public/images-v2/mobile-03.png",
+      "title": "上线只是开始",
+      "color": "#327b60"
+    },
+    {
+      "kind": "still",
+      "variant": "mobile",
+      "station": 4,
+      "path": "public/images-v2/mobile-04.png",
+      "title": "好队友",
+      "color": "#a44c76"
+    }
+  ]
+}

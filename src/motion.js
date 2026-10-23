@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'Wave', 'LookAround']);
+export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'LookAround', 'Wave']);
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
 const FADE_SECONDS = .35;
 const AUTHORED_RETURN_SECONDS = .8;
