@@ -31,8 +31,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 
 .identity{--name-size:60px;position:absolute;top:var(--frame);left:var(--frame);z-index:3}
 .wordmark{display:block;width:calc(var(--name-size)*3);line-height:0}
-.wordmark-art{display:block;width:100%;height:auto;overflow:visible}
-.wordmark-art text{font:600 24px var(--sans);letter-spacing:-.025em;fill:currentColor}
+.wordmark-art{display:block;width:100%;height:auto;fill:currentColor}
 .identity h1{width:max-content;font-size:var(--name-size);line-height:1.1;font-weight:600;letter-spacing:0;margin:8px 0 0}
 .print-name{display:none}
 .contact{position:absolute;right:var(--frame);top:var(--frame);z-index:4;display:flex;align-items:center;gap:28px;height:40px}
