@@ -1,0 +1,3189 @@
+{
+  "date": "2026-10-23",
+  "checks": [
+    {
+      "name": "desktop/1: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "desktop/1: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "desktop/1: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "desktop/1: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "desktop/1: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "desktop/2: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "desktop/2: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "desktop/2: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "desktop/2: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "desktop/2: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "desktop/3: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "desktop/3: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "desktop/3: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "desktop/3: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "desktop/3: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "desktop/4: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "desktop/4: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "desktop/4: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "desktop/4: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "desktop/4: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "mobile/1: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "mobile/1: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "mobile/1: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "mobile/1: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "mobile/1: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "mobile/2: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "mobile/2: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "mobile/2: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "mobile/2: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "mobile/2: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "mobile/3: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "mobile/3: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "mobile/3: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "mobile/3: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "mobile/3: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "mobile/4: independent authored Idle",
+      "pass": true
+    },
+    {
+      "name": "mobile/4: full 4K original surface",
+      "pass": true
+    },
+    {
+      "name": "mobile/4: no synthetic face or resolution downgrade",
+      "pass": true
+    },
+    {
+      "name": "mobile/4: current chapter and complete page",
+      "pass": true
+    },
+    {
+      "name": "mobile/4: no processed historical model request",
+      "pass": true
+    },
+    {
+      "name": "no unhandled browser error",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "records": [
+    {
+      "variant": "desktop",
+      "index": 0,
+      "file": "output/playwright/blender-motion/desktop-01-final.png",
+      "scene": {
+        "currentProgress": 0,
+        "targetProgress": 0,
+        "activeStation": 0,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 1440,
+          "height": 1000,
+          "top": {
+            "x": 662.4,
+            "y": 219.9999274066397
+          },
+          "bottom": {
+            "x": 662.4,
+            "y": 780.0000725933603
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": false,
+        "width": 1440,
+        "height": 1000,
+        "dpr": 2,
+        "triangles": 11694,
+        "colors": {
+          "hoodie": "#82756e",
+          "rib": "#6b5e58",
+          "lch": [
+            0.5722032968080484,
+            0.01938593534343355,
+            50.243036599034326
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.24,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 38,
+          "shift": -0.04,
+          "fill": 0.56,
+          "restClose": [
+            0.8270043127572989,
+            0,
+            0,
+            0
+          ],
+          "position": [
+            2.629117102159049,
+            3.590093484276396,
+            3.3651164921340917
+          ],
+          "target": [
+            -1.6492325745552128e-8,
+            0.9516000000000001,
+            3.60606868946944e-8
+          ],
+          "anchor": [
+            -1.6492325745552128e-8,
+            0,
+            3.60606868946944e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 818.7614851212408,
+            "y": 596.8114603326903,
+            "visible": true,
+            "depth": 4.084383647668885
+          },
+          {
+            "x": 986.9228459167571,
+            "y": 437.91885226941105,
+            "visible": true,
+            "depth": 5.420483053667805
+          },
+          {
+            "x": 556.0122808833695,
+            "y": 460.31714252898735,
+            "visible": false,
+            "depth": 5.987681341774742
+          },
+          {
+            "x": 295.12521910485333,
+            "y": 603.4805557947674,
+            "visible": true,
+            "depth": 4.811744080568137
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 4.404099999999996,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.7627686939543166e-8,
+            0,
+            3.947311139789866e-8
+          ],
+          "station": 0,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "Walk",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 4.404099999999996
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 4.404099999999996,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 4.404099999999996,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.003574235349562271,
+              0.9471678307730218,
+              0.0035742195828476694
+            ],
+            "Head": [
+              0.00026470619001176833,
+              1.5391269645751118,
+              -0.001915890343060278
+            ],
+            "LeftHand": [
+              0.27379500337757906,
+              0.8657688082215582,
+              -0.0032022640564211904
+            ],
+            "RightHand": [
+              -0.25583966896342986,
+              0.8677503380513516,
+              0.01773865845137973
+            ],
+            "LeftFoot": [
+              0.14654275441053202,
+              0.11794899349037463,
+              -0.04646493267381802
+            ],
+            "RightFoot": [
+              -0.1393945392216218,
+              0.11794889778016321,
+              -0.04646479933158759
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 591.4796860085156,
+            "y": 235.94693473659873,
+            "left": 591.4796860085156,
+            "right": 733.8162409980318,
+            "top": 235.94693473659873,
+            "bottom": 414.6951967607087,
+            "width": 142.33655498951623,
+            "height": 178.74826202410998
+          },
+          "handBounds": [
+            {
+              "x": 700.8188377131648,
+              "y": 550.8013899471124,
+              "left": 700.8188377131648,
+              "right": 770.5633696923016,
+              "top": 550.8013899471124,
+              "bottom": 655.344967085413,
+              "width": 69.74453197913681,
+              "height": 104.54357713830063
+            },
+            {
+              "x": 550.7675991658301,
+              "y": 493.3576709063541,
+              "left": 550.7675991658301,
+              "right": 619.9934196282301,
+              "top": 493.3576709063541,
+              "bottom": 593.9751695208438,
+              "width": 69.22582046239995,
+              "height": 100.6174986144897
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.200000016492326,
+            6,
+            4.800000036060687
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.170768198243506,
+            "poseMs": 0.2299041382472346,
+            "renderMs": 0.2328754107312454,
+            "nodesMs": 0.7991437343922301
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "随时出发"
+    },
+    {
+      "variant": "desktop",
+      "index": 1,
+      "file": "output/playwright/blender-motion/desktop-02-final.png",
+      "scene": {
+        "currentProgress": 1,
+        "targetProgress": 1,
+        "activeStation": 1,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 1440,
+          "height": 1000,
+          "top": {
+            "x": 648,
+            "y": 81.18070959564866
+          },
+          "bottom": {
+            "x": 648,
+            "y": 2528.8192904043517
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": false,
+        "width": 1440,
+        "height": 1000,
+        "dpr": 2,
+        "triangles": 11688,
+        "colors": {
+          "hoodie": "#3755a6",
+          "rib": "#28428a",
+          "lch": [
+            0.47084408672993516,
+            0.13505631354657616,
+            266.0767237746677
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.26,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 8,
+          "shift": -0.05,
+          "fill": 2.45,
+          "restClose": [
+            0.9034301418636138,
+            1,
+            0,
+            0
+          ],
+          "position": [
+            0.16816173645285923,
+            1.8675635393490884,
+            1.196533092920849
+          ],
+          "target": [
+            -1.762768693954314e-8,
+            1.4274,
+            3.947311139789861e-8
+          ],
+          "anchor": [
+            -1.762768693954314e-8,
+            0,
+            3.947311139789861e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 211.8933714801615,
+            "y": 796.626814001351,
+            "visible": true,
+            "depth": 1.1715609879138171
+          },
+          {
+            "x": 905.6238091254249,
+            "y": 720.5180618946634,
+            "visible": true,
+            "depth": 1.0383795000909222
+          },
+          {
+            "x": 1017.0583725147243,
+            "y": 562.2854416012788,
+            "visible": true,
+            "depth": 1.3862215867555656
+          },
+          {
+            "x": 468.44676888896737,
+            "y": 634.2802138185715,
+            "visible": false,
+            "depth": 1.4886011721678996
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 0.3873998092651311,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.7627686939543166e-8,
+            0,
+            3.947311139789866e-8
+          ],
+          "station": 1,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "Nod",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 5.516599999999968,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Nod"
+              ],
+              "to": "Idle",
+              "at": 9.66660009536741,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.150000095367432
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 0.3873998092651311
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 0.3873998092651311,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 0.3873998092651311,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035742353495622704,
+              0.9471678307730218,
+              0.0035742195828476694
+            ],
+            "Head": [
+              0.00020322909453592388,
+              1.5391444819276192,
+              -0.0019301933323698853
+            ],
+            "LeftHand": [
+              0.2739250252847913,
+              0.8658591462541432,
+              -0.0030075577756674826
+            ],
+            "RightHand": [
+              -0.25565421764967394,
+              0.8677413302821824,
+              0.01808850211218349
+            ],
+            "LeftFoot": [
+              0.14654275441053202,
+              0.11794899349037463,
+              -0.04646493267381802
+            ],
+            "RightFoot": [
+              -0.1393945392216218,
+              0.11794889778016321,
+              -0.04646479933158759
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 344.4268336448597,
+            "y": 288.7196074818357,
+            "left": 344.4268336448597,
+            "right": 904.4792675974869,
+            "top": 288.7196074818357,
+            "bottom": 1025.4402401403056,
+            "width": 560.0524339526272,
+            "height": 736.7206326584699
+          },
+          "handBounds": [
+            {
+              "x": 945.4991565103121,
+              "y": 1577.8010092558216,
+              "left": 945.4991565103121,
+              "right": 1185.0805657739318,
+              "top": 1577.8010092558216,
+              "bottom": 2024.3368676900734,
+              "width": 239.58140926361966,
+              "height": 446.53585843425185
+            },
+            {
+              "x": 119.79802601673062,
+              "y": 1525.133022829877,
+              "left": 119.79802601673062,
+              "right": 401.61318379872387,
+              "top": 1525.133022829877,
+              "bottom": 1962.4647608337903,
+              "width": 281.81515778199326,
+              "height": 437.3317380039132
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.200000017627687,
+            6,
+            4.800000039473111
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.172922434970507,
+            "poseMs": 0.1378514955068812,
+            "renderMs": 0.2279427021688053,
+            "nodesMs": 0.19564937183903963
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "好看，也好用"
+    },
+    {
+      "variant": "desktop",
+      "index": 2,
+      "file": "output/playwright/blender-motion/desktop-03-final.png",
+      "scene": {
+        "currentProgress": 2,
+        "targetProgress": 2,
+        "activeStation": 2,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 1440,
+          "height": 1000,
+          "top": {
+            "x": 806.3999999999999,
+            "y": 80.00001236075244
+          },
+          "bottom": {
+            "x": 806.3999999999999,
+            "y": 2179.999987639248
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": false,
+        "width": 1440,
+        "height": 1000,
+        "dpr": 2,
+        "triangles": 11688,
+        "colors": {
+          "hoodie": "#a44c76",
+          "rib": "#893c61",
+          "lch": [
+            0.5402033702092013,
+            0.12566044782800478,
+            352.2360673371543
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.24,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 30,
+          "shift": 0.06,
+          "fill": 2.1,
+          "restClose": [
+            0.9034301418636138,
+            1,
+            1,
+            0
+          ],
+          "position": [
+            0.8644046101753676,
+            1.458271593850109,
+            1.4971927731256673
+          ],
+          "target": [
+            -1.7627686939543153e-8,
+            1.4274,
+            3.9473111397898635e-8
+          ],
+          "anchor": [
+            -1.7627686939543153e-8,
+            0,
+            3.9473111397898635e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 930.5435773251525,
+            "y": 369.81975379871886,
+            "visible": false,
+            "depth": 2.021160034920957
+          },
+          {
+            "x": 491.3093186805484,
+            "y": 458.994925651496,
+            "visible": true,
+            "depth": 1.8835451468259432
+          },
+          {
+            "x": 633.8394859119405,
+            "y": 543.7757907922949,
+            "visible": true,
+            "depth": 1.450907637760571
+          },
+          {
+            "x": 1173.3926405653156,
+            "y": 423.5141789024791,
+            "visible": true,
+            "depth": 1.6255702199357862
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 1.4372998092651184,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.7627686939543166e-8,
+            0,
+            3.947311139789866e-8
+          ],
+          "station": 2,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "Wave",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 5.516599999999968,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Nod"
+              ],
+              "to": "Idle",
+              "at": 9.66660009536741,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.150000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Wave",
+              "at": 11.866500000000098,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Wave"
+              ],
+              "to": "Idle",
+              "at": 17.066499809265462,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 0.39999961853027344
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 1.4372998092651184
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 1.4372998092651184,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 1.4372998092651184,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035742353495622704,
+              0.9471678307730218,
+              0.0035742195828476694
+            ],
+            "Head": [
+              0.004735826718231731,
+              1.539082227606305,
+              -0.004677065740752065
+            ],
+            "LeftHand": [
+              0.26991771981173196,
+              0.8619574912067107,
+              0.00743807567058858
+            ],
+            "RightHand": [
+              -0.2638701585075238,
+              0.8675166178401541,
+              0.0038190116890509385
+            ],
+            "LeftFoot": [
+              0.14654275441053202,
+              0.11794899349037463,
+              -0.04646493267381802
+            ],
+            "RightFoot": [
+              -0.1393945392216218,
+              0.11794889778016321,
+              -0.04646479933158759
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 601.8850158950333,
+            "y": 188.06742206015937,
+            "left": 601.8850158950333,
+            "right": 1014.506672724498,
+            "top": 188.06742206015937,
+            "bottom": 628.0947329034748,
+            "width": 412.62165682946465,
+            "height": 440.0273108433154
+          },
+          "handBounds": [
+            {
+              "x": 956.0502214796488,
+              "y": 1197.532410123833,
+              "left": 956.0502214796488,
+              "right": 1186.313797396298,
+              "top": 1197.532410123833,
+              "bottom": 1573.97505880566,
+              "width": 230.2635759166492,
+              "height": 376.442648681827
+            },
+            {
+              "x": 443.6166332818892,
+              "y": 1097.0401762341564,
+              "left": 443.6166332818892,
+              "right": 651.0407807069164,
+              "top": 1097.0401762341564,
+              "bottom": 1411.3867711602802,
+              "width": 207.42414742502717,
+              "height": 314.34659492612377
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.200000017627687,
+            6,
+            4.800000039473111
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.1581943464354145,
+            "poseMs": 0.09803505129951051,
+            "renderMs": 0.23665161828867531,
+            "nodesMs": 0.1602697689566238
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "好队友"
+    },
+    {
+      "variant": "desktop",
+      "index": 3,
+      "file": "output/playwright/blender-motion/desktop-04-final.png",
+      "scene": {
+        "currentProgress": 3,
+        "targetProgress": 3,
+        "activeStation": 3,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 1440,
+          "height": 1000,
+          "top": {
+            "x": 676.7999999999998,
+            "y": 80.08839437252801
+          },
+          "bottom": {
+            "x": 676.7999999999998,
+            "y": 1979.9116056274722
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": false,
+        "width": 1440,
+        "height": 1000,
+        "dpr": 2,
+        "triangles": 11690,
+        "colors": {
+          "hoodie": "#327b60",
+          "rib": "#23664e",
+          "lch": [
+            0.5287863747539481,
+            0.08505163519236596,
+            165.97833234546624
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.3,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": -48,
+          "shift": -0.03,
+          "fill": 1.9,
+          "restClose": [
+            0.9034301418636138,
+            1,
+            1,
+            1
+          ],
+          "position": [
+            -1.1632999440713458,
+            1.7181123988546658,
+            1.0474399979743618
+          ],
+          "target": [
+            -1.7627686939543153e-8,
+            1.4274,
+            3.9473111397898635e-8
+          ],
+          "anchor": [
+            -1.7627686939543153e-8,
+            0,
+            3.9473111397898635e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 1030.7077875859131,
+            "y": 390.3300004265022,
+            "visible": true,
+            "depth": 1.7260096722501577
+          },
+          {
+            "x": 550.0409889310984,
+            "y": 393.57889424659487,
+            "visible": false,
+            "depth": 1.8985833498027316
+          },
+          {
+            "x": 268.1475382756046,
+            "y": 540.2616360988343,
+            "visible": true,
+            "depth": 1.4971282963107808
+          },
+          {
+            "x": 865.8502029862655,
+            "y": 558.847065207324,
+            "visible": true,
+            "depth": 1.2711741769589864
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 3.037599809265098,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.7627686939543166e-8,
+            0,
+            3.947311139789866e-8
+          ],
+          "station": 3,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "LookAround",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 5.516599999999968,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Nod"
+              ],
+              "to": "Idle",
+              "at": 9.66660009536741,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.150000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Wave",
+              "at": 11.866500000000098,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Wave"
+              ],
+              "to": "Idle",
+              "at": 17.066499809265462,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 0.39999961853027344
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "LookAround",
+              "at": 19.24540000000035,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "LookAround"
+              ],
+              "to": "Idle",
+              "at": 26.04540019073531,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 2
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 3.037599809265098
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 3.037599809265098,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 3.037599809265098,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035742353495622704,
+              0.9471678307730218,
+              0.0035742195828476694
+            ],
+            "Head": [
+              0.006785667179991028,
+              1.5393549746885848,
+              -0.005847649686613984
+            ],
+            "LeftHand": [
+              0.269381177138518,
+              0.8603590075450926,
+              -0.000005350623220830297
+            ],
+            "RightHand": [
+              -0.26228945782829216,
+              0.8684444074469817,
+              0.0026780953542839755
+            ],
+            "LeftFoot": [
+              0.14654275441053202,
+              0.11794899349037463,
+              -0.04646493267381802
+            ],
+            "RightFoot": [
+              -0.1393945392216218,
+              0.11794889778016321,
+              -0.04646479933158759
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 454.5725207215846,
+            "y": 229.5294915048261,
+            "left": 454.5725207215846,
+            "right": 896.7967902194202,
+            "top": 229.5294915048261,
+            "bottom": 682.4668021871635,
+            "width": 442.2242694978356,
+            "height": 452.9373106823374
+          },
+          "handBounds": [
+            {
+              "x": 769.9169511100317,
+              "y": 1025.7487303428481,
+              "left": 769.9169511100317,
+              "right": 964.0696125046267,
+              "top": 1025.7487303428481,
+              "bottom": 1320.6498919408793,
+              "width": 194.15266139459493,
+              "height": 294.9011615980312
+            },
+            {
+              "x": 357.19054330242795,
+              "y": 1209.6646525140225,
+              "left": 357.19054330242795,
+              "right": 602.7165881871003,
+              "top": 1209.6646525140225,
+              "bottom": 1607.5890204502018,
+              "width": 245.5260448846724,
+              "height": 397.92436793617935
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.200000017627687,
+            6,
+            4.800000039473111
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.173108790405029,
+            "poseMs": 0.14582569858154448,
+            "renderMs": 0.19995845015905328,
+            "nodesMs": 0.2183687929133588
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "上线只是开始"
+    },
+    {
+      "variant": "mobile",
+      "index": 0,
+      "file": "output/playwright/blender-motion/mobile-01-final.png",
+      "scene": {
+        "currentProgress": 0,
+        "targetProgress": 0,
+        "activeStation": 0,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 390,
+          "height": 626.109375,
+          "top": {
+            "x": 194.99999999999997,
+            "y": 156.52729829861653
+          },
+          "bottom": {
+            "x": 195,
+            "y": 507.1486392013835
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": true,
+        "width": 390,
+        "height": 626.109375,
+        "dpr": 2,
+        "triangles": 11694,
+        "colors": {
+          "hoodie": "#82756e",
+          "rib": "#6b5e58",
+          "lch": [
+            0.5722032968080484,
+            0.01938593534343355,
+            50.243036599034326
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.24,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 38,
+          "shift": 0,
+          "fill": 0.56,
+          "restClose": [
+            0.8270037773214729,
+            0,
+            0,
+            0
+          ],
+          "position": [
+            2.6291171021551047,
+            3.590093484276396,
+            3.3651164921387844
+          ],
+          "target": [
+            -1.6496270347732248e-8,
+            0.9516000000000001,
+            3.606537937183714e-8
+          ],
+          "anchor": [
+            -1.6496270347732248e-8,
+            0,
+            3.606537937183714e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 254.58082111152726,
+            "y": 372.5466020989267,
+            "visible": true,
+            "depth": 4.399734974479177
+          },
+          {
+            "x": 331.32104058823427,
+            "y": 308.97076000670427,
+            "visible": true,
+            "depth": 5.2638477849325565
+          },
+          {
+            "x": 148.66517441988057,
+            "y": 317.52499325391466,
+            "visible": false,
+            "depth": 5.65356948214461
+          },
+          {
+            "x": 47.13088564766904,
+            "y": 376.98343358860984,
+            "visible": true,
+            "depth": 4.859261490407033
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 4.404100000000006,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.763247460846671e-8,
+            0,
+            3.947467720728741e-8
+          ],
+          "station": 0,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "Walk",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 4.404100000000006
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 4.404100000000006,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 4.404100000000006,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035742353447746015,
+              0.9471678307730218,
+              0.003574219584413478
+            ],
+            "Head": [
+              0.00026470618522403004,
+              1.5391269645751118,
+              -0.0019158903414945028
+            ],
+            "LeftHand": [
+              0.27379500337279167,
+              0.8657688082215588,
+              -0.0032022640548552
+            ],
+            "RightHand": [
+              -0.25583966896821747,
+              0.8677503380513518,
+              0.017738658452946005
+            ],
+            "LeftFoot": [
+              0.14654275440574435,
+              0.11794899349037463,
+              -0.04646493267225221
+            ],
+            "RightFoot": [
+              -0.13939453922640946,
+              0.11794889778016321,
+              -0.04646479933002178
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 150.59612653232148,
+            "y": 166.51186909082017,
+            "left": 150.59612653232148,
+            "right": 239.71437801640914,
+            "top": 166.51186909082017,
+            "bottom": 278.427831709003,
+            "width": 89.11825148408766,
+            "height": 111.91596261818282
+          },
+          "handBounds": [
+            {
+              "x": 219.0543944690884,
+              "y": 363.6451952585509,
+              "left": 219.0543944690884,
+              "right": 262.7220997961958,
+              "top": 363.6451952585509,
+              "bottom": 429.10090900083964,
+              "width": 43.66770532710737,
+              "height": 65.45571374228871
+            },
+            {
+              "x": 125.10590728427955,
+              "y": 327.6791442323018,
+              "left": 125.10590728427955,
+              "right": 168.448842467826,
+              "top": 327.6791442323018,
+              "bottom": 390.6767034038494,
+              "width": 43.34293518354646,
+              "height": 62.99755917154761
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2000000164962703,
+            6,
+            4.800000036065379
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.168261209228707,
+            "poseMs": 0.19100626342194466,
+            "renderMs": 0.19091034660708286,
+            "nodesMs": 1.100209964955114
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "随时出发"
+    },
+    {
+      "variant": "mobile",
+      "index": 1,
+      "file": "output/playwright/blender-motion/mobile-02-final.png",
+      "scene": {
+        "currentProgress": 1,
+        "targetProgress": 1,
+        "activeStation": 1,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 390,
+          "height": 626.109375,
+          "top": {
+            "x": 226.2,
+            "y": 203.98848180643088
+          },
+          "bottom": {
+            "x": 226.2,
+            "y": 1234.0491206525855
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": true,
+        "width": 390,
+        "height": 626.109375,
+        "dpr": 2,
+        "triangles": 11688,
+        "colors": {
+          "hoodie": "#3755a6",
+          "rib": "#28428a",
+          "lch": [
+            0.47084408672993516,
+            0.13505631354657616,
+            266.0767237746677
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.26,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 8,
+          "shift": 0.08,
+          "fill": 1.6457987072945521,
+          "restClose": [
+            0.868004245389005,
+            1,
+            0,
+            0
+          ],
+          "position": [
+            0.26669003145032544,
+            2.1254614382580783,
+            1.8975983399795915
+          ],
+          "target": [
+            -1.7632474608466698e-8,
+            1.4274,
+            3.9474677207287386e-8
+          ],
+          "anchor": [
+            -1.7632474608466698e-8,
+            0,
+            3.9474677207287386e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 74.93804697967434,
+            "y": 470.28544651848523,
+            "visible": true,
+            "depth": 1.9229459229593806
+          },
+          {
+            "x": 311.15913669651343,
+            "y": 445.35051790957107,
+            "visible": true,
+            "depth": 1.8057577266057663
+          },
+          {
+            "x": 363.63065760406016,
+            "y": 382.775272628967,
+            "visible": true,
+            "depth": 2.119736310013522
+          },
+          {
+            "x": 157.07229511908704,
+            "y": 407.41518990797636,
+            "visible": false,
+            "depth": 2.2204148439918656
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 0.38729980926514446,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.763247460846671e-8,
+            0,
+            3.947467720728741e-8
+          ],
+          "station": 1,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "Nod",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 5.45409999999999,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Nod"
+              ],
+              "to": "Idle",
+              "at": 9.604100095367459,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.150000095367432
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 0.38729980926514446
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 0.38729980926514446,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 0.38729980926514446,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035742353447746015,
+              0.9471678307730218,
+              0.0035742195844134786
+            ],
+            "Head": [
+              0.00020250577591185258,
+              1.5391446877007269,
+              -0.0019303617432494882
+            ],
+            "LeftHand": [
+              0.27392655520108694,
+              0.8658602100009292,
+              -0.003005267724307821
+            ],
+            "RightHand": [
+              -0.2556520337093076,
+              0.8677412256034334,
+              0.018092616265026354
+            ],
+            "LeftFoot": [
+              0.14654275440574435,
+              0.11794899349037463,
+              -0.04646493267225221
+            ],
+            "RightFoot": [
+              -0.13939453922640946,
+              0.11794889778016321,
+              -0.04646479933002178
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 113.9275516553439,
+            "y": 270.893033036153,
+            "left": 113.9275516553439,
+            "right": 327.72510677680236,
+            "top": 270.893033036153,
+            "bottom": 561.5076679774969,
+            "width": 213.79755512145846,
+            "height": 290.6146349413439
+          },
+          "handBounds": [
+            {
+              "x": 348.38071772437206,
+              "y": 798.128641146301,
+              "left": 348.38071772437206,
+              "right": 441.6951935137281,
+              "top": 798.128641146301,
+              "bottom": 975.6996893438304,
+              "width": 93.31447578935604,
+              "height": 177.57104819752942
+            },
+            {
+              "x": 10.849350353087074,
+              "y": 779.3613722307919,
+              "left": 10.849350353087074,
+              "right": 121.44055968423574,
+              "top": 779.3613722307919,
+              "bottom": 955.4070095896146,
+              "width": 110.59120933114866,
+              "height": 176.04563735882277
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2000000176324748,
+            6,
+            4.800000039474677
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.153900580794051,
+            "poseMs": 0.1157937376319305,
+            "renderMs": 0.29093548666328484,
+            "nodesMs": 0.32563105192726727
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "好看，也好用"
+    },
+    {
+      "variant": "mobile",
+      "index": 2,
+      "file": "output/playwright/blender-motion/mobile-03-final.png",
+      "scene": {
+        "currentProgress": 2,
+        "targetProgress": 2,
+        "activeStation": 2,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 390,
+          "height": 626.109375,
+          "top": {
+            "x": 195.00000000000009,
+            "y": 233.4700323673149
+          },
+          "bottom": {
+            "x": 195.00000000000009,
+            "y": 1191.5100291080948
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": true,
+        "width": 390,
+        "height": 626.109375,
+        "dpr": 2,
+        "triangles": 11688,
+        "colors": {
+          "hoodie": "#a44c76",
+          "rib": "#893c61",
+          "lch": [
+            0.5402033702092013,
+            0.12566044782800478,
+            352.2360673371543
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.24,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": 30,
+          "shift": 0,
+          "fill": 1.5301479873225026,
+          "restClose": [
+            0.868004245389005,
+            1,
+            1,
+            0
+          ],
+          "position": [
+            1.189695266882457,
+            1.4698891173041047,
+            2.0606127177796503
+          ],
+          "target": [
+            -1.7632474608466698e-8,
+            1.4274,
+            3.9474677207287386e-8
+          ],
+          "anchor": [
+            -1.7632474608466698e-8,
+            0,
+            3.9474677207287386e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 252.22773279073905,
+            "y": 362.7624923044574,
+            "visible": false,
+            "depth": 2.6607060840855574
+          },
+          {
+            "x": 52.78495625373032,
+            "y": 404.6644019645324,
+            "visible": true,
+            "depth": 2.5232769905386956
+          },
+          {
+            "x": 122.87209537031677,
+            "y": 442.8508371813805,
+            "visible": true,
+            "depth": 2.1076821993976096
+          },
+          {
+            "x": 353.359784363499,
+            "y": 390.9892050601045,
+            "visible": true,
+            "depth": 2.270408410080757
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 1.4372998092651215,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.763247460846671e-8,
+            0,
+            3.947467720728741e-8
+          ],
+          "station": 2,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "Wave",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 5.45409999999999,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Nod"
+              ],
+              "to": "Idle",
+              "at": 9.604100095367459,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.150000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Wave",
+              "at": 11.687300000000134,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Wave"
+              ],
+              "to": "Idle",
+              "at": 16.887299809265553,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 0.39999961853027344
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 1.4372998092651215
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 1.4372998092651215,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 1.4372998092651215,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.0035742353447746015,
+              0.9471678307730218,
+              0.003574219584413478
+            ],
+            "Head": [
+              0.004735826713444075,
+              1.539082227606305,
+              -0.004677065739186241
+            ],
+            "LeftHand": [
+              0.26991771980694423,
+              0.8619574912067105,
+              0.007438075672154328
+            ],
+            "RightHand": [
+              -0.26387015851231155,
+              0.8675166178401543,
+              0.0038190116906167
+            ],
+            "LeftFoot": [
+              0.14654275440574435,
+              0.11794899349037463,
+              -0.04646493267225221
+            ],
+            "RightFoot": [
+              -0.13939453922640946,
+              0.11794889778016321,
+              -0.04646479933002178
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 102.72835257587491,
+            "y": 287.469251555347,
+            "left": 102.72835257587491,
+            "right": 290.32117565206886,
+            "top": 287.469251555347,
+            "bottom": 481.4879111007778,
+            "width": 187.59282307619395,
+            "height": 194.0186595454308
+          },
+          "handBounds": [
+            {
+              "x": 261.11662302166184,
+              "y": 738.9777603976488,
+              "left": 261.11662302166184,
+              "right": 364.25090168988265,
+              "top": 738.9777603976488,
+              "bottom": 893.3358028614739,
+              "width": 103.13427866822082,
+              "height": 154.3580424638251
+            },
+            {
+              "x": 27.64482788569636,
+              "y": 703.6327331467261,
+              "left": 27.64482788569636,
+              "right": 122.72547497903268,
+              "top": 703.6327331467261,
+              "bottom": 840.7781664923542,
+              "width": 95.08064709333632,
+              "height": 137.14543334562813
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2000000176324748,
+            6,
+            4.800000039474677
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.158601158094554,
+            "poseMs": 0.15374608448593188,
+            "renderMs": 0.28395413951624393,
+            "nodesMs": 0.36121456213389647
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "好队友"
+    },
+    {
+      "variant": "mobile",
+      "index": 3,
+      "file": "output/playwright/blender-motion/mobile-04-final.png",
+      "scene": {
+        "currentProgress": 3,
+        "targetProgress": 3,
+        "activeStation": 3,
+        "ready": true,
+        "presentationPaused": false,
+        "posterLayout": {
+          "width": 390,
+          "height": 626.109375,
+          "top": {
+            "x": 194.99999999999994,
+            "y": 260.87991668295456
+          },
+          "bottom": {
+            "x": 194.99999999999994,
+            "y": 1152.0470300383568
+          }
+        },
+        "dragging": false,
+        "moving": false,
+        "mobile": true,
+        "width": 390,
+        "height": 626.109375,
+        "dpr": 2,
+        "triangles": 11688,
+        "colors": {
+          "hoodie": "#327b60",
+          "rib": "#23664e",
+          "lch": [
+            0.5287863747539481,
+            0.08505163519236596,
+            165.97833234546624
+          ],
+          "durationMs": 600,
+          "throughBlack": false
+        },
+        "ring": {
+          "openness": 0.3,
+          "linewidth": 1.25,
+          "frontInk": 0.7,
+          "backDash": [
+            3,
+            4
+          ],
+          "ticks": 4
+        },
+        "camera": {
+          "azimuth": -48,
+          "shift": 0,
+          "fill": 1.4233934765790721,
+          "restClose": [
+            0.868004245389005,
+            1,
+            1,
+            1
+          ],
+          "position": [
+            -1.5931829543799803,
+            1.8255415478741719,
+            1.434508399028441
+          ],
+          "target": [
+            -1.7632474608466698e-8,
+            1.4274,
+            3.9474677207287386e-8
+          ],
+          "anchor": [
+            -1.7632474608466698e-8,
+            0,
+            3.9474677207287386e-8
+          ],
+          "tracking": false
+        },
+        "nodes": [
+          {
+            "x": 339.4947767692234,
+            "y": 402.5939720300289,
+            "visible": true,
+            "depth": 2.2848256859915006
+          },
+          {
+            "x": 141.28830954954262,
+            "y": 401.66551615753025,
+            "visible": false,
+            "depth": 2.443402866578257
+          },
+          {
+            "x": 36.67430613687349,
+            "y": 463.7939131502494,
+            "visible": true,
+            "depth": 2.0840408501770646
+          },
+          {
+            "x": 264.12630220216903,
+            "y": 470.57432683145447,
+            "visible": true,
+            "depth": 1.8956363343664915
+          }
+        ],
+        "animation": {
+          "action": "Idle",
+          "time": 3.037399809265072,
+          "duration": 4.800000190734863,
+          "speed": 1,
+          "walking": false,
+          "position": [
+            -1.763247460846671e-8,
+            0,
+            3.947467720728741e-8
+          ],
+          "station": 3,
+          "reducedMotion": false,
+          "dragging": false,
+          "end": true,
+          "completedAction": "LookAround",
+          "clips": [
+            "Idle",
+            "Walk",
+            "Nod",
+            "Wave",
+            "LookAround"
+          ],
+          "rejected": [
+            "Greet",
+            "Box",
+            "CrossArms"
+          ],
+          "transition": null,
+          "transitions": [
+            {
+              "from": [],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "initial",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Idle",
+              "at": 0,
+              "fade": 0,
+              "reason": "opening",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Walk",
+              "at": 0,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Walk"
+              ],
+              "to": "Idle",
+              "at": 4.400000095367432,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.400000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Nod",
+              "at": 5.45409999999999,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Nod"
+              ],
+              "to": "Idle",
+              "at": 9.604100095367459,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 4.150000095367432
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "Wave",
+              "at": 11.687300000000134,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "Wave"
+              ],
+              "to": "Idle",
+              "at": 16.887299809265553,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 0.39999961853027344
+            },
+            {
+              "from": [
+                "Idle"
+              ],
+              "to": "LookAround",
+              "at": 18.978800000000362,
+              "fade": 0.35,
+              "reason": "station",
+              "startTime": 0
+            },
+            {
+              "from": [
+                "LookAround"
+              ],
+              "to": "Idle",
+              "at": 25.778800190735332,
+              "fade": 0,
+              "reason": "authored-return",
+              "startTime": 2
+            }
+          ],
+          "weights": [
+            {
+              "action": "Idle",
+              "weight": 1,
+              "time": 3.037399809265072
+            }
+          ],
+          "rootMotion": {
+            "extracted": true,
+            "space": "world",
+            "bone": "mixamorigHips",
+            "horizontalRest": [
+              0.001952208112925291,
+              0.0019521674839779735
+            ]
+          },
+          "idleRange": [
+            0,
+            4.800000190734863
+          ],
+          "idleMode": "authored-idle",
+          "idleSourceTime": 3.037399809265072,
+          "posture": {
+            "mode": "blender-authored",
+            "runtimeCorrection": false
+          },
+          "idleAnimation": {
+            "duration": 4.800000190734863,
+            "time": 3.037399809265072,
+            "animated": true,
+            "loop": "repeat"
+          },
+          "settleProgress": 1,
+          "playbackTiming": {
+            "sourceRange": [
+              0,
+              4.800000190734863
+            ],
+            "authoredReturn": true,
+            "settleSeconds": 0
+          },
+          "walkPlayback": {
+            "sourceDuration": 4.400000095367432,
+            "duration": 4.400000095367432,
+            "speed": 1
+          },
+          "waveRange": [
+            0,
+            5.199999809265137
+          ],
+          "lookAroundRange": [
+            0,
+            6.800000190734863
+          ],
+          "faceAnimation": false,
+          "eyes": 0,
+          "morphs": {},
+          "pose": {
+            "Hips": [
+              0.003574235344774602,
+              0.9471678307730218,
+              0.0035742195844134786
+            ],
+            "Head": [
+              0.006786484619801015,
+              1.5393553672113582,
+              -0.0058485332283910035
+            ],
+            "LeftHand": [
+              0.26937953272087634,
+              0.8603589460072961,
+              -0.000005476112889847562
+            ],
+            "RightHand": [
+              -0.26228561038651144,
+              0.8684439091747898,
+              0.002678184750811184
+            ],
+            "LeftFoot": [
+              0.14654275440574435,
+              0.11794899349037463,
+              -0.04646493267225221
+            ],
+            "RightFoot": [
+              -0.13939453922640946,
+              0.11794889778016321,
+              -0.04646479933002178
+            ]
+          }
+        },
+        "protectedBounds": {
+          "faceBounds": {
+            "x": 94.32428602022907,
+            "y": 322.948344531313,
+            "left": 94.32428602022907,
+            "right": 295.00053085037365,
+            "top": 322.948344531313,
+            "bottom": 531.8376770395206,
+            "width": 200.67624483014458,
+            "height": 208.8893325082076
+          },
+          "handBounds": [
+            {
+              "x": 239.51996152097482,
+              "y": 701.5749225105707,
+              "left": 239.51996152097482,
+              "right": 331.84329882783715,
+              "top": 701.5749225105707,
+              "bottom": 836.780320873028,
+              "width": 92.32333730686233,
+              "height": 135.20539836245734
+            },
+            {
+              "x": 51.69970693993682,
+              "y": 773.880535572528,
+              "left": 51.69970693993682,
+              "right": 161.50296661224985,
+              "top": 773.880535572528,
+              "bottom": 942.4282739424725,
+              "width": 109.80325967231303,
+              "height": 168.54773836994457
+            }
+          ]
+        },
+        "studio": {
+          "surface": "original-baked-albedo",
+          "ambient": 0,
+          "shadowOpacity": 0.1,
+          "shadowWorldPosition": [
+            -3.2000000176324748,
+            6,
+            4.800000039474677
+          ],
+          "shadowFade": [
+            0.45,
+            1.7
+          ],
+          "shadowEnabled": true,
+          "mapSize": 1024,
+          "floorTintStrength": 0.5,
+          "floorEdge": "#f3f3f5",
+          "floorRadiusH": 1.8
+        },
+        "quality": {
+          "level": 0,
+          "slowDuration": 0,
+          "fallbackTriggered": false,
+          "automaticDowngrade": false,
+          "timings": {
+            "frameMs": 4.16228091488035,
+            "poseMs": 0.12472847083461874,
+            "renderMs": 0.23672833232345347,
+            "nodesMs": 0.33328238872709937
+          }
+        },
+        "cloth": [
+          {
+            "name": "Original",
+            "normalMap": false,
+            "originalAlbedo": true,
+            "textureSize": [
+              4096,
+              4096
+            ],
+            "sourceRoughness": 0.8999999761581421,
+            "surface": "MeshBasicMaterial",
+            "colorMaskSize": [
+              4096,
+              4096
+            ]
+          }
+        ]
+      },
+      "title": "上线只是开始"
+    }
+  ],
+  "errors": []
+}

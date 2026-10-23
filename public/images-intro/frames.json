@@ -18,7 +18,7 @@
       "animation": {
         "action": "Walk",
         "time": 0,
-        "duration": 3.6,
+        "duration": 4.400000095367432,
         "speed": 1,
         "walking": true,
         "position": [
@@ -46,7 +46,7 @@
         "transition": {
           "to": "Walk",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -54,7 +54,8 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
           },
           {
             "from": [
@@ -63,7 +64,8 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "walk-opening"
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -71,8 +73,9 @@
             ],
             "to": "Walk",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -91,192 +94,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
             0,
-            2.375
+            4.400000095367432
           ],
-          "tailSourceSeconds": 0,
-          "tailPlaybackSeconds": 0,
-          "settleSeconds": 1
+          "authoredReturn": true,
+          "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -288,29 +142,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },
@@ -387,8 +241,8 @@
       "animation": {
         "action": "Nod",
         "time": 0,
-        "duration": 3.4000000000000004,
-        "speed": 1.1,
+        "duration": 4.150000095367432,
+        "speed": 1,
         "walking": false,
         "position": [
           0,
@@ -415,7 +269,7 @@
         "transition": {
           "to": "Nod",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -423,7 +277,18 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -431,8 +296,9 @@
             ],
             "to": "Nod",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -451,192 +317,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
             0,
-            3
+            4.150000095367432
           ],
-          "tailSourceSeconds": 0.4,
-          "tailPlaybackSeconds": 0.8,
-          "settleSeconds": 0.7272727272727273
+          "authoredReturn": true,
+          "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -648,29 +365,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },
@@ -747,8 +464,8 @@
       "animation": {
         "action": "Wave",
         "time": 0,
-        "duration": 4.25,
-        "speed": 1.05,
+        "duration": 5.199999809265137,
+        "speed": 1,
         "walking": false,
         "position": [
           0,
@@ -775,7 +492,7 @@
         "transition": {
           "to": "Wave",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -783,7 +500,18 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -791,8 +519,9 @@
             ],
             "to": "Wave",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -811,192 +540,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
-            0.9,
-            4.75
+            0,
+            5.199999809265137
           ],
-          "tailSourceSeconds": 0.4,
-          "tailPlaybackSeconds": 0.8,
-          "settleSeconds": 0.7619047619047619
+          "authoredReturn": true,
+          "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -1008,29 +588,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },
@@ -1107,7 +687,7 @@
       "animation": {
         "action": "LookAround",
         "time": 0,
-        "duration": 6.6,
+        "duration": 6.800000190734863,
         "speed": 1,
         "walking": false,
         "position": [
@@ -1135,7 +715,7 @@
         "transition": {
           "to": "LookAround",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -1143,7 +723,18 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -1151,8 +742,9 @@
             ],
             "to": "LookAround",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -1171,192 +763,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
-            1.2,
-            7.4
+            0,
+            6.800000190734863
           ],
-          "tailSourceSeconds": 0.4,
-          "tailPlaybackSeconds": 0.8,
+          "authoredReturn": true,
           "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -1368,29 +811,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },
@@ -1469,7 +912,7 @@
       "animation": {
         "action": "Walk",
         "time": 0,
-        "duration": 3.6,
+        "duration": 4.400000095367432,
         "speed": 1,
         "walking": true,
         "position": [
@@ -1497,7 +940,7 @@
         "transition": {
           "to": "Walk",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -1505,7 +948,8 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
           },
           {
             "from": [
@@ -1514,7 +958,8 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "walk-opening"
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -1522,8 +967,9 @@
             ],
             "to": "Walk",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -1542,192 +988,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
             0,
-            2.375
+            4.400000095367432
           ],
-          "tailSourceSeconds": 0,
-          "tailPlaybackSeconds": 0,
-          "settleSeconds": 1
+          "authoredReturn": true,
+          "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -1739,29 +1036,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },
@@ -1838,8 +1135,8 @@
       "animation": {
         "action": "Nod",
         "time": 0,
-        "duration": 3.4000000000000004,
-        "speed": 1.1,
+        "duration": 4.150000095367432,
+        "speed": 1,
         "walking": false,
         "position": [
           0,
@@ -1866,7 +1163,7 @@
         "transition": {
           "to": "Nod",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -1874,7 +1171,18 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -1882,8 +1190,9 @@
             ],
             "to": "Nod",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -1902,192 +1211,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
             0,
-            3
+            4.150000095367432
           ],
-          "tailSourceSeconds": 0.4,
-          "tailPlaybackSeconds": 0.8,
-          "settleSeconds": 0.7272727272727273
+          "authoredReturn": true,
+          "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -2099,29 +1259,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },
@@ -2198,8 +1358,8 @@
       "animation": {
         "action": "Wave",
         "time": 0,
-        "duration": 4.25,
-        "speed": 1.05,
+        "duration": 5.199999809265137,
+        "speed": 1,
         "walking": false,
         "position": [
           0,
@@ -2226,7 +1386,7 @@
         "transition": {
           "to": "Wave",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -2234,7 +1394,18 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -2242,8 +1413,9 @@
             ],
             "to": "Wave",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -2262,192 +1434,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
-            0.9,
-            4.75
+            0,
+            5.199999809265137
           ],
-          "tailSourceSeconds": 0.4,
-          "tailPlaybackSeconds": 0.8,
-          "settleSeconds": 0.7619047619047619
+          "authoredReturn": true,
+          "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -2459,29 +1482,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },
@@ -2558,7 +1581,7 @@
       "animation": {
         "action": "LookAround",
         "time": 0,
-        "duration": 6.6,
+        "duration": 6.800000190734863,
         "speed": 1,
         "walking": false,
         "position": [
@@ -2586,7 +1609,7 @@
         "transition": {
           "to": "LookAround",
           "elapsed": 0,
-          "duration": 0.5
+          "duration": 0.35
         },
         "transitions": [
           {
@@ -2594,7 +1617,18 @@
             "to": "Idle",
             "at": 0,
             "fade": 0,
-            "reason": "initial"
+            "reason": "initial",
+            "startTime": 0
+          },
+          {
+            "from": [
+              "Idle"
+            ],
+            "to": "Idle",
+            "at": 0,
+            "fade": 0,
+            "reason": "opening",
+            "startTime": 0
           },
           {
             "from": [
@@ -2602,8 +1636,9 @@
             ],
             "to": "LookAround",
             "at": 0,
-            "fade": 0.5,
-            "reason": "station"
+            "fade": 0.35,
+            "reason": "station",
+            "startTime": 0
           }
         ],
         "weights": [
@@ -2622,192 +1657,43 @@
             0.0019521674839779735
           ]
         },
-        "idleRange": null,
-        "idleMode": null,
-        "idleSourceTime": null,
+        "idleRange": [
+          0,
+          4.800000190734863
+        ],
+        "idleMode": "authored-idle",
+        "idleSourceTime": 0,
         "posture": {
-          "active": false,
-          "activation": 0,
-          "curveBefore": 1.6846721511328724,
-          "curveAfter": 1.6846721511328724,
-          "before": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "after": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "deltaDegrees": 0,
-          "spineDegrees": 0,
-          "spine1Degrees": 0,
-          "spine2Degrees": 0,
-          "neckDegrees": 0,
-          "headDirectionError": 0,
-          "correctionDegrees": 0,
-          "max": {
-            "deltaDegrees": 17.91378139668498,
-            "spineDegrees": 9.757707971388804,
-            "spine1Degrees": 7.0877843178517645,
-            "spine2Degrees": 17.91378139668498,
-            "neckDegrees": 11.084119523476094,
-            "headDirectionError": 1.4600096599955432e-7,
-            "correctionDegrees": 17.91378139668498
-          },
-          "reference": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -5.440338182611633,
-            "neck": 17.354019453076802,
-            "curve": 1.6846721511328724
-          },
-          "targets": {
-            "lower": -6.709840808255051,
-            "middle": -7.125010333744545,
-            "upper": -4.125010333744545,
-            "neck": 18.354019453076802
-          },
-          "limits": {
-            "curveDegrees": 3,
-            "correctionDegrees": 20,
-            "perJoint": {
-              "Spine": 14,
-              "Spine1": 14,
-              "Spine2": 20,
-              "Neck": 15
-            },
-            "supportStartDegrees": 4,
-            "supportFullDegrees": 9
-          },
-          "bones": [
-            "Spine",
-            "Spine1",
-            "Spine2",
-            "Neck",
-            "Head"
-          ],
-          "mode": "observed",
-          "baked": true,
-          "clips": {
-            "Walk": {
-              "samples": 492,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            },
-            "Nod": {
-              "samples": 409,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 17.91378139668498,
-                "spineDegrees": 9.757707971388804,
-                "spine1Degrees": 7.0877843178517645,
-                "spine2Degrees": 17.91378139668498,
-                "neckDegrees": 11.084119523476094,
-                "headDirectionError": 1.032382731180714e-7
-              }
-            },
-            "Wave": {
-              "samples": 556,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": true,
-              "corrections": {
-                "deltaDegrees": 9.682721408793364,
-                "spineDegrees": 8.6897947051643,
-                "spine1Degrees": 6.566758660501979,
-                "spine2Degrees": 9.682721408793364,
-                "neckDegrees": 5.5292475648632085,
-                "headDirectionError": 1.4600096599955432e-7
-              }
-            },
-            "LookAround": {
-              "samples": 895,
-              "bones": [
-                "Spine",
-                "Spine1",
-                "Spine2",
-                "Neck",
-                "Head"
-              ],
-              "forcedSupport": false,
-              "corrections": {
-                "deltaDegrees": 0,
-                "spineDegrees": 0,
-                "spine1Degrees": 0,
-                "spine2Degrees": 0,
-                "neckDegrees": 0,
-                "headDirectionError": 0
-              }
-            }
-          }
+          "mode": "blender-authored",
+          "runtimeCorrection": false
         },
-        "breathing": {
+        "idleAnimation": {
+          "duration": 4.800000190734863,
           "time": 0,
-          "phase": 0,
-          "amount": 0,
-          "weight": 1,
-          "liftMetres": 0,
-          "periodSeconds": 4.8,
-          "maximumLiftMetres": 0.0028,
-          "bones": [
-            "Spine1",
-            "Spine2"
-          ]
+          "animated": true,
+          "loop": "repeat"
         },
         "settleProgress": 0,
         "playbackTiming": {
           "sourceRange": [
-            1.2,
-            7.4
+            0,
+            6.800000190734863
           ],
-          "tailSourceSeconds": 0.4,
-          "tailPlaybackSeconds": 0.8,
+          "authoredReturn": true,
           "settleSeconds": 0.8
         },
         "walkPlayback": {
-          "sourceDuration": 2.375,
-          "duration": 3.6,
+          "sourceDuration": 4.400000095367432,
+          "duration": 4.400000095367432,
           "speed": 1
         },
         "waveRange": [
-          0.9,
-          4.75
+          0,
+          5.199999809265137
         ],
         "lookAroundRange": [
-          1.2,
-          7.4
+          0,
+          6.800000190734863
         ],
         "faceAnimation": false,
         "eyes": 0,
@@ -2819,29 +1705,29 @@
             0.0035741801097362714
           ],
           "Head": [
-            0.003574312567083622,
-            1.5404882523460912,
-            -0.003574302191628749
+            -0.0013020099571004733,
+            1.5395191135130175,
+            -0.0023558057066549593
           ],
           "LeftHand": [
-            0.2652498586731464,
-            0.8698394600654737,
-            -0.004204656998943387
+            0.27645838651998333,
+            0.8675923321236434,
+            0.0005709369089950261
           ],
           "RightHand": [
-            -0.2632662881571893,
-            0.8775220806981199,
-            0.0016063535635369441
+            -0.25266724050795436,
+            0.8675491562446512,
+            0.024672767772759188
           ],
           "LeftFoot": [
-            0.14654276432822302,
-            0.1179491927681815,
-            -0.0464649448825171
+            0.14654277203821894,
+            0.11794899349037463,
+            -0.04646497214692942
           ],
           "RightFoot": [
-            -0.13939449849575153,
-            0.11794909790741209,
-            -0.046464866074154294
+            -0.13939452159393484,
+            0.11794889778016321,
+            -0.04646483880469899
           ]
         }
       },

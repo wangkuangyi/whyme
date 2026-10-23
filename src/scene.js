@@ -396,7 +396,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   document.addEventListener('visibilitychange', onVisibilityChange); canvas.addEventListener('webglcontextlost', onContextLost); const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(canvas); resize();
   signal?.addEventListener('abort', dispose, { once: true }); if (signal?.aborted) { dispose(); return; } animationFrame = requestAnimationFrame(render);
   try {
-    const url = new URL(USE_ANIMATIONS ? 'models/person-original-animated.glb?v=original-4k' : 'models/person-original.glb?v=original-4k', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href);
+    const url = new URL(USE_ANIMATIONS ? 'models/person-authored-animated.glb?v=blender-actions-1' : 'models/person-original.glb?v=original-4k', new URL(import.meta.env.BASE_URL, window.location.href)); const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url.href);
     pendingModel = gltf.scene;
     if (disposed) { disposeSceneResources([pendingModel]); pendingModel = null; return; }
     clothMask = await new THREE.TextureLoader().loadAsync(new URL('hoodie-mask.png?v=original-4k', url).href);

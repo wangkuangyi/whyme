@@ -1,0 +1,50 @@
+{
+  "sourceSHA256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "outputSHA256": "28ddcb8629174322495add57936bc27e8851dd7a5bb682602a46b728902bfda0",
+  "bytes": 6236244,
+  "blender": "5.1.0",
+  "originalBinaryPrefixPreserved": true,
+  "originalBinaryBytes": 4344360,
+  "preserved": [
+    "nodes",
+    "meshes",
+    "skins",
+    "materials",
+    "textures",
+    "images",
+    "samplers",
+    "scenes"
+  ],
+  "actions": [
+    {
+      "name": "Idle",
+      "duration": 4.8,
+      "fps": 60,
+      "frames": 289
+    },
+    {
+      "name": "Walk",
+      "duration": 4.4,
+      "fps": 60,
+      "frames": 265
+    },
+    {
+      "name": "Nod",
+      "duration": 4.15,
+      "fps": 60,
+      "frames": 250
+    },
+    {
+      "name": "Wave",
+      "duration": 5.2,
+      "fps": 60,
+      "frames": 313
+    },
+    {
+      "name": "LookAround",
+      "duration": 6.8,
+      "fps": 60,
+      "frames": 409
+    }
+  ]
+}

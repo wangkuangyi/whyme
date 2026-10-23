@@ -1,285 +1,114 @@
 import * as THREE from 'three';
-import { createPostureCorrection } from './posture.js';
-import { createIdleBreathing } from './breathing.js';
 
 export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'Wave', 'LookAround']);
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
-const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05, LookAround: 1 };
-const FADE_SECONDS = .5;
-const WALK_PLAYBACK_SECONDS = 3.6;
-// The reviewed first glance returns toward the camera before the next long
-// side-look. Keep its source timing; do not speed up or synthesize a gesture.
-const LOOK_AROUND_RANGE = Object.freeze([1.2, 7.4]);
-const WAVE_RANGE = Object.freeze([.9, 4.75]);
-const TAIL_SOURCE_SECONDS = .4;
-const cleanName = (name) => name.replace(/^mixamorig[:_]?/i, '');
-const smooth = (value) => value * value * (3 - 2 * value);
-const smoother = (value) => value ** 3 * (value * (value * 6 - 15) + 10);
-
-/** Keep the real lowering gesture, then decelerate its final samples to rest. */
-function decelerateTail(source) {
-  const length = Math.min(TAIL_SOURCE_SECONDS, source.duration / 2), start = source.duration - length;
-  const playback = length * 2, duration = start + playback;
-  const tracks = source.tracks.map(track => {
-    const size = track.getValueSize(), interpolant = track.createInterpolant(), times = [], values = [];
-    const append = (time, sourceTime) => { times.push(time); values.push(...Array.from(interpolant.evaluate(sourceTime)).slice(0, size)); };
-    for (const time of track.times) if (time < start) append(time, time);
-    append(start, start);
-    const steps = Math.ceil(playback * 120);
-    for (let i = 1; i <= steps; i++) {
-      const u = i / steps;
-      // This map enters at source speed 1 and leaves at 0. Its acceleration is
-      // zero at both boundaries; all earlier authored timing stays unchanged.
-      append(start + playback * u, start + length * (2 * u - 2 * u ** 3 + u ** 4));
-    }
-    const result = track.clone(); result.times = new Float32Array(times); result.values = new Float32Array(values); return result;
-  });
-  return new THREE.AnimationClip(source.name, duration, tracks, source.blendMode);
-}
-
-/** Use exact samples at both cut boundaries, including quaternion interpolation. */
-function excerpt(source, name, start, end) {
-  const tracks = source.tracks.map((track) => {
-    const size = track.getValueSize(), times = [start];
-    for (const time of track.times) if (time > start && time < end) times.push(time);
-    times.push(end);
-    const interpolant = track.createInterpolant(), values = [];
-    for (const time of times) values.push(...Array.from(interpolant.evaluate(time)).slice(0, size));
-    const result = track.clone(); result.times = new Float32Array(times.map((time) => time - start)); result.values = new Float32Array(values);
-    return result;
-  });
-  return new THREE.AnimationClip(name, end - start, tracks, source.blendMode);
-}
-
-function uprightRestClip(rest) {
-  const tracks = [];
-  for (const [bone, pose] of rest) for (const property of ['position', 'quaternion', 'scale']) {
-    const values = pose[property].toArray();
-    const Track = property === 'quaternion' ? THREE.QuaternionKeyframeTrack : THREE.VectorKeyframeTrack;
-    tracks.push(new Track(`${bone.name}.${property}`, [0, 1], [...values, ...values]));
-  }
-  return new THREE.AnimationClip('Idle', 1, tracks);
-}
-
-/** Correct the performance before blending it, so the exit never re-hunches. */
-function bakeUprightClip(source, model, bones, posture, rest) {
-  const names = posture.state().bones, selected = new Map(names.map(name => [bones.get(name).bone.name, name]));
-  const times = new Set([0, source.duration]);
-  for (let frame = 1; frame < source.duration * 120; frame++) times.add(frame / 120);
-  for (const track of source.tracks) for (const time of track.times) times.add(time);
-  const samples = [...times].filter(time => time <= source.duration).sort((a, b) => a - b);
-  const values = new Map(names.map(name => [name, []])), corrections = {};
-  const baker = new THREE.AnimationMixer(model), action = baker.clipAction(source).setLoop(THREE.LoopOnce, 1);
-  action.clampWhenFinished = true; action.play();
-  try {
-    for (const time of samples) {
-      posture.reset(); baker.setTime(time);
-      posture.update(source.name === 'Nod' || source.name === 'Wave' ? { support: 1 } : undefined);
-      const state = posture.state();
-      for (const key of ['deltaDegrees', 'spineDegrees', 'spine1Degrees', 'spine2Degrees', 'neckDegrees', 'headDirectionError']) corrections[key] = Math.max(corrections[key] || 0, Math.abs(state[key] || 0));
-      for (const name of names) bones.get(name).bone.quaternion.toArray(values.get(name), values.get(name).length);
-    }
-  } finally {
-    posture.reset(); baker.stopAllAction(); baker.uncacheRoot(model);
-    for (const [bone, pose] of rest) { bone.position.copy(pose.position); bone.quaternion.copy(pose.quaternion); bone.scale.copy(pose.scale); }
-    model.updateWorldMatrix(true, true);
-  }
-  const replaced = new Set();
-  const tracks = source.tracks.map(track => {
-    const binding = THREE.PropertyBinding.parseTrackName(track.name), name = selected.get(binding.nodeName);
-    if (binding.propertyName !== 'quaternion' || !name) return track.clone();
-    replaced.add(name); return new THREE.QuaternionKeyframeTrack(track.name, samples, values.get(name));
-  });
-  for (const name of names) if (!replaced.has(name)) tracks.push(new THREE.QuaternionKeyframeTrack(`${bones.get(name).bone.name}.quaternion`, samples, values.get(name)));
-  return { clip: new THREE.AnimationClip(source.name, source.duration, tracks, source.blendMode), summary: { samples: samples.length, bones: names, forcedSupport: ['Nod', 'Wave'].includes(source.name), corrections } };
-}
-
-/** Continue the authored forward gait at its original speed, without reversing it. */
-function extendWalk(source) {
-  const duration = Math.max(source.duration, WALK_PLAYBACK_SECONDS);
-  const tracks = source.tracks.map((track) => {
-    const size = track.getValueSize(), interpolant = track.createInterpolant();
-    const first = Array.from(interpolant.evaluate(0)).slice(0, size);
-    const last = Array.from(interpolant.evaluate(source.duration)).slice(0, size);
-    const binding = THREE.PropertyBinding.parseTrackName(track.name);
-    const rootPosition = cleanName(binding.nodeName || '') === 'Hips' && binding.propertyName === 'position';
-    const times = [], values = [];
-    function append(time, sourceTime, cycle) {
-      const value = Array.from(interpolant.evaluate(sourceTime)).slice(0, size);
-      // Keep real horizontal travel continuous if a future source contains it.
-      // Walk2 is in place; this adds no movement to its existing root track.
-      if (rootPosition) for (const axis of [0, 2]) value[axis] += (last[axis] - first[axis]) * cycle;
-      times.push(time); values.push(...value);
-    }
-    append(0, 0, 0);
-    for (let cycle = 0; cycle * source.duration < duration; cycle++) {
-      for (const time of track.times) {
-        const at = cycle * source.duration + time;
-        if (at > times.at(-1) && at < duration) append(at, time, cycle);
-      }
-      // The source's final pose is within 0.9 mm of its first pose. Retain that
-      // final key and interpolate into the repeated first key over one source
-      // frame, avoiding a hard reset at the cycle boundary.
-      const boundary = (cycle + 1) * source.duration;
-      if (boundary > times.at(-1) && boundary < duration) append(boundary, source.duration, cycle);
-    }
-    const cycle = Math.ceil(duration / source.duration) - 1;
-    append(duration, duration - cycle * source.duration, cycle);
-    const result = track.clone(); result.times = new Float32Array(times); result.values = new Float32Array(values);
-    return result;
-  });
-  return new THREE.AnimationClip(source.name, duration, tracks, source.blendMode);
-}
+const FADE_SECONDS = .35;
+const AUTHORED_RETURN_SECONDS = .8;
+const cleanName = name => name.replace(/^mixamorig[:_]?/i, '');
+const smooth = value => value * value * (3 - 2 * value);
+const smoother = value => value ** 3 * (value * (value * 6 - 15) + 10);
 
 /**
- * Play the supplied body animation with a bounded upper-back correction.
- * Facial geometry, gaze and original rest transforms remain untouched.
- * `position` is world-space travel; the scene applies it to
- * the character group and follows it with the camera, lights and ground pool.
+ * Play the finished Blender performances, including their authored return to
+ * the looping Idle. No posture solver, synthetic breath or runtime retiming.
+ * World-space travel is kept outside the rig for the scene's following camera.
  */
 export function createCharacterMotion({ model, animations, bones, reducedMotion = false }) {
   const position = new THREE.Vector3(), mixer = new THREE.AnimationMixer(model);
   const hips = bones.get('Hips')?.bone || [...bones.values()].find(({ bone }) => cleanName(bone.name) === 'Hips')?.bone;
   if (!hips) throw new Error('The supplied character has no Hips bone.');
-  const rest = new Map([...bones.values()].map(({ bone, rest: quaternion }) => [bone, {
-    position: bone.position.clone(), quaternion: quaternion?.clone() || bone.quaternion.clone(), scale: bone.scale.clone(),
+  const rest = new Map([...bones.values()].map(({ bone }) => [bone, {
+    position: bone.position.clone(), quaternion: bone.quaternion.clone(), scale: bone.scale.clone(),
   }]));
-  const restHips = rest.get(hips).position;
-  const posture = createPostureCorrection({ model, bones });
-  const breathing = createIdleBreathing({ model, bones });
-  const sourceClips = new Map(animations.map((clip) => [clip.name, clip]));
-  const clips = new Map(), timings = new Map(), bakedPosture = {}, records = new Set(), history = [];
+  const sourceClips = new Map(animations.map(clip => [clip.name, clip]));
+  const clips = new Map(), records = new Set(), history = [];
+  for (const name of ['Idle', ...STATION_CLIPS]) {
+    const source = sourceClips.get(name);
+    if (!source || !(source.duration > 0)) throw new Error(`The authored character requires a nonempty ${name} clip.`);
+    clips.set(name, source.clone());
+  }
+  const idleDuration = clips.get('Idle').duration;
+  const hipsTrack = clip => clip.tracks.find(track => {
+    const binding = THREE.PropertyBinding.parseTrackName(track.name);
+    return cleanName(binding.nodeName || '') === 'Hips' && binding.propertyName === 'position';
+  });
+  const idleHipsTrack = hipsTrack(clips.get('Idle'));
+  const idleHipsStart = idleHipsTrack ? new THREE.Vector3().fromArray(idleHipsTrack.createInterpolant().evaluate(0)) : rest.get(hips).position.clone();
+  const walkHipsTrack = hipsTrack(clips.get('Walk'));
+  const walkInterpolant = walkHipsTrack?.clone().createInterpolant();
+  if (walkHipsTrack) for (let i = 0; i < walkHipsTrack.values.length; i += 3) {
+    // Extract Walk travel only. The other authored clips retain their complete
+    // pelvis motion, including the small weight shifts inside the real Idle.
+    walkHipsTrack.values[i] = idleHipsStart.x;
+    walkHipsTrack.values[i + 2] = idleHipsStart.z;
+  }
   const linearTransform = new THREE.Matrix3(), rootDelta = new THREE.Vector3(), beforeSample = new THREE.Vector3(), afterSample = new THREE.Vector3();
-  let walkInterpolant = null, current = null, entry = null, rootRecord = null, transition = null;
+  let current = null, entry = null, rootRecord = null, transition = null;
   let station = -1, elapsed = 0, serial = 0, disposed = false, entryEnded = true, completedAction = null, dragging = false;
 
-  for (const name of new Set(['Idle', ...STATION_CLIPS])) {
-    const source = sourceClips.get(name);
-    if (!source) continue;
-    // Preserve the authored hand/head movement. No additive gestures or face
-    // tracks are generated here. Rejected Greet, Box and CrossArms are never bound.
-    // The supplied bind pose has a relaxed straight shoulder line and parallel
-    // feet. The old Idle clip curls the chest and shoulders, even at its best
-    // planted frame, so all chapters now return to the complete original pose.
-    const authored = name === 'Idle' ? uprightRestClip(rest)
-      : name === 'Wave' ? excerpt(source, name, WAVE_RANGE[0], Math.min(WAVE_RANGE[1], source.duration))
-      : name === 'LookAround' ? excerpt(source, name, LOOK_AROUND_RANGE[0], Math.min(LOOK_AROUND_RANGE[1], source.duration))
-      : name === 'Walk' ? extendWalk(source) : source.clone();
-    const slowed = name !== 'Idle' && name !== 'Walk';
-    const baked = name === 'Idle' ? { clip: authored } : bakeUprightClip(authored, model, bones, posture, rest);
-    if (baked.summary) bakedPosture[name] = baked.summary;
-    const clip = slowed ? decelerateTail(baked.clip) : baked.clip;
-    timings.set(name, { sourceRange: name === 'Wave' ? [...WAVE_RANGE] : name === 'LookAround' ? [...LOOK_AROUND_RANGE] : [0, source.duration],
-      tailSourceSeconds: slowed ? TAIL_SOURCE_SECONDS : 0,
-      tailPlaybackSeconds: slowed ? 2 * TAIL_SOURCE_SECONDS : 0,
-      settleSeconds: name === 'Walk' ? 1 : slowed ? 2 * TAIL_SOURCE_SECONDS / SPEEDS[name] : 0 });
-    clip.name = name;
-    for (const track of clip.tracks) {
-      const binding = THREE.PropertyBinding.parseTrackName(track.name);
-      if (cleanName(binding.nodeName || '') !== 'Hips' || binding.propertyName !== 'position') continue;
-      if (name === 'Walk') walkInterpolant = track.clone().createInterpolant();
-      // The authored vertical bounce is retained. Horizontal motion is moved
-      // out of the skeleton so every pose blends around one stable origin.
-      for (let i = 0; i < track.values.length; i += 3) { track.values[i] = restHips.x; track.values[i + 2] = restHips.z; }
-    }
-    clips.set(name, clip);
-  }
-  if (!reducedMotion && !clips.has('Idle')) throw new Error('A reviewed Idle clip is required.');
-
-  function restoreRest() {
-    breathing.reset();
-    posture.reset();
-    for (const [bone, value] of rest) { bone.position.copy(value.position); bone.quaternion.copy(value.quaternion); bone.scale.copy(value.scale); }
-    model.updateMatrixWorld(true);
-    breathing.update(0, 0);
-  }
   function release(record) {
     record.action.stop(); mixer.uncacheAction(record.clip); records.delete(record);
   }
-  function start(name, fade = FADE_SECONDS, reason = 'station') {
-    if (disposed || reducedMotion || !clips.has(name)) return false;
-    const from = new Map([...records].map((record) => [record, record.weight]));
-    // Each performance gets its own action, so rapid station changes never
-    // reset a still-visible, fading action to its first frame.
+  function start(name, fade = FADE_SECONDS, reason = 'station', startTime = 0) {
+    const from = new Map([...records].map(record => [record, record.weight]));
+    // Separate instances let an interrupted performance fade from its actual
+    // current sample, even when a subsequent click starts the same clip again.
     const clip = clips.get(name).clone(); clip.name = `${name}:${serial++}`;
-    const action = mixer.clipAction(clip).reset().setEffectiveTimeScale(SPEEDS[name]).setEffectiveWeight(fade ? 0 : 1);
-    action.setLoop(name === 'Idle' ? THREE.LoopPingPong : THREE.LoopOnce, name === 'Idle' ? Infinity : 1);
-    action.clampWhenFinished = name !== 'Idle'; action.play();
-    const record = { name, action, clip, rate: SPEEDS[name], weight: fade ? 0 : 1,
-      idleMode: name === 'Idle' ? 'upright-breathing' : null, settleSeconds: timings.get(name).settleSeconds };
+    const action = mixer.clipAction(clip).reset().setEffectiveTimeScale(1).setEffectiveWeight(fade ? 0 : 1);
+    action.setLoop(name === 'Idle' ? THREE.LoopRepeat : THREE.LoopOnce, name === 'Idle' ? Infinity : 1);
+    action.clampWhenFinished = name !== 'Idle'; action.time = startTime; action.play();
+    const record = { name, action, clip, rate: 1, weight: fade ? 0 : 1 };
     records.add(record); current = record;
-    history.push({ from: [...from].filter(([, weight]) => weight > .001).map(([r]) => r.name), to: name, at: elapsed, fade, reason });
+    history.push({ from: [...from].filter(([, weight]) => weight > .001).map(([record]) => record.name), to: name, at: elapsed, fade, reason, startTime });
     if (history.length > 12) history.shift();
-    if (fade && from.size) transition = { from, to: record, elapsed: 0, duration: fade, settling: reason === 'settle' };
-    else { for (const previous of from.keys()) release(previous); transition = null; record.weight = 1; action.setEffectiveWeight(1); }
+    if (fade && from.size) transition = { from, to: record, elapsed: 0, duration: fade };
+    else {
+      for (const previous of from.keys()) release(previous);
+      transition = null; record.weight = 1; action.setEffectiveWeight(1);
+    }
     return record;
   }
   function enter(name, immediate, reason) {
     rootRecord = null; entryEnded = false; completedAction = null;
-    if (name === 'Idle') {
-      // Idle is a continuous station, not a one-shot entry. Reuse an existing
-      // idle action so revisiting this station never restarts its loop phase.
-      entry = null; entryEnded = true;
-      return current?.name === 'Idle' || !!start('Idle', immediate ? 0 : FADE_SECONDS, reason);
-    }
     entry = start(name, immediate ? 0 : FADE_SECONDS, reason);
-    if (!entry) { entryEnded = true; return false; }
     if (name === 'Walk') rootRecord = entry;
     return true;
   }
-  function finishIntoIdle(reason) {
-    if (current?.name !== 'Idle') start('Idle', entry?.settleSeconds || FADE_SECONDS, reason);
+  function finishIntoIdle() {
+    if (!entry || entryEnded) return;
+    const completed = entry;
+    entryEnded = true; completedAction = completed.name; rootRecord = null;
+    // Blender already authored the return pose and velocity. Continue the real
+    // Idle at that same phase, with no second full-body fade back to bind pose.
+    start('Idle', 0, 'authored-return', completed.clip.duration % idleDuration);
+    entry = null;
+    mixer.update(0); model.updateMatrixWorld(true);
   }
   function setStation(index, { immediate = false, prepareOpening = false } = {}) {
-    const next = ((Math.round(index) % 4) + 4) % 4;
+    const next = ((Math.round(index) % STATION_CLIPS.length) + STATION_CLIPS.length) % STATION_CLIPS.length;
     if (!Number.isFinite(next) || disposed || next === station) return false;
-    const openingWalk = next === WALK_STATION && (station < 0 || prepareOpening);
+    const opening = station < 0 || prepareOpening;
     station = next;
-    if (reducedMotion) { restoreRest(); return false; }
-    // At dt=0 the outgoing action is still fully visible. Prime that action
-    // with the upright original rest pose before the paused intro render;
-    // once presentation time resumes, the existing fade starts the forward gait.
-    if (openingWalk) { breathing.reset(); start('Idle', 0, 'walk-opening'); mixer.update(0); breathing.update(elapsed); }
-    return enter(STATION_CLIPS[next], immediate && !openingWalk, 'station');
-  }
-  function update(dt, options = {}) {
-    if (disposed) return;
-    dragging = !!options.dragging;
-    if (reducedMotion) { restoreRest(); return; }
-    if (dragging) return;
-    const delta = Math.min(.1, Math.max(0, Number.isFinite(dt) ? dt : 0));
-    const fade = entry?.settleSeconds || FADE_SECONDS;
-    const untilFade = entry && !entryEnded && current === entry ? (entry.clip.duration - entry.action.time) / entry.rate - fade : Infinity;
-    // Split the frame at the authored-to-idle transition. Waiting for the next
-    // rendered frame would delay deceleration at low frame rates.
-    if (untilFade > 1e-7 && untilFade < delta) {
-      advance(untilFade);
-      if (current === entry) finishIntoIdle('settle');
-      advance(delta - untilFade);
-    } else {
-      if (untilFade <= 1e-7 && current === entry) finishIntoIdle('settle');
-      advance(delta);
-    }
+    if (reducedMotion) return false;
+    // All performances start at Idle phase zero. The loading screen therefore
+    // reveals a real relaxed idle sample, not an intermediate stride or Rest.
+    if (opening) { start('Idle', 0, 'opening', 0); mixer.update(0); }
+    return enter(STATION_CLIPS[next], immediate && !opening, 'station');
   }
   function advance(delta) {
     elapsed += delta;
     const walk = rootRecord, walkTime = walk?.action.time || 0, walkWeight = walk?.weight || 0;
     if (transition) {
       transition.elapsed += delta;
-      const t = Math.min(1, transition.elapsed / transition.duration), weight = transition.settling ? smoother(t) : smooth(t);
+      const t = Math.min(1, transition.elapsed / transition.duration), weight = smooth(t);
       for (const [record, initial] of transition.from) { record.weight = initial * (1 - weight); record.action.setEffectiveWeight(record.weight); }
       transition.to.weight = weight; transition.to.action.setEffectiveWeight(weight);
-      if (t === 1) { for (const previous of transition.from.keys()) if (previous !== transition.to && previous !== rootRecord && (previous !== entry || entryEnded)) release(previous); transition = null; }
+      if (t === 1) {
+        for (const previous of transition.from.keys()) if (previous !== transition.to) release(previous);
+        transition = null;
+      }
     }
-    breathing.reset();
     mixer.update(delta);
-    // One continuous breath clock spans gestures and idle. Only its amplitude
-    // follows the blend, so ending a gesture never restarts a visible inhale.
-    const idleWeight = [...records].filter(record => record.name === 'Idle').reduce((sum, record) => sum + record.weight, 0);
-    breathing.update(elapsed, .2 + .8 * idleWeight);
-    // Transform a displacement (not a point) through the Hips parent. This
-    // includes the preserved rig scale and any parent rotation, but never
-    // re-adds the already accumulated character translation.
     if (walk && walkInterpolant) {
       beforeSample.fromArray(walkInterpolant.evaluate(walkTime));
       afterSample.fromArray(walkInterpolant.evaluate(walk.action.time));
@@ -287,39 +116,57 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       hips.parent.updateWorldMatrix(true, false); linearTransform.setFromMatrix4(hips.parent.matrixWorld);
       rootDelta.applyMatrix3(linearTransform).multiplyScalar((walkWeight + walk.weight) * .5);
       rootDelta.y = 0; position.add(rootDelta);
-      if (walk.action.time >= walk.clip.duration - 1e-6) rootRecord = null;
     }
-    if (entry && !entryEnded) {
-      const remaining = (entry.clip.duration - entry.action.time) / entry.rate;
-      const fade = entry.settleSeconds;
-      if (remaining <= fade + 1e-7 && current === entry) finishIntoIdle('settle');
-      if (remaining <= 1e-6) { entryEnded = true; completedAction = entry.name; }
-    }
-    for (const record of [...records]) if (record !== current && record !== rootRecord && (record !== entry || entryEnded) && record.weight <= 1e-6 && !transition?.from.has(record)) release(record);
+    for (const record of [...records]) if (record !== current && record.weight <= 1e-6 && !transition?.from.has(record)) release(record);
     model.updateMatrixWorld(true);
   }
+  function update(dt, options = {}) {
+    if (disposed) return;
+    dragging = !!options.dragging;
+    if (reducedMotion || dragging || options.paused) return;
+    const delta = Math.min(.1, Math.max(0, Number.isFinite(dt) ? dt : 0));
+    const untilEnd = entry && !entryEnded ? Math.max(0, entry.clip.duration - entry.action.time) : Infinity;
+    // Split exactly at the authored boundary, then advance the matching Idle
+    // by this frame's remainder. This keeps the splice independent of frame rate.
+    if (untilEnd <= delta) {
+      advance(untilEnd); finishIntoIdle();
+      if (delta > untilEnd) advance(delta - untilEnd);
+    } else advance(delta);
+  }
   function react() {
-    if (disposed || reducedMotion || dragging || !entryEnded || rootRecord || station < 0 || STATION_CLIPS[station] === 'Idle') return false;
-    // Keep the reviewed Walk-station response: click to nod, then return to its
-    // upright original rest pose instead of replaying the walking entry.
+    if (disposed || reducedMotion || dragging || !entryEnded || rootRecord || station < 0) return false;
     return enter(station === WALK_STATION ? 'Nod' : STATION_CLIPS[station], false, 'reaction');
   }
   function getState() {
     const visible = !entryEnded && entry ? entry : current;
-    return { action: reducedMotion ? 'Rest' : visible?.name || 'Rest', time: visible?.action.time || 0,
-      duration: visible?.clip.duration || 0, speed: visible?.rate || 0, walking: !!rootRecord, position: position.toArray(),
+    const idle = [...records].find(record => record === current && record.name === 'Idle') || [...records].find(record => record.name === 'Idle');
+    const returnSeconds = Math.min(AUTHORED_RETURN_SECONDS, visible?.clip.duration || AUTHORED_RETURN_SECONDS);
+    const returnProgress = entry && !entryEnded ? Math.min(1, Math.max(0, (entry.action.time - entry.clip.duration + returnSeconds) / returnSeconds)) : 1;
+    return {
+      action: visible?.name || 'Idle', time: visible?.action.time || 0, duration: visible?.clip.duration || 0,
+      speed: reducedMotion ? 0 : 1, walking: !!rootRecord, position: position.toArray(),
       station, reducedMotion, dragging, end: entryEnded, completedAction, clips: [...clips.keys()], rejected: ['Greet', 'Box', 'CrossArms'],
       transition: transition ? { to: transition.to.name, elapsed: transition.elapsed, duration: transition.duration } : null,
-      transitions: history.map((item) => ({ ...item, from: [...item.from] })),
-      weights: [...records].filter((record) => record.weight > .0001).map((record) => ({ action: record.name, weight: record.weight, time: record.action.time })),
-      rootMotion: { extracted: true, space: 'world', bone: hips.name, horizontalRest: [restHips.x, restHips.z] },
-      idleRange: null, idleMode: current?.idleMode || null, idleSourceTime: null, posture: { ...posture.inspect(), baked: true, clips: bakedPosture }, breathing: breathing.state(),
-      settleProgress: transition?.settling ? smoother(Math.min(1, transition.elapsed / transition.duration)) : current?.name === 'Idle' && entryEnded ? 1 : 0,
-      playbackTiming: { ...(timings.get(visible?.name) || timings.get('Idle')) },
-      walkPlayback: { sourceDuration: sourceClips.get('Walk')?.duration || 0, duration: clips.get('Walk')?.duration || 0, speed: SPEEDS.Walk },
-      waveRange: [...WAVE_RANGE], lookAroundRange: [...LOOK_AROUND_RANGE], faceAnimation: false };
+      transitions: history.map(item => ({ ...item, from: [...item.from] })),
+      weights: [...records].filter(record => record.weight > .0001).map(record => ({ action: record.name, weight: record.weight, time: record.action.time })),
+      rootMotion: { extracted: true, space: 'world', bone: hips.name, horizontalRest: [idleHipsStart.x, idleHipsStart.z] },
+      idleRange: [0, idleDuration], idleMode: 'authored-idle', idleSourceTime: idle?.action.time ?? null,
+      posture: { mode: 'blender-authored', runtimeCorrection: false },
+      idleAnimation: { duration: idleDuration, time: idle?.action.time ?? null, animated: !reducedMotion, loop: 'repeat' },
+      settleProgress: smoother(returnProgress),
+      playbackTiming: { sourceRange: [0, visible?.clip.duration || idleDuration], authoredReturn: true, settleSeconds: visible?.name === 'Idle' ? 0 : returnSeconds },
+      walkPlayback: { sourceDuration: sourceClips.get('Walk').duration, duration: clips.get('Walk').duration, speed: 1 },
+      waveRange: [0, clips.get('Wave').duration], lookAroundRange: [0, clips.get('LookAround').duration], faceAnimation: false,
+    };
   }
-  function dispose() { if (disposed) return; disposed = true; mixer.stopAllAction(); mixer.uncacheRoot(model); records.clear(); transition = null; rootRecord = null; restoreRest(); }
-  if (reducedMotion) restoreRest(); else { start('Idle', 0, 'initial'); mixer.update(0); }
+  function dispose() {
+    if (disposed) return;
+    disposed = true; mixer.stopAllAction(); mixer.uncacheRoot(model); records.clear(); transition = null; rootRecord = null;
+    for (const [bone, pose] of rest) { bone.position.copy(pose.position); bone.quaternion.copy(pose.quaternion); bone.scale.copy(pose.scale); }
+    model.updateMatrixWorld(true);
+  }
+  start('Idle', 0, 'initial', 0); mixer.update(0);
+  if (reducedMotion) current.action.paused = true;
+  model.updateMatrixWorld(true);
   return { position, setStation, update, react, dispose, getState };
 }

@@ -1,8 +1,8 @@
 # Why me? — 个人展示
 
-独立项目目录：`whyme-web`。页面版本标识为 v2.4.1，当前保留 Tripo 原始表面与 4K 贴图；本轮加入细微连续呼吸，将点头、挥手修成直立支撑姿态，并重做减速收尾与待机衔接。抽绳修正继续保留。白色加载页完成后再淡入网站。站点顺序为“迅速到岗、审美与产品意识、团队精神、长期意识”，对应 Walk2 原地步态、点头、小幅挥手和环顾，默认展示迅速到岗。
+独立项目目录：`whyme-web`。页面版本标识为 v2.4.1，当前保留 Tripo 原始表面与 4K 贴图；本轮在 Blender 中编辑五个独立动画：自然待机、走路、点头、小幅挥手和环顾。使用统一放松站姿，重点修正非挥手右臂内缩与动作间的姿态跳变。抽绳修正继续保留。白色加载页完成后再淡入网站。站点顺序为“迅速到岗、审美与产品意识、团队精神、长期意识”，对应 Walk2 原地步态、点头、小幅挥手和环顾，默认展示迅速到岗。
 
-当前使用 `public/models/person-original.glb` / `person-original-animated.glb`。它们保留 Tripo 的 11,922 个 GLB 顶点、10,892 个三角形、原法线、UV、蒙皮与原始 4096×4096 JPEG 字节，不做细分、减面、几何量化、缩图或贴图重编码。旧 `person.glb` / `person-animated.glb` 曾做细分、材质重建与 2K 处理，是历史网站基线，不是未经处理的 Tripo 原模型；它们与用户的 `../person.blend` 均保留。下文旧版本记录中的“原模型”指当时的网站基线，不能作为当前原始保真程度的证明。
+静态使用 `public/models/person-original.glb`，动态使用 `person-authored-animated.glb`；`person-original-animated.glb` 保留为原动画备份。新动态文件只追加 Blender 编辑的动画，完整保留原 binary 前缀及 nodes、meshes、skins、materials、textures、images 等模型数据。它们保留 Tripo 的 11,922 个 GLB 顶点、10,892 个三角形、原法线、UV、蒙皮与原始 4096×4096 JPEG 字节，不做细分、减面、几何量化、缩图或贴图重编码。旧 `person.glb` / `person-animated.glb` 曾做细分、材质重建与 2K 处理，是历史网站基线，不是未经处理的 Tripo 原模型；它们与用户的 `../person.blend` 均保留。下文旧版本记录中的“原模型”指当时的网站基线，不能作为当前原始保真程度的证明。
 
 正式域名：[whywky.website](https://whywky.website/)。代码仓库：[wangkuangyi/whyme](https://github.com/wangkuangyi/whyme)。原始 Pages 地址为 `https://wangkuangyi.github.io/whyme/`，绑定域名后由 GitHub 跳转至正式域名。
 
@@ -18,7 +18,7 @@ npm run dev
 - 默认进入 01“随时出发”，首屏使用 Walk2 原地步态；`?angle=1` 至 `?angle=4` 可指定初始角度。
 - `?still=1` 展示原人物静止 3D，仍可切换镜头。
 - `?static=1` 使用静帧展示；幕后也提供静帧切换入口。
-- 系统启用“减少动态”时，人物保留原站姿。
+- 系统启用“减少动态”时，人物定格独立 Idle 首帧。
 
 `npm run check` 检查语法，`npm run build` 构建，`npm run preview` 预览构建结果。Node.js 22 已在本机使用。
 
@@ -41,7 +41,7 @@ npm run preview -- --port 4174 --base /whyme/
 
 ## 当前版本
 
-站点顺序、配色和动作如下；镜头与配色随内容身份保留。当前原始资产检查见 `qa/tripo/original-assets.json`，直立待机、动作和抽绳修正的验收见 `qa/breathing/`，加载与揭幕检查见 `qa/original/loading-results.json`。此前 `qa/tripo/walk-entry-*`、`walk-idle-*` 和 `walk2-*` 是历史证据，不替代本轮资产、渲染与加载检查。
+站点顺序、配色和动作如下；镜头与配色随内容身份保留。当前原始资产检查见 `qa/tripo/original-assets.json`，本轮独立待机、动作和衣服检查见 `qa/blender-motion/`，加载与揭幕检查见 `qa/original/loading-results.json`。此前 `qa/tripo/walk-entry-*`、`walk-idle-*` 和 `walk2-*` 是历史证据，不替代本轮资产、渲染与加载检查。
 
 | 站点 | 主题 | 动作 | 卫衣颜色 |
 | --- | --- | --- | --- |
@@ -62,21 +62,32 @@ npm run preview -- --port 4174 --base /whyme/
 - 自托管 Noto Sans SC 400/600；WHY ME? 使用全大写自绘几何字标，统一顶线、底线和直切笔画，与姓名等宽。姓名下显示“11月底可到岗”小字；页面不显示镜头参数。左下目录与内容展示框共用直角半透明底色。
 - 暖灰褐、群青、莓果、松绿四种卫衣颜色，直接 OKLCH 过渡。01 使用低饱和暖灰褐 `#82756E`，袖口为 `#6B5E58`、地面为 `#F8F5F3`；首帧和降级静帧需与新顺序及配色同步。
 - 四站动作映射为 `Walk / Nod / Wave / LookAround`。站点判断通过动作名称定位，避免顺序改变后把 Walk 的行为套到其他站。
-- 04环顾使用源1.2–7.4秒，03小幅挥手使用源0.9–4.75秒，02点头保留完整3秒。三者最后0.4源秒平滑放慢为0.8播放秒，并在减速中自然回待机；实际时长约6.6秒、4.05秒、3.09秒。动作结束不额外停顿再切回。
-- 四站以自然直立的原Rest站姿轻微呼吸：4.8秒一轮、胸部总升幅2.8mm，双脚和根位置稳定，不改变脸部比例或脊柱旋转。呼吸相位跨站和点击连续，暂停/拖拽冻结；减少动态模式保留静止站姿。01依然完整原速步态续至3.6秒，最后1秒逐渐减小步幅和摆臂，平顺回站；点击01只点头。
+- 五段 Blender 动画时长：Idle 4.8 秒、Walk 4.4 秒、Nod 4.15 秒、Wave 5.2 秒、LookAround 6.8 秒。点头只对起手最初 0.4 源秒减速到 0.75 秒，主体手势保留。
+- Idle 是独立循环的骨骼动画，取原 Idle 3.25–5 秒的稳定上身微动，脚保持落地，肩背、头部和手臂有细微变化。所有动作围绕同一放松站姿编辑，首帧匹配 Idle0、末帧匹配对应 Idle 相位，结束后直接续播 Idle；不再程序性上下浮动或强行回 bind/rest。
 - 四站保持不同摄影角度和距离：01 斜俯视小全身、02 点头较正面特写、03 小幅挥手为另一侧半身、04 环顾略高侧面中景。01 动作与 Idle 均保持全身；02、03、04 待机继续收近，尽量少露手指。当前参数以 `src/scene.js` 为准，`qa/tripo/walk-idle-visual.json` 只记录旧资产对应的镜头验收。
 - 光环、柔光与阴影；键盘、拖动、节点和目录导航。
 - 手机版说明区、打印版、幕后详情和静帧降级。
-- 人物使用 `public/models/person-original-animated.glb`，精确文件体积和 SHA-256 见 `public/models/person-original-info.json`。使用三份同骨架素材，Walk 来自 Walk2，没有新增眼球或面部动画。衣服通过额外的 4K 灰度遮罩限定换色区域，同时保留原纹理；不使用程序生成布纹或合成法线替代原纹理。当前不因帧率自动降低画质，仅在失败或主动选择时切换高质量静帧。
+- 人物使用 `public/models/person-authored-animated.glb`，精确文件体积和 SHA-256 见 `qa/blender-motion/asset-preservation.json`。使用三份同骨架素材，Walk 来自 Walk2，没有新增眼球或面部动画。衣服通过额外的 4K 灰度遮罩限定换色区域，同时保留原纹理；不使用程序生成布纹或合成法线替代原纹理。当前不因帧率自动降低画质，仅在失败或主动选择时切换高质量静帧。
 - 原始贴图已包含鼻唇等部位的烘焙明暗。运行时人物采用 `MeshBasicMaterial`、`toneMapped:false`，直接呈现原 4K 纹理，避免棚灯再次塑形导致嘴唇明暗被放大；地面的投影仍保留。GLB 文件保留原 PBR 参数（roughness 约 0.9）用于数据互换，但网站人物不再受棚灯二次照明。02 的镜头增加轻微俯视，具体参数以 `src/scene.js` 为准。
 
 大幅招手 `Greet` 和不合适的 `Box` 均不绑定或播放。它们仍存在于原始动作资产中，不属于当前可用动作。此前撤回的表情和动作实验只保留在被 Git 忽略的 `output/v2/`，不参与运行。
 
 用户已因明显穿模撤回抱臂 `CrossArms`。当前派生 GLB 不包含抱臂片段，管线也不读取 `human+character+3d+model+shuangbi.glb`；抱臂实验的通过记录不能作为本轮环顾验收。
 
-点头和挥手的挺直修正在加载时烘焙到派生动作，只替换五个支撑骨的旋转，再与呼吸待机混合。此前对混合姿态进行动态门控会导致收尾中途再次含胸，现已移除。走路、环顾正常源姿态保留；五次平滑权重和末段减速让动作自然收束，镜头也从收尾阶段开始渐近。抽绳仍仅修正180个导出顶点的蒙皮权重，原几何、法线、UV、4K贴图与GLB均不改写。当前验收见 `qa/breathing/acceptance.md`。
+动画编辑源为 `animation/character-actions.blend`，包含五个 `Edited_*` Actions。Wave 的右臂改为自然下垂；Walk 双手及 LookAround 右手在 Blender 里通过 IK 留出腰侧间距。网页只播放烘焙后的动画，已取消运行时肩背校正和胸部上下平移。抽绳仍使用原先 180 个顶点的蒙皮权重修正。验收与限制见 `qa/blender-motion/acceptance.md`。
 
-## 重新生成动作资产
+## 编辑当前 Blender 动作
+
+```powershell
+& "D:\APP\blender\blender.exe" --background --python-exit-code 1 --python scripts/blender_edit_motion.py
+npm run motion:pack
+npm run test:motion
+npm run test:hoodie
+```
+
+上述命令从原始 GLB 重新生成并覆盖 `animation/character-actions.blend`；修改过该副本时请先另存。五段 Actions 均可在 Blender 中编辑。打包器读取 `output/blender-motion/authored-animations.json`，不会直接读取手工改过的 `.blend`，手工编辑后需要重新采样。采样中间数据被 Git 忽略。打包器不重新导出网格，只追加骨骼动画数据。修改后需重新截图、生成 24 张静帧并运行正式构建。
+
+## 重新生成原始动作基线
 
 将三份用户原始导出文件放在 `动作素材/`：
 
@@ -89,10 +100,9 @@ npm run preview -- --port 4174 --base /whyme/
 ```powershell
 node scripts/original-prepare.mjs
 node scripts/original-prepare.mjs --check
-node scripts/tripo-test-motion.mjs
 ```
 
-准备脚本核对骨架、原网格属性、4K JPEG 字节和各动作采样，生成 `person-original.glb`、`person-original-animated.glb`、`hoodie-mask.png` 及 `person-original-info.json`；元数据记录源路径、SHA-256 和片段来源。`--check` 只核验可复现性，不写文件。资产报告写入 `qa/tripo/original-assets.json`，动作测试写入 `qa/tripo/original-motion.json`，不能替代真实浏览器中的材质、动作和构图检查。每次改动导出或遮罩后重新生成报告，并核对动作报告的资产 SHA-256。原始素材默认不入库，新检出项目只有重新生成资产时才需补齐源文件。旧 `prepare_person.py` 与 `tripo-prepare.mjs` 仅用于历史管线，不用于当前原始保真资产。
+准备脚本核对骨架、原网格属性、4K JPEG 字节和各动作采样，生成 `person-original.glb`、`person-original-animated.glb`、`hoodie-mask.png` 及 `person-original-info.json`；元数据记录源路径、SHA-256 和片段来源。`--check` 只核验可复现性，不写文件。资产报告写入 `qa/tripo/original-assets.json`；它只更新原始基线，之后需按上节在 Blender 编辑、打包并运行 `npm run test:motion`，当前动作报告写入 `qa/blender-motion/motion-results.json`。数值报告不能替代浏览器中的材质、动作和构图检查。每次改动导出或遮罩后重新生成报告，并核对动作报告的资产 SHA-256。原始素材默认不入库，新检出项目只有重新生成资产时才需补齐源文件。旧 `prepare_person.py` 与 `tripo-prepare.mjs` 仅用于历史管线，不用于当前原始保真资产。
 
 ## 文件与版本管理
 
@@ -105,10 +115,10 @@ v2.4.1 的文案与作品入口使用 `feature/content-evidence` 分支，标签
 - `src/dialogs.js`：联系、幕后、更新记录。
 - `public/models/`：当前 `person-original*`、衣服换色遮罩、来源报告，以及保留的历史模型。
 - `public/images-intro/`：透明人物与相机配准元数据，用于截图验收和资料保留，普通 3D 首屏不下载这些图片。仅开发模式的 `?holdIntro=1` 暂停模型用于捕获，白色遮罩保持显示；通过 scene.capture() 导出人物，浏览器截图若需隐藏遮罩只在测试中处理。
-- `public/images-tripo/`：四张桌面、四张手机待机静帧及位置元数据；`public/images-v2/` 为静止 3D 的静帧。改变资产、镜头或灯光后须重生成这两组及 intro 共 24 张，并同步元数据。当前静帧缓存版本为 `breathing-4k`。
+- `public/images-tripo/`：四张桌面、四张手机待机静帧及位置元数据；`public/images-v2/` 为静止 3D 的静帧。改变资产、镜头或灯光后须重生成这两组及 intro 共 24 张，并同步元数据。当前静帧缓存版本为 `blender-actions-1`。
 - `CONTENT_SOURCES.md`：个人经历的来源边界。
 - `qa/tripo/original-assets.json`：原始资产保留检查；`qa/tripo/original-motion.json` 为此前待机行为的历史检查。
-- `qa/breathing/acceptance.md`：当前连续呼吸、动作预校正、自然收尾与抽绳组合验收；`qa/posture/` 保留上一轮历史结果。
+- `qa/blender-motion/acceptance.md`：本轮 Blender 独立待机、四动作、衔接与衣服检查；`qa/breathing/` 和 `qa/posture/` 保留被替代方案的历史结果。
 - `qa/original/loading.md`、`qa/original/loading-results.json`：白色加载页、错误恢复、静帧解码、字体等待与揭幕时序检查。
 - `qa/tripo/walk2-assets.json`：历史 Walk2 替换检查，不替代当前原始保真资产检查。
 - `qa/tripo/walk-idle-motion.json`、`qa/tripo/walk-idle-visual.json`：此前新顺序、稳站与旧资产的检查。

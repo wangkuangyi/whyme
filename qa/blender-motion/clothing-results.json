@@ -1,0 +1,571 @@
+{
+  "generatedAt": "2026-10-23T16:30:35.794Z",
+  "asset": "public/models/person-authored-animated.glb",
+  "assetSHA256": "28ddcb8629174322495add57936bc27e8851dd7a5bb682602a46b728902bfda0",
+  "sourceSHA256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "imageHashes": [
+    {
+      "mimeType": "image/jpeg",
+      "bytes": 3106959,
+      "sha256": "c931d3555581a035ff2445b148f2676d70c5b22a60ec3b99b191c7341ed8c1ec"
+    }
+  ],
+  "moduleSHA256": {
+    "src/motion.js": "d3577c9b79278bd43de283fa1b7da963c31b887d342603825d2262f21b800fae",
+    "src/hoodie-skinning.js": "bd19d0e339442ab6fc568c8b4b789aa1b78627fba188b8eb4746fc60962a650a",
+    "src/hoodie-skinning-data.js": "45af6211d6c787f8a532460628b860da5e43eb1aeb7f0f0db549a9da66887cca"
+  },
+  "passed": 28,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "source-asset-matches-reviewed-immutable-sha",
+      "passed": true
+    },
+    {
+      "name": "all-original-binary-bytes-are-preserved-as-an-exact-prefix",
+      "passed": true
+    },
+    {
+      "name": "original-mesh-skeleton-materials-images-and-scene-json-are-identical",
+      "passed": true
+    },
+    {
+      "name": "original-embedded-texture-bytes-identical",
+      "passed": true
+    },
+    {
+      "name": "drawstring-and-hand-subsets-cover-real-mesh-vertices",
+      "passed": true
+    },
+    {
+      "name": "runtime-patch-only-changes-the-approved-180-skinning-rows",
+      "passed": true
+    },
+    {
+      "name": "Walk-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "Walk-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "Walk-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "Walk-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Walk-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Nod-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "Nod-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "Nod-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "Nod-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Nod-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Wave-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "Wave-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "Wave-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "Wave-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "Wave-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "LookAround-uses-blender-actions-with-no-runtime-posture-or-breathing-solver",
+      "passed": true
+    },
+    {
+      "name": "LookAround-all-180-cord-vertices-clear-chest-through-real-entry-action-exit-idle",
+      "passed": true
+    },
+    {
+      "name": "LookAround-at-least-two-complete-real-idle-cycles-are-sampled",
+      "passed": true
+    },
+    {
+      "name": "LookAround-right-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "LookAround-left-hand-has-no-negative-side-clearance-against-tested-waist-geometry",
+      "passed": true
+    },
+    {
+      "name": "source-and-static-and-historical-report-sha256-are-unchanged",
+      "passed": true
+    },
+    {
+      "name": "authored-asset-remained-unchanged-during-the-test",
+      "passed": true
+    }
+  ],
+  "method": "Actual Three.GLTFLoader skeleton/geometry/animation; only headless texture decoding is replaced. Runtime entry/action/authored return followed by more than two full real Idle loops at 60 Hz. All 180 patched cord vertices use deformed front-chest triangle depth at every frame. All dominant LeftHand/RightHand and finger mesh vertices use actual waist/upper-leg side silhouette depth at 30 Hz. The worst sample per hand/station is separately replayed and measured with true 3D point-to-triangle distance, outward-normal signed distance, and deduplicated ray parity. No posture correction or synthetic breathing is imported or applied.",
+  "coverage": {
+    "heightMetres": 1.83,
+    "sourceHeight": 0.9995117485523206,
+    "cordVertices": 180,
+    "chestTriangles": 656,
+    "rightHandVertices": 851,
+    "leftHandVertices": 835,
+    "bodySideTriangles": 1130
+  },
+  "limits": "Directional projection checks are not a proof of arbitrary full-mesh self-intersection. Side misses are not asserted positive clearance; only samples intersecting the tested body projection have a measured gap. Fingers against their own sleeve and other body regions are outside this test. Texture appearance and visible arm/cloth shape require separate real browser review.",
+  "runtime": [
+    {
+      "name": "Walk",
+      "station": 1,
+      "seconds": 14.500000476837158,
+      "frames": 872,
+      "cords": {
+        "minimumGapMM": 2.894341445279545,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 156960,
+        "worst": {
+          "time": 6.216666666666667,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": 3.7974970885695223,
+        "penetratingSamples": 0,
+        "missing": 29209,
+        "samples": 341827,
+        "worst": {
+          "time": 0.26666666666666666,
+          "vertex": 1020
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": 7.503634860284792,
+        "penetratingSamples": 0,
+        "missing": 19470,
+        "samples": 344590,
+        "worst": {
+          "time": 0.8333333333333334,
+          "vertex": 6644
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 245.77612685075576,
+        "maximum": 381.9813351329865
+      },
+      "idle": {
+        "frames": 607,
+        "firstTime": 4.416666666666667,
+        "lastTime": 14.516666666666667,
+        "cords": {
+          "minimumGapMM": 2.894341445279545,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109260,
+          "worst": {
+            "time": 6.216666666666667,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.817621284989833,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 257853,
+          "worst": {
+            "time": 6.7,
+            "vertex": 1038
+          }
+        },
+        "durationSeconds": 10.100000000000001
+      },
+      "rightHandWorst3D": {
+        "time": 0.26666666666666666,
+        "vertex": 1020,
+        "position": [
+          -0.10625548610356021,
+          0.39865844335561673,
+          0.030496668610251045
+        ],
+        "nearest": {
+          "triangle": [
+            1114,
+            4403,
+            4402
+          ],
+          "distanceMM": 3.65116418669336,
+          "signedDistanceMM": 3.65116418669336
+        },
+        "positiveXRayIntersections": 2,
+        "insideByOddParity": false
+      },
+      "leftHandWorst3D": {
+        "time": 0.8333333333333334,
+        "vertex": 6644,
+        "position": [
+          0.11137573997360932,
+          0.4076704042464055,
+          0.03159971053423234
+        ],
+        "nearest": {
+          "triangle": [
+            10041,
+            6696,
+            10040
+          ],
+          "distanceMM": 7.219776252253268,
+          "signedDistanceMM": 6.899361221278914
+        },
+        "positiveXRayIntersections": 0,
+        "insideByOddParity": false
+      }
+    },
+    {
+      "name": "Nod",
+      "station": 2,
+      "seconds": 14.250000476837158,
+      "frames": 857,
+      "cords": {
+        "minimumGapMM": 2.8896056726742936,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 154260,
+        "worst": {
+          "time": 3.5,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": 25.797554589235205,
+        "penetratingSamples": 0,
+        "missing": 70323,
+        "samples": 294756,
+        "worst": {
+          "time": 3.6,
+          "vertex": 1161
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": 23.10752392552548,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 358215,
+        "worst": {
+          "time": 3.066666666666667,
+          "vertex": 6650
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 169.6587098460136,
+        "maximum": 397.5329727645263
+      },
+      "idle": {
+        "frames": 607,
+        "firstTime": 4.166666666666667,
+        "lastTime": 14.266666666666667,
+        "cords": {
+          "minimumGapMM": 2.894341445279545,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109260,
+          "worst": {
+            "time": 6.216666666666667,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.817621284989833,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 258704,
+          "worst": {
+            "time": 6.7,
+            "vertex": 1038
+          }
+        },
+        "durationSeconds": 10.100000000000001
+      },
+      "rightHandWorst3D": {
+        "time": 3.6,
+        "vertex": 1161,
+        "position": [
+          -0.11564976719838553,
+          0.43065004233478066,
+          -0.0005658697503329505
+        ],
+        "nearest": {
+          "triangle": [
+            1132,
+            4408,
+            4407
+          ],
+          "distanceMM": 25.388145255403533,
+          "signedDistanceMM": 25.366366097487553
+        },
+        "positiveXRayIntersections": 2,
+        "insideByOddParity": false
+      },
+      "leftHandWorst3D": {
+        "time": 3.066666666666667,
+        "vertex": 6650,
+        "position": [
+          0.11309262254250792,
+          0.4083434805777691,
+          0.027304088203322537
+        ],
+        "nearest": {
+          "triangle": [
+            10047,
+            6769,
+            6697
+          ],
+          "distanceMM": 22.659032342508976,
+          "signedDistanceMM": 22.659032342508972
+        },
+        "positiveXRayIntersections": 0,
+        "insideByOddParity": false
+      }
+    },
+    {
+      "name": "Wave",
+      "station": 3,
+      "seconds": 15.300000190734863,
+      "frames": 920,
+      "cords": {
+        "minimumGapMM": 2.8943414452794944,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 165600,
+        "worst": {
+          "time": 6.216666666666667,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": 15.93836586797168,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 391460,
+        "worst": {
+          "time": 2,
+          "vertex": 1038
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": 5.7196539618526945,
+        "penetratingSamples": 0,
+        "missing": 54619,
+        "samples": 329481,
+        "worst": {
+          "time": 4.066666666666666,
+          "vertex": 6646
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 252.01534430894225,
+        "maximum": 277.0455120353015
+      },
+      "idle": {
+        "frames": 608,
+        "firstTime": 5.2,
+        "lastTime": 15.316666666666666,
+        "cords": {
+          "minimumGapMM": 2.8943414452794944,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109440,
+          "worst": {
+            "time": 6.216666666666667,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.81762128498958,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 258704,
+          "worst": {
+            "time": 6.7,
+            "vertex": 1038
+          }
+        },
+        "durationSeconds": 10.116666666666667
+      },
+      "rightHandWorst3D": {
+        "time": 2,
+        "vertex": 1038,
+        "position": [
+          -0.10758889751012314,
+          0.41283603123130896,
+          0.028889421125554277
+        ],
+        "nearest": {
+          "triangle": [
+            1143,
+            1133,
+            1117
+          ],
+          "distanceMM": 13.904853433523156,
+          "signedDistanceMM": 12.895108171384406
+        },
+        "positiveXRayIntersections": 2,
+        "insideByOddParity": false
+      },
+      "leftHandWorst3D": {
+        "time": 4.066666666666666,
+        "vertex": 6646,
+        "position": [
+          0.10526138337709609,
+          0.4044227506007876,
+          0.017673456109715085
+        ],
+        "nearest": {
+          "triangle": [
+            10047,
+            6697,
+            10041
+          ],
+          "distanceMM": 5.5475226949259016,
+          "signedDistanceMM": 5.547522694925902
+        },
+        "positiveXRayIntersections": 0,
+        "insideByOddParity": false
+      }
+    },
+    {
+      "name": "LookAround",
+      "station": 4,
+      "seconds": 16.90000057220459,
+      "frames": 1016,
+      "cords": {
+        "minimumGapMM": 2.882436075384302,
+        "penetratingSamples": 0,
+        "missing": 0,
+        "samples": 182880,
+        "worst": {
+          "time": 5.85,
+          "vertex": 7523
+        }
+      },
+      "rightHandSide": {
+        "minimumGapMM": 15.1147952487484,
+        "penetratingSamples": 0,
+        "missing": 1450,
+        "samples": 430858,
+        "worst": {
+          "time": 0.8333333333333334,
+          "vertex": 1020
+        }
+      },
+      "leftHandSide": {
+        "minimumGapMM": 23.31952053992044,
+        "penetratingSamples": 0,
+        "missing": 1260,
+        "samples": 422920,
+        "worst": {
+          "time": 1.8333333333333333,
+          "vertex": 6646
+        }
+      },
+      "rightWristLateralFromHipsMM": {
+        "minimum": 256.2414602097239,
+        "maximum": 281.0036553033189
+      },
+      "idle": {
+        "frames": 607,
+        "firstTime": 6.816666666666666,
+        "lastTime": 16.916666666666668,
+        "cords": {
+          "minimumGapMM": 2.894341445840672,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 109260,
+          "worst": {
+            "time": 8.183333333333334,
+            "vertex": 7523
+          }
+        },
+        "rightHandSide": {
+          "minimumGapMM": 27.817622592063152,
+          "penetratingSamples": 0,
+          "missing": 0,
+          "samples": 257853,
+          "worst": {
+            "time": 11.5,
+            "vertex": 1038
+          }
+        },
+        "durationSeconds": 10.100000000000001
+      },
+      "rightHandWorst3D": {
+        "time": 0.8333333333333334,
+        "vertex": 1020,
+        "position": [
+          -0.10977033974528379,
+          0.3966943901878423,
+          0.025545250430223324
+        ],
+        "nearest": {
+          "triangle": [
+            1114,
+            1116,
+            4403
+          ],
+          "distanceMM": 14.97345225173157,
+          "signedDistanceMM": 14.97345225173157
+        },
+        "positiveXRayIntersections": 2,
+        "insideByOddParity": false
+      },
+      "leftHandWorst3D": {
+        "time": 1.8333333333333333,
+        "vertex": 6646,
+        "position": [
+          0.11465893666099365,
+          0.40297992906602953,
+          0.02099349355298931
+        ],
+        "nearest": {
+          "triangle": [
+            10041,
+            6697,
+            6696
+          ],
+          "distanceMM": 22.753433739698515,
+          "signedDistanceMM": 22.661136219419916
+        },
+        "positiveXRayIntersections": 0,
+        "insideByOddParity": false
+      }
+    }
+  ]
+}

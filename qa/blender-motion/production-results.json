@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "name": "production loads authored GLB and precise mask",
+      "pass": true
+    },
+    {
+      "name": "production serves the verified Blender asset",
+      "pass": true,
+      "detail": "28ddcb8629174322495add57936bc27e8851dd7a5bb682602a46b728902bfda0"
+    },
+    {
+      "name": "production does not request old PNG or processed model",
+      "pass": true
+    },
+    {
+      "name": "production chapter 1",
+      "pass": true
+    },
+    {
+      "name": "production chapter 3",
+      "pass": true
+    },
+    {
+      "name": "production chapter 4",
+      "pass": true
+    },
+    {
+      "name": "production chapter 2",
+      "pass": true
+    },
+    {
+      "name": "production Idle continues to render motion after the performance",
+      "pass": true
+    },
+    {
+      "name": "production fallback uses newly rendered 2x frame",
+      "pass": true,
+      "detail": {
+        "src": "http://127.0.0.1:4173/images-tripo/angle-02.png?v=blender-actions-1",
+        "width": 2880,
+        "height": 2000
+      }
+    },
+    {
+      "name": "production mobile remains readable without overflow",
+      "pass": true
+    },
+    {
+      "name": "no production browser error",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": []
+}
