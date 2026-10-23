@@ -28,7 +28,7 @@ const SHOTS = [
 const REST_FILLS = [1.88, 2.45, 1.90, 2.10];
 const MOBILE_REST_FILLS = [1.50, 1.85, 1.60, 1.72];
 const STATIONS = [
-  { camY: .95, dist: 2.5, lookY: .50, fov: 27, shift: -.04, fill: .84, haloY: .55, width: .64, roll: 9, openness: .24, color: '#C2603D', rib: '#A64F2F', floor: '#FFF4F1' },
+  { camY: .95, dist: 2.5, lookY: .50, fov: 27, shift: -.04, fill: .84, haloY: .55, width: .64, roll: 9, openness: .24, color: '#82756E', rib: '#6B5E58', floor: '#F8F5F3' },
   { camY: .22, dist: 2, lookY: .58, fov: 37.8, shift: -.05, fill: .72, haloY: .55, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
   { camY: 2.5, dist: 4.9, lookY: .50, fov: 19.5, shift: -.03, fill: .58, haloY: .55, width: .58, roll: 6, openness: .30, color: '#327B60', rib: '#23664E', floor: '#F0F9F5' },
   { camY: .82, dist: 2.8, lookY: .66, fov: 16.1, shift: .06, fill: 1.22, haloY: .68, width: .52, roll: 8, openness: .24, color: '#A44C76', rib: '#893C61', floor: '#FEF4F8' },

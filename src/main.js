@@ -2,7 +2,7 @@ import './style.css';
 import { profile, advantages } from './content.js';
 import { setupDialogs } from './dialogs.js';
 
-const COLORS=['#C2603D','#3755A6','#327B60','#A44C76'];
+const COLORS=['#82756E','#3755A6','#327B60','#A44C76'];
 const restored = new URLSearchParams(location.search).has('still');
 const assetPath=path=>`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 const IMAGE_ROOT=assetPath(restored?'images-v2':'images-tripo');
