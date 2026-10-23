@@ -2,7 +2,7 @@
 
 :root {
   --paper:#fff; --ink:#202124; --ink-2:#626369; --line:#d9d9dc;
-  --accent:#a44c76; --frame:32px;
+  --accent:#82756e; --frame:32px;
   --sans:'Noto Sans SC','Microsoft YaHei',sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
 }

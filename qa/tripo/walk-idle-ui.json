@@ -1,0 +1,408 @@
+{
+  "scope": "新顺序和默认到岗入口的桌面/手机页面回归；脚位与动作连续性由独立动作及视觉验收覆盖。",
+  "productionUrl": "http://127.0.0.1:4173/",
+  "productionEntry": "/assets/index-BJD608hp.js",
+  "finalBuildVerified": true,
+  "cacheVersion": "walk-idle-first",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 320,
+      "height": 740
+    }
+  ],
+  "summary": {
+    "passed": 47,
+    "total": 47,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "1440 default departure",
+      "pass": true
+    },
+    {
+      "name": "1440 new directory order",
+      "pass": true
+    },
+    {
+      "name": "1440 header fits",
+      "pass": true
+    },
+    {
+      "name": "1440 teamwork evidence",
+      "pass": true
+    },
+    {
+      "name": "1440 station 2",
+      "pass": true
+    },
+    {
+      "name": "1440 station 3",
+      "pass": true
+    },
+    {
+      "name": "1440 station 4",
+      "pass": true
+    },
+    {
+      "name": "1440 static 1",
+      "pass": true
+    },
+    {
+      "name": "1440 static 2",
+      "pass": true
+    },
+    {
+      "name": "1440 static 3",
+      "pass": true
+    },
+    {
+      "name": "1440 static 4",
+      "pass": true
+    },
+    {
+      "name": "1440 still departure default",
+      "pass": true
+    },
+    {
+      "name": "390 default departure",
+      "pass": true
+    },
+    {
+      "name": "390 new directory order",
+      "pass": true
+    },
+    {
+      "name": "390 header fits",
+      "pass": true
+    },
+    {
+      "name": "390 teamwork evidence",
+      "pass": true
+    },
+    {
+      "name": "390 expand works",
+      "pass": true
+    },
+    {
+      "name": "390 station 2",
+      "pass": true
+    },
+    {
+      "name": "390 station 3",
+      "pass": true
+    },
+    {
+      "name": "390 station 4",
+      "pass": true
+    },
+    {
+      "name": "390 static 1",
+      "pass": true
+    },
+    {
+      "name": "390 static 2",
+      "pass": true
+    },
+    {
+      "name": "390 static 3",
+      "pass": true
+    },
+    {
+      "name": "390 static 4",
+      "pass": true
+    },
+    {
+      "name": "390 still departure default",
+      "pass": true
+    },
+    {
+      "name": "320 default departure",
+      "pass": true
+    },
+    {
+      "name": "320 new directory order",
+      "pass": true
+    },
+    {
+      "name": "320 header fits",
+      "pass": true
+    },
+    {
+      "name": "320 teamwork evidence",
+      "pass": true
+    },
+    {
+      "name": "320 expand works",
+      "pass": true
+    },
+    {
+      "name": "320 station 2",
+      "pass": true
+    },
+    {
+      "name": "320 station 3",
+      "pass": true
+    },
+    {
+      "name": "320 station 4",
+      "pass": true
+    },
+    {
+      "name": "320 static 1",
+      "pass": true
+    },
+    {
+      "name": "320 static 2",
+      "pass": true
+    },
+    {
+      "name": "320 static 3",
+      "pass": true
+    },
+    {
+      "name": "320 static 4",
+      "pass": true
+    },
+    {
+      "name": "320 still departure default",
+      "pass": true
+    },
+    {
+      "name": "runtime action 1 Walk",
+      "pass": true
+    },
+    {
+      "name": "Walk card readable before end",
+      "pass": true
+    },
+    {
+      "name": "runtime action 2 Nod",
+      "pass": true
+    },
+    {
+      "name": "runtime action 3 Wave",
+      "pass": true
+    },
+    {
+      "name": "runtime action 4 LookAround",
+      "pass": true
+    },
+    {
+      "name": "intro desktop action mapping",
+      "pass": true
+    },
+    {
+      "name": "intro mobile action mapping",
+      "pass": true
+    },
+    {
+      "name": "all frame metadata available",
+      "pass": true
+    },
+    {
+      "name": "production page errors",
+      "pass": true
+    }
+  ],
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "default",
+      "angle": 1,
+      "title": "随时出发",
+      "color": "#82756e",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "station-2",
+      "angle": 2,
+      "title": "好看，也好用",
+      "color": "#3755a6",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "station-3",
+      "angle": 3,
+      "title": "好队友",
+      "color": "#a44c76",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "station-4",
+      "angle": 4,
+      "title": "上线只是开始",
+      "color": "#327b60",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "default",
+      "angle": 1,
+      "title": "随时出发",
+      "color": "#82756e",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "station-2",
+      "angle": 2,
+      "title": "好看，也好用",
+      "color": "#3755a6",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "station-3",
+      "angle": 3,
+      "title": "好队友",
+      "color": "#a44c76",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "station-4",
+      "angle": 4,
+      "title": "上线只是开始",
+      "color": "#327b60",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "phase": "default",
+      "angle": 1,
+      "title": "随时出发",
+      "color": "#82756e",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "phase": "station-2",
+      "angle": 2,
+      "title": "好看，也好用",
+      "color": "#3755a6",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "phase": "station-3",
+      "angle": 3,
+      "title": "好队友",
+      "color": "#a44c76",
+      "availability": "11月底可到岗",
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "phase": "station-4",
+      "angle": 4,
+      "title": "上线只是开始",
+      "color": "#327b60",
+      "availability": "11月底可到岗",
+      "overflow": false
+    }
+  ],
+  "walkCardDuringAnimation": {
+    "t": 1418.5,
+    "angle": 1,
+    "action": "Walk",
+    "walking": true,
+    "actionTime": 0.7998000000000014,
+    "paused": false,
+    "opacity": 0.992419,
+    "color": "#82756e"
+  },
+  "animationMapping": [
+    {
+      "station": 1,
+      "action": "Walk"
+    },
+    {
+      "station": 2,
+      "action": "Nod"
+    },
+    {
+      "station": 3,
+      "action": "Wave"
+    },
+    {
+      "station": 4,
+      "action": "LookAround"
+    }
+  ],
+  "screenshots": [
+    "output/playwright/walk-idle/1440-default-departure.png",
+    "output/playwright/walk-idle/1440-still-departure.png",
+    "output/playwright/walk-idle/1440-team-readable.png",
+    "output/playwright/walk-idle/320-default-departure.png",
+    "output/playwright/walk-idle/320-still-departure.png",
+    "output/playwright/walk-idle/320-team-readable.png",
+    "output/playwright/walk-idle/390-default-departure.png",
+    "output/playwright/walk-idle/390-still-departure.png",
+    "output/playwright/walk-idle/390-team-readable.png"
+  ],
+  "pageErrors": [],
+  "notes": [
+    "主要导航通过目录和手机按钮DOM操作。",
+    "生产页面无调试API，实际动画映射和早开卡时序使用同源开发版本的__WHYME__运行采样验证。",
+    "查看了1440、390、320默认到岗的真实截图；小字不遮挡人物，未见横向溢出。",
+    "图片和长时序采样保存在忽略的output目录；此文件仅记录紧凑验收结果。"
+  ]
+}

@@ -1,9 +1,13 @@
 import * as THREE from 'three';
 
-export const STATION_CLIPS = Object.freeze(['Wave', 'Nod', 'Walk', 'LookAround']);
+export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'Wave', 'LookAround']);
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
 const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05, LookAround: 1 };
 const FADE_SECONDS = .5;
+const IDLE_RANGE = Object.freeze([1.5, 3.5]);
+// This authored whole-body frame has both feet planted. Holding it only on the
+// wide Walk station avoids looping back through Idle's forward right-foot step.
+const WALK_IDLE_SOURCE_TIME = 2.5;
 // The reviewed first glance returns toward the camera before the next long
 // side-look. Keep its source timing; do not speed up or synthesize a gesture.
 const LOOK_AROUND_RANGE = Object.freeze([1.2, 7.0]);
@@ -24,6 +28,15 @@ function excerpt(source, name, start, end) {
   return new THREE.AnimationClip(name, end - start, tracks, source.blendMode);
 }
 
+function holdPose(source, name, time) {
+  const tracks = source.tracks.map((track) => {
+    const value = Array.from(track.createInterpolant().evaluate(time)).slice(0, track.getValueSize());
+    const result = track.clone(); result.times = new Float32Array([0, 1]); result.values = new Float32Array([...value, ...value]);
+    return result;
+  });
+  return new THREE.AnimationClip(name, 1, tracks, source.blendMode);
+}
+
 /**
  * Play only user-supplied body animation. The face and original rest transforms
  * remain untouched. `position` is world-space travel; the scene applies it to
@@ -40,7 +53,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
   const sourceClips = new Map(animations.map((clip) => [clip.name, clip]));
   const clips = new Map(), records = new Set(), history = [];
   const linearTransform = new THREE.Matrix3(), rootDelta = new THREE.Vector3(), beforeSample = new THREE.Vector3(), afterSample = new THREE.Vector3();
-  let walkInterpolant = null, current = null, entry = null, rootRecord = null, transition = null;
+  let walkInterpolant = null, walkIdleClip = null, current = null, entry = null, rootRecord = null, transition = null;
   let station = -1, elapsed = 0, serial = 0, disposed = false, entryEnded = true, completedAction = null, dragging = false;
 
   for (const name of new Set(['Idle', ...STATION_CLIPS])) {
@@ -48,7 +61,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     if (!source) continue;
     // Preserve the authored hand/head movement. No additive gestures or face
     // tracks are generated here. Rejected Greet, Box and CrossArms are never bound.
-    const clip = name === 'Idle' ? excerpt(source, name, 1.5, Math.min(3.5, source.duration))
+    const clip = name === 'Idle' ? excerpt(source, name, IDLE_RANGE[0], Math.min(IDLE_RANGE[1], source.duration))
       : name === 'Wave' ? excerpt(source, name, 1.2, Math.min(4.3, source.duration))
       : name === 'LookAround' ? excerpt(source, name, LOOK_AROUND_RANGE[0], Math.min(LOOK_AROUND_RANGE[1], source.duration)) : source.clone();
     clip.name = name;
@@ -60,6 +73,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       // out of the skeleton so every pose blends around one stable origin.
       for (let i = 0; i < track.values.length; i += 3) { track.values[i] = restHips.x; track.values[i + 2] = restHips.z; }
     }
+    if (name === 'Idle') walkIdleClip = holdPose(clip, name, WALK_IDLE_SOURCE_TIME - IDLE_RANGE[0]);
     clips.set(name, clip);
   }
   if (!reducedMotion && !clips.has('Idle')) throw new Error('A reviewed Idle clip is required.');
@@ -76,11 +90,13 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     const from = new Map([...records].map((record) => [record, record.weight]));
     // Each performance gets its own action, so rapid station changes never
     // reset a still-visible, fading action to its first frame.
-    const clip = clips.get(name).clone(); clip.name = `${name}:${serial++}`;
+    const heldIdle = name === 'Idle' && station === WALK_STATION;
+    const clip = (heldIdle ? walkIdleClip : clips.get(name)).clone(); clip.name = `${name}:${serial++}`;
     const action = mixer.clipAction(clip).reset().setEffectiveTimeScale(SPEEDS[name]).setEffectiveWeight(fade ? 0 : 1);
     action.setLoop(name === 'Idle' ? THREE.LoopPingPong : THREE.LoopOnce, name === 'Idle' ? Infinity : 1);
     action.clampWhenFinished = name !== 'Idle'; action.play();
-    const record = { name, action, clip, rate: SPEEDS[name], weight: fade ? 0 : 1 };
+    const record = { name, action, clip, rate: SPEEDS[name], weight: fade ? 0 : 1,
+      idleMode: name === 'Idle' ? heldIdle ? 'walk-source-hold' : 'source-loop' : null };
     records.add(record); current = record;
     history.push({ from: [...from].filter(([, weight]) => weight > .001).map(([r]) => r.name), to: name, at: elapsed, fade, reason });
     if (history.length > 12) history.shift();
@@ -164,8 +180,8 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
   }
   function react() {
     if (disposed || reducedMotion || dragging || !entryEnded || rootRecord || station < 0 || STATION_CLIPS[station] === 'Idle') return false;
-    // Walk is navigational, so clicking the person uses the supplied nod
-    // instead of unexpectedly restarting several metres of forward travel.
+    // Keep the reviewed Walk-station response: click to nod, then return to its
+    // stable whole-body source pose instead of replaying the walking entry.
     return enter(station === WALK_STATION ? 'Nod' : STATION_CLIPS[station], false, 'reaction');
   }
   function getState() {
@@ -177,7 +193,9 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       transitions: history.map((item) => ({ ...item, from: [...item.from] })),
       weights: [...records].filter((record) => record.weight > .0001).map((record) => ({ action: record.name, weight: record.weight, time: record.action.time })),
       rootMotion: { extracted: true, space: 'world', bone: hips.name, horizontalRest: [restHips.x, restHips.z] },
-      idleRange: [1.5, 3.5], waveRange: [1.2, 4.3], lookAroundRange: [...LOOK_AROUND_RANGE], faceAnimation: false };
+      idleRange: [...IDLE_RANGE], idleMode: current?.idleMode || null,
+      idleSourceTime: current?.idleMode === 'walk-source-hold' ? WALK_IDLE_SOURCE_TIME : null,
+      waveRange: [1.2, 4.3], lookAroundRange: [...LOOK_AROUND_RANGE], faceAnimation: false };
   }
   function dispose() { if (disposed) return; disposed = true; mixer.stopAllAction(); mixer.uncacheRoot(model); records.clear(); transition = null; rootRecord = null; restoreRest(); }
   if (reducedMotion) restoreRest(); else { start('Idle', 0, 'initial'); mixer.update(0); }

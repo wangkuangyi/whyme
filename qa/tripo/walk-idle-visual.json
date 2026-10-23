@@ -1,0 +1,899 @@
+{
+  "scope": "Chromium keyframe review at 1440x900 and 390x844; final static smoke at 320x740; all 24 PNG assets and metadata regenerated in the new station order.",
+  "limitations": [
+    "Keyframe inspection and 16 ms sampling are not a continuous per-frame penetration guarantee.",
+    "Sampling pauses presentation for screenshots; elapsed after-stop time excludes those pauses.",
+    "The original Walk final step is preserved. Only its ending Idle uses the full authored source pose at 2.5 seconds. No manual bone pose was created."
+  ],
+  "stationOrder": [
+    {
+      "station": 1,
+      "title": "随时出发",
+      "clip": "Walk"
+    },
+    {
+      "station": 2,
+      "title": "好看，也好用",
+      "clip": "Nod"
+    },
+    {
+      "station": 3,
+      "title": "好队友",
+      "clip": "Wave"
+    },
+    {
+      "station": 4,
+      "title": "上线只是开始",
+      "clip": "LookAround"
+    }
+  ],
+  "defaultStation": 1,
+  "availability": "11月底可到岗",
+  "visualConclusion": "Inspected the final 0.55-second blend, its midpoint, stop, and 0.5/2/6 seconds after stop. The original final walking step blends into the stable source stance; no additional right-leg step occurs after stop. Both feet are exactly unchanged at the three requested post-stop captures. Full body and the approved overhead camera remain visible.",
+  "checks": {
+    "assetCount24": true,
+    "allStationMappings": true,
+    "walkIdleUsesSource25": true,
+    "otherStationsRetainSourceLoop": true,
+    "feetExactlyEqualAtHalfTwoSixSeconds": true,
+    "feetStableInSampledHold": true,
+    "cameraUnchanged": true,
+    "fullBodyInsideKeyframes": true,
+    "noPageErrors": true,
+    "static320Passes": true
+  },
+  "keyframes": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "phase": "blend-start",
+          "afterStopSeconds": null,
+          "action": "Walk",
+          "actionTime": 1.8376000000000035,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.10208235296733233,
+              0.19031216401690615,
+              -0.007722216498541462
+            ],
+            "right": [
+              -0.046301179346665174,
+              0.11206621586469812,
+              -0.0401313306751336
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 542,
+            "top": 200,
+            "right": 764,
+            "bottom": 753,
+            "width": 223,
+            "height": 554,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "screenshot": "output/playwright/walk-idle/1440-blend-start.png"
+        },
+        {
+          "phase": "blend-mid",
+          "afterStopSeconds": null,
+          "action": "Walk",
+          "actionTime": 2.1313000000000035,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.14002381277746925,
+              0.09957306356703788,
+              0.056328274119067996
+            ],
+            "right": [
+              -0.10919658712824734,
+              0.12661929197749117,
+              -0.2014455186436809
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 548,
+            "top": 204,
+            "right": 762,
+            "bottom": 780,
+            "width": 215,
+            "height": 577,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "screenshot": "output/playwright/walk-idle/1440-blend-mid.png"
+        },
+        {
+          "phase": "stopped",
+          "afterStopSeconds": 0,
+          "action": "Idle",
+          "actionTime": 0.5549999999970229,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912567487,
+              0.11546916441958893,
+              -0.06736214527272898
+            ],
+            "right": [
+              -0.1232527167987327,
+              0.11612415501545348,
+              -0.08997254311281326
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 564,
+            "top": 200,
+            "right": 760,
+            "bottom": 764,
+            "width": 197,
+            "height": 565,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "screenshot": "output/playwright/walk-idle/1440-stopped.png"
+        },
+        {
+          "phase": "after-0.5",
+          "afterStopSeconds": 0.5115000000000003,
+          "action": "Idle",
+          "actionTime": 0.0702000000029846,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912567487,
+              0.11546916441958893,
+              -0.06736214527272898
+            ],
+            "right": [
+              -0.1232527167987327,
+              0.11612415501545348,
+              -0.08997254311281326
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 564,
+            "top": 200,
+            "right": 760,
+            "bottom": 764,
+            "width": 197,
+            "height": 565,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "screenshot": "output/playwright/walk-idle/1440-after-0.5.png"
+        },
+        {
+          "phase": "after-2",
+          "afterStopSeconds": 2.00079999999702,
+          "action": "Idle",
+          "actionTime": 0.5623000000119268,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912567487,
+              0.11546916441958893,
+              -0.06736214527272898
+            ],
+            "right": [
+              -0.1232527167987327,
+              0.11612415501545348,
+              -0.08997254311281326
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 564,
+            "top": 200,
+            "right": 760,
+            "bottom": 764,
+            "width": 197,
+            "height": 565,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "screenshot": "output/playwright/walk-idle/1440-after-2.png"
+        },
+        {
+          "phase": "after-6",
+          "afterStopSeconds": 6.001000000000008,
+          "action": "Idle",
+          "actionTime": 0.5596000000089448,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912567487,
+              0.11546916441958893,
+              -0.06736214527272898
+            ],
+            "right": [
+              -0.1232527167987327,
+              0.11612415501545348,
+              -0.08997254311281326
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 564,
+            "top": 200,
+            "right": 760,
+            "bottom": 764,
+            "width": 197,
+            "height": 565,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "screenshot": "output/playwright/walk-idle/1440-after-6.png"
+        }
+      ],
+      "heldPose": {
+        "source": "Idle",
+        "sourceTime": 2.5,
+        "maxKeyframeFootDeltaMeters": 0,
+        "maxSampledFootDeltaMeters": 1.3877787807814457e-17,
+        "sampleCount": 346,
+        "foreAftDifferenceMeters": -0.022610397840084284,
+        "ankleHeightDifferenceMeters": 0.0006549905958645463
+      },
+      "pageErrors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "frames": [
+        {
+          "phase": "blend-start",
+          "afterStopSeconds": null,
+          "action": "Walk",
+          "actionTime": 1.8416000000000043,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.10209045189892482,
+              0.18576802459952607,
+              0.002241365983087301
+            ],
+            "right": [
+              -0.0465466159293634,
+              0.11201932190058556,
+              -0.044231654509651254
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 111,
+            "top": 158,
+            "right": 265,
+            "bottom": 544,
+            "width": 155,
+            "height": 387,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "screenshot": "output/playwright/walk-idle/390-blend-start.png"
+        },
+        {
+          "phase": "blend-mid",
+          "afterStopSeconds": null,
+          "action": "Walk",
+          "actionTime": 2.1311000000029856,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.13997946601220215,
+              0.0995562024854626,
+              0.05658900480167008
+            ],
+            "right": [
+              -0.10917452572946222,
+              0.12658442846641615,
+              -0.2015467912341918
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 115,
+            "top": 161,
+            "right": 264,
+            "bottom": 561,
+            "width": 150,
+            "height": 401,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "screenshot": "output/playwright/walk-idle/390-blend-mid.png"
+        },
+        {
+          "phase": "stopped",
+          "afterStopSeconds": 0,
+          "action": "Idle",
+          "actionTime": 0.5570000000089451,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912778296,
+              0.11546916441958893,
+              -0.06736214527136822
+            ],
+            "right": [
+              -0.12325271679662464,
+              0.11612415501545348,
+              -0.08997254311145249
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 126,
+            "top": 158,
+            "right": 262,
+            "bottom": 550,
+            "width": 137,
+            "height": 393,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "screenshot": "output/playwright/walk-idle/390-stopped.png"
+        },
+        {
+          "phase": "after-0.5",
+          "afterStopSeconds": 0.5122999999970199,
+          "action": "Idle",
+          "actionTime": 0.07190000000298634,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912778296,
+              0.11546916441958893,
+              -0.06736214527136822
+            ],
+            "right": [
+              -0.12325271679662464,
+              0.11612415501545348,
+              -0.08997254311145249
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.71014186886275
+          },
+          "pixelBounds": {
+            "left": 126,
+            "top": 158,
+            "right": 262,
+            "bottom": 550,
+            "width": 137,
+            "height": 393,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "screenshot": "output/playwright/walk-idle/390-after-0.5.png"
+        },
+        {
+          "phase": "after-2",
+          "afterStopSeconds": 2.0165999999940376,
+          "action": "Idle",
+          "actionTime": 0.5829000000000075,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912778296,
+              0.11546916441958893,
+              -0.06736214527136822
+            ],
+            "right": [
+              -0.12325271679662464,
+              0.11612415501545348,
+              -0.08997254311145249
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.710141868862753
+          },
+          "pixelBounds": {
+            "left": 126,
+            "top": 158,
+            "right": 262,
+            "bottom": 550,
+            "width": 137,
+            "height": 393,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "screenshot": "output/playwright/walk-idle/390-after-2.png"
+        },
+        {
+          "phase": "after-6",
+          "afterStopSeconds": 6.000799999982117,
+          "action": "Idle",
+          "actionTime": 0.5768000000059699,
+          "idleMode": "walk-source-hold",
+          "idleSourceTime": 2.5,
+          "feet": {
+            "left": [
+              0.18404179912778296,
+              0.11546916441958893,
+              -0.06736214527136822
+            ],
+            "right": [
+              -0.12325271679662464,
+              0.11612415501545348,
+              -0.08997254311145249
+            ]
+          },
+          "camera": {
+            "azimuth": 38,
+            "fill": 0.56,
+            "pitchDegrees": 31.710141868862753
+          },
+          "pixelBounds": {
+            "left": 126,
+            "top": 158,
+            "right": 262,
+            "bottom": 550,
+            "width": 137,
+            "height": 393,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "screenshot": "output/playwright/walk-idle/390-after-6.png"
+        }
+      ],
+      "heldPose": {
+        "source": "Idle",
+        "sourceTime": 2.5,
+        "maxKeyframeFootDeltaMeters": 0,
+        "maxSampledFootDeltaMeters": 0,
+        "sampleCount": 346,
+        "foreAftDifferenceMeters": -0.02261039784008427,
+        "ankleHeightDifferenceMeters": 0.0006549905958645463
+      },
+      "pageErrors": []
+    }
+  ],
+  "static320": {
+    "results": [
+      {
+        "angle": 1,
+        "pass": true,
+        "actual": {
+          "angle": 1,
+          "title": "随时出发",
+          "img": "http://127.0.0.1:5173/images-tripo/mobile-01.png?v=walk-idle-first",
+          "posterWidth": 390,
+          "color": "#82756e",
+          "availability": "11月底可到岗",
+          "cardOpacity": "1"
+        },
+        "screenshot": "output/playwright/walk-idle/320-static-01.png"
+      },
+      {
+        "angle": 3,
+        "pass": true,
+        "actual": {
+          "angle": 3,
+          "title": "好队友",
+          "img": "http://127.0.0.1:5173/images-tripo/mobile-03.png?v=walk-idle-first",
+          "posterWidth": 390,
+          "color": "#a44c76",
+          "availability": "11月底可到岗",
+          "cardOpacity": "1"
+        },
+        "screenshot": "output/playwright/walk-idle/320-static-03.png"
+      }
+    ],
+    "errors": []
+  },
+  "assets": [
+    {
+      "path": "public/images-intro/angle-01.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 1,
+      "title": "随时出发",
+      "action": "Walk",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 188755,
+      "sha256": "85ff46fdc5038baae49b0fd692cb2385658e1b84e76e04606e9929ee42ee7e3d",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-intro/angle-02.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Nod",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 526461,
+      "sha256": "897b66368a8ecbae418870b84590dbfa550ad285f66649ecf063077f2f086c9d",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-intro/angle-03.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 3,
+      "title": "好队友",
+      "action": "Wave",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 459433,
+      "sha256": "f89fd3208973e48169fe90056aa3042689c5a2308c0db32299c3b4771f5369fc",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-intro/angle-04.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "LookAround",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 425146,
+      "sha256": "689212f995933f06a4f16f760abe33a568e91ba77811e3cd12ed7aa6be1f53f5",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/angle-01.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 1,
+      "title": "随时出发",
+      "action": "Idle",
+      "idleMode": "walk-source-hold",
+      "idleSourceTime": 2.5,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 497702,
+      "sha256": "acbb79e51c5be35a5ad3829ce674b31baf985b3a7f3f7460cea73b9fa72b365c",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/angle-02.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Idle",
+      "idleMode": "source-loop",
+      "idleSourceTime": null,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 540636,
+      "sha256": "8755e82a634326d2edb7a0b17c5d6e2319b313e4e48ef3e809d3695f5d47955b",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/angle-03.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 3,
+      "title": "好队友",
+      "action": "Idle",
+      "idleMode": "source-loop",
+      "idleSourceTime": null,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 502546,
+      "sha256": "399d61f5b29f7a8d46bde53f55ef18c19290fa153fe5227578f34a26cd309b61",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/angle-04.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "Idle",
+      "idleMode": "source-loop",
+      "idleSourceTime": null,
+      "width": 1440,
+      "height": 1000,
+      "bytes": 459434,
+      "sha256": "03551a87a59d573406d5aed6391d15d26f086b02ffe8c8740f6b531960a057c5",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/angle-01.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 1,
+      "title": "随时出发",
+      "action": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 497742,
+      "sha256": "ee75e3bbc8dd6fbc50d2425c9d33c13c9caa9e116560c42594e2b9eaf5ac85e3",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/angle-02.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 309919,
+      "sha256": "ae97825d96b5971936a38ba13e04ae86868d30f1f1716ddef48346dba283da81",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/angle-03.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 3,
+      "title": "好队友",
+      "action": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 338909,
+      "sha256": "2bcc376e00de0c4904e71176bd33062a72bf868020b09ac0e98fe1933de7f9df",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/angle-04.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 439164,
+      "sha256": "4fb19deb8103fbbe74b3268665cd4d39b2574006ac5ea98197634d5fb00e7b47",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-intro/mobile-01.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 1,
+      "title": "随时出发",
+      "action": "Walk",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 390,
+      "height": 626,
+      "bytes": 76030,
+      "sha256": "0d801c80213b5420928416178f8843a1bbc6ae1b55db6f55a8346942e53e1dd7",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-intro/mobile-02.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Nod",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 390,
+      "height": 626,
+      "bytes": 140822,
+      "sha256": "18ff0c24f4e9f1882ed5293822089025bdf811642d16733466453e394ceb5ef2",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-intro/mobile-03.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 3,
+      "title": "好队友",
+      "action": "Wave",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 390,
+      "height": 626,
+      "bytes": 106360,
+      "sha256": "15d595317d16ca3ad883ca788338a9c41778c36147be2d90d2f333fe48fd8af2",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-intro/mobile-04.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "LookAround",
+      "idleMode": null,
+      "idleSourceTime": null,
+      "width": 390,
+      "height": 626,
+      "bytes": 130233,
+      "sha256": "d86b1d249930b77ccd0e9def3eac6f52c9861d807c978a8839dd0a914363306a",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/mobile-01.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 1,
+      "title": "随时出发",
+      "action": "Idle",
+      "idleMode": "walk-source-hold",
+      "idleSourceTime": 2.5,
+      "width": 390,
+      "height": 626,
+      "bytes": 131595,
+      "sha256": "fe16b391618c4df3b78f9cf797ddd0b44f39c00eafa9305000e7c4a6a9ca9dcc",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/mobile-02.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Idle",
+      "idleMode": "source-loop",
+      "idleSourceTime": null,
+      "width": 390,
+      "height": 626,
+      "bytes": 144749,
+      "sha256": "02fc335b900b2f2079827a27d2af4f49d23077970402114ebbece2cf238187b2",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/mobile-03.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 3,
+      "title": "好队友",
+      "action": "Idle",
+      "idleMode": "source-loop",
+      "idleSourceTime": null,
+      "width": 390,
+      "height": 626,
+      "bytes": 126154,
+      "sha256": "658b99fc0be20018e4afce4fd6eef9c5ea40f96e19c11b9db6d09e7218d36467",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-tripo/mobile-04.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "Idle",
+      "idleMode": "source-loop",
+      "idleSourceTime": null,
+      "width": 390,
+      "height": 626,
+      "bytes": 109448,
+      "sha256": "1caef700fecb99fab0ba6c0d240f49a7624f1272b3e082e6e523dd606318b9df",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/mobile-01.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 1,
+      "title": "随时出发",
+      "action": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 131588,
+      "sha256": "7969ba7fbcd906dd4ca950d1338bf3808fee7fc3fe560549b5bbcac12c901c37",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/mobile-02.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 88962,
+      "sha256": "2233ae41395f1a4d686c61535a70583c81982f02aa8b1fb2a4d68c8938e3d1cf",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/mobile-03.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 3,
+      "title": "好队友",
+      "action": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 109468,
+      "sha256": "100711642f57ad06ab615d471115c52898e2ddb8d902a4f0e7b606764057a10a",
+      "mappingCorrect": true
+    },
+    {
+      "path": "public/images-v2/mobile-04.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 127597,
+      "sha256": "c7d8d39978f26b97573299e4714b26d15235eeaf96204b2e8209a499f616cfdf",
+      "mappingCorrect": true
+    }
+  ],
+  "metadataFiles": [
+    "public/images-intro/frames.json",
+    "public/images-tripo/frames.json",
+    "public/images-v2/frames.json"
+  ]
+}

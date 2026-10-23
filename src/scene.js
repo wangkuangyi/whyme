@@ -20,17 +20,17 @@ const NODE_REVEAL_DELAY = 250, WALK_NODE_REVEAL_DELAY = 650;
 // Retain the original static 3D model as an explicit, reproducible fallback.
 const USE_ANIMATIONS = !new URLSearchParams(location.search).has('still');
 const SHOTS = [
-  { azimuth: 30, fill: 1.52, camY: .83, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
-  { azimuth: 8, fill: 2.45, camY: .88, lookY: .80, dist: 2.8, fov: 25, haloY: .83 },
   { azimuth: 38, fill: .56, camY: 2.25, lookY: .52, dist: 2.8, fov: 31, haloY: .52 },
+  { azimuth: 8, fill: 2.45, camY: .88, lookY: .80, dist: 2.8, fov: 25, haloY: .83 },
+  { azimuth: 30, fill: 1.52, camY: .83, lookY: .69, dist: 2.8, fov: 28, haloY: .75 },
   { azimuth: -48, fill: 1.70, camY: 1.30, lookY: .72, dist: 2.8, fov: 30, haloY: .77 },
 ];
-const REST_FILLS = [2.10, 2.45, .56, 1.90];
-const MOBILE_REST_FILLS = [1.72, 1.85, .56, 1.60];
+const REST_FILLS = [.56, 2.45, 2.10, 1.90];
+const MOBILE_REST_FILLS = [.56, 1.85, 1.72, 1.60];
 const STATIONS = [
-  { azimuth: -65, camY: .82, dist: 2.8, lookY: .66, fov: 16.1, shift: .06, fill: 1.22, haloY: .68, width: .52, roll: 8, openness: .24, color: '#A44C76', rib: '#893C61', floor: '#FEF4F8' },
-  { azimuth: 65, camY: .22, dist: 2, lookY: .58, fov: 37.8, shift: -.05, fill: .72, haloY: .55, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
   { azimuth: 38, camY: 2.25, dist: 2.8, lookY: .52, fov: 31, shift: -.04, fill: .56, haloY: .52, width: .52, roll: 9, openness: .24, color: '#82756E', rib: '#6B5E58', floor: '#F8F5F3' },
+  { azimuth: 65, camY: .22, dist: 2, lookY: .58, fov: 37.8, shift: -.05, fill: .72, haloY: .55, width: .64, roll: 11, openness: .26, color: '#3755A6', rib: '#28428A', floor: '#F3F7FF' },
+  { azimuth: -65, camY: .82, dist: 2.8, lookY: .66, fov: 16.1, shift: .06, fill: 1.22, haloY: .68, width: .52, roll: 8, openness: .24, color: '#A44C76', rib: '#893C61', floor: '#FEF4F8' },
   { azimuth: 160, camY: 2.5, dist: 4.9, lookY: .50, fov: 19.5, shift: -.03, fill: .58, haloY: .55, width: .58, roll: 6, openness: .30, color: '#327B60', rib: '#23664E', floor: '#F0F9F5' },
 ];
 const lch = (hex) => labToLCH(linearToOKLab(new THREE.Color(hex).toArray()));
@@ -194,8 +194,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       // Width/height matters here: a tall 320px phone needs more horizontal room.
       const gestureScale = Math.min(1, width / 390 * 557 / height);
       const walkWide = Math.min(.56, Math.max(.35, (height - 149) / height));
-      const activeFills = [.98 * gestureScale, 1.85 * gestureScale, walkWide, 1.45 * gestureScale];
-      const fills = USE_ANIMATIONS ? activeFills.map((fill, i) => i === WALK_STATION ? fill : lerp(fill, MOBILE_REST_FILLS[i] * gestureScale, restClose[i])) : [.70, .66, walkWide, .68];
+      const activeFills = [walkWide, 1.85 * gestureScale, .98 * gestureScale, 1.45 * gestureScale];
+      const fills = USE_ANIMATIONS ? activeFills.map((fill, i) => i === WALK_STATION ? fill : lerp(fill, MOBILE_REST_FILLS[i] * gestureScale, restClose[i])) : [walkWide, .66, .70, .68];
       profile.fill = lerp(fills[from], fills[to], t);
       if (!USE_ANIMATIONS && profile.fill < 1) profile.fill = Math.min(profile.fill, Math.max(.35, (height - 149) / height));
       const top = Math.max(135 / height, .25);

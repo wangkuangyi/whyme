@@ -45,7 +45,7 @@ const finishEntry=(context)=>{const state=context.motion.getState();tick(context
 const savePose=context=>[...context.bones].map(([name,{bone}])=>({name,position:bone.position.clone(),quaternion:bone.quaternion.clone(),scale:bone.scale.clone()}));
 const poseError=(context,saved)=>Math.max(...saved.map(value=>{const bone=context.bones.get(value.name).bone;return Math.max(bone.position.distanceTo(value.position),bone.quaternion.clone().normalize().angleTo(value.quaternion.clone().normalize()),bone.scale.distanceTo(value.scale));}));
 const sample = rig(), unchanged = sample.animations.map(clip=>clip.tracks.map(track=>Array.from(track.values)));
-check('reviewed-station-map',()=>{assert.deepEqual(STATION_CLIPS,['Wave','Nod','Walk','LookAround']);assert.equal(WAVE_STATION,0);assert.equal(NOD_STATION,1);assert.equal(WALK_STATION,2);assert.equal(LOOK_AROUND_STATION,3);assert.equal(Object.isFrozen(STATION_CLIPS),true);});
+check('reviewed-station-map',()=>{assert.deepEqual(STATION_CLIPS,['Walk','Nod','Wave','LookAround']);assert.equal(WALK_STATION,0);assert.equal(NOD_STATION,1);assert.equal(WAVE_STATION,2);assert.equal(LOOK_AROUND_STATION,3);assert.equal(Object.isFrozen(STATION_CLIPS),true);});
 const suppliedWalk=sample.animations.find(clip=>clip.name==='Walk'), walkDuration=suppliedWalk?.duration;
 check('walk2-uses-complete-2_375-second-supplied-clip',()=>{assert.ok(suppliedWalk);assert.equal(walkDuration,2.375);});
 const sourceRoot=suppliedWalk.tracks.find(track=>/Hips\.position$/.test(track.name));
@@ -54,12 +54,14 @@ const sourceRootOffsets=Array.from(sourceRoot.times,(_,i)=>{const delta=new THRE
 const sourceRootMaxExcursion=Math.max(...sourceRootOffsets.map(offset=>offset.length()));
 check('walk2-source-is-in-place-without-invented-travel',()=>assert.ok(sourceRootMaxExcursion<1e-5,`source horizontal excursion ${sourceRootMaxExcursion} m`));
 const suppliedLookAround=sample.animations.find(clip=>clip.name==='LookAround');
+const suppliedIdle=sample.animations.find(clip=>clip.name==='Idle');
 check('look-around-exists-in-supplied-glb',()=>{assert.ok(suppliedLookAround);assert.ok(suppliedLookAround.duration>0);assert.ok(suppliedLookAround.tracks.some(track=>/Head.*quaternion/.test(track.name)));assert.ok(suppliedLookAround.tracks.some(track=>/Spine2.*quaternion/.test(track.name)));});
 for (let station=0;station<STATION_CLIPS.length;station++) {
   sample.motion.setStation(station);
   check(`station-${station+1}-uses-reviewed-action`,()=>assert.equal(sample.motion.getState().action,STATION_CLIPS[station]));
   finishEntry(sample);
   check(`station-${station+1}-settles-to-idle`,()=>{assert.equal(sample.motion.getState().action,'Idle');assert.equal(sample.motion.getState().end,true);assert.equal(sample.motion.getState().walking,false);});
+  check(`station-${station+1}-uses-its-own-idle-mode`,()=>{const state=sample.motion.getState();assert.equal(state.idleMode,station===WALK_STATION?'walk-source-hold':'source-loop');assert.equal(state.idleSourceTime,station===WALK_STATION?2.5:null);});
   check(`station-${station+1}-hips-horizontal-rest`,()=>{const [x,z]=sample.motion.getState().rootMotion.horizontalRest;assert.ok(Math.abs(sample.bones.get('Hips').bone.position.x-x)<1e-7);assert.ok(Math.abs(sample.bones.get('Hips').bone.position.z-z)<1e-7);});
 }
 check('source-animation-arrays-preserved',()=>sample.animations.forEach((clip,c)=>clip.tracks.forEach((track,t)=>assert.deepEqual(Array.from(track.values),unchanged[c][t]))));
@@ -118,7 +120,7 @@ const longIdle=rig(), initialIdle=savePose(longIdle);
 tick(longIdle,300);const idlePoseError=poseError(longIdle,initialIdle);
 check('five-minute-idle-has-no-root-drift',()=>assert.equal(longIdle.motion.position.length(),0));
 check('five-minute-idle-returns-to-the-same-pose',()=>assert.ok(idlePoseError<1e-5,`pose error ${idlePoseError}`));
-check('initial-idle-does-not-trigger-repeated-settling',()=>{const state=longIdle.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.end,true);assert.equal(state.transition,null);assert.equal(state.weights.length,1);assert.equal(state.transitions.length,1);});
+check('initial-idle-does-not-trigger-repeated-settling',()=>{const state=longIdle.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.idleMode,'source-loop');assert.equal(state.idleSourceTime,null);assert.equal(state.end,true);assert.equal(state.transition,null);assert.equal(state.weights.length,1);assert.equal(state.transitions.length,1);});
 const idleBeforeClick=longIdle.motion.getState();
 check('idle-before-any-station-does-not-add-a-reaction',()=>{assert.equal(longIdle.motion.react(),false);assert.deepEqual(longIdle.motion.getState(),idleBeforeClick);});
 
@@ -139,6 +141,35 @@ const sourcePoseError=(context,sourceTime,source=suppliedLookAround)=>{
   }
   return maximum;
 };
+const footPose=(context)=>{
+  const hips=context.bones.get('Hips').bone.getWorldPosition(new THREE.Vector3());
+  const positions=Object.fromEntries(['LeftFoot','RightFoot','LeftToeBase','RightToeBase'].map(name=>[name,context.bones.get(name).bone.getWorldPosition(new THREE.Vector3()).sub(hips).toArray()]));
+  return {positions,depthDifference:positions.RightFoot[2]-positions.LeftFoot[2],ankleHeightDifference:positions.RightFoot[1]-positions.LeftFoot[1],toeHeightDifference:positions.RightToeBase[1]-positions.LeftToeBase[1]};
+};
+// Inspect the unmodified source independently of the runtime Idle variants.
+const idleSourceProbe=rig();idleSourceProbe.motion.dispose();
+const idleSourceMixer=new THREE.AnimationMixer(idleSourceProbe.model);idleSourceMixer.clipAction(suppliedIdle).play();
+const idleSourceFeet=[1.5,2.5,3.5].map(time=>{idleSourceMixer.setTime(time);idleSourceProbe.outer.updateMatrixWorld(true);return {time,...footPose(idleSourceProbe)};});
+check('old-idle-loop-includes-the-forward-right-foot-step',()=>assert.ok(idleSourceFeet[0].depthDifference>.30));
+check('selected-source-frame-has-both-feet-planted-together',()=>{const feet=idleSourceFeet[1];assert.ok(Math.abs(feet.depthDifference)<.035);assert.ok(Math.abs(feet.ankleHeightDifference)<.002);assert.ok(Math.abs(feet.toeHeightDifference)<.001);});
+const stableWalk=rig();stableWalk.motion.setStation(WALK_STATION,{immediate:true});finishEntry(stableWalk);
+const stableState=stableWalk.motion.getState(),stableFeet=footPose(stableWalk),stablePose=savePose(stableWalk),stableSourceError=sourcePoseError(stableWalk,2.5,suppliedIdle);
+check('walk-settles-to-the-complete-authored-idle-pose',()=>{assert.equal(stableState.action,'Idle');assert.equal(stableState.idleMode,'walk-source-hold');assert.equal(stableState.idleSourceTime,2.5);assert.ok(stableSourceError<3e-6,`whole-body source error ${stableSourceError}`);});
+check('walk-settled-feet-match-the-selected-source-frame',()=>{const expected=idleSourceFeet[1];for(const name of Object.keys(stableFeet.positions))assert.ok(new THREE.Vector3().fromArray(stableFeet.positions[name]).distanceTo(new THREE.Vector3().fromArray(expected.positions[name]))<1e-6);});
+tick(stableWalk,300);const stableLongIdleError=poseError(stableWalk,stablePose),stableLongIdleFeet=footPose(stableWalk);
+check('five-minute-walk-idle-keeps-all-bones-and-feet-still',()=>{assert.ok(stableLongIdleError<1e-6);assert.deepEqual(stableLongIdleFeet,stableFeet);assert.equal(stableWalk.motion.getState().action,'Idle');assert.equal(stableWalk.motion.getState().idleMode,'walk-source-hold');});
+check('walk-stable-idle-reselect-does-not-restart-the-step',()=>{assert.equal(stableWalk.motion.setStation(WALK_STATION),false);assert.equal(stableWalk.motion.getState().action,'Idle');});
+check('walk-stable-idle-still-allows-the-reviewed-nod',()=>{assert.equal(stableWalk.motion.react(),true);assert.equal(stableWalk.motion.getState().action,'Nod');});
+finishEntry(stableWalk);const postNodSourceError=sourcePoseError(stableWalk,2.5,suppliedIdle);
+check('walk-nod-returns-to-the-same-stable-whole-body-pose',()=>{const state=stableWalk.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.completedAction,'Nod');assert.equal(state.idleMode,'walk-source-hold');assert.ok(postNodSourceError<3e-6);assert.ok(poseError(stableWalk,stablePose)<1e-6);});
+stableWalk.motion.setStation(NOD_STATION);finishEntry(stableWalk);const normalIdlePose=savePose(stableWalk);tick(stableWalk,.4);const resumedIdlePoseChange=poseError(stableWalk,normalIdlePose);
+check('leaving-walk-restores-the-other-station-idle-animation',()=>{assert.equal(stableWalk.motion.getState().idleMode,'source-loop');assert.equal(stableWalk.motion.getState().idleSourceTime,null);assert.ok(resumedIdlePoseChange>.001,`restored Idle pose change ${resumedIdlePoseChange}`);});
+const interruptedHold=rig();interruptedHold.motion.setStation(WALK_STATION);tick(interruptedHold,walkDuration-.25);
+check('walk-idle-blend-is-active-before-interruption',()=>{assert.equal(interruptedHold.motion.getState().transition?.to,'Idle');assert.equal(interruptedHold.motion.getState().idleMode,'walk-source-hold');});
+interruptedHold.motion.setStation(WAVE_STATION);finishEntry(interruptedHold);
+const interruptedHoldState=interruptedHold.motion.getState(),interruptedLoopSourceError=sourcePoseError(interruptedHold,1.5+interruptedHoldState.time,suppliedIdle);
+check('interrupting-walk-idle-blend-does-not-freeze-the-next-station',()=>{assert.equal(interruptedHoldState.completedAction,'Wave');assert.equal(interruptedHoldState.idleMode,'source-loop');assert.deepEqual(interruptedHoldState.weights.map(weight=>weight.action),['Idle']);assert.ok(interruptedLoopSourceError<3e-6);});
+idleSourceMixer.stopAllAction();idleSourceMixer.uncacheRoot(idleSourceProbe.model);
 const walkPoseProbe=rig();walkPoseProbe.motion.setStation(WALK_STATION,{immediate:true});walkPoseProbe.motion.update(0);
 const walkSourcePoseSamples=[{time:0,error:sourcePoseError(walkPoseProbe,0,suppliedWalk)}];
 for(const time of [.25,.75,1.5]){tick(walkPoseProbe,time-walkPoseProbe.motion.getState().time);const currentTime=walkPoseProbe.motion.getState().time;walkSourcePoseSamples.push({time:currentTime,error:sourcePoseError(walkPoseProbe,currentTime,suppliedWalk)});}
@@ -184,10 +215,11 @@ check('switching-during-walk-settle-preserves-position',()=>assert.ok(fadeInterr
 const frameRates=[];
 for(const fps of[20,30,60,120]){
   const context=rig();context.motion.setStation(WALK_STATION,{immediate:true});for(let frame=0;frame<Math.ceil(fps*(walkDuration+.8));frame++){context.motion.update(1/fps);context.outer.position.copy(context.motion.position);context.outer.updateMatrixWorld(true);}
-  frameRates.push({fps,position:context.motion.position.toArray(),action:context.motion.getState().action});context.motion.dispose();
+  frameRates.push({fps,position:context.motion.position.toArray(),action:context.motion.getState().action,idleMode:context.motion.getState().idleMode,feet:footPose(context)});context.motion.dispose();
 }
 check('walk-settles-at-20-through-120-fps',()=>{assert.ok(frameRates.every(r=>r.action==='Idle'));assert.ok(Math.max(...frameRates.map(r=>r.position[2]))-Math.min(...frameRates.map(r=>r.position[2]))<.001);});
-for(const context of[sample,walk,interrupted,paused,rootFixture,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt,excerptProbe,walkPoseProbe])context.motion.dispose();
-const result={checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walk2:{sourceDuration:walkDuration,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray()},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual GLB animation arrays used, except the explicitly labelled nonzero parent-transform fixture. Walk2 is authored in place; no extra travel is added. No browser rendering asserted by this test.'};
-await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/walk2-motion-tests.json',import.meta.url),JSON.stringify(result,null,2));
+check('walk-idle-feet-stay-planted-at-20-through-120-fps',()=>assert.ok(frameRates.every(r=>r.idleMode==='walk-source-hold'&&Math.abs(r.feet.depthDifference)<.035&&Math.abs(r.feet.toeHeightDifference)<.001)));
+for(const context of[sample,walk,interrupted,paused,rootFixture,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt,excerptProbe,walkPoseProbe,stableWalk,interruptedHold])context.motion.dispose();
+const result={checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walkIdle:{sourceTime:2.5,mode:'whole-body-source-hold',idleSourceFeet,stableFeet,stableSourceError,stableLongIdleError,postNodSourceError,resumedIdlePoseChange,interruptedLoopSourceError},walk2:{sourceDuration:walkDuration,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray()},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual GLB animation arrays used, except the explicitly labelled nonzero parent-transform fixture. Walk idle holds the entire supplied Idle pose at source 2.5 seconds; other stations retain the 1.5-3.5 second source loop. Walk2 remains authored in place; no extra travel is added. No browser rendering asserted by this test.'};
+await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/walk-idle-motion.json',import.meta.url),JSON.stringify(result,null,2));
 console.log(JSON.stringify(result,null,2));
