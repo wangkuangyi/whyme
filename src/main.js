@@ -4,7 +4,8 @@ import { setupDialogs } from './dialogs.js';
 
 const COLORS=['#C2603D','#3755A6','#327B60','#A44C76'];
 const restored = new URLSearchParams(location.search).has('still');
-const IMAGE_ROOT=restored?'/images-v2':'/images-tripo';
+const assetPath=path=>`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+const IMAGE_ROOT=assetPath(restored?'images-v2':'images-tripo');
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const wrap=n=>((n%4)+4)%4;
@@ -23,7 +24,7 @@ let frameMetadata=null,lastPositions=[],lastSettled=null;
 let posterGeneration=0,revealGeneration=0,introPending=true,introMetadata=null,introLayout=null;
 const holdIntro=import.meta.env.DEV&&new URLSearchParams(location.search).has('holdIntro');
 const framePath=(i,variant=mobile()?'mobile':'desktop')=>`${IMAGE_ROOT}/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png`;
-const introPath=(i)=>restored?framePath(i):`/images-intro/${mobile()?'mobile':'angle'}-0${i+1}.png`;
+const introPath=(i)=>restored?framePath(i):assetPath(`images-intro/${mobile()?'mobile':'angle'}-0${i+1}.png`);
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const nextFrame=()=>new Promise(resolve=>requestAnimationFrame(resolve));
 
@@ -52,7 +53,7 @@ document.querySelector('#app').innerHTML=`
     </a>
     <h1>${esc(profile.name)}</h1><span class="print-name">${esc(profile.nameEn)}</span>
   </header>
-  <nav class="contact" aria-label="简历与联系"><a href="#contact" class="contact-link">联系</a><a class="resume" href="${esc(profile.resume)}" target="_blank" rel="noopener noreferrer">简历 <span>↗</span></a></nav>
+  <nav class="contact" aria-label="简历与联系"><a href="#contact" class="contact-link">联系</a><a class="resume" href="${esc(assetPath(profile.resume))}" target="_blank" rel="noopener noreferrer">简历 <span>↗</span></a></nav>
   <section id="strengths" class="strengths" aria-label="四个一起工作的理由" tabindex="-1" data-side="right">
     <span class="card-notch" aria-hidden="true"></span><p class="fallback-status" hidden>已为你切换到静帧展示 · <button id="retry-3d">重试 3D</button></p><div class="card-body">${advantages.map((a,i)=>`<article class="strength ${i===active?'is-active':''}" data-strength="${i}" aria-labelledby="title-${i}">
       <div class="card-label card-reveal"><span class="color-dot" style="--dot-color:${COLORS[i]}"></span><span><span class="card-number">0${i+1}</span>　${esc(a.category)}</span></div>
@@ -246,7 +247,7 @@ new ResizeObserver(()=>{if(mobile())updateMobileConnection();}).observe(card);
 new ResizeObserver(()=>{if(introPending&&!staticMode&&scene&&!holdIntro)revealScene(scene,generation);}).observe(stage);
 applyActive(active,{announce:false});positionStaticNodes();document.body.classList.add('scene-loading');
 fetch(`${IMAGE_ROOT}/frames.json`).then(r=>r.ok?r.json():null).then(d=>{frameMetadata=d;if(staticMode){positionStaticNodes();settled();}}).catch(()=>{});
-if(!restored)fetch('/images-intro/frames.json').then(r=>r.ok?r.json():null).then(d=>{introMetadata=d;layoutIntroPoster();}).catch(()=>{});
+if(!restored)fetch(assetPath('images-intro/frames.json')).then(r=>r.ok?r.json():null).then(d=>{introMetadata=d;layoutIntroPoster();}).catch(()=>{});
 bootScene();setTimeout(showDirectory,6500);
 if(import.meta.env.DEV)window.__WHYME__={getScene:()=>scene,select,getActive:()=>active,getLayout:()=>({moving,staticMode,active,lastSettled,lastPositions,nodeDistance:card.dataset.nodeDistance,overlapsProtected:card.dataset.overlapsProtected}),settled};
 

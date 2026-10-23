@@ -1,6 +1,8 @@
-# Why me? — 本地网页
+# Why me? — 个人展示
 
 独立项目目录：`whyme-web`。当前版本为 v2.4.1，使用用户提供的 Tripo 动作，保留原人物的脸、几何与贴图。四站改为“走路、点头、环顾、小幅挥手”，并调整四站的摄影角度和距离，使镜头明显区分。原始 `../person.blend` 和 `public/models/person.glb` 保持不变。本轮验收与此前交付版本分开记录。
+
+网站地址：[wangkuangyi.github.io/whyme](https://wangkuangyi.github.io/whyme/)。代码仓库：[wangkuangyi/whyme](https://github.com/wangkuangyi/whyme)。
 
 ## 运行
 
@@ -17,6 +19,21 @@ npm run dev
 - 系统启用“减少动态”时，人物保留原站姿。
 
 `npm run check` 检查语法，`npm run build` 构建，`npm run preview` 预览构建结果。Node.js 22 已在本机使用。
+
+## GitHub Pages 发布
+
+`.github/workflows/deploy.yml` 在推送 `main` 或手动运行时，执行 `npm ci`、语法检查、生产构建，再将 `dist` 发布到 GitHub Pages。CI 使用 Node.js 22；部署 Actions 固定到已核对的提交。仓库 Pages 的发布来源为 GitHub Actions。
+
+构建从 Pages 配置读取 `base_path`，因此图片、字体、模型、简历和页面图标都适配 `/whyme/` 子路径。以后在 Pages 中绑定自定义域名并配置 DNS 后，重新运行工作流即可按新地址构建；本地 `npm run dev` 仍使用根路径。
+
+如需在本机复验项目子路径：
+
+```powershell
+npm run build -- --base /whyme/
+npm run preview -- --port 4174 --base /whyme/
+```
+
+打开 `http://127.0.0.1:4174/whyme/`。发布只上传构建目录；依赖、原始动作素材、Blender 源文件和测试输出不进入发布产物。
 
 ## 当前版本
 
@@ -80,7 +97,7 @@ v2.4.1 的文案与作品入口使用 `feature/content-evidence` 分支，标签
 - `qa/v2-requirements.md`：此前恢复原人物版本的历史验收，不等同于本版动画验收。
 - `动作素材/`：用户导出的同人物动画；未经筛选的原始素材默认不入库。
 
-Git 在本项目独立初始化。v2.4.0 使用 `feature/v2.4-polish` 分支落实第二轮优化，版本标签为 `v2.4.0`。v2.3.3 使用 `feature/angular-wordmark` 分支设计全大写几何字标，版本标签为 `v2.3.3`。v2.3.2 使用 `feature/wide-wordmark` 分支调整字标与框体，版本标签为 `v2.3.2`。v2.3.1 的界面改进使用 `feature/clearer-interface` 分支，版本标签为 `v2.3.1`。v2.3 使用 `feature/look-around` 分支开发与验收，版本标签为 `v2-look-around`。此前 v2.2 见 `v2-refined-actions`，最初 Tripo 版本见 `v2-tripo-motion`，原人物静止版本见 `v2-restored`。后续按可回退的小改动提交。依赖、构建结果、测试截图、Blender 实验、缓存和未经筛选的原始动作素材不提交。未配置远程仓库，也未推送。
+Git 在本项目独立初始化。v2.4.0 使用 `feature/v2.4-polish` 分支落实第二轮优化，版本标签为 `v2.4.0`。v2.3.3 使用 `feature/angular-wordmark` 分支设计全大写几何字标，版本标签为 `v2.3.3`。v2.3.2 使用 `feature/wide-wordmark` 分支调整字标与框体，版本标签为 `v2.3.2`。v2.3.1 的界面改进使用 `feature/clearer-interface` 分支，版本标签为 `v2.3.1`。v2.3 使用 `feature/look-around` 分支开发与验收，版本标签为 `v2-look-around`。此前 v2.2 见 `v2-refined-actions`，最初 Tripo 版本见 `v2-tripo-motion`，原人物静止版本见 `v2-restored`。后续按可回退的小改动提交。依赖、构建结果、测试截图、Blender 实验、缓存和未经筛选的原始动作素材不提交。远程仓库为 `https://github.com/wangkuangyi/whyme.git`，网站通过 GitHub Pages 发布。
 
 文案改变后运行 `python scripts/fetch_fonts.py --local-only` 更新字体子集。
 
