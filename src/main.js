@@ -20,7 +20,7 @@ let reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let pointer=null,dragged=false,firstInput=false,moving=false;
 let wheelLast=0,wheelAmount=0,wheelUsed=false;
 let lineTimer,cardTimer,staticTimer,resizeTimer;
-let frameMetadata=null,lastPositions=[],lastSettled=null;
+let frameMetadata=null,lastPositions=[],lastSettled=null,desktopConnection=null;
 let posterGeneration=0,revealGeneration=0,introPending=true,introMetadata=null,introLayout=null;
 const holdIntro=import.meta.env.DEV&&new URLSearchParams(location.search).has('holdIntro');
 const framePath=(i,variant=mobile()?'mobile':'desktop')=>`${IMAGE_ROOT}/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png`;
@@ -133,7 +133,14 @@ function positionNodes(positions){
     if(!Number.isFinite(positions[nearest]?.depth))nearest=wrap(Math.round(pointer.progress));const p=positions[nearest];
     if(p){const label=document.querySelector('#drag-label');label.textContent=`0${nearest+1} ${advantages[nearest].category}`;label.style.left=`${clamp(p.x,95,stage.clientWidth-95)}px`;label.style.top=`${p.y-38}px`;}
   }
-  if(mobile())updateMobileConnection();
+  if(mobile())updateMobileConnection();else updateDesktopConnection(positions[active]);
+}
+function updateDesktopConnection(p){
+  if(!p||desktopConnection?.index!==active)return;
+  const {side,x,y}=desktopConnection;
+  // 节点每帧移动，连线起点同步跟随；卡片端点沿用最近一次布局，避免每帧测量 DOM。
+  connector.setAttribute('d',`M ${p.x+(side==='right'?8:-8)} ${p.y} L ${x} ${y}`);
+  card.dataset.nodeDistance=String(Math.hypot(x-p.x,y-p.y));
 }
 function updateMobileConnection(){
   const p=lastPositions[pointer?.started?wrap(Math.round(pointer.progress)):active];if(!p)return;
@@ -141,12 +148,14 @@ function updateMobileConnection(){
   card.style.setProperty('--notch-x',`${x}px`);connector.setAttribute('d',`M ${x} ${p.y+11} V ${cr.top-sr.top-7}`);
 }
 function layoutCard(data){
-  if(mobile()){card.style.removeProperty('left');card.style.removeProperty('top');card.style.removeProperty('width');delete card.dataset.nodeDistance;delete card.dataset.overlapsProtected;updateMobileConnection();return;}
+  if(mobile()){desktopConnection=null;card.style.removeProperty('left');card.style.removeProperty('top');card.style.removeProperty('width');delete card.dataset.nodeDistance;delete card.dataset.overlapsProtected;updateMobileConnection();return;}
   const w=stage.clientWidth,h=stage.clientHeight,p=data?.nodes?.[active]||lastPositions[active]||{x:w*.61,y:h*.51};
   const side=active===3?'left':'right';card.dataset.side=side;
   const frame=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--frame'))||32;
   let cw=w<1120?300:340,x=side==='right'?p.x+28:p.x-cw-28;
   if(x<frame||x+cw>w-frame){cw=300;x=side==='right'?p.x+28:p.x-cw-28;}
+  // 窄桌面的行走卡片固定靠右，为摆臂留出空间。
+  if(active===0&&w<1000)x=w-frame-cw;
   x=clamp(x,frame,w-frame-cw);card.style.width=`${cw}px`;
   const status=document.querySelector('.fallback-status'),ch=panels[active].getBoundingClientRect().height+24+(status.hidden?0:status.getBoundingClientRect().height),tagOffset=23;
   let y=clamp(p.y-tagOffset,150,h-ch-85);
@@ -155,8 +164,7 @@ function layoutCard(data){
   if(safe!==undefined)y=safe;
   card.style.left=`${x}px`;card.style.top=`${y}px`;
   const endpoint=side==='right'?x:x+cw,labelY=y+tagOffset;
-  connector.setAttribute('d',`M ${p.x+(side==='right'?8:-8)} ${p.y} L ${endpoint} ${labelY}`);
-  card.dataset.nodeDistance=String(Math.hypot(endpoint-p.x,labelY-p.y));
+  desktopConnection={index:active,side,x:endpoint,y:labelY};updateDesktopConnection(p);
   card.dataset.overlapsProtected=String(obstacles.some(r=>overlap({left:x,right:x+cw,top:y,bottom:y+ch},r,3)));
 }
 function positionStaticNodes(){

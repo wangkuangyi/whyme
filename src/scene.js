@@ -305,6 +305,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       // The supplied walk has no authored stopping pose. Push in before its
       // legs blend to Idle, and retain the close shot after the person arrives.
       const motion = characterMotion.getState();
+      // 行走期间卡片已展开，持续更新节点连线及手、脸的避让位置。
+      if (motion.walking) framingPending = true;
       if (!dragging && motion.station >= 0) {
         const index = cameraTransition ? activeStation : motion.station;
         const target = reducedMotion || (!cameraTransition && motion.action === 'Idle') ? 1 : 0;
@@ -349,7 +351,8 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
   }
   function protectedBounds() { return { faceBounds: boneBounds('Head', [.13, .17, .13]), handBounds: ['LeftHand', 'RightHand'].map(handBounds).filter(Boolean) }; }
   function notifySettled() {
-    if (!ready || presentationPaused || dragging || cameraTransition || characterMotion?.getState().walking || !settledPending) return; settledPending = false;
+    // 镜头就位即可阅读，正文不再等待人物走完整段动作。
+    if (!ready || presentationPaused || dragging || cameraTransition || !settledPending) return; settledPending = false;
     const box = new THREE.Box3().setFromObject(modelGroup), center = box.getCenter(vector()), half = box.getSize(vector()).multiplyScalar(.5);
     onSettled({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), modelBounds: projectBounds(center, half), ...protectedBounds() });
   }
@@ -360,7 +363,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
     updateColor(presentationTime); const poseStart = performance.now(); updatePose(dt); lastProfile = sampleProfile(currentProgress); const azimuth = updateCamera(lastProfile); updatePosterLayout(); updateHalo(lastProfile, azimuth);
     renderer.getDrawingBufferSize(floorMaterial.uniforms.viewport.value);
     const renderStart = performance.now(); renderer.render(scene, camera); const nodesStart = performance.now(); updateNodes(); notifySettled();
-    if (framingPending && ready && !presentationPaused && !dragging && !cameraTransition && !characterMotion?.getState().walking && now - lastFramingAt > 80) { onFramingChange({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), ...protectedBounds() }); lastFramingAt = now; framingPending = false; }
+    if (framingPending && ready && !presentationPaused && !dragging && !cameraTransition && now - lastFramingAt > 80) { onFramingChange({ index: activeStation, nodes: nodePositions.map((node) => ({ ...node })), ...protectedBounds() }); lastFramingAt = now; framingPending = false; }
     timings.frameMs = lerp(timings.frameMs, rawDelta * 1000, .1); timings.poseMs = lerp(timings.poseMs, renderStart - poseStart, .1); timings.renderMs = lerp(timings.renderMs, nodesStart - renderStart, .1); timings.nodesMs = lerp(timings.nodesMs, performance.now() - nodesStart, .1);
     if (ready && !presentationPaused && now - loadedTime > 3500) {
       // Degrade resolution and shadow cost first; a single healthy frame resets the fallback clock.
