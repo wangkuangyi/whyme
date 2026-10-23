@@ -1,0 +1,1289 @@
+{
+  "scope": "Production DOM flows at 1440, 390, 320; dev runtime action sampling",
+  "passed": 47,
+  "total": 47,
+  "checks": [
+    {
+      "name": "1440 default team",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.990493,
+        "static": false,
+        "poster": "/images-tripo/angle-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 new directory order",
+      "pass": true,
+      "detail": [
+        "团队精神",
+        "审美与产品意识",
+        "迅速到岗",
+        "长期意识"
+      ]
+    },
+    {
+      "name": "1440 header fits",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.990493,
+        "static": false,
+        "poster": "/images-tripo/angle-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 teamwork evidence",
+      "pass": true
+    },
+    {
+      "name": "1440 station 2",
+      "pass": true,
+      "detail": {
+        "angle": 2,
+        "title": "好看，也好用",
+        "color": "#3755a6",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.991502,
+        "static": false,
+        "poster": "/images-tripo/angle-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 station 3",
+      "pass": true,
+      "detail": {
+        "angle": 3,
+        "title": "随时出发",
+        "color": "#82756e",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.990474,
+        "static": false,
+        "poster": "/images-tripo/angle-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 station 4",
+      "pass": true,
+      "detail": {
+        "angle": 4,
+        "title": "上线只是开始",
+        "color": "#327b60",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.99049,
+        "static": false,
+        "poster": "/images-tripo/angle-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 static 1",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.990524,
+        "static": true,
+        "poster": "/images-tripo/angle-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 static 2",
+      "pass": true,
+      "detail": {
+        "angle": 2,
+        "title": "好看，也好用",
+        "color": "#3755a6",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.990501,
+        "static": true,
+        "poster": "/images-tripo/angle-02.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 static 3",
+      "pass": true,
+      "detail": {
+        "angle": 3,
+        "title": "随时出发",
+        "color": "#82756e",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.99047,
+        "static": true,
+        "poster": "/images-tripo/angle-03.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 static 4",
+      "pass": true,
+      "detail": {
+        "angle": 4,
+        "title": "上线只是开始",
+        "color": "#327b60",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.990487,
+        "static": true,
+        "poster": "/images-tripo/angle-04.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "1440 still team default",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 32,
+          "right": 212,
+          "top": 32,
+          "bottom": 168.796875
+        },
+        "availabilityBounds": {
+          "left": 32,
+          "right": 212,
+          "top": 149.296875,
+          "bottom": 168.796875
+        },
+        "overflow": false,
+        "opacity": 0.990495,
+        "static": false,
+        "poster": "/images-v2/angle-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 default team",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 new directory order",
+      "pass": true,
+      "detail": [
+        "团队精神",
+        "审美与产品意识",
+        "迅速到岗",
+        "长期意识"
+      ]
+    },
+    {
+      "name": "390 header fits",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 teamwork evidence",
+      "pass": true
+    },
+    {
+      "name": "390 expand works",
+      "pass": true
+    },
+    {
+      "name": "390 station 2",
+      "pass": true,
+      "detail": {
+        "angle": 2,
+        "title": "好看，也好用",
+        "color": "#3755a6",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 station 3",
+      "pass": true,
+      "detail": {
+        "angle": 3,
+        "title": "随时出发",
+        "color": "#82756e",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 station 4",
+      "pass": true,
+      "detail": {
+        "angle": 4,
+        "title": "上线只是开始",
+        "color": "#327b60",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 static 1",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 static 2",
+      "pass": true,
+      "detail": {
+        "angle": 2,
+        "title": "好看，也好用",
+        "color": "#3755a6",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-02.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 static 3",
+      "pass": true,
+      "detail": {
+        "angle": 3,
+        "title": "随时出发",
+        "color": "#82756e",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-03.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 static 4",
+      "pass": true,
+      "detail": {
+        "angle": 4,
+        "title": "上线只是开始",
+        "color": "#327b60",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-04.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "390 still team default",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 20,
+          "right": 370,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 20,
+          "right": 370,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-v2/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 default team",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 new directory order",
+      "pass": true,
+      "detail": [
+        "团队精神",
+        "审美与产品意识",
+        "迅速到岗",
+        "长期意识"
+      ]
+    },
+    {
+      "name": "320 header fits",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 teamwork evidence",
+      "pass": true
+    },
+    {
+      "name": "320 expand works",
+      "pass": true
+    },
+    {
+      "name": "320 station 2",
+      "pass": true,
+      "detail": {
+        "angle": 2,
+        "title": "好看，也好用",
+        "color": "#3755a6",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 station 3",
+      "pass": true,
+      "detail": {
+        "angle": 3,
+        "title": "随时出发",
+        "color": "#82756e",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 station 4",
+      "pass": true,
+      "detail": {
+        "angle": 4,
+        "title": "上线只是开始",
+        "color": "#327b60",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 static 1",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 static 2",
+      "pass": true,
+      "detail": {
+        "angle": 2,
+        "title": "好看，也好用",
+        "color": "#3755a6",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-02.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 static 3",
+      "pass": true,
+      "detail": {
+        "angle": 3,
+        "title": "随时出发",
+        "color": "#82756e",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-03.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 static 4",
+      "pass": true,
+      "detail": {
+        "angle": 4,
+        "title": "上线只是开始",
+        "color": "#327b60",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": true,
+        "poster": "/images-tripo/mobile-04.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "320 still team default",
+      "pass": true,
+      "detail": {
+        "angle": 1,
+        "title": "好队友",
+        "color": "#a44c76",
+        "directory": [
+          "团队精神",
+          "审美与产品意识",
+          "迅速到岗",
+          "长期意识"
+        ],
+        "availability": "11月底可到岗",
+        "header": {
+          "left": 16,
+          "right": 304,
+          "top": 22,
+          "bottom": 113.875
+        },
+        "availabilityBounds": {
+          "left": 16,
+          "right": 304,
+          "top": 97.375,
+          "bottom": 113.875
+        },
+        "overflow": false,
+        "opacity": 1,
+        "static": false,
+        "poster": "/images-v2/mobile-01.png?v=walk2-team-first",
+        "posterLoaded": true
+      }
+    },
+    {
+      "name": "runtime action 1 Wave",
+      "pass": true,
+      "detail": {
+        "samples": [
+          {
+            "t": 671.2000000029802,
+            "angle": 1,
+            "action": "Wave",
+            "walking": false,
+            "actionTime": 0.026355000000000028,
+            "paused": false,
+            "opacity": 0,
+            "color": "#a44c76"
+          },
+          {
+            "t": 700.0999999940395,
+            "angle": 1,
+            "action": "Wave",
+            "walking": false,
+            "actionTime": 0.05701500000000007,
+            "paused": false,
+            "opacity": 0,
+            "color": "#a44c76"
+          }
+        ],
+        "latest": {
+          "t": 1572.0999999940395,
+          "angle": 1,
+          "action": "Wave",
+          "walking": false,
+          "actionTime": 0.9714599999999973,
+          "paused": false,
+          "opacity": 1,
+          "color": "#a44c76"
+        }
+      }
+    },
+    {
+      "name": "runtime action 2 Nod",
+      "pass": true,
+      "detail": {
+        "samples": [
+          {
+            "t": 7871.29999999702,
+            "angle": 2,
+            "action": "Nod",
+            "walking": false,
+            "actionTime": 0.022880000000000202,
+            "paused": false,
+            "opacity": 0,
+            "color": "#3755a6"
+          },
+          {
+            "t": 7900.4000000059605,
+            "angle": 2,
+            "action": "Nod",
+            "walking": false,
+            "actionTime": 0.05511000000000041,
+            "paused": false,
+            "opacity": 0,
+            "color": "#3755a6"
+          }
+        ],
+        "latest": {
+          "t": 8800.90000000596,
+          "angle": 2,
+          "action": "Nod",
+          "walking": false,
+          "actionTime": 1.0448899999999999,
+          "paused": false,
+          "opacity": 1,
+          "color": "#3755a6"
+        }
+      }
+    },
+    {
+      "name": "runtime action 3 Walk",
+      "pass": true,
+      "detail": {
+        "samples": [
+          {
+            "t": 9878.79999999702,
+            "angle": 3,
+            "action": "Walk",
+            "walking": true,
+            "actionTime": 0.008300000000001091,
+            "paused": false,
+            "opacity": 0,
+            "color": "#82756e"
+          },
+          {
+            "t": 9912.09999999404,
+            "angle": 3,
+            "action": "Walk",
+            "walking": true,
+            "actionTime": 0.04170000000000072,
+            "paused": false,
+            "opacity": 0,
+            "color": "#82756e"
+          }
+        ],
+        "latest": {
+          "t": 10809.59999999404,
+          "angle": 3,
+          "action": "Walk",
+          "walking": true,
+          "actionTime": 0.9375999999999991,
+          "paused": false,
+          "opacity": 1,
+          "color": "#82756e"
+        }
+      }
+    },
+    {
+      "name": "Walk card readable before end",
+      "pass": true,
+      "detail": {
+        "t": 10691,
+        "angle": 3,
+        "action": "Walk",
+        "walking": true,
+        "actionTime": 0.8208000000000001,
+        "paused": false,
+        "opacity": 0.994774,
+        "color": "#82756e"
+      }
+    },
+    {
+      "name": "runtime action 4 LookAround",
+      "pass": true,
+      "detail": {
+        "samples": [
+          {
+            "t": 11862.70000000298,
+            "angle": 4,
+            "action": "LookAround",
+            "walking": false,
+            "actionTime": 0.016600000000000364,
+            "paused": false,
+            "opacity": 0,
+            "color": "#327b60"
+          },
+          {
+            "t": 11891.79999999702,
+            "angle": 4,
+            "action": "LookAround",
+            "walking": false,
+            "actionTime": 0.045700000000000726,
+            "paused": false,
+            "opacity": 0,
+            "color": "#327b60"
+          }
+        ],
+        "latest": {
+          "t": 12788.79999999702,
+          "angle": 4,
+          "action": "LookAround",
+          "walking": false,
+          "actionTime": 0.9414999999999996,
+          "paused": false,
+          "opacity": 1,
+          "color": "#327b60"
+        }
+      }
+    },
+    {
+      "name": "intro desktop action mapping",
+      "pass": true,
+      "detail": [
+        {
+          "action": "Wave",
+          "station": 0
+        },
+        {
+          "action": "Nod",
+          "station": 1
+        },
+        {
+          "action": "Walk",
+          "station": 2
+        },
+        {
+          "action": "LookAround",
+          "station": 3
+        }
+      ]
+    },
+    {
+      "name": "intro mobile action mapping",
+      "pass": true,
+      "detail": [
+        {
+          "action": "Wave",
+          "station": 0
+        },
+        {
+          "action": "Nod",
+          "station": 1
+        },
+        {
+          "action": "Walk",
+          "station": 2
+        },
+        {
+          "action": "LookAround",
+          "station": 3
+        }
+      ]
+    },
+    {
+      "name": "all frame metadata available",
+      "pass": true,
+      "detail": [
+        {
+          "name": "images-intro",
+          "status": 200
+        },
+        {
+          "name": "images-tripo",
+          "status": 200
+        },
+        {
+          "name": "images-v2",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "production page errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "finalBundleCheck": {
+    "url": "http://127.0.0.1:4173/?final=walk2&angle=1",
+    "script": "http://127.0.0.1:4173/assets/index-DWUVGpFm.js",
+    "title": "好队友",
+    "availability": "11月底可到岗",
+    "pass": true,
+    "evidence": "Independent Playwright session walk2-order, fresh navigation after final rebuild."
+  }
+}

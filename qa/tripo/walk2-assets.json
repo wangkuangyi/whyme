@@ -1,0 +1,102 @@
+{
+  "baselineSHA256": "def0603ec59ac8fac3de5df25e2827b2fbbd11cf0ad7ae5672e9fc3fab4a957f",
+  "previousAnimatedSHA256": "30c9fe726248feaf64d84b4d54623fc0059dff5d59d0f0c6d13aaf1551491bdd",
+  "outputSHA256": "1f8c63c22f67523ed69382ce9d5f7ad245f95222e87bea48390309a87e945ffb",
+  "baselineBinaryPreserved": true,
+  "preservedObjects": {
+    "nodes": true,
+    "meshes": true,
+    "skins": true,
+    "materials": true,
+    "textures": true,
+    "images": true,
+    "samplers": true,
+    "scenes": true
+  },
+  "clips": [
+    {
+      "name": "Idle",
+      "sameAsPrevious": true,
+      "samplesSHA256": "202e0eb83583a08103cefbf0f0e4e8c6f1bd11a4c795a2f9404031cc025ade65"
+    },
+    {
+      "name": "Greet",
+      "sameAsPrevious": true,
+      "samplesSHA256": "28f19003469a86bf4516616b8d9f9e4c3726cc4e6c034a6129e32b7e76418300"
+    },
+    {
+      "name": "Box",
+      "sameAsPrevious": true,
+      "samplesSHA256": "67ca50ab3994354d84dba6df2d76c0db9aeda7a278a94b0e40742debdcf9e388"
+    },
+    {
+      "name": "Walk",
+      "sameAsPrevious": false,
+      "samplesSHA256": "ed75522bf54e4329d54d1c8f3eeb41c5ec0c7513f9b7d20c5044160f84019f4c"
+    },
+    {
+      "name": "Nod",
+      "sameAsPrevious": true,
+      "samplesSHA256": "1bca36b4daf57784285f2d6ffe2ce9a6a324b6ad65333c2f5c18e8da1623145a"
+    },
+    {
+      "name": "Wave",
+      "sameAsPrevious": true,
+      "samplesSHA256": "3a62846ae72d24ddd2e4dee5fe3400cf232e52953c74aa5ea6b1b4309db10a49"
+    },
+    {
+      "name": "LookAround",
+      "sameAsPrevious": true,
+      "samplesSHA256": "d7b6f116061e8d7136813a1a84eebcfd0bdb936dbcd7710cc6774c46ae02a477"
+    }
+  ],
+  "noCrossArms": true,
+  "reproducibleCheck": "node scripts/tripo-prepare.mjs --check: passed",
+  "walkStartEndPoseLargestDeltas": [
+    {
+      "bone": "mixamorig:RightLeg",
+      "path": "rotation",
+      "maxStartEndDelta": 0.0003819465637207031
+    },
+    {
+      "bone": "mixamorig:RightUpLeg",
+      "path": "rotation",
+      "maxStartEndDelta": 0.000241011381149292
+    },
+    {
+      "bone": "mixamorig:LeftArm",
+      "path": "rotation",
+      "maxStartEndDelta": 0.0002074986696243286
+    },
+    {
+      "bone": "mixamorig:LeftFoot",
+      "path": "rotation",
+      "maxStartEndDelta": 0.00019314885139465332
+    },
+    {
+      "bone": "mixamorig:LeftUpLeg",
+      "path": "rotation",
+      "maxStartEndDelta": 0.0001566847786307335
+    },
+    {
+      "bone": "mixamorig:LeftLeg",
+      "path": "rotation",
+      "maxStartEndDelta": 0.0001379251480102539
+    },
+    {
+      "bone": "mixamorig:RightForeArm",
+      "path": "rotation",
+      "maxStartEndDelta": 0.0001365765929222107
+    },
+    {
+      "bone": "mixamorig:RightFoot",
+      "path": "rotation",
+      "maxStartEndDelta": 0.0001156926155090332
+    }
+  ],
+  "notes": [
+    "Only Walk replaced. Six other animations have identical interpolation, node targets, input times and floating point outputs to the previous derived asset.",
+    "Original source model bytes and all baseline scene objects preserved.",
+    "New Walk is an in-place 2.375s clip; start and end pose numeric closeness is not a substitute for visual motion QA."
+  ]
+}

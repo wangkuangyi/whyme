@@ -1,21 +1,21 @@
 {
   "source": "Local Noto Sans SC",
-  "subset_characters_requested": 563,
+  "subset_characters_requested": 613,
   "fonts": [
     {
       "file": "noto-sans-sc-400.woff2",
       "family": "Noto Sans SC",
       "weight": 400,
-      "bytes": 69936,
-      "sha256": "1646584624554c4a57e3721b380d95637daad9980d72705fffa510b914e02921",
+      "bytes": 76956,
+      "sha256": "bcd3d0169edd64b4e6c442cf9d78aef61830694592039615b239f7e4725111ff",
       "url": "Local installed Noto Sans SC; no page text sent externally"
     },
     {
       "file": "noto-sans-sc-600.woff2",
       "family": "Noto Sans SC",
       "weight": 600,
-      "bytes": 70844,
-      "sha256": "a70a37b0724a7d543b81dc7bf89d6c0fa730851cce47f64f11c75ecdcc92e605",
+      "bytes": 77992,
+      "sha256": "c26eb7f350910f97993a8e057529991b3c43fb8f88cdd5ee8f4d87575997bc0e",
       "url": "Local installed Noto Sans SC; no page text sent externally"
     }
   ]

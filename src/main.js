@@ -2,18 +2,20 @@ import './style.css';
 import { profile, advantages } from './content.js';
 import { setupDialogs } from './dialogs.js';
 
-const COLORS=['#82756E','#3755A6','#327B60','#A44C76'];
+const COLORS=['#A44C76','#3755A6','#82756E','#327B60'];
+const WALK_STATION=advantages.findIndex(a=>a.category==='迅速到岗');
+const TEAM_STATION=advantages.findIndex(a=>a.category==='团队精神');
 const restored = new URLSearchParams(location.search).has('still');
 const assetPath=path=>`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 const IMAGE_ROOT=assetPath(restored?'images-v2':'images-tripo');
-const PORTRAIT_VERSION='warm-gray-01';
+const PORTRAIT_VERSION='walk2-team-first';
 const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const wrap=n=>((n%4)+4)%4;
 const mobile=()=>innerWidth<901;
 const availability=Date.now()<Date.parse(`${profile.availableFrom}T00:00:00+08:00`)?profile.availability:'现在即可到岗';
-if(availability==='现在即可到岗')advantages[0].claim='现在即可到岗，用已有经验尽快上手。';
-const DEFAULT_ANGLE=2;
+if(availability==='现在即可到岗')advantages[WALK_STATION].claim='现在即可到岗，用已有经验尽快上手。';
+const DEFAULT_ANGLE=1;
 const param=Number(new URLSearchParams(location.search).get('angle')||DEFAULT_ANGLE);
 let active=Number.isFinite(param)?clamp(Math.round(param)-1,0,3):DEFAULT_ANGLE-1;
 let scene=null,controller=null,generation=0;
@@ -25,8 +27,8 @@ let lineTimer,cardTimer,staticTimer,resizeTimer;
 let frameMetadata=null,lastPositions=[],lastSettled=null,desktopConnection=null;
 let posterGeneration=0,revealGeneration=0,introPending=true,introMetadata=null,introLayout=null;
 const holdIntro=import.meta.env.DEV&&new URLSearchParams(location.search).has('holdIntro');
-const framePath=(i,variant=mobile()?'mobile':'desktop')=>`${IMAGE_ROOT}/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png${i===0?`?v=${PORTRAIT_VERSION}`:''}`;
-const introPath=(i)=>restored?framePath(i):assetPath(`images-intro/${mobile()?'mobile':'angle'}-0${i+1}.png${i===0?`?v=${PORTRAIT_VERSION}`:''}`);
+const framePath=(i,variant=mobile()?'mobile':'desktop')=>`${IMAGE_ROOT}/${variant==='mobile'?'mobile':'angle'}-0${i+1}.png?v=${PORTRAIT_VERSION}`;
+const introPath=(i)=>restored?framePath(i):assetPath(`images-intro/${mobile()?'mobile':'angle'}-0${i+1}.png?v=${PORTRAIT_VERSION}`);
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const nextFrame=()=>new Promise(resolve=>requestAnimationFrame(resolve));
 
@@ -54,6 +56,7 @@ document.querySelector('#app').innerHTML=`
       </svg>
     </a>
     <h1>${esc(profile.name)}</h1><span class="print-name">${esc(profile.nameEn)}</span>
+    <p class="identity-availability">${esc(availability)}</p>
   </header>
   <nav class="contact" aria-label="简历与联系"><a href="#contact" class="contact-link">联系</a><a class="resume" href="${esc(assetPath(profile.resume))}" target="_blank" rel="noopener noreferrer">简历 <span>↗</span></a></nav>
   <section id="strengths" class="strengths" aria-label="四个一起工作的理由" tabindex="-1" data-side="right">
@@ -152,12 +155,12 @@ function updateMobileConnection(){
 function layoutCard(data){
   if(mobile()){desktopConnection=null;card.style.removeProperty('left');card.style.removeProperty('top');card.style.removeProperty('width');delete card.dataset.nodeDistance;delete card.dataset.overlapsProtected;updateMobileConnection();return;}
   const w=stage.clientWidth,h=stage.clientHeight,p=data?.nodes?.[active]||lastPositions[active]||{x:w*.61,y:h*.51};
-  const side=active===3?'left':'right';card.dataset.side=side;
+  const side=active===TEAM_STATION?'left':'right';card.dataset.side=side;
   const frame=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--frame'))||32;
   let cw=w<1120?300:340,x=side==='right'?p.x+28:p.x-cw-28;
   if(x<frame||x+cw>w-frame){cw=300;x=side==='right'?p.x+28:p.x-cw-28;}
   // 窄桌面的行走卡片固定靠右，为摆臂留出空间。
-  if(active===0&&w<1000)x=w-frame-cw;
+  if(active===WALK_STATION&&w<1000)x=w-frame-cw;
   x=clamp(x,frame,w-frame-cw);card.style.width=`${cw}px`;
   const status=document.querySelector('.fallback-status'),ch=panels[active].getBoundingClientRect().height+24+(status.hidden?0:status.getBoundingClientRect().height),tagOffset=23;
   let y=clamp(p.y-tagOffset,150,h-ch-85);
@@ -174,7 +177,7 @@ function positionStaticNodes(){
   document.querySelectorAll('.poster').forEach((img,i)=>{const src=framePath(i,variant);if(img.getAttribute('src')!==src)img.src=src;});
   const frame=frameMetadata?.[variant]?.[active];
   if(frame){const s=Math.min(w/frame.width,h/frame.height),ox=(w-frame.width*s)/2,oy=(h-frame.height*s)/2;const p=frame.nodes.map(n=>({...n,x:n.x*s+ox,y:n.y*s+oy}));const scaleBox=b=>b?{left:b.left*s+ox,right:b.right*s+ox,top:b.top*s+oy,bottom:b.bottom*s+oy}:null;p.static=true;positionNodes(p);lastSettled={index:active,nodes:p,faceBounds:scaleBox(frame.faceBounds),handBounds:frame.handBounds?.map(scaleBox)};layoutCard(lastSettled);return;}
-  const p=advantages.map((_,i)=>i===active?{x:w*(active===3?.42:.6),y:h*.53,visible:true,depth:1}:{x:w*(i%2?.2:.8),y:h*.45,visible:i!==wrap(active+2),depth:3});p.static=true;positionNodes(p);layoutCard({index:active,nodes:p});
+  const p=advantages.map((_,i)=>i===active?{x:w*(active===TEAM_STATION?.42:.6),y:h*.53,visible:true,depth:1}:{x:w*(i%2?.2:.8),y:h*.45,visible:i!==wrap(active+2),depth:3});p.static=true;positionNodes(p);layoutCard({index:active,nodes:p});
 }
 
 document.querySelectorAll('[data-index]').forEach(b=>b.addEventListener('click',()=>{if(!dragged)select(Number(b.dataset.index));}));

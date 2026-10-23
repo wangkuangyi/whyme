@@ -1,0 +1,1031 @@
+{
+  "scope": "Chromium desktop 1440x900 and mobile 390x844 keyframe inspection. 24 PNG assets captured at desktop 1440x1000 and mobile 390x844 with each actual stage size.",
+  "limitations": [
+    "Keyframe sampling is not a frame-by-frame guarantee. Character-only alpha bounds use alpha > 32.",
+    "First/middle/stopped captures pause presentation to inspect pixels; their timing does not establish uninterrupted card animation latency.",
+    "Walk2 is an authored in-place clip: measured world translation is approximately 1e-7. Tracking is enabled but there is no meaningful authored travel.",
+    "The initially proposed 52-58% figure height was not the final measured occupancy: approved keyframes are approximately 59-63% of the stage.",
+    "Keyframe bounds were recorded before the final ring-angle adjustment; the camera remained unchanged. Final node/card positions were inspected separately."
+  ],
+  "stationOrder": [
+    {
+      "station": 1,
+      "title": "好队友",
+      "clip": "Wave"
+    },
+    {
+      "station": 2,
+      "title": "好看，也好用",
+      "clip": "Nod"
+    },
+    {
+      "station": 3,
+      "title": "随时出发",
+      "clip": "Walk"
+    },
+    {
+      "station": 4,
+      "title": "上线只是开始",
+      "clip": "LookAround"
+    }
+  ],
+  "defaultStation": 1,
+  "availability": "11月底可到岗",
+  "checks": {
+    "assetCount24": true,
+    "allAssetStationMappings": true,
+    "defaultTeamBothViewports": true,
+    "noPageErrors": true,
+    "walkCameraFillUnchanged": true,
+    "walkPitch30to35": true,
+    "fullBodyInsideFrames": true,
+    "desktopCardSides": true
+  },
+  "keyframes": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "phase": "first",
+          "action": "Walk",
+          "actionTime": 0,
+          "duration": 2.375,
+          "pitchDegrees": 31.71014186886275,
+          "cameraFill": 0.56,
+          "pixelBounds": {
+            "left": 494,
+            "top": 204,
+            "right": 757,
+            "bottom": 733,
+            "width": 264,
+            "height": 530,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "fillCanvas": 0.5888888888888889,
+          "fillViewport": 0.5888888888888889,
+          "worldPosition": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "middle",
+          "action": "Walk",
+          "actionTime": 1.1962000000029813,
+          "duration": 2.375,
+          "pitchDegrees": 31.71014186886275,
+          "cameraFill": 0.56,
+          "pixelBounds": {
+            "left": 579,
+            "top": 204,
+            "right": 757,
+            "bottom": 752,
+            "width": 179,
+            "height": 549,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "fillCanvas": 0.61,
+          "fillViewport": 0.61,
+          "worldPosition": [
+            4.240036496328997e-10,
+            0,
+            2.8735553540212242e-8
+          ]
+        },
+        {
+          "phase": "stopped",
+          "action": "Idle",
+          "actionTime": 1.6658999999940447,
+          "duration": 2,
+          "pitchDegrees": 31.71014186886275,
+          "cameraFill": 0.56,
+          "pixelBounds": {
+            "left": 577,
+            "top": 196,
+            "right": 760,
+            "bottom": 762,
+            "width": 184,
+            "height": 567,
+            "canvasWidth": 1440,
+            "canvasHeight": 900
+          },
+          "fillCanvas": 0.63,
+          "fillViewport": 0.63,
+          "worldPosition": [
+            -4.911140064900346e-10,
+            0,
+            -8.065167852104015e-8
+          ]
+        }
+      ],
+      "defaultEntry": {
+        "angle": "1",
+        "title": "好队友",
+        "identity": "王匡义\n\n11月底可到岗",
+        "availabilityShown": true
+      },
+      "pageErrors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "frames": [
+        {
+          "phase": "first",
+          "action": "Walk",
+          "actionTime": 0.012600000000000023,
+          "duration": 2.375,
+          "pitchDegrees": 31.71014186886275,
+          "cameraFill": 0.56,
+          "pixelBounds": {
+            "left": 78,
+            "top": 160,
+            "right": 261,
+            "bottom": 528,
+            "width": 184,
+            "height": 369,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "fillCanvas": 0.5894568690095847,
+          "fillViewport": 0.4372037914691943,
+          "worldPosition": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "middle",
+          "action": "Walk",
+          "actionTime": 1.1906999999910608,
+          "duration": 2.375,
+          "pitchDegrees": 31.71014186886275,
+          "cameraFill": 0.56,
+          "pixelBounds": {
+            "left": 137,
+            "top": 161,
+            "right": 261,
+            "bottom": 543,
+            "width": 125,
+            "height": 383,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "fillCanvas": 0.6118210862619808,
+          "fillViewport": 0.4537914691943128,
+          "worldPosition": [
+            2.0408480927220173e-10,
+            0,
+            2.8735727707291876e-8
+          ]
+        },
+        {
+          "phase": "stopped",
+          "action": "Idle",
+          "actionTime": 1.6662999999910653,
+          "duration": 2,
+          "pitchDegrees": 31.71014186886275,
+          "cameraFill": 0.56,
+          "pixelBounds": {
+            "left": 136,
+            "top": 155,
+            "right": 263,
+            "bottom": 549,
+            "width": 128,
+            "height": 395,
+            "canvasWidth": 390,
+            "canvasHeight": 626
+          },
+          "fillCanvas": 0.6309904153354633,
+          "fillViewport": 0.46800947867298576,
+          "worldPosition": [
+            -4.911590412865933e-10,
+            0,
+            -8.065150435396052e-8
+          ]
+        }
+      ],
+      "defaultEntry": {
+        "angle": "1",
+        "title": "好队友",
+        "identity": "王匡义\n\n11月底可到岗",
+        "availabilityShown": true
+      },
+      "pageErrors": []
+    }
+  ],
+  "cameras": [
+    {
+      "station": 1,
+      "title": "好队友",
+      "variant": "desktop",
+      "azimuth": 30,
+      "fill": 1.52,
+      "shift": 0.06,
+      "pitchDegrees": 2.862405226111747,
+      "position": [
+        1.1872154660256082,
+        1.3814215466025608,
+        2.0563175066879165
+      ],
+      "target": [
+        0,
+        1.2627,
+        0
+      ]
+    },
+    {
+      "station": 2,
+      "title": "好看，也好用",
+      "variant": "desktop",
+      "azimuth": 8,
+      "fill": 2.45,
+      "shift": -0.05,
+      "pitchDegrees": 1.6365770416167202,
+      "position": [
+        0.22993569393558114,
+        1.5112044612786737,
+        1.6360774747246365
+      ],
+      "target": [
+        0,
+        1.4640000000000002,
+        0
+      ]
+    },
+    {
+      "station": 3,
+      "title": "随时出发",
+      "variant": "desktop",
+      "azimuth": 38,
+      "fill": 0.56,
+      "shift": -0.04,
+      "pitchDegrees": 31.71014186886275,
+      "position": [
+        2.629117118651375,
+        3.590093484276396,
+        3.365116456073405
+      ],
+      "target": [
+        0,
+        0.9516000000000001,
+        0
+      ]
+    },
+    {
+      "station": 4,
+      "title": "上线只是开始",
+      "variant": "desktop",
+      "azimuth": -48,
+      "fill": 1.7,
+      "shift": -0.03,
+      "pitchDegrees": 11.702901480221364,
+      "position": [
+        -1.3236632857782926,
+        1.6865555326380435,
+        1.1918317758033423
+      ],
+      "target": [
+        0,
+        1.3176,
+        0
+      ]
+    },
+    {
+      "station": 1,
+      "title": "好队友",
+      "variant": "mobile",
+      "azimuth": 30,
+      "fill": 0.8718285044046816,
+      "shift": 0,
+      "pitchDegrees": 2.862405226111747,
+      "position": [
+        2.0823177476986166,
+        1.4709317747698616,
+        3.6066801365163954
+      ],
+      "target": [
+        0,
+        1.2627,
+        0
+      ]
+    },
+    {
+      "station": 2,
+      "title": "好看，也好用",
+      "variant": "mobile",
+      "azimuth": 8,
+      "fill": 1.6457987072945521,
+      "shift": 0.08,
+      "pitchDegrees": 1.6365770416167194,
+      "position": [
+        0.34439267537262463,
+        1.5347018141943651,
+        2.4504812149572675
+      ],
+      "target": [
+        0,
+        1.4640000000000002,
+        0
+      ]
+    },
+    {
+      "station": 3,
+      "title": "随时出发",
+      "variant": "mobile",
+      "azimuth": 38,
+      "fill": 0.56,
+      "shift": 0,
+      "pitchDegrees": 31.71014186886275,
+      "position": [
+        2.629117118651375,
+        3.590093484276396,
+        3.365116456073405
+      ],
+      "target": [
+        0,
+        0.9516000000000001,
+        0
+      ]
+    },
+    {
+      "station": 4,
+      "title": "上线只是开始",
+      "variant": "mobile",
+      "azimuth": -48,
+      "fill": 1.289950338149784,
+      "shift": 0,
+      "pitchDegrees": 11.702901480221364,
+      "position": [
+        -1.775813760413356,
+        1.812587145808786,
+        1.598949891795941
+      ],
+      "target": [
+        0,
+        1.3176,
+        0
+      ]
+    }
+  ],
+  "positions": [
+    {
+      "viewportWidth": 1440,
+      "station": 1,
+      "title": "好队友",
+      "cardSide": "left",
+      "card": {
+        "x": 262.84375,
+        "y": 506.46875,
+        "width": 340,
+        "height": 246.75,
+        "top": 506.46875,
+        "right": 602.84375,
+        "bottom": 753.21875,
+        "left": 262.84375
+      },
+      "nodes": [
+        {
+          "x": 630.8547592498843,
+          "y": 529.479444922841,
+          "visible": true,
+          "depth": 1.9528419785753115
+        },
+        {
+          "x": 1175.2095261603868,
+          "y": 405.8140814400997,
+          "visible": true,
+          "depth": 2.2204032713977404
+        },
+        {
+          "x": 928.2355882901737,
+          "y": 350.59393841101206,
+          "visible": false,
+          "depth": 2.8171912310446316
+        },
+        {
+          "x": 494.8868152281093,
+          "y": 439.14395033307363,
+          "visible": true,
+          "depth": 2.611506756247611
+        }
+      ],
+      "faceBounds": {
+        "x": 688.5004668860095,
+        "y": 171.10104192553442,
+        "left": 688.5004668860095,
+        "right": 952.2958509955632,
+        "top": 171.10104192553442,
+        "bottom": 444.261722948908,
+        "width": 263.79538410955377,
+        "height": 273.1606810233736
+      },
+      "screenshot": "output/playwright/walk2/final-1440-01.png",
+      "visualCheck": "Card remains left of the character and clear of face and raised hand."
+    },
+    {
+      "viewportWidth": 1440,
+      "station": 3,
+      "title": "随时出发",
+      "cardSide": "right",
+      "card": {
+        "x": 850.0625,
+        "y": 523.96875,
+        "width": 340,
+        "height": 246.75,
+        "top": 523.96875,
+        "right": 1190.0625,
+        "bottom": 770.71875,
+        "left": 850.0625
+      },
+      "nodes": [
+        {
+          "x": 558.2411282249085,
+          "y": 409.9165970923395,
+          "visible": false,
+          "depth": 6.091865155991996
+        },
+        {
+          "x": 294.1317798776477,
+          "y": 552.1599080690522,
+          "visible": true,
+          "depth": 4.80221177448589
+        },
+        {
+          "x": 822.0734923862266,
+          "y": 546.973600424442,
+          "visible": true,
+          "depth": 3.9878086408943507
+        },
+        {
+          "x": 983.5348433979277,
+          "y": 387.1712738379453,
+          "visible": true,
+          "depth": 5.472860395457764
+        }
+      ],
+      "faceBounds": {
+        "x": 598.5370479759221,
+        "y": 222.9597796400482,
+        "left": 598.5370479759221,
+        "right": 726.5761278828712,
+        "top": 222.9597796400482,
+        "bottom": 384.05345888334904,
+        "width": 128.03907990694915,
+        "height": 161.09367924330084
+      },
+      "screenshot": "output/playwright/walk2/final-1440-03.png",
+      "visualCheck": "Card remains right of the full-body character; head and shoes are visible."
+    },
+    {
+      "viewportWidth": 390,
+      "station": 1,
+      "title": "好队友",
+      "cardSide": "right",
+      "card": {
+        "x": 0,
+        "y": 626.109375,
+        "width": 390,
+        "height": 217.890625,
+        "top": 626.109375,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "nodes": [
+        {
+          "x": 122.87209530350815,
+          "y": 341.8787890078947,
+          "visible": true,
+          "depth": 3.69096228362857
+        },
+        {
+          "x": 353.3597845006512,
+          "y": 288.8984025303013,
+          "visible": true,
+          "depth": 3.9738189808804574
+        },
+        {
+          "x": 252.22773283279622,
+          "y": 258.2329128279572,
+          "visible": false,
+          "depth": 4.656076775527975
+        },
+        {
+          "x": 52.784956143117995,
+          "y": 300.9319698260285,
+          "visible": true,
+          "depth": 4.417127599014298
+        }
+      ],
+      "faceBounds": {
+        "x": 148.8543742899785,
+        "y": 196.75479835018137,
+        "left": 148.8543742899785,
+        "right": 255.01500096250595,
+        "top": 196.75479835018137,
+        "bottom": 303.0005213142826,
+        "width": 106.16062667252746,
+        "height": 106.24572296410122
+      },
+      "screenshot": "output/playwright/walk2/final-390-01.png",
+      "visualCheck": "Name and availability line are clear of the head; body and lower card remain legible."
+    },
+    {
+      "viewportWidth": 390,
+      "station": 3,
+      "title": "随时出发",
+      "cardSide": "right",
+      "card": {
+        "x": 0,
+        "y": 626.109375,
+        "width": 390,
+        "height": 217.890625,
+        "top": 626.109375,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "nodes": [
+        {
+          "x": 148.66517441988063,
+          "y": 317.52499325391466,
+          "visible": false,
+          "depth": 5.65356948214461
+        },
+        {
+          "x": 47.13088564766906,
+          "y": 376.98343358860984,
+          "visible": true,
+          "depth": 4.859261490407032
+        },
+        {
+          "x": 254.58082111152734,
+          "y": 372.5466020989267,
+          "visible": true,
+          "depth": 4.399734974479177
+        },
+        {
+          "x": 331.3210405882344,
+          "y": 308.97076000670427,
+          "visible": true,
+          "depth": 5.2638477849325565
+        }
+      ],
+      "faceBounds": {
+        "x": 146.70842087875909,
+        "y": 173.9234934481972,
+        "left": 146.70842087875909,
+        "right": 235.43273432176667,
+        "top": 173.9234934481972,
+        "bottom": 285.5145279408028,
+        "width": 88.72431344300759,
+        "height": 111.59103449260559
+      },
+      "screenshot": "output/playwright/walk2/final-390-03.png",
+      "visualCheck": "Name and availability line are clear of the head; body and lower card remain legible."
+    }
+  ],
+  "assets": [
+    {
+      "path": "public/images-intro/angle-01.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 1,
+      "title": "好队友",
+      "action": "Wave",
+      "expectedAction": "Wave",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 459433,
+      "sha256": "f89fd3208973e48169fe90056aa3042689c5a2308c0db32299c3b4771f5369fc",
+      "hoodie": "#a44c76",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-intro/angle-02.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Nod",
+      "expectedAction": "Nod",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 526461,
+      "sha256": "897b66368a8ecbae418870b84590dbfa550ad285f66649ecf063077f2f086c9d",
+      "hoodie": "#3755a6",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-intro/angle-03.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 3,
+      "title": "随时出发",
+      "action": "Walk",
+      "expectedAction": "Walk",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 188755,
+      "sha256": "85ff46fdc5038baae49b0fd692cb2385658e1b84e76e04606e9929ee42ee7e3d",
+      "hoodie": "#82756e",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-intro/angle-04.png",
+      "kind": "intro",
+      "variant": "desktop",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "LookAround",
+      "expectedAction": "LookAround",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 425146,
+      "sha256": "689212f995933f06a4f16f760abe33a568e91ba77811e3cd12ed7aa6be1f53f5",
+      "hoodie": "#327b60",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/angle-01.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 1,
+      "title": "好队友",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 502545,
+      "sha256": "d4f7e21dd79210ee19a06a8c695503f9ca41c0b3e4b91f927391916cb167221d",
+      "hoodie": "#a44c76",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/angle-02.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 540758,
+      "sha256": "f929c56d9c94a2e8a3c5987ced0fa79090733c3884fc64c0f398083a8fa0d5f6",
+      "hoodie": "#3755a6",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/angle-03.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 3,
+      "title": "随时出发",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 493122,
+      "sha256": "d344ff61cddfef77b9194ef02ff79fb6eda2403ea28053d93adc3514de3545cb",
+      "hoodie": "#82756e",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/angle-04.png",
+      "kind": "idle",
+      "variant": "desktop",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 459745,
+      "sha256": "2976b41eeac7619ae2584c6798b3bf6cee8cc018d2f5bfe8952f3134a4206f85",
+      "hoodie": "#327b60",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/angle-01.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 1,
+      "title": "好队友",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 338909,
+      "sha256": "2bcc376e00de0c4904e71176bd33062a72bf868020b09ac0e98fe1933de7f9df",
+      "hoodie": "#a44c76",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/angle-02.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 309919,
+      "sha256": "ae97825d96b5971936a38ba13e04ae86868d30f1f1716ddef48346dba283da81",
+      "hoodie": "#3755a6",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/angle-03.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 3,
+      "title": "随时出发",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 497742,
+      "sha256": "ee75e3bbc8dd6fbc50d2425c9d33c13c9caa9e116560c42594e2b9eaf5ac85e3",
+      "hoodie": "#82756e",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/angle-04.png",
+      "kind": "still",
+      "variant": "desktop",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 439164,
+      "sha256": "4fb19deb8103fbbe74b3268665cd4d39b2574006ac5ea98197634d5fb00e7b47",
+      "hoodie": "#327b60",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-intro/mobile-01.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 1,
+      "title": "好队友",
+      "action": "Wave",
+      "expectedAction": "Wave",
+      "width": 390,
+      "height": 626,
+      "bytes": 106360,
+      "sha256": "15d595317d16ca3ad883ca788338a9c41778c36147be2d90d2f333fe48fd8af2",
+      "hoodie": "#a44c76",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-intro/mobile-02.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Nod",
+      "expectedAction": "Nod",
+      "width": 390,
+      "height": 626,
+      "bytes": 140822,
+      "sha256": "18ff0c24f4e9f1882ed5293822089025bdf811642d16733466453e394ceb5ef2",
+      "hoodie": "#3755a6",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-intro/mobile-03.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 3,
+      "title": "随时出发",
+      "action": "Walk",
+      "expectedAction": "Walk",
+      "width": 390,
+      "height": 626,
+      "bytes": 76030,
+      "sha256": "0d801c80213b5420928416178f8843a1bbc6ae1b55db6f55a8346942e53e1dd7",
+      "hoodie": "#82756e",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-intro/mobile-04.png",
+      "kind": "intro",
+      "variant": "mobile",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "LookAround",
+      "expectedAction": "LookAround",
+      "width": 390,
+      "height": 626,
+      "bytes": 130233,
+      "sha256": "d86b1d249930b77ccd0e9def3eac6f52c9861d807c978a8839dd0a914363306a",
+      "hoodie": "#327b60",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/mobile-01.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 1,
+      "title": "好队友",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 390,
+      "height": 626,
+      "bytes": 126154,
+      "sha256": "658b99fc0be20018e4afce4fd6eef9c5ea40f96e19c11b9db6d09e7218d36467",
+      "hoodie": "#a44c76",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/mobile-02.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 390,
+      "height": 626,
+      "bytes": 144749,
+      "sha256": "02fc335b900b2f2079827a27d2af4f49d23077970402114ebbece2cf238187b2",
+      "hoodie": "#3755a6",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/mobile-03.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 3,
+      "title": "随时出发",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 390,
+      "height": 626,
+      "bytes": 129944,
+      "sha256": "d57241ac42adbc9febd44c3476e793cc30a80536ae772fb5a6123301b2f644b1",
+      "hoodie": "#82756e",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-tripo/mobile-04.png",
+      "kind": "idle",
+      "variant": "mobile",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "Idle",
+      "expectedAction": "Idle",
+      "width": 390,
+      "height": 626,
+      "bytes": 109250,
+      "sha256": "6309f3206d2e3c51ac8bca847f24d380cce33de015d6c42eacda3410fe5e7890",
+      "hoodie": "#327b60",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/mobile-01.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 1,
+      "title": "好队友",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 109468,
+      "sha256": "100711642f57ad06ab615d471115c52898e2ddb8d902a4f0e7b606764057a10a",
+      "hoodie": "#a44c76",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/mobile-02.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 2,
+      "title": "好看，也好用",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 88962,
+      "sha256": "2233ae41395f1a4d686c61535a70583c81982f02aa8b1fb2a4d68c8938e3d1cf",
+      "hoodie": "#3755a6",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/mobile-03.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 3,
+      "title": "随时出发",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 131588,
+      "sha256": "7969ba7fbcd906dd4ca950d1338bf3808fee7fc3fe560549b5bbcac12c901c37",
+      "hoodie": "#82756e",
+      "metadataMatches": true
+    },
+    {
+      "path": "public/images-v2/mobile-04.png",
+      "kind": "still",
+      "variant": "mobile",
+      "station": 4,
+      "title": "上线只是开始",
+      "action": "OriginalRest",
+      "expectedAction": "OriginalRest",
+      "width": 390,
+      "height": 626,
+      "bytes": 127597,
+      "sha256": "c7d8d39978f26b97573299e4714b26d15235eeaf96204b2e8209a499f616cfdf",
+      "hoodie": "#327b60",
+      "metadataMatches": true
+    }
+  ],
+  "metadataFiles": [
+    "public/images-intro/frames.json",
+    "public/images-tripo/frames.json",
+    "public/images-v2/frames.json"
+  ],
+  "finalSmoke": {
+    "checks": [
+      {
+        "name": "1440 静帧01新顺序正确",
+        "pass": true,
+        "detail": {
+          "title": "好队友",
+          "angle": "1",
+          "img": "http://127.0.0.1:5173/images-tripo/angle-01.png?v=walk2-team-first",
+          "availability": "11月底可到岗"
+        }
+      },
+      {
+        "name": "1440 静帧03新顺序正确",
+        "pass": true,
+        "detail": {
+          "title": "随时出发",
+          "angle": "3",
+          "img": "http://127.0.0.1:5173/images-tripo/angle-03.png?v=walk2-team-first",
+          "availability": "11月底可到岗"
+        }
+      },
+      {
+        "name": "320 静帧01新顺序正确",
+        "pass": true,
+        "detail": {
+          "title": "好队友",
+          "angle": "1",
+          "img": "http://127.0.0.1:5173/images-tripo/mobile-01.png?v=walk2-team-first",
+          "availability": "11月底可到岗"
+        }
+      },
+      {
+        "name": "320 静帧03新顺序正确",
+        "pass": true,
+        "detail": {
+          "title": "随时出发",
+          "angle": "3",
+          "img": "http://127.0.0.1:5173/images-tripo/mobile-03.png?v=walk2-team-first",
+          "availability": "11月底可到岗"
+        }
+      },
+      {
+        "name": "still 04到01沿正向135度短弧旋转",
+        "pass": true,
+        "detail": {
+          "start": 160,
+          "end": 294.9999999999997,
+          "delta": 134.99999999999972,
+          "samples": 95
+        }
+      },
+      {
+        "name": "静止镜头页面无异常",
+        "pass": true,
+        "detail": []
+      }
+    ],
+    "screenshots": [
+      "output/playwright/walk2/static-1440-01.png",
+      "output/playwright/walk2/static-1440-03.png",
+      "output/playwright/walk2/static-320-01.png",
+      "output/playwright/walk2/static-320-03.png"
+    ],
+    "visualCheck": "Viewed regenerated static 01/03 at 1440 and 320 widths. Header availability line stays above the character head; station text and image identities match. Still 04 to 01 uses a measured positive 135 degree arc."
+  }
+}

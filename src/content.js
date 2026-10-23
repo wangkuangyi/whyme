@@ -8,7 +8,7 @@ export const profile = {
   github: 'https://github.com/wangkuangyi',
   website: 'https://wky.wang/',
   education: '新加坡国立大学 · 计算机工程',
-  availability: '11 月底可到岗',
+  availability: '11月底可到岗',
   // The design confirms late November, not a particular day. This is the
   // display rollover boundary, not a claim of an exact joining date.
   availableFrom: '2026-12-01',
@@ -20,14 +20,14 @@ export const profile = {
 export const advantages = [
   {
     id: '01',
-    category: '迅速到岗',
-    title: '随时出发',
-    claim: '11 月底即可到岗，用已有经验尽快上手。',
+    category: '团队精神',
+    title: '好队友',
+    claim: '认真配合，善于协作，把任务落实到位。',
     proofs: [
-      'Agent / MCP 工具开发与评测',
-      '平台需求开发与上下游接口协作',
+      '网易：前后端协同，优化接口、开发需求',
+      'NUS：Embodied Agent 协同开发',
     ],
-    link: { label: '约个时间聊', href: 'mailto:kuangyi001126@outlook.com?subject=关于工作机会' },
+    link: { label: '看看协作项目', href: '#teamwork' },
   },
   {
     id: '02',
@@ -42,6 +42,17 @@ export const advantages = [
   },
   {
     id: '03',
+    category: '迅速到岗',
+    title: '随时出发',
+    claim: '11 月底即可到岗，用已有经验尽快上手。',
+    proofs: [
+      'Agent / MCP 工具开发与评测',
+      '平台需求开发与上下游接口协作',
+    ],
+    link: { label: '约个时间聊', href: 'mailto:kuangyi001126@outlook.com?subject=关于工作机会' },
+  },
+  {
+    id: '04',
     category: '长期意识',
     title: '上线只是开始',
     claim: '把产品做出来，也把它持续做好。',
@@ -50,17 +61,6 @@ export const advantages = [
       'Benchmark Atlas：从面试任务开始，持续更新至今',
     ],
     link: { label: '看看持续更新的项目', href: '#ongoing-work' },
-  },
-  {
-    id: '04',
-    category: '团队精神',
-    title: '好队友',
-    claim: '认真配合，善于协作，把任务落实到位。',
-    proofs: [
-      '网易：前后端协同，优化接口、开发需求',
-      'NUS：Embodied Agent 协同开发',
-    ],
-    link: { label: '看看协作项目', href: '#teamwork' },
   },
 ];
 

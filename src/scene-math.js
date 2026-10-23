@@ -12,7 +12,8 @@ export function nearestStation(target, current) {
 }
 
 export function stationAzimuth(progress) {
-  const angles = [-18, 65, 160, 295, 342];
+  // Keep each chapter's active node on its established side after reordering.
+  const angles = [25, 65, 162, 250, 385];
   const turn = Math.floor(progress / 4);
   const local = progress - turn * 4;
   const index = Math.floor(local);

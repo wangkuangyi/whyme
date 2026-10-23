@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'LookAround', 'Wave']);
+export const STATION_CLIPS = Object.freeze(['Wave', 'Nod', 'Walk', 'LookAround']);
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
 const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05, LookAround: 1 };
 const FADE_SECONDS = .5;

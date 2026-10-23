@@ -15,10 +15,13 @@ const baselineURL = new URL('../public/models/person.glb', import.meta.url);
 const outputURL = new URL('../public/models/person-animated.glb', import.meta.url);
 const metadataURL = new URL('../public/models/person-animated-info.json', import.meta.url);
 const sourceDefinitions = [
-  { path:'动作素材/human+character+3d+model.glb', names:['Idle','Greet','Box','Walk','Nod','Wave'],
+  { path:'动作素材/human+character+3d+model.glb', names:['Idle','Greet','Box',null,'Nod','Wave'],
     sourceNames:['角色自然站立.001','人物主动向面前的人打招呼，精神饱满，反应利','box_01.001','角色正常走路.001','人物认真听完一句话后，给出明确、自信的肯定','角色小幅挥手，别有气无力的.001'] },
   { path:'动作素材/human+character+3d+model+huangu.glb', names:['LookAround'], sourceNames:['look_around.001'] },
+  { path:'动作素材/human+character+3d+model+walk2.glb', names:['Walk'], sourceNames:['walk.001'] },
 ];
+// Keep the public clip order stable while selecting Walk only from the new file.
+const animationOrder = ['Idle','Greet','Box','Walk','Nod','Wave','LookAround'];
 const checkOnly = process.argv.includes('--check');
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const align4 = n => (n + 3) & ~3;
@@ -105,7 +108,9 @@ function appendAccessor(source,index) {
   const destinationIndex = json.accessors.length; json.accessors.push(destination); source.accessorMap.set(index,destinationIndex);
   return destinationIndex;
 }
-const animationSources=sources.flatMap(source=>source.json.animations.map((animation,index)=>({source,animation,index,name:source.names[index]})));
+const animationSources=sources.flatMap(source=>source.json.animations.map((animation,index)=>({source,animation,index,name:source.names[index]})).filter(clip=>clip.name!==null))
+  .sort((a,b)=>animationOrder.indexOf(a.name)-animationOrder.indexOf(b.name));
+if (animationSources.map(clip=>clip.name).join()!==animationOrder.join()) throw new Error('Expected exactly one source for each approved output clip.');
 json.animations = animationSources.map(({source,animation,index,name})=>({
   name, extras:{sourceName:animation.name,sourceIndex:index},
   samplers:animation.samplers.map(s=>({...s,input:appendAccessor(source,s.input),output:appendAccessor(source,s.output)})),
@@ -124,7 +129,7 @@ for (const field of ['nodes','meshes','skins','materials','textures','images','s
 }
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder});
 const [sourceDocuments, outputDocument] = await Promise.all([Promise.all(sources.map(source=>io.readBinary(source.bytes))),io.readBinary(output)]);
-const originalClips = sourceDocuments.flatMap(document=>document.getRoot().listAnimations()), newClips = outputDocument.getRoot().listAnimations();
+const originalClips = animationSources.map(({source,index})=>sourceDocuments[sources.indexOf(source)].getRoot().listAnimations()[index]), newClips = outputDocument.getRoot().listAnimations();
 const clips = [];
 for (let index = 0; index < newClips.length; index++) {
   const actual = newClips[index], expected = originalClips[index], actualChannels = actual.listChannels(), expectedChannels = expected.listChannels();
@@ -142,9 +147,9 @@ for (let index = 0; index < newClips.length; index++) {
   const provenance=animationSources[index];
   clips.push({name:provenance.name,source:provenance.source.path,sourceName:expected.getName(),sourceIndex:provenance.index,duration:Math.max(...actual.listSamplers().map(s=>Math.max(...s.getInput().getArray()))),channels:actualChannels.length,
     rootMotion:{bone:'mixamorig:Hips',start,end,delta,worldDelta:delta.map(v=>v*json.nodes.find(n=>n.name==='PersonRig').scale[0])},
-    recommendation:provenance.name==='Walk'?'真实根运动；镜头与场景锚点跟随。不要直接首尾跳回循环。':provenance.name==='Box'?'拳击动作；默认不启用。':provenance.name==='Greet'?'大幅招手已由用户撤回，不绑定或播放。':provenance.name==='Idle'?'站立包含侧向漂移，避免直接硬循环。':provenance.name==='LookAround'?'用户新增环顾原片段；保留原采样，播放区间与构图另行验收。':'原地短动作；进入和退出时交叉淡化。'});
+    recommendation:provenance.name==='Walk'?'用户新提供的原地走路；保留全部原始采样，不沿用旧 Walk 的前移距离或时长。':provenance.name==='Box'?'拳击动作；默认不启用。':provenance.name==='Greet'?'大幅招手已由用户撤回，不绑定或播放。':provenance.name==='Idle'?'站立包含侧向漂移，避免直接硬循环。':provenance.name==='LookAround'?'用户新增环顾原片段；保留原采样，播放区间与构图另行验收。':'原地短动作；进入和退出时交叉淡化。'});
 }
-const metadata = {version:2,source:sources[0].path,sources:sources.map(source=>({path:source.path,sha256:source.sha256,bytes:source.bytes.length,clips:[...source.names],skeletonComparison:source.skeletonComparison})),baseline:'public/models/person.glb',output:'public/models/person-animated.glb',
+const metadata = {version:3,source:sources[0].path,sources:sources.map(source=>({path:source.path,sha256:source.sha256,bytes:source.bytes.length,clips:source.names.filter(name=>name!==null),skeletonComparison:source.skeletonComparison})),baseline:'public/models/person.glb',output:'public/models/person-animated.glb',
   sourceSHA256:sources[0].sha256,baselineSHA256:hash(baselineBytes),outputSHA256:hash(output),bytes:output.length,
   preserved:{originalFace:true,originalMeshBytes:true,originalMaterials:true,originalTextures:true,originalSkeleton:true,newMorphTargets:false},
   skeletonComparison:{jointCount:65,maxRestTranslation:maxTranslation,maxRestQuaternion:maxQuaternion,maxRestScale:maxScale},

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "source": "动作素材/human+character+3d+model.glb",
   "sources": [
     {
@@ -10,7 +10,6 @@
         "Idle",
         "Greet",
         "Box",
-        "Walk",
         "Nod",
         "Wave"
       ],
@@ -34,14 +33,28 @@
         "maxRestQuaternion": 0.00001198076643049717,
         "maxRestScale": 0.000004887580871582031
       }
+    },
+    {
+      "path": "动作素材/human+character+3d+model+walk2.glb",
+      "sha256": "1ac75a5eb67e65b4f0b49c9e37066bc69f682464ccd4c84770bd24418ab602b2",
+      "bytes": 3883444,
+      "clips": [
+        "Walk"
+      ],
+      "skeletonComparison": {
+        "jointCount": 65,
+        "maxRestTranslation": 2.086162567138672e-7,
+        "maxRestQuaternion": 0.00001198076643049717,
+        "maxRestScale": 0.000004887580871582031
+      }
     }
   ],
   "baseline": "public/models/person.glb",
   "output": "public/models/person-animated.glb",
   "sourceSHA256": "489f55375ca109e670396da16a45f35b94f18a7247a2ff26bb35bbaaa2e6f9e8",
   "baselineSHA256": "def0603ec59ac8fac3de5df25e2827b2fbbd11cf0ad7ae5672e9fc3fab4a957f",
-  "outputSHA256": "30c9fe726248feaf64d84b4d54623fc0059dff5d59d0f0c6d13aaf1551491bdd",
-  "bytes": 2135360,
+  "outputSHA256": "1f8c63c22f67523ed69382ce9d5f7ad245f95222e87bea48390309a87e945ffb",
+  "bytes": 2118404,
   "preserved": {
     "originalFace": true,
     "originalMeshBytes": true,
@@ -156,35 +169,35 @@
     },
     {
       "name": "Walk",
-      "source": "动作素材/human+character+3d+model.glb",
-      "sourceName": "角色正常走路.001",
-      "sourceIndex": 3,
-      "duration": 5,
+      "source": "动作素材/human+character+3d+model+walk2.glb",
+      "sourceName": "walk.001",
+      "sourceIndex": 0,
+      "duration": 2.375,
       "channels": 195,
       "rootMotion": {
         "bone": "mixamorig:Hips",
         "start": [
-          0.004768076352775097,
-          0.49222585558891296,
-          -0.035331640392541885
+          0.001952244434505701,
+          0.5097491145133972,
+          0.0019520922796800733
         ],
         "end": [
-          0.21301192045211792,
-          0.502666711807251,
-          4.109251976013184
+          0.001952244434505701,
+          0.5097544193267822,
+          0.0019520482746884227
         ],
         "delta": [
-          0.20824384409934282,
-          0.010440856218338013,
-          4.1445836164057255
+          0,
+          0.000005304813385009766,
+          -4.400499165058136e-8
         ],
         "worldDelta": [
-          0.38127240331936596,
-          0.019116100935875124,
-          7.588293248328808
+          0,
+          0.000009712550962603927,
+          -8.056847489168462e-8
         ]
       },
-      "recommendation": "真实根运动；镜头与场景锚点跟随。不要直接首尾跳回循环。"
+      "recommendation": "用户新提供的原地走路；保留全部原始采样，不沿用旧 Walk 的前移距离或时长。"
     },
     {
       "name": "Nod",
