@@ -1,0 +1,212 @@
+{
+  "asset": "public/models/person-original-animated.glb",
+  "sha256": "fda0ce34395d895f6d18b39a40b65affd3f622401a2f76b1f2beaf152955a036",
+  "checks": [
+    {
+      "name": "original-whole-body-rest-is-not-corrected",
+      "passed": true
+    },
+    {
+      "name": "all-four-source-performances-only-change-three-authorized-local-rotations",
+      "passed": true
+    },
+    {
+      "name": "hips-legs-and-feet-never-move-from-posture-correction",
+      "passed": true
+    },
+    {
+      "name": "source-head-world-gaze-is-preserved-through-all-samples",
+      "passed": true
+    },
+    {
+      "name": "head-compensation-stays-within-the-4_4-degree-support-change",
+      "passed": true
+    },
+    {
+      "name": "correction-adds-no-5mm-pop-per-frame-at-240Hz",
+      "passed": true
+    },
+    {
+      "name": "naturally-upright-source-frames-are-untouched",
+      "passed": true
+    },
+    {
+      "name": "repeated-update-without-new-mixer-sample-does-not-accumulate",
+      "passed": true
+    },
+    {
+      "name": "reset-exactly-restores-the-uncorrected-source-frame",
+      "passed": true
+    },
+    {
+      "name": "omitted-spine-and-head-tracks-cannot-accumulate-correction",
+      "passed": true
+    },
+    {
+      "name": "omitted-track-fixture-restores-the-original-local-pose",
+      "passed": true
+    },
+    {
+      "name": "parent-yaw-and-scale-preserve-head-direction-and-correction-limit",
+      "passed": true
+    },
+    {
+      "name": "original-animation-time-and-value-arrays-stay-byte-equivalent",
+      "passed": true
+    }
+  ],
+  "frameCount": 3430,
+  "sampling": [
+    {
+      "clip": "Nod",
+      "start": 0,
+      "end": 3,
+      "frames": 721,
+      "maxCorrectionDegrees": 8,
+      "naturalFrames": 0
+    },
+    {
+      "clip": "Wave",
+      "start": 1.2,
+      "end": 4.3,
+      "frames": 745,
+      "maxCorrectionDegrees": 4.682714468544759,
+      "naturalFrames": 0
+    },
+    {
+      "clip": "LookAround",
+      "start": 1.2,
+      "end": 7,
+      "frames": 1393,
+      "maxCorrectionDegrees": 0,
+      "naturalFrames": 1393
+    },
+    {
+      "clip": "Walk",
+      "start": 0,
+      "end": 2.375,
+      "frames": 571,
+      "maxCorrectionDegrees": 0.5578279666246999,
+      "naturalFrames": 465
+    }
+  ],
+  "unchangedFrames": 1858,
+  "maxHeadDirectionErrorRadians": 9.424321830774485e-8,
+  "maxHeadCompensationDegrees": 4.400000876454853,
+  "maxCorrectionOffsetChangePer240HzFrameMetres": 0.0013516936263433866,
+  "examples": [
+    {
+      "clip": "Nod",
+      "time": 1,
+      "active": true,
+      "curveBefore": 20.65282122903045,
+      "curveAfter": 12.652820870335859,
+      "deltaDegrees": 8,
+      "spine1Degrees": 3.6,
+      "spine2Degrees": -8,
+      "headDirectionError": 0,
+      "correctionDegrees": 8,
+      "max": {
+        "deltaDegrees": 8,
+        "spine1Degrees": 3.6,
+        "spine2Degrees": 8,
+        "headDirectionError": 6.664001874625056e-8,
+        "correctionDegrees": 8
+      },
+      "limits": {
+        "curveDegrees": 8,
+        "correctionDegrees": 8
+      },
+      "bones": [
+        "Spine1",
+        "Spine2",
+        "Head"
+      ]
+    },
+    {
+      "clip": "Wave",
+      "time": 2,
+      "active": true,
+      "curveBefore": 12.06055203972312,
+      "curveAfter": 7.999999416276523,
+      "deltaDegrees": 4.06055203972312,
+      "spine1Degrees": 1.8272484178754043,
+      "spine2Degrees": -4.06055203972312,
+      "headDirectionError": 2.9802322387695312e-8,
+      "correctionDegrees": 4.06055203972312,
+      "max": {
+        "deltaDegrees": 8,
+        "spine1Degrees": 3.6,
+        "spine2Degrees": 8,
+        "headDirectionError": 7.300048299977715e-8,
+        "correctionDegrees": 8
+      },
+      "limits": {
+        "curveDegrees": 8,
+        "correctionDegrees": 8
+      },
+      "bones": [
+        "Spine1",
+        "Spine2",
+        "Head"
+      ]
+    },
+    {
+      "clip": "LookAround",
+      "time": 2.5999999999999996,
+      "active": false,
+      "curveBefore": 4.661858075375903,
+      "curveAfter": 4.661858075375903,
+      "deltaDegrees": 0,
+      "spine1Degrees": 0,
+      "spine2Degrees": 0,
+      "headDirectionError": 0,
+      "correctionDegrees": 0,
+      "max": {
+        "deltaDegrees": 8,
+        "spine1Degrees": 3.6,
+        "spine2Degrees": 8,
+        "headDirectionError": 7.300048299977715e-8,
+        "correctionDegrees": 8
+      },
+      "limits": {
+        "curveDegrees": 8,
+        "correctionDegrees": 8
+      },
+      "bones": [
+        "Spine1",
+        "Spine2",
+        "Head"
+      ]
+    },
+    {
+      "clip": "Walk",
+      "time": 1.2,
+      "active": false,
+      "curveBefore": 7.950536223078757,
+      "curveAfter": 7.950536223078757,
+      "deltaDegrees": 0,
+      "spine1Degrees": 0,
+      "spine2Degrees": 0,
+      "headDirectionError": 0,
+      "correctionDegrees": 0,
+      "max": {
+        "deltaDegrees": 8,
+        "spine1Degrees": 3.6,
+        "spine2Degrees": 8,
+        "headDirectionError": 7.300048299977715e-8,
+        "correctionDegrees": 8
+      },
+      "limits": {
+        "curveDegrees": 8,
+        "correctionDegrees": 8
+      },
+      "bones": [
+        "Spine1",
+        "Spine2",
+        "Head"
+      ]
+    }
+  ],
+  "notes": "Independent actual-GLB posture-module checks. Only local Spine1/Spine2/Head rotations may change; head world gaze and every lower-body transform remain unchanged. The test includes deliberately omitted corrected tracks and repeated update calls to detect cumulative corrections. Screenshot review is separate; this report does not assert all-frame cloth clearance."
+}

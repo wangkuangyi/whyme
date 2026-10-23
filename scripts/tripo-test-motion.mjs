@@ -48,8 +48,11 @@ function rig({reducedMotion=false,yaw=0,scale=1,rootMotionFixture=false}={}) {
     for(let i=0;i<track.times.length;i++){track.values[i*3]+=.3*track.times[i];track.values[i*3+2]+=.8*track.times[i];}
   }
   outer.updateMatrixWorld(true);
+  // Capture expected transforms directly from GLB nodes before the runtime
+  // creates or samples any action. This is independent of its generated Idle.
+  const restPose=[...bones].map(([name,{bone}])=>({name,position:bone.position.clone(),quaternion:bone.quaternion.clone(),scale:bone.scale.clone()}));
   const sourceSnapshot=animations.map(clip=>clip.tracks.map(track=>({times:Array.from(track.times),values:Array.from(track.values)})));
-  return {motion:createCharacterMotion({model,animations,bones,reducedMotion}),bones,model,outer,animations,sourceSnapshot};
+  return {motion:createCharacterMotion({model,animations,bones,reducedMotion}),bones,model,outer,animations,sourceSnapshot,restPose};
 }
 const reports = [], check=(name,test)=>{test();reports.push({name,passed:true});};
 const tick=(context,seconds,options={})=>{for(let i=0;i<Math.round(seconds*120);i++) {context.motion.update(1/120,options);context.outer.position.copy(context.motion.position);context.outer.updateMatrixWorld(true);}};
@@ -78,7 +81,7 @@ for (let station=0;station<STATION_CLIPS.length;station++) {
   check(`station-${station+1}-uses-reviewed-action`,()=>assert.equal(sample.motion.getState().action,STATION_CLIPS[station]));
   finishEntry(sample);
   check(`station-${station+1}-settles-to-idle`,()=>{assert.equal(sample.motion.getState().action,'Idle');assert.equal(sample.motion.getState().end,true);assert.equal(sample.motion.getState().walking,false);});
-  check(`station-${station+1}-uses-its-own-idle-mode`,()=>{const state=sample.motion.getState();assert.equal(state.idleMode,station===WALK_STATION?'walk-source-hold':'source-loop');assert.equal(state.idleSourceTime,station===WALK_STATION?2.5:null);});
+  check(`station-${station+1}-uses-whole-original-upright-rest`,()=>{const state=sample.motion.getState();assert.equal(state.idleMode,'upright-rest');assert.equal(state.idleSourceTime,null);assert.equal(state.idleRange,null);assert.ok(poseError(sample,sample.restPose)<1e-6);});
   check(`station-${station+1}-hips-horizontal-rest`,()=>{const [x,z]=sample.motion.getState().rootMotion.horizontalRest;assert.ok(Math.abs(sample.bones.get('Hips').bone.position.x-x)<1e-7);assert.ok(Math.abs(sample.bones.get('Hips').bone.position.z-z)<1e-7);});
 }
 check('source-animation-arrays-preserved-from-before-motion-creation',()=>sample.animations.forEach((clip,c)=>clip.tracks.forEach((track,t)=>{assert.deepEqual(Array.from(track.times),unchanged[c][t].times);assert.deepEqual(Array.from(track.values),unchanged[c][t].values);})));
@@ -137,7 +140,7 @@ const longIdle=rig(), initialIdle=savePose(longIdle);
 tick(longIdle,300);const idlePoseError=poseError(longIdle,initialIdle);
 check('five-minute-idle-has-no-root-drift',()=>assert.equal(longIdle.motion.position.length(),0));
 check('five-minute-idle-returns-to-the-same-pose',()=>assert.ok(idlePoseError<1e-5,`pose error ${idlePoseError}`));
-check('initial-idle-does-not-trigger-repeated-settling',()=>{const state=longIdle.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.idleMode,'source-loop');assert.equal(state.idleSourceTime,null);assert.equal(state.end,true);assert.equal(state.transition,null);assert.equal(state.weights.length,1);assert.equal(state.transitions.length,1);});
+check('initial-idle-does-not-trigger-repeated-settling',()=>{const state=longIdle.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.idleMode,'upright-rest');assert.equal(state.idleSourceTime,null);assert.equal(state.end,true);assert.equal(state.transition,null);assert.equal(state.weights.length,1);assert.equal(state.transitions.length,1);assert.ok(poseError(longIdle,longIdle.restPose)<1e-6);});
 const idleBeforeClick=longIdle.motion.getState();
 check('idle-before-any-station-does-not-add-a-reaction',()=>{assert.equal(longIdle.motion.react(),false);assert.deepEqual(longIdle.motion.getState(),idleBeforeClick);});
 
@@ -146,16 +149,32 @@ const lookAroundStart=lookAround.motion.getState(), lookAroundDuration=lookAroun
 check('look-around-is-reviewed-5_8-second-excerpt-at-original-speed',()=>{assert.deepEqual(lookAroundStart.lookAroundRange,[1.2,7]);assert.ok(Math.abs(lookAroundDuration-5.8)<1e-6);assert.equal(lookAroundStart.speed,1);assert.ok(suppliedLookAround.duration>15);});
 // Compare live bone transforms with independent interpolation of the original
 // GLB. Checking both the entry and replay guards against an offset/retiming bug.
+// Only the three explicitly permitted local quaternion corrections are excluded
+// from source equality; their bounds and world-space gaze are checked separately.
+const sourceReference=rig();sourceReference.motion.dispose();
+const postureSourceComparisons=[],permittedPostureBones=new Set(['Spine1','Spine2','Head']);
 const sourcePoseError=(context,sourceTime,source=suppliedLookAround)=>{
   let maximum=0;
+  for(const pose of sourceReference.restPose){const bone=sourceReference.bones.get(pose.name).bone;bone.position.copy(pose.position);bone.quaternion.copy(pose.quaternion);bone.scale.copy(pose.scale);}
+  sourceReference.outer.quaternion.copy(context.outer.quaternion);sourceReference.outer.scale.copy(context.outer.scale);
   for(const track of source.tracks){
-    const binding=THREE.PropertyBinding.parseTrackName(track.name), name=binding.nodeName.replace(/^mixamorig[:_]?/i,''), bone=context.bones.get(name)?.bone;
+    const binding=THREE.PropertyBinding.parseTrackName(track.name), name=binding.nodeName.replace(/^mixamorig[:_]?/i,''), bone=sourceReference.bones.get(name)?.bone;
     if(!bone)continue;
     const expected=Array.from(track.createInterpolant().evaluate(sourceTime)).slice(0,track.getValueSize());
     if(binding.propertyName==='position'&&name==='Hips'){const[x,z]=context.motion.getState().rootMotion.horizontalRest;expected[0]=x;expected[2]=z;}
-    const actual=bone[binding.propertyName].toArray();
-    maximum=Math.max(maximum,...actual.map((v,i)=>Math.abs(v-expected[i])));
+    bone[binding.propertyName].fromArray(expected);
   }
+  sourceReference.outer.updateMatrixWorld(true);context.outer.updateMatrixWorld(true);
+  const corrections={};
+  for(const[name,{bone}]of context.bones){
+    const expected=sourceReference.bones.get(name).bone;
+    for(const property of['position','quaternion','scale']){
+      if(property==='quaternion'&&permittedPostureBones.has(name)){corrections[name]=bone.quaternion.clone().normalize().angleTo(expected.quaternion.clone().normalize())*180/Math.PI;continue;}
+      const actual=bone[property].toArray(),reference=expected[property].toArray();maximum=Math.max(maximum,...actual.map((v,i)=>Math.abs(v-reference[i])));
+    }
+  }
+  const actualGaze=context.bones.get('Head').bone.getWorldQuaternion(new THREE.Quaternion()).normalize(),expectedGaze=sourceReference.bones.get('Head').bone.getWorldQuaternion(new THREE.Quaternion()).normalize();
+  postureSourceComparisons.push({clip:source.name,sourceTime,unchangedLocalError:maximum,localCorrectionDegrees:corrections,headWorldDirectionError:actualGaze.angleTo(expectedGaze),runtime:context.motion.getState().posture});
   return maximum;
 };
 const footPose=(context)=>{
@@ -163,40 +182,44 @@ const footPose=(context)=>{
   const positions=Object.fromEntries(['LeftFoot','RightFoot','LeftToeBase','RightToeBase'].map(name=>[name,context.bones.get(name).bone.getWorldPosition(new THREE.Vector3()).sub(hips).toArray()]));
   return {positions,depthDifference:positions.RightFoot[2]-positions.LeftFoot[2],ankleHeightDifference:positions.RightFoot[1]-positions.LeftFoot[1],toeHeightDifference:positions.RightToeBase[1]-positions.LeftToeBase[1]};
 };
-// Inspect the unmodified source independently of the runtime Idle variants.
+const sourceRestProbe=rig();sourceRestProbe.motion.dispose();
+const restFeet=footPose(sourceRestProbe);
+check('original-bind-rest-feet-are-parallel-and-planted',()=>{assert.ok(Math.abs(restFeet.depthDifference)<.035);assert.ok(Math.abs(restFeet.ankleHeightDifference)<.002);assert.ok(Math.abs(restFeet.toeHeightDifference)<.001);});
+// Retain historical evidence of why the old Idle animation was withdrawn.
+// Its least-stepped sample is no longer the expected runtime posture.
 const idleSourceProbe=rig();idleSourceProbe.motion.dispose();
 const idleSourceMixer=new THREE.AnimationMixer(idleSourceProbe.model);idleSourceMixer.clipAction(suppliedIdle).play();
 const idleSourceFeet=[1.5,2.5,3.5].map(time=>{idleSourceMixer.setTime(time);idleSourceProbe.outer.updateMatrixWorld(true);return {time,...footPose(idleSourceProbe)};});
 check('old-idle-loop-includes-the-forward-right-foot-step',()=>assert.ok(idleSourceFeet[0].depthDifference>.30));
-check('selected-source-frame-has-both-feet-planted-together',()=>{const feet=idleSourceFeet[1];assert.ok(Math.abs(feet.depthDifference)<.035);assert.ok(Math.abs(feet.ankleHeightDifference)<.002);assert.ok(Math.abs(feet.toeHeightDifference)<.001);});
+check('historical-idle-2_5-second-sample-had-planted-feet',()=>{const feet=idleSourceFeet[1];assert.ok(Math.abs(feet.depthDifference)<.035);assert.ok(Math.abs(feet.ankleHeightDifference)<.002);assert.ok(Math.abs(feet.toeHeightDifference)<.001);});
 const stableWalk=rig();stableWalk.motion.setStation(WALK_STATION,{immediate:true});finishEntry(stableWalk);
-const stableState=stableWalk.motion.getState(),stableFeet=footPose(stableWalk),stablePose=savePose(stableWalk),stableSourceError=sourcePoseError(stableWalk,2.5,suppliedIdle);
-check('walk-settles-to-the-complete-authored-idle-pose',()=>{assert.equal(stableState.action,'Idle');assert.equal(stableState.idleMode,'walk-source-hold');assert.equal(stableState.idleSourceTime,2.5);assert.ok(stableSourceError<3e-6,`whole-body source error ${stableSourceError}`);});
-check('walk-settled-feet-match-the-selected-source-frame',()=>{const expected=idleSourceFeet[1];for(const name of Object.keys(stableFeet.positions))assert.ok(new THREE.Vector3().fromArray(stableFeet.positions[name]).distanceTo(new THREE.Vector3().fromArray(expected.positions[name]))<1e-6);});
+const stableState=stableWalk.motion.getState(),stableFeet=footPose(stableWalk),stablePose=savePose(stableWalk),stableRestError=poseError(stableWalk,stableWalk.restPose);
+check('walk-settles-to-the-complete-original-bind-rest',()=>{assert.equal(stableState.action,'Idle');assert.equal(stableState.idleMode,'upright-rest');assert.equal(stableState.idleSourceTime,null);assert.ok(stableRestError<1e-6,`whole-body rest error ${stableRestError}`);});
+check('walk-settled-feet-match-the-original-bind-rest',()=>{for(const name of Object.keys(stableFeet.positions))assert.ok(new THREE.Vector3().fromArray(stableFeet.positions[name]).distanceTo(new THREE.Vector3().fromArray(restFeet.positions[name]))<1e-6);});
 tick(stableWalk,300);const stableLongIdleError=poseError(stableWalk,stablePose),stableLongIdleFeet=footPose(stableWalk);
-check('five-minute-walk-idle-keeps-all-bones-and-feet-still',()=>{assert.ok(stableLongIdleError<1e-6);assert.deepEqual(stableLongIdleFeet,stableFeet);assert.equal(stableWalk.motion.getState().action,'Idle');assert.equal(stableWalk.motion.getState().idleMode,'walk-source-hold');});
+check('five-minute-walk-idle-keeps-all-bones-and-feet-still',()=>{assert.ok(stableLongIdleError<1e-6);assert.deepEqual(stableLongIdleFeet,stableFeet);assert.equal(stableWalk.motion.getState().action,'Idle');assert.equal(stableWalk.motion.getState().idleMode,'upright-rest');});
 check('walk-stable-idle-reselect-does-not-restart-the-step',()=>{assert.equal(stableWalk.motion.setStation(WALK_STATION),false);assert.equal(stableWalk.motion.getState().action,'Idle');});
 check('walk-stable-idle-still-allows-the-reviewed-nod',()=>{assert.equal(stableWalk.motion.react(),true);assert.equal(stableWalk.motion.getState().action,'Nod');});
-finishEntry(stableWalk);const postNodSourceError=sourcePoseError(stableWalk,2.5,suppliedIdle);
-check('walk-nod-returns-to-the-same-stable-whole-body-pose',()=>{const state=stableWalk.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.completedAction,'Nod');assert.equal(state.idleMode,'walk-source-hold');assert.ok(postNodSourceError<3e-6);assert.ok(poseError(stableWalk,stablePose)<1e-6);});
+finishEntry(stableWalk);const postNodRestError=poseError(stableWalk,stableWalk.restPose);
+check('walk-nod-returns-to-the-same-stable-whole-body-pose',()=>{const state=stableWalk.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.completedAction,'Nod');assert.equal(state.idleMode,'upright-rest');assert.ok(postNodRestError<1e-6);assert.ok(poseError(stableWalk,stablePose)<1e-6);});
 stableWalk.motion.setStation(NOD_STATION);finishEntry(stableWalk);const normalIdlePose=savePose(stableWalk);tick(stableWalk,.4);const resumedIdlePoseChange=poseError(stableWalk,normalIdlePose);
-check('leaving-walk-restores-the-other-station-idle-animation',()=>{assert.equal(stableWalk.motion.getState().idleMode,'source-loop');assert.equal(stableWalk.motion.getState().idleSourceTime,null);assert.ok(resumedIdlePoseChange>.001,`restored Idle pose change ${resumedIdlePoseChange}`);});
+check('leaving-walk-keeps-the-same-stable-upright-rest',()=>{assert.equal(stableWalk.motion.getState().idleMode,'upright-rest');assert.equal(stableWalk.motion.getState().idleSourceTime,null);assert.ok(resumedIdlePoseChange<1e-6,`rest Idle pose change ${resumedIdlePoseChange}`);assert.ok(poseError(stableWalk,stableWalk.restPose)<1e-6);});
 const interruptedHold=rig();interruptedHold.motion.setStation(WALK_STATION);tick(interruptedHold,walkDuration-.25);
-check('walk-idle-blend-is-active-before-interruption',()=>{assert.equal(interruptedHold.motion.getState().transition?.to,'Idle');assert.equal(interruptedHold.motion.getState().idleMode,'walk-source-hold');});
+check('walk-idle-blend-is-active-before-interruption',()=>{assert.equal(interruptedHold.motion.getState().transition?.to,'Idle');assert.equal(interruptedHold.motion.getState().idleMode,'upright-rest');});
 interruptedHold.motion.setStation(WAVE_STATION);finishEntry(interruptedHold);
-const interruptedHoldState=interruptedHold.motion.getState(),interruptedLoopSourceError=sourcePoseError(interruptedHold,1.5+interruptedHoldState.time,suppliedIdle);
-check('interrupting-walk-idle-blend-does-not-freeze-the-next-station',()=>{assert.equal(interruptedHoldState.completedAction,'Wave');assert.equal(interruptedHoldState.idleMode,'source-loop');assert.deepEqual(interruptedHoldState.weights.map(weight=>weight.action),['Idle']);assert.ok(interruptedLoopSourceError<3e-6);});
+const interruptedHoldState=interruptedHold.motion.getState(),interruptedRestError=poseError(interruptedHold,interruptedHold.restPose);
+check('interrupting-walk-idle-blend-plays-next-action-then-restores-rest',()=>{assert.equal(interruptedHoldState.completedAction,'Wave');assert.equal(interruptedHoldState.idleMode,'upright-rest');assert.deepEqual(interruptedHoldState.weights.map(weight=>weight.action),['Idle']);assert.ok(interruptedRestError<1e-6);});
 idleSourceMixer.stopAllAction();idleSourceMixer.uncacheRoot(idleSourceProbe.model);
 const walkPoseProbe=rig();walkPoseProbe.motion.setStation(WALK_STATION,{immediate:true});walkPoseProbe.motion.update(0);
-const walkOpeningSourceError=sourcePoseError(walkPoseProbe,2.5,suppliedIdle),walkOpeningFeet=footPose(walkPoseProbe),walkOpeningPose=savePose(walkPoseProbe);
-check('initial-walk-dt0-shows-the-complete-planted-idle-source-pose',()=>{assert.ok(walkOpeningSourceError<3e-6);assert.ok(Math.abs(walkOpeningFeet.depthDifference)<.035);assert.ok(Math.abs(walkOpeningFeet.ankleHeightDifference)<.002);assert.ok(Math.abs(walkOpeningFeet.toeHeightDifference)<.001);assert.deepEqual(walkPoseProbe.motion.getState().weights.map(w=>w.action),['Idle']);});
+const walkOpeningRestError=poseError(walkPoseProbe,walkPoseProbe.restPose),walkOpeningFeet=footPose(walkPoseProbe),walkOpeningPose=savePose(walkPoseProbe);
+check('initial-walk-dt0-shows-the-complete-original-bind-rest',()=>{assert.ok(walkOpeningRestError<1e-6);assert.ok(Math.abs(walkOpeningFeet.depthDifference)<.035);assert.ok(Math.abs(walkOpeningFeet.ankleHeightDifference)<.002);assert.ok(Math.abs(walkOpeningFeet.toeHeightDifference)<.001);assert.deepEqual(walkPoseProbe.motion.getState().weights.map(w=>w.action),['Idle']);});
 for(let frame=0;frame<600;frame++)walkPoseProbe.motion.update(0);
 check('paused-intro-never-advances-the-walk-or-unplants-the-feet',()=>{assert.equal(walkPoseProbe.motion.getState().time,0);assert.ok(poseError(walkPoseProbe,walkOpeningPose)<1e-6);});
 const walkSourcePoseSamples=[];
 for(const time of [.5,.75,1.5,2.25,2.5,2.75,3]){tick(walkPoseProbe,time-walkPoseProbe.motion.getState().time);const currentTime=walkPoseProbe.motion.getState().time,sourceTime=currentTime>walkSourceDuration?currentTime-walkSourceDuration:currentTime;walkSourcePoseSamples.push({time:currentTime,sourceTime,error:sourcePoseError(walkPoseProbe,sourceTime,suppliedWalk)});}
-check('walk2-original-and-repeated-cycles-keep-source-pose-and-rate',()=>assert.ok(walkSourcePoseSamples.every(sample=>sample.error<3e-6),JSON.stringify(walkSourcePoseSamples)));
+check('walk2-original-and-repeated-cycles-preserve-source-except-bounded-posture',()=>assert.ok(walkSourcePoseSamples.every(sample=>sample.error<3e-6),JSON.stringify(walkSourcePoseSamples)));
 const initialDefault=rig();initialDefault.motion.setStation(WALK_STATION);initialDefault.motion.update(0);
-check('default-initial-selection-also-starts-in-the-planted-source-pose',()=>assert.ok(sourcePoseError(initialDefault,2.5,suppliedIdle)<3e-6));
+check('default-initial-selection-also-starts-in-original-bind-rest',()=>assert.ok(poseError(initialDefault,initialDefault.restPose)<1e-6));
 const openingFirstStep=savePose(initialDefault);initialDefault.motion.update(1/240);
 check('first-unpaused-frame-fades-away-from-standing-without-a-pose-snap',()=>{assert.ok(poseError(initialDefault,openingFirstStep)<.002);assert.equal(initialDefault.motion.getState().action,'Walk');assert.ok(initialDefault.motion.getState().time>0);});
 const entryContinuity=rig();entryContinuity.motion.setStation(WALK_STATION);entryContinuity.motion.update(0);
@@ -216,17 +239,17 @@ const seamRootFixture=rig({rootMotionFixture:true});seamRootFixture.motion.setSt
 for(let frame=1;frame<=Math.round((walkSourceDuration+.2)*240);frame++){seamRootFixture.motion.update(1/240);const currentRoot=seamRootFixture.motion.position;if(Math.abs(frame/240-walkSourceDuration)<.1){const forwardStep=currentRoot.z-lastFixtureRoot.z;minFixtureForwardStep=Math.min(minFixtureForwardStep,forwardStep);maxFixtureForwardStep=Math.max(maxFixtureForwardStep,forwardStep);}lastFixtureRoot.copy(currentRoot);}
 check('nonzero-root-fixture-continues-forward-across-repeat-seam',()=>{assert.ok(minFixtureForwardStep>=-1e-6);assert.ok(maxFixtureForwardStep<.02);});
 const initialNonWalk=rig(),initialNonWalkPose=savePose(initialNonWalk);initialNonWalk.motion.setStation(NOD_STATION);initialNonWalk.motion.update(0);
-check('initial-non-walk-station-retains-its-original-entry-pose',()=>assert.ok(poseError(initialNonWalk,initialNonWalkPose)<1e-6));
+check('initial-non-walk-station-retains-original-bind-rest',()=>{assert.ok(poseError(initialNonWalk,initialNonWalkPose)<1e-6);assert.ok(poseError(initialNonWalk,initialNonWalk.restPose)<1e-6);});
 initialNonWalk.motion.setStation(WALK_STATION,{immediate:true,prepareOpening:true});initialNonWalk.motion.update(0);
-check('switching-to-walk-during-paused-intro-primes-the-planted-pose',()=>{assert.ok(sourcePoseError(initialNonWalk,2.5,suppliedIdle)<3e-6);assert.equal(initialNonWalk.motion.getState().time,0);assert.deepEqual(initialNonWalk.motion.getState().weights.map(w=>w.action),['Idle']);});
+check('switching-to-walk-during-paused-intro-primes-original-bind-rest',()=>{assert.ok(poseError(initialNonWalk,initialNonWalk.restPose)<1e-6);assert.equal(initialNonWalk.motion.getState().time,0);assert.deepEqual(initialNonWalk.motion.getState().weights.map(w=>w.action),['Idle']);});
 const resumedDrag=rig();resumedDrag.motion.setStation(WALK_STATION);tick(resumedDrag,walkSourceDuration-.05);const beforeSeamDrag=savePose(resumedDrag),beforeSeamDragTime=resumedDrag.motion.getState().time;tick(resumedDrag,2,{dragging:true});
 check('dragging-near-repeat-seam-keeps-pose-and-time-paused',()=>{assert.equal(resumedDrag.motion.getState().time,beforeSeamDragTime);assert.ok(poseError(resumedDrag,beforeSeamDrag)<1e-6);});
 tick(resumedDrag,.2);check('releasing-drag-continues-the-extended-forward-gait',()=>{assert.ok(resumedDrag.motion.getState().time>walkSourceDuration);assert.equal(resumedDrag.motion.getState().action,'Walk');assert.equal(resumedDrag.motion.getState().speed,1);});
-resumedDrag.motion.setStation(WAVE_STATION);finishEntry(resumedDrag);check('interrupting-the-repeated-cycle-retires-walk-and-keeps-next-idle',()=>{assert.equal(resumedDrag.motion.getState().completedAction,'Wave');assert.equal(resumedDrag.motion.getState().idleMode,'source-loop');assert.equal(resumedDrag.motion.getState().walking,false);assert.deepEqual(resumedDrag.motion.getState().weights.map(w=>w.action),['Idle']);});
+resumedDrag.motion.setStation(WAVE_STATION);finishEntry(resumedDrag);check('interrupting-the-repeated-cycle-retires-walk-and-keeps-next-idle',()=>{assert.equal(resumedDrag.motion.getState().completedAction,'Wave');assert.equal(resumedDrag.motion.getState().idleMode,'upright-rest');assert.equal(resumedDrag.motion.getState().walking,false);assert.deepEqual(resumedDrag.motion.getState().weights.map(w=>w.action),['Idle']);});
 const excerptProbe=rig();excerptProbe.motion.setStation(LOOK_AROUND_STATION,{immediate:true});excerptProbe.motion.update(0);
 const sourcePoseSamples=[{time:0,error:sourcePoseError(excerptProbe,1.2)}];
 for(const time of [.1,1.3,2.4,3.8,5.2]){tick(excerptProbe,time-excerptProbe.motion.getState().time);sourcePoseSamples.push({time:excerptProbe.motion.getState().time,error:sourcePoseError(excerptProbe,1.2+excerptProbe.motion.getState().time)});}
-check('look-around-preserves-original-source-samples-through-excerpt',()=>assert.ok(sourcePoseSamples.every(s=>s.error<3e-6),JSON.stringify(sourcePoseSamples)));
+check('look-around-preserves-source-except-bounded-posture-through-excerpt',()=>assert.ok(sourcePoseSamples.every(s=>s.error<3e-6),JSON.stringify(sourcePoseSamples)));
 tick(excerptProbe,.8);
 check('look-around-is-finished-within-six-seconds',()=>{const state=excerptProbe.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.end,true);assert.equal(state.completedAction,'LookAround');assert.deepEqual(state.weights.map(item=>item.action),['Idle']);});
 const turnNames=['Head','Neck','Spine','Spine1','Spine2'];
@@ -254,7 +277,7 @@ const beforeCompletedReselect=lookAround.motion.getState();
 check('reselecting-completed-look-around-keeps-idle-phase',()=>{assert.equal(lookAround.motion.setStation(LOOK_AROUND_STATION),false);assert.deepEqual(lookAround.motion.getState(),beforeCompletedReselect);});
 check('clicking-after-look-around-replays-the-entry',()=>{assert.equal(lookAround.motion.react(),true);const state=lookAround.motion.getState();assert.equal(state.action,'LookAround');assert.equal(state.time,0);assert.equal(state.duration,lookAroundStart.duration);assert.deepEqual(state.lookAroundRange,lookAroundStart.lookAroundRange);assert.equal(state.speed,1);assert.equal(state.end,false);assert.equal(state.transitions.at(-1).reason,'reaction');});
 tick(lookAround,1.3);const replaySourceError=sourcePoseError(lookAround,2.5);
-check('look-around-replay-uses-the-same-source-pose',()=>assert.ok(replaySourceError<3e-6,`source pose error ${replaySourceError}`));
+check('look-around-replay-preserves-source-except-bounded-posture',()=>assert.ok(replaySourceError<3e-6,`source pose error ${replaySourceError}`));
 finishEntry(lookAround);
 check('look-around-reaction-also-settles-once',()=>{const state=lookAround.motion.getState();assert.equal(state.action,'Idle');assert.equal(state.completedAction,'LookAround');assert.equal(state.end,true);assert.equal(state.weights.length,1);assert.equal(lookAround.motion.position.length(),0);});
 const fadeInterrupt=rig();fadeInterrupt.motion.setStation(WALK_STATION);tick(fadeInterrupt,walkDuration-.25);const atFade=fadeInterrupt.motion.position.clone();
@@ -267,8 +290,49 @@ for(const fps of[20,30,60,120]){
   frameRates.push({fps,position:context.motion.position.toArray(),action:context.motion.getState().action,idleMode:context.motion.getState().idleMode,feet:footPose(context)});context.motion.dispose();
 }
 check('walk-settles-at-20-through-120-fps',()=>{assert.ok(frameRates.every(r=>r.action==='Idle'));assert.ok(Math.max(...frameRates.map(r=>r.position[2]))-Math.min(...frameRates.map(r=>r.position[2]))<.001);});
-check('walk-idle-feet-stay-planted-at-20-through-120-fps',()=>assert.ok(frameRates.every(r=>r.idleMode==='walk-source-hold'&&Math.abs(r.feet.depthDifference)<.035&&Math.abs(r.feet.toeHeightDifference)<.001)));
+check('walk-idle-feet-stay-planted-at-20-through-120-fps',()=>assert.ok(frameRates.every(r=>r.idleMode==='upright-rest'&&Math.abs(r.feet.depthDifference)<.035&&Math.abs(r.feet.toeHeightDifference)<.001)));
+for(const station of[NOD_STATION,WAVE_STATION]){
+  const probe=rig();probe.motion.setStation(station,{immediate:true});probe.motion.update(0);
+  const source=probe.animations.find(clip=>clip.name===STATION_CLIPS[station]),state=probe.motion.getState(),sourceOffset=station===WAVE_STATION?1.2:0;
+  const sampleEnd=Math.max(0,state.duration-state.speed*.55);
+  for(const fraction of[0,.2,.4,.65,.9]){const target=sampleEnd*fraction;tick(probe,(target-probe.motion.getState().time)/state.speed);const error=sourcePoseError(probe,sourceOffset+probe.motion.getState().time,source);check(`${source.name.toLowerCase()}-source-tracks-preserved-at-${fraction}`,()=>assert.ok(error<3e-6,`unchanged local error ${error}`));}
+  probe.motion.dispose();
+}
+check('posture-integration-only-lists-authorized-three-bones',()=>{assert.ok(postureSourceComparisons.length>20);assert.ok(postureSourceComparisons.every(sample=>sample.runtime&&JSON.stringify(sample.runtime.bones)===JSON.stringify([...permittedPostureBones])));});
+check('posture-integration-preserves-all-other-local-transforms',()=>assert.ok(postureSourceComparisons.every(sample=>sample.unchangedLocalError<3e-6)));
+check('posture-integration-keeps-spine-corrections-within-reviewed-bounds',()=>{for(const sample of postureSourceComparisons){assert.ok(sample.localCorrectionDegrees.Spine1<=3.60001,JSON.stringify(sample));assert.ok(sample.localCorrectionDegrees.Spine2<=8.00001,JSON.stringify(sample));assert.ok(sample.localCorrectionDegrees.Head<=4.40001,JSON.stringify(sample));assert.ok(sample.runtime.spine1Degrees>=0&&sample.runtime.spine1Degrees<=3.6);assert.ok(sample.runtime.spine2Degrees>=-8&&sample.runtime.spine2Degrees<=0);}});
+check('posture-integration-retains-original-world-head-direction',()=>assert.ok(postureSourceComparisons.every(sample=>sample.headWorldDirectionError<1e-5),JSON.stringify(postureSourceComparisons.map(({clip,sourceTime,headWorldDirectionError})=>({clip,sourceTime,headWorldDirectionError})))));
+check('posture-integration-is-active-only-above-the-curve-limit',()=>{assert.ok(postureSourceComparisons.some(sample=>sample.runtime.active));for(const sample of postureSourceComparisons){const state=sample.runtime;assert.ok(state.correctionDegrees>=0&&state.correctionDegrees<=8);if(state.active){assert.ok(state.curveBefore>8);assert.ok(state.curveAfter<state.curveBefore);}else assert.ok(state.curveBefore<=8.00001);}});
+const initialStationRest=[];
+for(let station=0;station<STATION_CLIPS.length;station++){
+  const probe=rig();probe.motion.setStation(station);for(let frame=0;frame<600;frame++)probe.motion.update(0);
+  const error=poseError(probe,probe.restPose),state=probe.motion.getState();initialStationRest.push({station,action:state.action,error,feet:footPose(probe),posture:state.posture});
+  check(`station-${station+1}-paused-first-frame-stays-original-rest`,()=>{assert.ok(error<1e-6);assert.equal(state.time,0);assert.equal(state.posture.active,false);assert.equal(state.posture.correctionDegrees,0);});
+  probe.motion.dispose();
+}
+// The upper-back adjustment is active in Nod/Wave, so test their integration
+// boundaries as well as Walk's existing detailed startup/ending regression.
+const stationContinuity=[];
+for(let station=0;station<STATION_CLIPS.length;station++){
+  const probe=rig();probe.motion.setStation(station);probe.motion.update(0);probe.outer.updateMatrixWorld(true);
+  const initial=probe.motion.getState(),duration=initial.duration/initial.speed;
+  let previous=[...probe.bones.values()].map(({bone})=>bone.getWorldPosition(new THREE.Vector3())),maxOpeningStep=0,maxEndingStep=0;
+  for(let frame=1;frame<=Math.ceil((duration+.6)*240);frame++){
+    probe.motion.update(1/240);probe.outer.position.copy(probe.motion.position);probe.outer.updateMatrixWorld(true);
+    const now=[...probe.bones.values()].map(({bone})=>bone.getWorldPosition(new THREE.Vector3())),step=Math.max(...now.map((point,index)=>point.distanceTo(previous[index]))),time=frame/240;
+    if(time<=.6)maxOpeningStep=Math.max(maxOpeningStep,step);
+    if(time>=duration-.6)maxEndingStep=Math.max(maxEndingStep,step);
+    previous=now;
+  }
+  const finalRestError=poseError(probe,probe.restPose);
+  stationContinuity.push({station,clip:STATION_CLIPS[station],duration,maxOpeningStep,maxEndingStep,finalRestError});
+  check(`station-${station+1}-startup-stays-below-20mm-per-240hz-frame`,()=>assert.ok(maxOpeningStep<.02,`${STATION_CLIPS[station]} startup ${maxOpeningStep} m`));
+  check(`station-${station+1}-ending-stays-below-20mm-per-240hz-frame`,()=>{assert.ok(maxEndingStep<.02,`${STATION_CLIPS[station]} ending ${maxEndingStep} m`);assert.ok(finalRestError<1e-6);});
+  probe.motion.dispose();
+}
 for(const context of[sample,walk,interrupted,paused,rootFixture,rotated,reduced,rapid,reaction,ending,longIdle,lookAround,fadeInterrupt,excerptProbe,walkPoseProbe,stableWalk,interruptedHold,initialDefault,entryContinuity,seamRootFixture,initialNonWalk,resumedDrag])context.motion.dispose();
-const result={asset:{path:assetPath,bytes:assetBytes.length,sha256:assetSHA256,sourceBounds,sourceHeight,sceneHeight,normalizationScale,joints:sample.bones.size},checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walkOpening:{sourceTime:2.5,wholeBody:true,walkOpeningSourceError,walkOpeningFeet,maxOpeningBoneStep},walkIdle:{sourceTime:2.5,mode:'whole-body-source-hold',idleSourceFeet,stableFeet,stableSourceError,stableLongIdleError,postNodSourceError,resumedIdlePoseChange,interruptedLoopSourceError},walk2:{sourceDuration:walkSourceDuration,runtimeDuration:walkDuration,speed:1,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray(),seam:{at:walkSourceDuration,maxSeamBoneStep,maxSeamRootStep,minFixtureForwardStep,maxFixtureForwardStep,samples:seamSamples}},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual restored original-resolution GLB animation arrays used. World-space tolerances retain the same values after matching the scene whole-model height of 1.83m; no geometry or skeleton edits are made by this test. Only the explicitly labelled nonzero parent-transform fixtures contain synthetic root displacement. Walk initial and settled poses hold the entire supplied Idle source at2.5sec. Walk duration extends from2.375 to3.6sec by continuing its forward cycle at unchanged rate1; source arrays and GLB are not modified. Other station entries and idle loops are retained. Walk2 remains authored in place; no extra travel is added. No browser rendering asserted by this test.'};
-await mkdir(new URL('../qa/tripo/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/tripo/original-motion.json',import.meta.url),JSON.stringify(result,null,2));
-console.log(JSON.stringify(result,null,2));
+const result={behavior:'upright-rest-all-stations',asset:{path:assetPath,bytes:assetBytes.length,sha256:assetSHA256,sourceBounds,sourceHeight,sceneHeight,normalizationScale,joints:sample.bones.size},checks:reports,stationClips:STATION_CLIPS,walkStation:WALK_STATION,walkOpening:{sourceTime:null,wholeBody:true,mode:'upright-rest',walkOpeningRestError,walkOpeningFeet,maxOpeningBoneStep},uprightIdle:{sourceTime:null,mode:'upright-rest',expected:'complete original GLB bind/rest transforms captured before runtime construction',restFeet,historicalIdleSourceFeet:idleSourceFeet,stableFeet,stableRestError,stableLongIdleError,postNodRestError,resumedIdlePoseChange,interruptedRestError},walk2:{sourceDuration:walkSourceDuration,runtimeDuration:walkDuration,speed:1,inPlace:true,sourceHorizontalExcursion:sourceRootMaxExcursion,sourcePoseSamples:walkSourcePoseSamples,nonzeroRootFixtureEnd:fixtureEnd.toArray(),seam:{at:walkSourceDuration,maxSeamBoneStep,maxSeamRootStep,minFixtureForwardStep,maxFixtureForwardStep,samples:seamSamples}},lookAround:{station:LOOK_AROUND_STATION,sourceDuration:suppliedLookAround.duration,sourceRange:lookAroundStart.lookAroundRange,runtimeDuration:lookAroundStart.duration,speed:lookAroundStart.speed,sourcePoseSamples,replaySourceError,turnExcursionRadians:Object.fromEntries(turnNames.map((name,i)=>[name,turnExcursion[i]])),postIdlePoseError:postLookAroundIdlePoseError},walkWorldEnd:end.toArray(),interruptedWorldEnd:partial.toArray(),endingSamples,maxEndingBoneStep,maxWeightError,idlePoseError,frameRates,notes:'Actual restored original-resolution GLB animation arrays used. All four stations and the Walk initial frame now use the complete original bind/rest posture, independently captured from GLB nodes before runtime construction. Historical Idle samples remain only as evidence of the old forward-foot step. World-space thresholds are unchanged: 1.83m character scale and <0.02m bone displacement per 240Hz frame for startup, ending and repeated gait seam. Walk extends2.375 to3.6sec at original rate1. Source animation arrays and GLB are not modified. Only explicitly labelled root fixtures add synthetic displacement. This report does not assert browser appearance or absence of drawstring intersections.'};
+result.posture={permittedLocalQuaternionBones:[...permittedPostureBones],sourceComparisons:postureSourceComparisons,initialStationRest,stationContinuity,maxUnchangedLocalError:Math.max(...postureSourceComparisons.map(sample=>sample.unchangedLocalError)),maxHeadWorldDirectionError:Math.max(...postureSourceComparisons.map(sample=>sample.headWorldDirectionError))};
+result.notes+=' Runtime upper-back correction is separately verified against an independent raw-source rig: only Spine1/Spine2/Head local quaternions may differ, within3.6/8/4.4deg; all other local transforms and original world head direction are preserved. The complete original bind/rest pose remains uncorrected.';
+await mkdir(new URL('../qa/posture/',import.meta.url),{recursive:true});await writeFile(new URL('../qa/posture/motion-results.json',import.meta.url),JSON.stringify(result,null,2));
+console.log(JSON.stringify({report:'qa/posture/motion-results.json',passed:reports.length,assetSHA256,maxOpeningBoneStep,maxEndingBoneStep,maxSeamBoneStep,stableRestError,walkOpeningRestError},null,2));

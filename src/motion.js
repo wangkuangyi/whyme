@@ -1,13 +1,10 @@
 import * as THREE from 'three';
+import { createPostureCorrection } from './posture.js';
 
 export const STATION_CLIPS = Object.freeze(['Walk', 'Nod', 'Wave', 'LookAround']);
 export const WALK_STATION = STATION_CLIPS.indexOf('Walk');
 const SPEEDS = { Idle: 1, Nod: 1.1, Walk: 1, Wave: 1.05, LookAround: 1 };
 const FADE_SECONDS = .5;
-const IDLE_RANGE = Object.freeze([1.5, 3.5]);
-// This authored whole-body frame has both feet planted. Holding it only on the
-// wide Walk station avoids looping back through Idle's forward right-foot step.
-const WALK_IDLE_SOURCE_TIME = 2.5;
 const WALK_PLAYBACK_SECONDS = 3.6;
 // The reviewed first glance returns toward the camera before the next long
 // side-look. Keep its source timing; do not speed up or synthesize a gesture.
@@ -29,13 +26,14 @@ function excerpt(source, name, start, end) {
   return new THREE.AnimationClip(name, end - start, tracks, source.blendMode);
 }
 
-function holdPose(source, name, time) {
-  const tracks = source.tracks.map((track) => {
-    const value = Array.from(track.createInterpolant().evaluate(time)).slice(0, track.getValueSize());
-    const result = track.clone(); result.times = new Float32Array([0, 1]); result.values = new Float32Array([...value, ...value]);
-    return result;
-  });
-  return new THREE.AnimationClip(name, 1, tracks, source.blendMode);
+function uprightRestClip(rest) {
+  const tracks = [];
+  for (const [bone, pose] of rest) for (const property of ['position', 'quaternion', 'scale']) {
+    const values = pose[property].toArray();
+    const Track = property === 'quaternion' ? THREE.QuaternionKeyframeTrack : THREE.VectorKeyframeTrack;
+    tracks.push(new Track(`${bone.name}.${property}`, [0, 1], [...values, ...values]));
+  }
+  return new THREE.AnimationClip('Idle', 1, tracks);
 }
 
 /** Continue the authored forward gait at its original speed, without reversing it. */
@@ -76,8 +74,9 @@ function extendWalk(source) {
 }
 
 /**
- * Play only user-supplied body animation. The face and original rest transforms
- * remain untouched. `position` is world-space travel; the scene applies it to
+ * Play the supplied body animation with a bounded upper-back correction.
+ * Facial geometry, gaze and original rest transforms remain untouched.
+ * `position` is world-space travel; the scene applies it to
  * the character group and follows it with the camera, lights and ground pool.
  */
 export function createCharacterMotion({ model, animations, bones, reducedMotion = false }) {
@@ -88,10 +87,11 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     position: bone.position.clone(), quaternion: quaternion?.clone() || bone.quaternion.clone(), scale: bone.scale.clone(),
   }]));
   const restHips = rest.get(hips).position;
+  const posture = createPostureCorrection({ model, bones });
   const sourceClips = new Map(animations.map((clip) => [clip.name, clip]));
   const clips = new Map(), records = new Set(), history = [];
   const linearTransform = new THREE.Matrix3(), rootDelta = new THREE.Vector3(), beforeSample = new THREE.Vector3(), afterSample = new THREE.Vector3();
-  let walkInterpolant = null, walkIdleClip = null, current = null, entry = null, rootRecord = null, transition = null;
+  let walkInterpolant = null, current = null, entry = null, rootRecord = null, transition = null;
   let station = -1, elapsed = 0, serial = 0, disposed = false, entryEnded = true, completedAction = null, dragging = false;
 
   for (const name of new Set(['Idle', ...STATION_CLIPS])) {
@@ -99,7 +99,10 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     if (!source) continue;
     // Preserve the authored hand/head movement. No additive gestures or face
     // tracks are generated here. Rejected Greet, Box and CrossArms are never bound.
-    const clip = name === 'Idle' ? excerpt(source, name, IDLE_RANGE[0], Math.min(IDLE_RANGE[1], source.duration))
+    // The supplied bind pose has a relaxed straight shoulder line and parallel
+    // feet. The old Idle clip curls the chest and shoulders, even at its best
+    // planted frame, so all chapters now return to the complete original pose.
+    const clip = name === 'Idle' ? uprightRestClip(rest)
       : name === 'Wave' ? excerpt(source, name, 1.2, Math.min(4.3, source.duration))
       : name === 'LookAround' ? excerpt(source, name, LOOK_AROUND_RANGE[0], Math.min(LOOK_AROUND_RANGE[1], source.duration))
       : name === 'Walk' ? extendWalk(source) : source.clone();
@@ -112,14 +115,15 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       // out of the skeleton so every pose blends around one stable origin.
       for (let i = 0; i < track.values.length; i += 3) { track.values[i] = restHips.x; track.values[i + 2] = restHips.z; }
     }
-    if (name === 'Idle') walkIdleClip = holdPose(clip, name, WALK_IDLE_SOURCE_TIME - IDLE_RANGE[0]);
     clips.set(name, clip);
   }
   if (!reducedMotion && !clips.has('Idle')) throw new Error('A reviewed Idle clip is required.');
 
   function restoreRest() {
+    posture.reset();
     for (const [bone, value] of rest) { bone.position.copy(value.position); bone.quaternion.copy(value.quaternion); bone.scale.copy(value.scale); }
     model.updateMatrixWorld(true);
+    posture.update();
   }
   function release(record) {
     record.action.stop(); mixer.uncacheAction(record.clip); records.delete(record);
@@ -129,13 +133,12 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     const from = new Map([...records].map((record) => [record, record.weight]));
     // Each performance gets its own action, so rapid station changes never
     // reset a still-visible, fading action to its first frame.
-    const heldIdle = name === 'Idle' && station === WALK_STATION;
-    const clip = (heldIdle ? walkIdleClip : clips.get(name)).clone(); clip.name = `${name}:${serial++}`;
+    const clip = clips.get(name).clone(); clip.name = `${name}:${serial++}`;
     const action = mixer.clipAction(clip).reset().setEffectiveTimeScale(SPEEDS[name]).setEffectiveWeight(fade ? 0 : 1);
     action.setLoop(name === 'Idle' ? THREE.LoopPingPong : THREE.LoopOnce, name === 'Idle' ? Infinity : 1);
     action.clampWhenFinished = name !== 'Idle'; action.play();
     const record = { name, action, clip, rate: SPEEDS[name], weight: fade ? 0 : 1,
-      idleMode: name === 'Idle' ? heldIdle ? 'walk-source-hold' : 'source-loop' : null };
+      idleMode: name === 'Idle' ? 'upright-rest' : null };
     records.add(record); current = record;
     history.push({ from: [...from].filter(([, weight]) => weight > .001).map(([r]) => r.name), to: name, at: elapsed, fade, reason });
     if (history.length > 12) history.shift();
@@ -166,9 +169,9 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
     station = next;
     if (reducedMotion) { restoreRest(); return false; }
     // At dt=0 the outgoing action is still fully visible. Prime that action
-    // with the planted whole-body source pose before the paused intro render;
+    // with the upright original rest pose before the paused intro render;
     // once presentation time resumes, the existing fade starts the forward gait.
-    if (openingWalk) { start('Idle', 0, 'walk-opening'); mixer.update(0); }
+    if (openingWalk) { posture.reset(); start('Idle', 0, 'walk-opening'); mixer.update(0); posture.update(); }
     return enter(STATION_CLIPS[next], immediate && !openingWalk, 'station');
   }
   function update(dt, options = {}) {
@@ -200,7 +203,9 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       transition.to.weight = weight; transition.to.action.setEffectiveWeight(weight);
       if (t === 1) { for (const previous of transition.from.keys()) if (previous !== transition.to && previous !== rootRecord && (previous !== entry || entryEnded)) release(previous); transition = null; }
     }
+    posture.reset();
     mixer.update(delta);
+    posture.update();
     // Transform a displacement (not a point) through the Hips parent. This
     // includes the preserved rig scale and any parent rotation, but never
     // re-adds the already accumulated character translation.
@@ -225,7 +230,7 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
   function react() {
     if (disposed || reducedMotion || dragging || !entryEnded || rootRecord || station < 0 || STATION_CLIPS[station] === 'Idle') return false;
     // Keep the reviewed Walk-station response: click to nod, then return to its
-    // stable whole-body source pose instead of replaying the walking entry.
+    // upright original rest pose instead of replaying the walking entry.
     return enter(station === WALK_STATION ? 'Nod' : STATION_CLIPS[station], false, 'reaction');
   }
   function getState() {
@@ -237,12 +242,11 @@ export function createCharacterMotion({ model, animations, bones, reducedMotion 
       transitions: history.map((item) => ({ ...item, from: [...item.from] })),
       weights: [...records].filter((record) => record.weight > .0001).map((record) => ({ action: record.name, weight: record.weight, time: record.action.time })),
       rootMotion: { extracted: true, space: 'world', bone: hips.name, horizontalRest: [restHips.x, restHips.z] },
-      idleRange: [...IDLE_RANGE], idleMode: current?.idleMode || null,
-      idleSourceTime: current?.idleMode === 'walk-source-hold' ? WALK_IDLE_SOURCE_TIME : null,
+      idleRange: null, idleMode: current?.idleMode || null, idleSourceTime: null, posture: posture.state(),
       walkPlayback: { sourceDuration: sourceClips.get('Walk')?.duration || 0, duration: clips.get('Walk')?.duration || 0, speed: SPEEDS.Walk },
       waveRange: [1.2, 4.3], lookAroundRange: [...LOOK_AROUND_RANGE], faceAnimation: false };
   }
   function dispose() { if (disposed) return; disposed = true; mixer.stopAllAction(); mixer.uncacheRoot(model); records.clear(); transition = null; rootRecord = null; restoreRest(); }
-  if (reducedMotion) restoreRest(); else { start('Idle', 0, 'initial'); mixer.update(0); }
+  if (reducedMotion) restoreRest(); else { start('Idle', 0, 'initial'); mixer.update(0); posture.update(); }
   return { position, setStation, update, react, dispose, getState };
 }

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { createCharacterMotion, WALK_STATION } from './motion.js';
+import { applyHoodieSkinning } from './hoodie-skinning.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { Line2 } from 'three/addons/lines/Line2.js';
@@ -408,6 +409,7 @@ export async function createScene({ canvas, signal, onNodePositions = () => {}, 
       if (/^Eye(Left|Right)$/i.test(object.name)) eyes.push({ object, rest: object.quaternion.clone() });
       if (!object.isMesh) return; object.frustumCulled = false; object.castShadow = true; object.receiveShadow = false; meshes.push(object); if (object.morphTargetDictionary && object.morphTargetInfluences) morphMeshes.push(object);
       if (object.isSkinnedMesh) {
+        applyHoodieSkinning(object);
         const bounds = makeSkinnedBounds(object); skinnedBounds.push(bounds); skinBoundsByMesh.set(object, bounds);
         // Indexed triangles share most vertices, as do the four node rays.
         // Skin a requested vertex once per pose instead of once per triangle.
