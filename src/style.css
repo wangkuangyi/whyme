@@ -18,8 +18,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 #app{opacity:1;transition:opacity .45s ease}
 .page-loading{overflow:hidden}
 .page-loading #app{opacity:0;pointer-events:none;transition:none}
-.page-loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#fff;opacity:1;transition:opacity .45s ease;font-family:'Microsoft YaHei',sans-serif}
-.page-loader p{margin:0;padding:24px;font-size:14px;line-height:1.6;letter-spacing:.04em;text-align:center;color:#626369}
+/* 加载页动效与关键样式内联在 HTML，避免等待 JS 或字体后才显示。 */
 .page-revealing #app{opacity:1;transition:opacity .45s ease}
 .page-revealing .page-loader{opacity:0;pointer-events:none}
 .portfolio{position:relative;isolation:isolate;height:100svh;min-height:620px;width:100%;overflow:hidden;background:radial-gradient(ellipse at 49% 42%,#fff 0%,#fff 37%,#f3f3f5 100%)}
